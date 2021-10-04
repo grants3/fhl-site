@@ -188,6 +188,7 @@ if(isset($_GET['s']) || isset($_POST['s'])) {
 <html lang="en">
 <head>
   	<meta charset="UTF-8"/>
+  	<meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
   	<meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=3.0, minimum-scale=0.85"/>
   	<title>Canadian Elite Hockey League</title>
 
@@ -267,7 +268,7 @@ if(isset($_GET['s']) || isset($_POST['s'])) {
 	<?php 
 	//cache bust css.(should evade caching same filename when contents changes)
 	$cssHash = hash_file('crc32',FS_ROOT.'assets/css/style-1.css');
-	$cssHash = '123';
+	//$cssHash = '123';
 	$cssHashUrl= '?m='.$cssHash;
 	?>
 
@@ -331,10 +332,10 @@ if(isset($_GET['s']) || isset($_POST['s'])) {
 	
 	
 	<!-- style overrides -->
-	<?php include FS_ROOT.'style.php' ?>
+	<?php include_once FS_ROOT.'style.php' ?>
 </head>
 
-<body>
+<body class="fhlElement">
 
 <?php 
 if(isset($navbarMode) && $navbarMode != 0){
@@ -384,7 +385,7 @@ if(isset($navbarMode) && $navbarMode != 0){
   
 </style>
 
-
+<?php if(isset($CurrentHTML) && $CurrentHTML == 'index.php' || str_starts_with($CurrentHTML,'Team') ){?>
 <div class="floating-menu-main">
 <button class="btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     <span class="font-weight-bold">Demo Options</span>
@@ -401,6 +402,6 @@ if(isset($navbarMode) && $navbarMode != 0){
     <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=3">Simple Min</a>
 </nav>
 </div>
-
+<?php }?>
 
 

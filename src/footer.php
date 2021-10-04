@@ -11,6 +11,10 @@
 				<p><?php echo FOOTER_TEXT?></p>
 			</div>
 			
+			<div>
+				<a class="text-white" href="#">⮝&nbsp;Back to&nbsp;top&nbsp;⮝</a>
+			</div>
+			
 		</div>
 	</div>
 </footer>	

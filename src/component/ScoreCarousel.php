@@ -109,7 +109,7 @@ padding-right:30px;
 
 </style>
 
-<div id="scoringBanner" class="container-responsive">
+<div id="scoringBanner" class="container-responsive fhlElement">
 	<div class="button-container"></div>
 	<div class="score-scroll">
     
@@ -168,9 +168,8 @@ if ($playoff == 1) {
     $playoffLink = '';
 }
 
-$gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
 $teamScoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
-$teamAbbrHolder = new TeamAbbrHolder($gmFile,$teamScoringFile);
+$teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
 
 
 // last games played scores

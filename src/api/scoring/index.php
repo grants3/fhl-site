@@ -5,7 +5,7 @@ header("Access-Control-Allow-Methods: OPTIONS,GET,POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-require_once __DIR__.'/../../baseConfig.php';
+require_once __DIR__.'/../../config.php';
 
 include_once FS_ROOT.'common.php';
 include_once FS_ROOT.'controller/PlayerScoringController.php';
@@ -15,7 +15,7 @@ include_once FS_ROOT.'api/ApiRequest.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode( '/', $uri );
-error_log(print_r($uri,1));
+
 if(DEBUG_MODE){
     error_log(print_r($uri,1));
 }
@@ -37,7 +37,7 @@ $requestURI = $_SERVER['REQUEST_URI'];
 
 // Build an API Request and pass the REQUEST_URI var.
 $request = new ApiRequest($requestURI);
-//error_log(print_r($request,1));
+error_log(print_r($request,1));
 
 
 $seasonId='';

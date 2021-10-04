@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 require_once 'config.php';
 include_once 'lang.php';
 include_once 'common.php';
+include_once 'classes/TeamAbbrHolder.php';
 
 ?>
 <!DOCTYPE html>
@@ -24,7 +25,15 @@ include_once 'common.php';
 
 </head>
 <body>
-<?php include 'component/ScoreCarousel.php'; ?>
+<?php //include 'component/ScoreCarousel.php'; ?>
+
+<?php 
+$fileName = getLeagueFile($folder, '', 'TeamScoring.html', 'TeamScoring');
+$test = new TeamAbbrHolder($fileName);
+
+error_log($test->teamAbbrArray['Toronto']);
+
+?>
 </body>
 
 

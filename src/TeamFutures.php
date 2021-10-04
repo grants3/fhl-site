@@ -13,17 +13,8 @@ include 'TeamHeader.php';
 
 
 <?php
-$matches = glob($folder.'*'.$playoff.'Futures.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Futures')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-$Fnm = $folder.$folderLeagueURL.'Futures.html';
+
+$Fnm = getLeagueFile($folder, $playoff, 'Futures.html', 'Futures');
 
 $a = 0;
 $b = 0;

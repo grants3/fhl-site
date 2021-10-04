@@ -95,9 +95,8 @@ if(isPlayoffs($folder, $playoffMode)){
 
 $scheduleHolder = new ScheduleHolder($fileName, '');
 
-$gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
 $teamScoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
-$teamAbbrHolder = new TeamAbbrHolder($gmFile,$teamScoringFile);
+$teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
 
 
 //set days

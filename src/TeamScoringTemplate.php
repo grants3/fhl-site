@@ -38,11 +38,9 @@ if(isset($_GET['team']) || isset($_POST['team'])) {
 
 if(trim($seasonId) == false){
     $fileName = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
-    $gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
 }else{
     $seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
     $fileName = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
-    $gmFile = getLeagueFile($seasonFolder, $playoff, 'GMs.html', 'GMs');
 }
 
 if(!file_exists($fileName) && $playoff == "PLF") {
@@ -57,7 +55,7 @@ if(!file_exists($fileName) && $playoff == "PLF") {
 }
 
 $scoringHolder = new ScoringHolder($fileName, $currentTeam);
-$teamAbbrHolder = new TeamAbbrHolder($gmFile,$fileName);
+$teamAbbrHolder = new TeamAbbrHolder($fileName);
 
 $shootoutMode = $scoringHolder->isShootoutMode();
 $tieLabel = $shootoutMode ? $scoringOTLm : $scoringTm;

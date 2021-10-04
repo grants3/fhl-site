@@ -1,54 +1,11 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", "On");
-
 require_once 'config.php';
 include 'lang.php';
 include_once 'common.php';
 include_once 'classes/GameHolder.php';
 include_once 'classes/RosterObj.php';
 include_once 'classes/RostersHolder.php';
-
-if(!function_exists('search')) {
-    function search($Fnm,$currentTeam) {
-        $b = 0;
-        $d = 0;
-        $tableau = file($Fnm);
-        while(list($cle,$val) = myEach($tableau)) {
-            $val = utf8_encode($val);
-            if(substr_count($val, 'A NAME='.$currentTeam)) {
-                $b = 1;
-            }
-            if($b == 1 && $d == 1) {
-                $reste = trim($val);
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                if(substr($reste, 0, 1) == '*') {
-                    $reste = trim(substr($reste, 1));
-                }
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                return $TSabbr = trim(substr($reste, strrpos($reste, ' ')));
-            }
-            if($b == 1 && substr_count($val, 'PCTG')) {
-                $d = 1;
-            }
-        }
-    }
-}
+include_once 'classes/TeamAbbrHolder.php';
 
 $baseFolder = '';
 $seasonId = '';
@@ -56,14 +13,6 @@ $awayTeamAbbr='';
 $homeTeamAbbr='';
 if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
     $seasonId = ( isset($_GET['seasonId']) ) ? $_GET['seasonId'] : $_POST['seasonId'];
-}
-
-//override abbreviation
-if(isset($_GET['awayTeam']) || isset($_POST['awayTeam'])) {
-    $awayTeamAbbr = ( isset($_GET['awayTeam']) ) ? $_GET['awayTeam'] : $_POST['awayTeam'];
-}
-if(isset($_GET['homeTeam']) || isset($_POST['homeTeam'])) {
-    $homeTeamAbbr = ( isset($_GET['homeTeam']) ) ? $_GET['homeTeam'] : $_POST['homeTeam'];
 }
 
 if(trim($seasonId) == false){
@@ -485,27 +434,41 @@ table.table-sm>thead>tr>th:first-of-type {
     $isOvertime= $gameHolder->isOvertime();
     
     // Find Teams Abbr
-    $matches = glob($folder.'*TeamScoring.html');
-    $folderLeagueURL3 = '';
-    $matchesDate = array_map('filemtime', $matches);
-    arsort($matchesDate);
-    foreach ($matchesDate as $j => $val) {
-        if(!substr_count($matches[$j], 'PLF')) {
-            $folderLeagueURL3 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
-            break 1;
-        }
-    }
+//     $matches = glob($folder.'*TeamScoring.html');
+//     $folderLeagueURL3 = '';
+//     $matchesDate = array_map('filemtime', $matches);
+//     arsort($matchesDate);
+//     foreach ($matchesDate as $j => $val) {
+//         if(!substr_count($matches[$j], 'PLF')) {
+//             $folderLeagueURL3 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
+//             break 1;
+//         }
+//     }
     
-    $FnmAbbr = $folder.$folderLeagueURL3.'TeamScoring.html';
-    if(file_exists($FnmAbbr)) {
-        $awayTeamAbbr = search($FnmAbbr,$awayTeam);
-        $homeTeamAbbr = search($FnmAbbr,$homeTeam);
+//     $FnmAbbr = $folder.$folderLeagueURL3.'TeamScoring.html';
+//     if(file_exists($FnmAbbr)) {
+//         $awayTeamAbbr = search($FnmAbbr,$awayTeam);
+//         $homeTeamAbbr = search($FnmAbbr,$homeTeam);
+//     }
+//     else exit($allFileNotFound.' - '.$FnmAbbr);
+
+    $teamScoringFile = getLeagueFile($baseFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
+    if(file_exists($teamScoringFile)) {
+        $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
+        $awayTeamAbbr = $teamAbbrHolder->getAbbr($awayTeam);
+        $homeTeamAbbr = $teamAbbrHolder->getAbbr($homeTeam);
     }
-    else exit($allFileNotFound.' - '.$FnmAbbr);
-    
+
+    //if not set default abbr to first 3 chars (all star games etc)
     if(!$awayTeamAbbr){
-        $awayTeamAbbr = 'Wes';
-        $homeTeamAbbr = 'Eas';
+        //$awayTeamAbbr = 'Wes';
+        //$homeTeamAbbr = 'Eas';
+
+        //$awayTeamAbbr = substr($awayTeam, 0, 3);
+        //$homeTeamAbbr = substr($homeTeam, 0, 3);
+        
+        $awayTeamAbbr = strtoupper(substr($awayTeam,'0','3'));
+        $homeTeamAbbr = strtoupper(substr($homeTeam,'0','3'));
     }
 
 ?>
@@ -967,7 +930,7 @@ table.table-sm>thead>tr>th:first-of-type {
                                                 </tr>';
                                             }
                                         }else{
-                                            echo '<tr><td colspan="4">NO PENALTIES</td></tr>';
+                                            echo '<tr><td class="text-center" colspan="4">NO PENALTIES</td></tr>';
                                         }
                                         ?>
                                         </tbody>
@@ -1546,7 +1509,7 @@ table.table-sm>thead>tr>th:first-of-type {
 						style="background-color: rgb(50, 52, 54);">
 
 						<h5 class="mb-0 border-bottom" style="border-color: rgb(128, 128, 128) !important;">
-							<button class="btn btn-link" type="button" data-toggle="collapse"
+							<button class="btn btn-link text-white" type="button" data-toggle="collapse"
 								data-target="#collapseOne" aria-expanded="true"
 								aria-controls="collapseOne">
                           	MINOR LEAGUE BOX SCORE <?php //echo $gameHolder->getFarmAwayScore().' '.$gameHolder->getFarmHomeScore().' FINAL' ?>

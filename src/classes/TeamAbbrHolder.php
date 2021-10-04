@@ -2,16 +2,37 @@
 require_once __DIR__.'/../baseConfig.php';
 include_once FS_ROOT.'classes/TeamHolder.php';
 
-if(!function_exists('search')) {
-    function search($Fnm,$currentTeam) {
+class TeamAbbrHolder {
+    var $teamAbbrArray = array();
+    
+    public function __construct(string $teamScoringFile) {
+
         $b = 0;
         $d = 0;
-        $contents = file($Fnm);
+        $curTeam = null;
+        $teamSearchHtml = 'A NAME=';
+        $contents = file($teamScoringFile);
         foreach ($contents as $cle => $val) {
-           
+            
             $val = utf8_encode($val);
-            if(substr_count($val, 'A NAME='.$currentTeam)) {
+            //signifies the start of new team line. (but not the first team)
+            if (substr_count($val, '</PRE><BR>') && $b) {
+                $d = 0;
+                
+                //only reset team if getting all teams
+                $curTeam = null;
+            }
+            //if (substr_count($val, 'A NAME=' . $searchTeam) && $d) {
+            //  if (substr_count($val, 'A NAME=') && $d && !isset($curTeam)) {
+            if (substr_count($val, $teamSearchHtml) && $d && !isset($curTeam)) {
+
+                $pos = strpos($val, '</A>');
+                $pos = $pos - 23;
+                $curTeam = substr($val, 23, $pos);
                 $b = 1;
+
+                //if(isset($searchTeam) && $curTeam != $searchTeam) continue;
+                
             }
             if($b == 1 && $d == 1) {
                 $reste = trim($val);
@@ -35,31 +56,34 @@ if(!function_exists('search')) {
                 $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
                 $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
                 $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                return $TSabbr = trim(substr($reste, strrpos($reste, ' ')));
+                
+                $teamAbbr = trim(substr($reste, strrpos($reste, ' ')));
+
+                if(!empty($teamAbbr)){
+                    //add first record to array and then set team to null to skip the rest of the players (only need once per team)
+                    $this->teamAbbrArray[$curTeam] = $teamAbbr;
+                    
+                    $curTeam = null;
+                }
+
             }
             if($b == 1 && substr_count($val, 'PCTG')) {
                 $d = 1;
             }
+            
+            //restart loop if current team not set.
+            //will be reset to null everytime the start of a new team is finished processing.
+            if (!isset($curTeam)) {
+                $b = 0;
+                $d = 1;
+            }
         }
+        
     }
-}
-
-class TeamAbbrHolder {
-    var $teamAbbrArray = array();
-
-    public function __construct(string $gmFile, string $teamScoringFile) {
-
-        //init TeamHolder;
-        $teamHolder = new TeamHolder($gmFile);
-
-        foreach ($teamHolder->get_teams() as $team) {
-        $this->teamAbbrArray[$team] = search($teamScoringFile,$team);
-        }
-
-    }
-
+    
     public function getAbbr(string $teamName){
-        return $this->teamAbbrArray[$teamName];
+        //return $this->teamAbbrArray[$teamName];
+        return isset($this->teamAbbrArray[$teamName]) ? $this->teamAbbrArray[$teamName] : null;
     }
     
     public function getTeamName(string $teamAbbr){

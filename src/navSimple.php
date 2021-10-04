@@ -42,12 +42,12 @@ body{
 #main-navbar .btn-outline-primary:hover {
     color: #fff;
     background-color: #444;
-    border-color: #444;
+    border-color: var(--color-primary-2);
 }
 #main-navbar .btn-outline-primary {
     color: #fff;
     background-color: #444;
-    border-color: #444;
+    border-color: var(--color-primary-2);
 }
 
 

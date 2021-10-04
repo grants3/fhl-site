@@ -4,11 +4,11 @@ include 'lang.php';
 include 'common.php';
 include 'fileUtils.php';
 
-include 'head.php';
-
 $CurrentHTML = 'index.php';
 $CurrentTitle = 'Home';
 $CurrentPage = 'Home';
+
+include 'head.php';
 
 ?>
 

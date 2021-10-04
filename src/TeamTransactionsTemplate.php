@@ -23,12 +23,10 @@ $playoff = '';
 if(trim($seasonId) == false){
     $fileName = getLeagueFile($folder, $playoff, 'Transact.html', 'Transact');
     $scoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
-    $gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
 }else{
     $seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
     $fileName = getLeagueFile($seasonFolder, $playoff, 'Transact.html', 'Transact');
     $scoringFile = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
-    $gmFile = getLeagueFile($seasonFolder, $playoff, 'GMs.html', 'GMs');
 }
 
 if(empty($team)){
@@ -37,7 +35,7 @@ if(empty($team)){
 }
 
 $transactionHolder = new TransactionHolder($fileName);
-$teamAbbrHolder = new TeamAbbrHolder($gmFile,$scoringFile);
+$teamAbbrHolder = new TeamAbbrHolder($scoringFile);
 
 $teamAbbr = $teamAbbrHolder->getAbbr($team);
 
