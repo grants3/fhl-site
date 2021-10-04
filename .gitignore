@@ -1,0 +1,5 @@
+# ignore all
+/.settings
+/vendor
+composer.json
+.buildpath

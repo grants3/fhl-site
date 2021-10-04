@@ -1,0 +1,67 @@
+ 
+  <!-- Top menu -->
+<style>
+	body{
+        margin-top: 60px; 
+    }
+}
+
+
+</style>
+	<nav class="navbar navbar-dark fixed-top navbar-expand-lg navbar-no-bg" id="main-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="<?php echo BASE_URL?>index.php">Navbar</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto scrollable text-center">
+
+					  <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>Scores.php">Scores</a></li>
+					  <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>Standings.php">Standings</a></li>
+					  <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>TeamRosters.php">Teams</a></li>
+					  <li class="dropdown">
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stats&nbsp;<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>PlayerScoring.php">Player Stats</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>TeamStats.php">Team Stats</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Individual.php">Individual</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Leaders.php">Leaders</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Leaders.php?s=1">Farm&nbsp;Leaders</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>CareerLeaders.php">Career&nbsp;Leaders</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>CareerStandings.php">Career&nbsp;Standings</a></li>
+						</ul>
+					  </li>
+					  <li class="dropdown">
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">League&nbsp;<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Coaches.php">Coaches</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Injury.php">Injuries</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Schedule3.php">Schedule</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Transact.php">Transactions</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Waivers.php">Waivers</a></li>
+							<li class="dropdown-divider"></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>FarmStandings.php?s=1">Farm&nbsp;Standings</a></li>
+							<li class="dropdown-divider"></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>FreeAgents.php">Free&nbsp;Agents</a></li>
+							<li class="dropdown-divider"></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Unassigned.php">Unassigned</a></li>
+							
+						</ul>
+					  </li>
+					  <li class="dropdown">
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other&nbsp;<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>GMs.php">General&nbsp;Managers</a></li>
+							<li class="dropdown-divider"></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>PlayerSearch.php">Player Search</a></li>
+							<li class="dropdown-divider"></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>SalaryCop.php">Salary&nbsp;Cop</a></li>
+						</ul>
+					  </li>
+				</ul>
+			</div>
+			
+		</div>
+	</nav>
+	
