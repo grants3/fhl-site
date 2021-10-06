@@ -45,17 +45,17 @@ define("BASE_URL",getBaseUrl());
 define("FS_ROOT",__DIR__.'/');
 
 #Debug Mode. 1 = ON, 0 = OFF
-define("DEBUG_MODE",0);
+define("DEBUG_MODE",1);
 
-// if(DEBUG_MODE){
-//     error_log('-------config path info ---------');
-//     error_log('FS_ROOT='.FS_ROOT);
-//     error_log('BASE_URL='.BASE_URL);
-//     error_log('DOCUMENT_ROOT='.$_SERVER['DOCUMENT_ROOT']);
-//     error_log('FILE='.__FILE__);
-//     error_log('WORKING DIR='.getcwd());
-//     error_log('---------------------------------');
-// }
+if(DEBUG_MODE){
+    error_log('-------config path info ---------');
+    error_log('FS_ROOT='.FS_ROOT);
+    error_log('BASE_URL='.BASE_URL);
+    error_log('DOCUMENT_ROOT='.$_SERVER['DOCUMENT_ROOT']);
+    error_log('FILE='.__FILE__);
+    error_log('WORKING DIR='.getcwd());
+    error_log('---------------------------------');
+}
 
 
 ?>

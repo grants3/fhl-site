@@ -14,8 +14,6 @@ $seasonId = '';
 //$playoff = '';
 
 if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
-    //$sort = ( isset($_GET['sort']) ) ? $_GET['sort'] : $_POST['sort'];
-    //$sort = htmlspecialchars($sort);
     $seasonId = ( isset($_GET['seasonId']) ) ? $_GET['seasonId'] : $_POST['seasonId'];
 }
 

@@ -92,13 +92,13 @@ $leagueFuturesDraftYears = FUTURES_DRAFT_YEARS;
 
 # Playoff mode (Auto mode will check if playoff files exist in transfer directory, otherwise mode is selected manualy)
 # Auto: 0 Regular Season : 1 or Playoffs : 2
-define("LEAGUE_MODE",0);
+define("LEAGUE_MODE",1);
 $playoffMode = LEAGUE_MODE;
 
 # Whether or not main navbar should be displayed and the type of nav to be displayed.
 # Default navbar includes all site links, simple nav only contains home button and team links.
 # Auto: 0 Navbar disabled : 1 Full Navbar enabled (default) : 2 Simple with team icons : 3 Simple nav with team dropdown.
-define("NAVBAR_MODE",2);
+define("NAVBAR_MODE",1);
 $navbarMode = NAVBAR_MODE;
 
 #text to display in footer(bottom) of each page.

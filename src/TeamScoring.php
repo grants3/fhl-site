@@ -32,7 +32,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 </style>
 
 
-<div class="container">
+<div class="container px-0">
 
 	<div class="card">
 

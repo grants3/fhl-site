@@ -109,7 +109,7 @@ padding-right:30px;
 
 </style>
 
-<div id="scoringBanner" class="container-responsive fhlElement">
+<div id="scoringBanner" class="container-fluid fhlElement px-0">
 	<div class="button-container"></div>
 	<div class="score-scroll">
     

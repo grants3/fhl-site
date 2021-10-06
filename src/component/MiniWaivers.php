@@ -25,7 +25,7 @@ if (file_exists($fileName)) {
 
 ?>
 
-<div class="container">
+<div class="container px-0">
 	<div class="row">
 		<div class="col">
 			<?php  if (isset($waivers) && !empty($waivers)) {?>

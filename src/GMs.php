@@ -17,17 +17,8 @@ include 'head.php';
 	<div class="card-body">
 
 <?php
-$matches = glob($folder.'*'.$playoff.'GMs.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'GMs')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-$Fnm = $folder.$folderLeagueURL.'GMs.html';
+
+$Fnm = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
 
 $c = 1;
 $i = 0;
@@ -49,7 +40,7 @@ if(file_exists($Fnm)) {
 			echo '<table class="table table-sm table-striped table-rounded">';
 		}
 		if(substr_count($val, 'HREF') && !substr_count($val, '<BR>')) {
-			$gmequipe[$i] = trim(substr($val, 0, 10));
+			$teamList[$i] = trim(substr($val, 0, 10));
 			$gm[$i] = substr($val, 16, 26);
 			$gmEmail[$i] = substr($val, strpos($val, '>')+1, strpos($val, '</A>')-strpos($val, '>')-1);
 			if($gmEmail[$i] == '') $libre[$i] = 1;
@@ -68,15 +59,15 @@ if(file_exists($Fnm)) {
 		</tr>';
 	echo '</thead>';
 	echo '<tbody>';
-	for($i=0;$i<count($gmequipe);$i++) {
+	for($i=0;$i<count($teamList);$i++) {
 		if($libre[$i]) {
-			$free[$z] = $gmequipe[$i];
+			$free[$z] = $teamList[$i];
 			$z++;
 		}
 		else {
 
 			echo '<tr>
-			<td>'.$gmequipe[$i].'</td>
+			<td>'.$teamList[$i].'</td>
 			<td><a style="display:block; width:100%;" href="mailto:'.$gmEmail[$i].'">'.$gm[$i].'</a></td>
 			</tr>';
 			if($sendAllFirst == 0) {

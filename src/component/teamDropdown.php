@@ -2,7 +2,7 @@
 
 /*
  * Example call
- * includeWithVariables('component/teamDropdown.php',array('teamList' => $gmequipe, 'teamDropdownPrefix' => 'roster', 'CurrentPage' => $CurrentPage));
+ * includeWithVariables('component/teamDropdown.php',array('teamList' => $teamList, 'teamDropdownPrefix' => 'roster', 'CurrentPage' => $CurrentPage));
  * 
  */
 

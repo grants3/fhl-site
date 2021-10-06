@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 require_once 'config.php';
 include_once 'lang.php';
 include_once 'common.php';
+include_once 'classes/TeamHolder.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_name(SESSION_NAME);
@@ -46,13 +47,6 @@ if ($CurrentPage !== ''){
     setcookie('currentPage',$CurrentPage);
 }
 
-if($SecurePage){
-    if(!isAuthenticated()){
-        header('Location: Login.php');
-        exit();
-    }
-}
-
 if(isset($_SESSION['teamId'])){
     $teamID = $_SESSION['teamId'];
 }
@@ -82,106 +76,11 @@ if(isPlayoffs(TRANSFER_DIR, LEAGUE_MODE)){
     $currentPLF = 1;
 }
 
-//$dropLinkPlf = '';
-$plfLink = '';
-$tmpFolderPlayoff = '';
-// TEAM CARD - SEE IF PLAYOFFS GMS FILE EXISTS
-$matches = glob(TRANSFER_DIR.'*GMs.html');
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	$tmpFolderPlayoff = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'GMs')-strrpos($matches[$j], '/')-1);
-	break 1;
-}
-//if($CurrentPage == 'fiche') {
-if($CurrentPage == 'Overview') {
-	if(substr_count($tmpFolderPlayoff, 'PLF')) {
-		$playoff = 'PLF';
-		$currentPLF = 1;
-		$plfLink = '?plf=1';
-	}
-}
-
-if(isset($_GET['plf']) || isset($_POST['plf'])) {
-	$currentPLF = ( isset($_GET['plf']) ) ? $_GET['plf'] : $_POST['plf'];
-	$currentPLF = htmlspecialchars($currentPLF);
-	if($currentPLF == 1) {
-		$playoff = 'PLF';
-		//$dropLinkPlf = 'plf=1&';
-		$plfLink = '?plf=1';
-	}
-	if($currentPLF == 0) $playoff = '';
-}
-if(isset($_GET['rnd']) || isset($_POST['rnd'])) {
-	$playoff = 'PLF';
-	$currentPLF = 1;
-	//$dropLinkPlf = 'plf=1&';
-	$plfLink = '?plf=1';
-}
-
-//SORTING (FACTOR THIS OUT)
-$sort = '';
-if(isset($_GET['sort']) || isset($_POST['sort'])) {
-	$sort = ( isset($_GET['sort']) ) ? $_GET['sort'] : $_POST['sort'];
-	$sort = htmlspecialchars($sort);
-}
-
-$dropLinkOne = '';
-if($CurrentPage == 'CareerLeaders' && (isset($_GET['one']) || isset($_POST['one']))) {
-	$ctlOneTeams = ( isset($_GET['one']) ) ? $_GET['one'] : $_POST['one'];
-	$ctlOneTeams = trim(htmlspecialchars($ctlOneTeams));
-	if($ctlOneTeams == 1) $dropLinkOne = 'one=1&';
-}
-
-// CREATE TEAM LIST
-$matches = glob(TRANSFER_DIR.'*'.$playoff.'GMs.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'GMs')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-$FnmGMs = TRANSFER_DIR.$folderLeagueURL.'GMs.html';
-$i = 0;
-if(file_exists($FnmGMs)) {
-	$tableau = file($FnmGMs);
-	/* while(list($cle,$val) = each($tableau)) { */
-	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
-		if(substr_count($val, 'HREF') && !substr_count($val, '<BR>')) {
-			$gmequipe[$i] = trim(substr($val, 0, 10));
-			if($currentTeam == '' && $i == 0) $currentTeam = $gmequipe[$i];
-			$i++;
-		}
-	}
-}
-//else echo $allFileNotFound.' - '.$FnmGMs;
-
-
-$farm = '';
-$dropLinkFarm = '';
-$currentFarm = 0;
-if(isset($_GET['s']) || isset($_POST['s'])) {
-	$currentFarm = ( isset($_GET['s']) ) ? $_GET['s'] : $_POST['s'];
-	$currentFarm = htmlspecialchars($currentFarm);
-	if($currentFarm == 1) {
-		$farm = 'Farm';
-		//if($CurrentPage == 'Standings') $CurrentTitle = $standingTitleFarm;
-		//if($CurrentPage == 'OverallStandings') $CurrentTitle = $standingTitleFarm;
-		if($CurrentPage == 'Leaders') $CurrentTitle = $leaderTitleFarm;
-		$dropLinkFarm = 's=1&';
-	}
-}
-
-// if(isset($skipNav) && !$skipNav){
- 
-// }else{
-//     include 'nav.php';
-// //     echo '<div class="header-content top-container"></div>';
-// }
+// // CREATE TEAM LIST
+$gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
+$teamHolder = new TeamHolder($gmFile);
+//needs to retain order.
+$teamList = $teamHolder->get_teams();
 
 ?>
 <!DOCTYPE html>
@@ -268,14 +167,18 @@ if(isset($_GET['s']) || isset($_POST['s'])) {
 	<?php 
 	//cache bust css.(should evade caching same filename when contents changes)
 	$cssHash = hash_file('crc32',FS_ROOT.'assets/css/style-1.css');
-	//$cssHash = '123';
+	$cssMediaHash = hash_file('crc32',FS_ROOT.'assets/css/media-queries-1.css');
+	$jsHash = hash_file('crc32',FS_ROOT.'assets/js/scripts-1.js');
+
 	$cssHashUrl= '?m='.$cssHash;
+	$jsHashUrl= '?m='.$jsHash;
+	$cssMediaHashUrl= '?m='.$cssMediaHash;
 	?>
 
 	<!-- Custom scripts and styling and overrides (load last)-->
 	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/style-1.css<?php echo $cssHashUrl;?>"/>
-	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/media-queries-09302021.css"/>
-	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/scripts-1.js"></script>
+	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/media-queries-1.css<?php echo $cssMediaHashUrl;?>"/>
+	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/scripts-1.js<?php echo $jsHashUrl;?>"></script>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141959083-1"></script>
@@ -296,7 +199,7 @@ if(isset($_GET['s']) || isset($_POST['s'])) {
 	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/css-vars-ponyfill@1.js"></script>
 	<?php }?>
 
-	
+	<!-- polyfill for var support -->
 	<script type="text/javascript">
 	cssVars({
 	  onlyLegacy: true,
@@ -343,6 +246,8 @@ if(isset($navbarMode) && $navbarMode != 0){
         include FS_ROOT.'nav.php';
     }else if($navbarMode == 2 || $navbarMode == 3){
         include FS_ROOT.'navSimple.php';
+    }else if($navbarMode == 4){
+        include FS_ROOT.'navCustom.php';
     }else{
         error_log("unsupported nav mode: ".$navbarMode);
     }
@@ -351,10 +256,16 @@ if(isset($navbarMode) && $navbarMode != 0){
 ?>
 
 	
-<div class="container-responsive site-content header-content top-container">
+<div class="container-fluid site-content header-content top-container px-0">
 
 <style>
 
+<?php 
+//demo mode. change themes, navbar etc.
+$demoMode = true;
+
+if(isset($demoMode) && $demoMode){
+?>
 .floating-menu-main{
     background-color: rgba(255,255,255,0.5);
     margin-top:100px;
@@ -385,7 +296,7 @@ if(isset($navbarMode) && $navbarMode != 0){
   
 </style>
 
-<?php if(isset($CurrentHTML) && $CurrentHTML == 'index.php' || str_starts_with($CurrentHTML,'Team') ){?>
+<?php if(isset($CurrentHTML) && ($CurrentHTML == 'index.php' || str_starts_with($CurrentHTML,'Team') )){?>
 <div class="floating-menu-main">
 <button class="btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     <span class="font-weight-bold">Demo Options</span>
@@ -400,8 +311,10 @@ if(isset($navbarMode) && $navbarMode != 0){
     <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=0">None</a>
     <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=2">Simple</a>
     <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=3">Simple Min</a>
+    <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=4">Custom</a>
 </nav>
 </div>
-<?php }?>
+<?php }
+}?>
 
 

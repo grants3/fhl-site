@@ -145,7 +145,7 @@ function getPreviousSeasons($folderCarrerStats):array{
     return $seasons;
 }
 
-/*usage example: includeWithVariables('component/teamDropdown.php',array('teamList' => $gmequipe, 'teamDropdownPrefix' => 'roster', 'CurrentPage' => $CurrentPage)); */
+/*usage example: includeWithVariables('component/teamDropdown.php',array('teamList' => $teamList, 'teamDropdownPrefix' => 'roster', 'CurrentPage' => $CurrentPage)); */
 function includeWithVariables($filePath, $variables = array(), $print = true)
 {
     $output = NULL;
@@ -182,6 +182,24 @@ function strposX($haystack, $needle, $number)
     return $matches[0][$number-1][1];
 }
 
+/*backwards compatibility functions if mb module is not loaded in php*
+ * These functions are hardcoded to UTF encoding. the $encoding variable has no effect. 
+ */
+if (!function_exists('mb_substr')){
+    function mb_substr($string, $offset, $length, $encoding = 'UTF-8')
+    {
+        $arr = preg_split("//u", $string);
+        $slice = array_slice($arr, $offset + 1, $length);
+        return implode("", $slice);
+    }
+}
+
+if (!function_exists('mb_strlen')){
+    function mb_strlen(string $str, string $encoding = 'UTF-8')
+    {
+        return preg_match_all('(.)su', $str);
+    }
+}
 
 
 ?>

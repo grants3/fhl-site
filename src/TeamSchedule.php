@@ -69,10 +69,6 @@ include 'TeamHeader.php';
 
 ?>
 
-<!--<div style="clear:both; width:555px; margin-left:auto; margin-right:auto; border: solid 1px <?php echo $couleur_contour; ?>;"-->
-<!--<div class = "row" style="clear:both; width:555px; margin-left:auto; margin-right:auto;">-->
-<!--<h3 class = "text-center"><?php echo $schedTitle.$schedTitlePlayoff; ?></h3>-->
-
 <style>
 .thumbnail {
     position: relative;
@@ -86,7 +82,7 @@ include 'TeamHeader.php';
 }
 </style>
 
-<div class = "container">
+<div class = "container px-0">
 
 
 	<div class="card">
@@ -132,14 +128,14 @@ include 'TeamHeader.php';
 					$currentDay = 0;
 					$dayArray = array();
 
-					if(isset($gmequipe)) {
-						for($j=0;$j<count($gmequipe);$j++) {
-							$gmequipeWin[$j] = 0;
-							$gmequipeLoose[$j] = 0;
-							$gmequipeTie[$j] = 0;
-							$gmequipeLeft[$j] = 0;
-							$gmequipeGA[$j] = 0;
-							$gmequipeGF[$j] = 0;
+					if(isset($teamList)) {
+						for($j=0;$j<count($teamList);$j++) {
+							$teamListWin[$j] = 0;
+							$teamListLoose[$j] = 0;
+							$teamListTie[$j] = 0;
+							$teamListLeft[$j] = 0;
+							$teamListGA[$j] = 0;
+							$teamListGF[$j] = 0;
 							
 						}
 						if (file_exists($Fnm)) {
@@ -166,9 +162,9 @@ include 'TeamHeader.php';
 									if($equipe1[$i] == $currentTeam || $equipe2[$i] == $currentTeam) {
 									    $dayArray[$i] = $currentDay;
 									    
-										for($j=0;$j<count($gmequipe);$j++) {
-											if($gmequipe[$j] != $currentTeam && ($gmequipe[$j] == $equipe1[$i] || $gmequipe[$j] == $equipe2[$i])) {
-												$gmequipeLeft[$j]++;
+										for($j=0;$j<count($teamList);$j++) {
+											if($teamList[$j] != $currentTeam && ($teamList[$j] == $equipe1[$i] || $teamList[$j] == $equipe2[$i])) {
+												$teamListLeft[$j]++;
 											}
 										}
 										
@@ -212,10 +208,22 @@ include 'TeamHeader.php';
 									$equipe2[$i] = substr($reste, 0, $pos3-1);
 									$reste = trim(substr($reste, $pos3));
 									$score2[$i] = $reste;
+									
+									//shootout support.
+									$isShootout = false;
+									$isOt = false;
+									if(substr_count($score2[$i], 'SO)')){
+									    $isShootout = true;
+									}else if(substr_count($score2[$i], '(OT)')){
+									    $isOt = true;
+									}
+									
+									$score2[$i] = explode(' ',trim($score2[$i]))[0]; //shootout support
+
 									if($equipe1[$i] == $currentTeam || $equipe2[$i] == $currentTeam) {
 									    $dayArray[$i] = $currentDay;
 									    //echo $dayArray[$i].' ';
-									    
+
 										if($equipe1[$i] == $currentTeam) {
 											if($score1[$i] < $score2[$i]) $schelduleResult[$i] = 'L';
 											if($score1[$i] > $score2[$i]) $schelduleResult[$i] = 'W';
@@ -237,28 +245,38 @@ include 'TeamHeader.php';
 										}
 										if($schelduleResult[$i] == 'L') {
 											$scheduleLoose++;
+											
+											if($isShootout){
+											    $scheduleTie++;
+											}
 										}
+
 										$scheduleRecord[$i] = $scheduleWin.'-'.$scheduleLoose.'-'.$scheduleTie;
 										$scheduleGFGA[$i] = $scheduleGF.'-'.$scheduleGA;
-										for($j=0;$j<count($gmequipe);$j++) {
-											if($gmequipe[$j] != $currentTeam && ($gmequipe[$j] == $equipe1[$i] || $gmequipe[$j] == $equipe2[$i])) {
-												if($gmequipe[$j] == $equipe1[$i]) {
-													if($score1[$i] < $score2[$i]) $gmequipeWin[$j] += 1;
-													if($score1[$i] > $score2[$i]) $gmequipeLoose[$j] += 1;
-													$gmequipeGA[$j] += $score1[$i];
-													$gmequipeGF[$j] += $score2[$i];
+										for($j=0;$j<count($teamList);$j++) {
+											if($teamList[$j] != $currentTeam && ($teamList[$j] == $equipe1[$i] || $teamList[$j] == $equipe2[$i])) {
+												if($teamList[$j] == $equipe1[$i]) {
+													if($score1[$i] < $score2[$i]) $teamListWin[$j] += 1;
+													if($score1[$i] > $score2[$i]) $teamListLoose[$j] += 1;
+													$teamListGA[$j] += $score1[$i];
+													$teamListGF[$j] += $score2[$i];
 												}
-												if($gmequipe[$j] == $equipe2[$i]) {
-													if($score1[$i] < $score2[$i]) $gmequipeLoose[$j] += 1;
-													if($score1[$i] > $score2[$i]) $gmequipeWin[$j] += 1;
-													$gmequipeGA[$j] += $score2[$i];
-													$gmequipeGF[$j] += $score1[$i];
+												if($teamList[$j] == $equipe2[$i]) {
+													if($score1[$i] < $score2[$i]) $teamListLoose[$j] += 1;
+													if($score1[$i] > $score2[$i]) $teamListWin[$j] += 1;
+													$teamListGA[$j] += $score2[$i];
+													$teamListGF[$j] += $score1[$i];
 												}
-												if($score1[$i] == $score2[$i]) $gmequipeTie[$j] += 1;
+												if($score1[$i] == $score2[$i]) $teamListTie[$j] += 1;
 											}
 										}
 									}
 									$i++;
+								}
+								if(substr_count($val, 'SO)')){
+								    $i--;
+								    $prol[$i] = 'SO';
+								    $i++;
 								}
 								if(substr_count($val, '(OT)')){
 									$i--;
@@ -311,6 +329,7 @@ include 'TeamHeader.php';
 										echo '<td class="text-center">'.$equipe2[$i].'</td>';
 										echo '<td class="text-center">'.$score1[$i].'-'.$score2[$i].'</td>';
 										if(isset($prol[$i]) && $prol[$i] == 'PROL') echo '<td class="text-center">'.$schedOT.'</td>';
+										else if(isset($prol[$i]) && $prol[$i] == 'SO') echo '<td class="text-center">SO</td>';
 										else echo '<td></td>';
 										$replaceOrigin = array('W', 'L', 'T');
 										$replaceBy = array($ScheldW, $ScheldL, $ScheldT);
@@ -363,20 +382,23 @@ include 'TeamHeader.php';
 				echo '</tr>';
 				echo '</thead>';
 				$c = 1;
-				for($j=0;$j<count($gmequipe);$j++) {
-				    if($gmequipe[$j] != $currentTeam) {
+				for($j=0;$j<count($teamList);$j++) {
+				    if($teamList[$j] != $currentTeam) {
 				        if($c == 1) $c = 2;
 				        else $c = 1;
-				        $GP = $gmequipeWin[$j]+$gmequipeLoose[$j]+$gmequipeTie[$j];
+
+				        $GP = $teamListWin[$j]+$teamListLoose[$j]+$teamListTie[$j];
+				        if($GP == 0 && $teamListLeft[$j] == 0) continue; //skip team if not scheduled.
+				        
 				        echo '<tr>';
-				        echo '<td>'.$gmequipe[$j].'</td>';
+				        echo '<td>'.$teamList[$j].'</td>';
 				        echo '<td class="text-center">'.$GP.'</td>';
-				        echo '<td class="text-center">'.$gmequipeWin[$j].'</td>';
-				        echo '<td class="text-center">'.$gmequipeLoose[$j].'</td>';
-				        echo '<td class="text-center">'.$gmequipeTie[$j].'</td>';
-				        echo '<td class="text-center"d>'.$gmequipeLeft[$j].'</td>';
-				        /* echo '<td>'.$gmequipeGA[$j].'-'.$gmequipeGF[$j].'</td>'; */
-				        echo '<td class="text-center">'.$gmequipeGF[$j].'-'.$gmequipeGA[$j].'</td>';
+				        echo '<td class="text-center">'.$teamListWin[$j].'</td>';
+				        echo '<td class="text-center">'.$teamListLoose[$j].'</td>';
+				        echo '<td class="text-center">'.$teamListTie[$j].'</td>';
+				        echo '<td class="text-center"d>'.$teamListLeft[$j].'</td>';
+				        /* echo '<td>'.$teamListGA[$j].'-'.$teamListGF[$j].'</td>'; */
+				        echo '<td class="text-center">'.$teamListGF[$j].'-'.$teamListGA[$j].'</td>';
 				        echo '</tr>';
 				    }
 				}

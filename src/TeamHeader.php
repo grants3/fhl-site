@@ -1,5 +1,6 @@
 <?php 
-require_once 'config.php';
+require_once __DIR__.'/config.php';
+include_once FS_ROOT.'fileUtils.php';
 
 ?>
 
@@ -15,19 +16,26 @@ border-bottom:1px solid blue;
 
 #header-nav .active {
     font-weight: 1000;
-	font-size: large;
+/* 	font-size: large; */
 }
 
 .team-header-content { 
+/*     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cedce7+9,596a72+100 */ */
+/*     background: var(--team-header-background-color-2); /* Old browsers */ */
+/*     background: -moz-linear-gradient(top, var(--team-header-background-color-1) 9%, var(--team-header-background-color-2) 100%); /* FF3.6-15 */ */
+/*     background: -webkit-linear-gradient(top, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* Chrome10-25,Safari5.1-6 */ */
+/*     background: linear-gradient(to bottom, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ */
+/*     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72',GradientType=0 ); /* IE6-9 */ */
+    
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cedce7+9,596a72+100 */
-    background: var(--team-header-background-color-2); /* Old browsers */
+    background: rgb(206,220,231); /* Old browsers */
     background: -moz-linear-gradient(top, var(--team-header-background-color-1) 9%, var(--team-header-background-color-2) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72',GradientType=0 ); /* IE6-9 */
-
-    border-radius: 5px;   
-    margin-bottom:10px;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72', GradientType=0); /* IE6-9 */
+	
+	border-radius: 5px;   
+/*     margin-bottom:10px; */
 }
 
 .team-nav {
@@ -51,75 +59,10 @@ border-bottom:1px solid blue;
 /* 	border-radius: 100%;   */
 }
 
-.nav-item{
+.team-nav .nav-item{
     text-transform: uppercase;
 }
 
-
-
-.teamheader {
-/* 	background: linear-gradient(rgb(0, 39, 79) 0%, rgb(0, 39, 79) 60%, */
-/* 		rgb(27, 98, 162) 100%); */
-    background: var(--header-gradient);
-/* 	height: 68px; */
-
-    overflow: hidden;
-    width: 100%;
-    float: left;
-
-	moz-border-radius-bottomright: 5px;
-	-webkit-border-bottom-right-radius: 5px;
-	-border-bottom-right-radius: 5px;
-	-moz-border-radius-bottomleft: 5px;
-	-webkit-border-bottom-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-}
-
-.team .header-container{ 
-     background: var(--header-gradient);
-     height: 68px;  
-} 
-
-.teamheader .logo-gradient {
-	background: var(--header-gradient);
-}
-
-.teamheader .gloss {
-	height: 34px;
-	background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%,
-		rgba(255, 255, 255, 0.5) 35%, rgba(255, 255, 255, 0.1) 100%);
-		
-}
-
-.teamheader .team-logo {
-	float: left;
-	vertical-align: middle;
-	text-align: center;
-	width: 68px;
-	height: 68px;
-	-moz-border-radius-bottomleft: 5px;
-	-webkit-border-bottom-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-}
-
-.teamheader .team-logo-right {
-	float: right;
-	-moz-border-radius-bottomright: 5px;
-	-webkit-border-bottom-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-}
-
-.teamheader .header {
-    vertical-align: middle;
-    line-height: 20px;
-    padding: 5px 10px;
-
-    color: #fff;
-    text-transform: uppercase;
-    margin-top: -32px;
-    text-align: center;
-   
-}
 
 </style>
 
@@ -130,49 +73,40 @@ border-bottom:1px solid blue;
 //$CurrentTitle .= ' - '.$currentTeam;
     
 //team logo links
-if($navbarMode <= 2){
-echo '<div class="row">';
-    echo '<div id="logo-header" class="col text-center">';
-    
-    sort($gmequipe); //sort
-    for($i=0;$i<count($gmequipe);$i++) {
-        $matches = glob($folderTeamLogos.strtolower($gmequipe[$i]).'.*');
-        $teamImage = '';
-        for($j=0;$j<count($matches);$j++) {
-            $teamImage = $matches[$j];
-            break 1;
-        }
-        //echo '<a id="'.$gmequipe[$i].'" href="'.$CurrentPage.'.php?'.$dropLinkPlf.$dropLinkFarm.$dropLinkOne.'team='.$gmequipe[$i].'">';
-        echo '<a id="'.$gmequipe[$i].'" href="'.$CurrentPage.'.php?'.$plfLink.$dropLinkFarm.$dropLinkOne.'team='.$gmequipe[$i].'">';
+if($navbarMode != 3){ ?>
+   
+    <div class="row no-gutters">
+    <div class="col text-center">
+    <?php
+    sort($teamList); // sort
+    for ($i = 0; $i < count($teamList); $i ++) {
+        ?>
+        			
+        			<a href="<?php echo BASE_URL?>TeamRosters.php?team=<?php echo urlencode($teamList[$i]) ?>">
+        				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" width=55 alt="<?php echo $teamList[$i] ?>">
+        			</a>
         
-        echo '<img src="'.$teamImage.'" width=55>';
-        
-        echo '</a>';
-    }
-    echo '</div>';
+        		<?php } ?>
+        	</div>
+    	</div>
+
+    <?php 
+}?>
     
-echo '</div>';
-}
-
-//team nav
-    //includeWithVariables('component/teamDropdown.php',array('teamList' => $gmequipe, 'teamDropdownPrefix' => 'roster', 'CurrentPage' => $CurrentPage));
-    echo '<div class="row justify-content-center team-nav">';
-    echo '<nav id ="header-nav" class="nav justify-content-center">';
-    echo'<a class="nav-item nav-link" href="TeamScoring.php'.$plfLink.'">'.$allScoring.'</a>';
-    echo'<a class="nav-item nav-link" href="TeamFinance.php'.$plfLink.'">'.$allFinances.'</a>';
-    echo'<a class="nav-item nav-link" href="TeamRosters.php'.$plfLink.'">'.$allRosters.'</a>';
-    echo'<a class="nav-item nav-link" href="TeamLines.php'.$plfLink.'">'.$allLines.'</a>';
-    echo'<a class="nav-item nav-link" href="TeamFutures.php'.$plfLink.'">'.$allProspects.'</a>';
-    echo'<a class="nav-item nav-link" href="TeamTransactions.php">Transactions</a>';
-    echo'<a class="nav-item nav-link" href="TeamOverview.php'.$plfLink.'">'.$allTeamCard.'</a>';
-    echo'<a class="nav-item nav-link" href="TeamSchedule.php'.$plfLink.'">'.$schedTitle.'</a>';
-    echo '</nav>';
-    echo '</div>';
+<div class="row justify-content-center team-nav">
+    <nav id ="header-nav" class="nav justify-content-center">
+        <a class="nav-item nav-link" href="TeamScoring.php"><?php echo $allScoring ?></a>
+        <a class="nav-item nav-link" href="TeamFinance.php"><?php echo $allFinances ?></a>
+        <a class="nav-item nav-link" href="TeamRosters.php"><?php echo $allRosters ?></a>
+        <a class="nav-item nav-link" href="TeamLines.php"><?php echo $allLines ?></a>
+        <a class="nav-item nav-link" href="TeamFutures.php"><?php echo $allProspects ?></a>
+        <a class="nav-item nav-link" href="TeamTransactions.php">Transactions</a>
+        <a class="nav-item nav-link" href="TeamOverview.php"><?php echo $allTeamCard ?></a>
+        <a class="nav-item nav-link" href="TeamSchedule.php"><?php echo $schedTitle ?></a>
+    </nav>
+</div>
 
 
-
-
-?>
 
 
 <script>

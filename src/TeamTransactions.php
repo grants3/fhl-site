@@ -25,7 +25,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 
 
 
-<div class = "container">
+<div class = "container px-0">
 	<div class="card">
     	<div class="card-header p-1">
     	

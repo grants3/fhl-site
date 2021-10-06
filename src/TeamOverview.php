@@ -715,7 +715,7 @@ if(file_exists($Fnm)) {
 	}
 }
 
-echo '<div class = "container">';
+echo '<div class = "container px-2">';
 
 echo '<div class="card">';
 
@@ -779,7 +779,7 @@ if(isset($nextNumber)) {
 }
 
 if(isset($propayroll)) {
-	echo '<a href="Finance.php'.$plfLink.'">';
+	echo '<a href="Finance.php">';
     echo '<table class="table table-sm table-striped table-rounded">';
     echo '<thead>';
 	echo '<tr><th colspan="2"><h5 class="m-0">'.$teamCardFinancial.'</h5></th></tr>';

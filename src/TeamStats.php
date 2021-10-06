@@ -4,10 +4,19 @@ include 'lang.php';
 $CurrentHTML = 'TeamStats.php';
 $CurrentTitle = $teamStatsTitle;
 $CurrentPage = 'TeamStats';
+
+//sort support
+$sort = '';
+if(isset($_GET['sort']) || isset($_POST['sort'])) {
+    $sort = ( isset($_GET['sort']) ) ? $_GET['sort'] : $_POST['sort'];
+    $sort = htmlspecialchars($sort);
+}
+
 include 'head.php';
+
 ?>
 
-<div class="container">
+<div class="container px-0">
 <div class="row no-gutters">
 <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2"> 	
 <div class="card p-1">
@@ -120,8 +129,8 @@ for($j=1;$j<=$round;$j++) {
 							
 							if($b == 2) {
 								$d = 0;
-								for($k = 0; $k < count($gmequipe) ; $k++) {
-									if($tmpGameTeam1 == $gmequipe[$k]) {
+								for($k = 0; $k < count($teamList) ; $k++) {
+									if($tmpGameTeam1 == $teamList[$k]) {
 										$d++;
 										if(isset($gameStatsFilePPG[$k])) $gameStatsFilePPG[$k] += $tmpTeam1PPG;
 										else $gameStatsFilePPG[$k] = $tmpTeam1PPG;
@@ -132,7 +141,7 @@ for($j=1;$j<=$round;$j++) {
 										if(isset($gameStatsFilePKOA[$k])) $gameStatsFilePKOA[$k] += $tmpTeam2PPGO;
 										else $gameStatsFilePKOA[$k] = $tmpTeam2PPGO;
 									}
-									if($tmpGameTeam2 == $gmequipe[$k]) {
+									if($tmpGameTeam2 == $teamList[$k]) {
 										$d++;
 										if(isset($gameStatsFilePPG[$k])) $gameStatsFilePPG[$k] += $tmpTeam2PPG;
 										else $gameStatsFilePPG[$k] = $tmpTeam2PPG;
@@ -203,8 +212,8 @@ if(file_exists($Fnm)) {
 			$tmpSFG = substr($val, 52, 5);
 			$tmpSAG = substr($val, 59, 5);
 			
-			for($k = 0; $k < count($gmequipe) ; $k++) {
-				if($tmpTeam == $gmequipe[$k]) {
+			for($k = 0; $k < count($teamList) ; $k++) {
+				if($tmpTeam == $teamList[$k]) {
 					$teamStatsFileGP[$k] = $tmpGP;
 					$teamStatsFilePP[$k] = $tmpPP;
 					$teamStatsFilePK[$k] = $tmpPK;
@@ -252,7 +261,7 @@ if(file_exists($Fnm)) {
 		while(list ($key, $val) = myEach($tableaut)) {
 			if($c == 1) $c = 2;
 			else $c = 1;
-			$equipe = $gmequipe[$key];
+			$equipe = $teamList[$key];
 
 			$position = $i + 1;
 			echo '<tr>

@@ -53,7 +53,7 @@ if(DEBUG_MODE){
 }
 </style>
 
-<div class="container">
+<div class="container px-2">
 
 	<div class="card">
 		<?php include 'SectionHeader.php';?>

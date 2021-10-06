@@ -17,18 +17,16 @@ jQuery(document).ready(function() {
     /*
         Background slideshow
     */
-	if ($('.top-content').length){
+	if ($('.top-container').length){
 		
-		 $('.top-content').backstretch("assets/img/backgrounds/1.jpg");
-	    //$('.section-4-container').backstretch("assets/img/backgrounds/1.jpg");
-	    
+		// $('.top-content').backstretch("assets/img/backgrounds/1.jpg");
+
 	    /*
 	     * Top container of each page. 
 	     */
 		$('.top-container').waypoint(function() {
 			$('nav').toggleClass('navbar-no-bg');
 		});
-
 	}
    
     

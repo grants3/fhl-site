@@ -4,6 +4,20 @@ include 'lang.php';
 $CurrentHTML = 'Leaders.php';
 $CurrentTitle = $leaderTitle;
 $CurrentPage = 'Leaders';
+
+$farm = '';
+$currentFarm = 0;
+if(isset($_GET['s']) || isset($_POST['s'])) {
+    $currentFarm = ( isset($_GET['s']) ) ? $_GET['s'] : $_POST['s'];
+    $currentFarm = htmlspecialchars($currentFarm);
+    if($currentFarm == 1) {
+        $farm = 'Farm';
+        //if($CurrentPage == 'Standings') $CurrentTitle = $standingTitleFarm;
+        //if($CurrentPage == 'OverallStandings') $CurrentTitle = $standingTitleFarm;
+        if($CurrentPage == 'Leaders') $CurrentTitle = $leaderTitleFarm;
+    }
+}
+
 include 'head.php';
 ?>
 

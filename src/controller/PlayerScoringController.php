@@ -125,14 +125,31 @@ class PlayerScoringController {
                 $a = (array) $a;
                 $b = (array) $b;
                 
+//                 if($orderDirection == 'asc'){
+//                     return $a[$orderColumn] <=> $b[$orderColumn];
+//                 }else{
+//                     return $b[$orderColumn] <=> $a[$orderColumn];
+//                 }
+                //multi sort with attribute and then name.
                 if($orderDirection == 'asc'){
+                    //return [$a[$orderColumn], $a['name']] <=> [$b[$orderColumn], $b['name']];
+                    if($a[$orderColumn] === $b[$orderColumn]){
+                        return $a['name'] <=>  $b['name'];
+                    }
+                    
                     return $a[$orderColumn] <=> $b[$orderColumn];
                 }else{
+                    if($a[$orderColumn] === $b[$orderColumn]){
+                        return $a['name'] <=>  $b['name'];
+                    }
+                    
                     return $b[$orderColumn] <=> $a[$orderColumn];
                 }
                 
                 
             } );
+            
+            
         }
         
       

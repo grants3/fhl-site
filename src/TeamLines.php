@@ -8,7 +8,7 @@ include 'head.php';
 include 'TeamHeader.php';
 ?>
 
-<div class="container">
+<div class="container px-0">
 
 <?php
 

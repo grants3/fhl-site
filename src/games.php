@@ -473,7 +473,7 @@ table.table-sm>thead>tr>th:first-of-type {
 
 ?>
 
-<div class="container">
+<div class="container px-0">
 	<div class="row">
 		<div class="col">
 			<div class="card">
@@ -1006,10 +1006,10 @@ table.table-sm>thead>tr>th:first-of-type {
                                             }
 
                                             echo '<tr >
-                                                    <td style="width:24%">' . $scoringTemp['TEAM'] . '</td>
+                                                    <td style="width:23%">' . $scoringTemp['TEAM'] . '</td>
                                                     <td class="text-center" style="width:8%">' . $scoringTemp['TIME'] . '</td>
                                                     <td style="width:60%">' . $scoringTemp['SCORE'] . '</td>
-                                                    <td class="text-center" style="width:8%">' . $awayScoreCounter . '-' . $homeScoreCounter . '</td>
+                                                    <td class="text-center" style="width:9%">' . $awayScoreCounter . '-' . $homeScoreCounter . '</td>
                                                 </tr>';
                                         }
 
@@ -1049,10 +1049,10 @@ table.table-sm>thead>tr>th:first-of-type {
                                             }
 
                                             echo '<tr >
-                                                    <td style="width:24%">' . $scoringTemp['TEAM'] . '</td>
+                                                    <td style="width:23%">' . $scoringTemp['TEAM'] . '</td>
                                                     <td class="text-center" style="width:8%">' . $scoringTemp['TIME'] . '</td>
                                                     <td style="width:60%">' . $scoringTemp['SCORE'] . '</td>
-                                                    <td class="text-center" style="width:8%">' . $awayScoreCounter . '-' . $homeScoreCounter . '</td>
+                                                    <td class="text-center" style="width:9%">' . $awayScoreCounter . '-' . $homeScoreCounter . '</td>
                                                 </tr>';
                                         }
                                         if (empty($gameHolder->getScoringSecondPeriod())) {
@@ -1091,10 +1091,10 @@ table.table-sm>thead>tr>th:first-of-type {
                                             }
 
                                             echo '<tr >
-                                                    <td style="width:24%">' . $scoringTemp['TEAM'] . '</td>
+                                                    <td style="width:23%">' . $scoringTemp['TEAM'] . '</td>
                                                     <td class="text-center" style="width:8%">' . $scoringTemp['TIME'] . '</td>
                                                     <td style="width:60%">' . $scoringTemp['SCORE'] . '</td>
-                                                    <td class="text-center" style="width:8%">' . $awayScoreCounter . '-' . $homeScoreCounter . '</td>
+                                                    <td class="text-center" style="width:9%">' . $awayScoreCounter . '-' . $homeScoreCounter . '</td>
                                                 </tr>';
                                         }
                                         if (empty($gameHolder->getScoringThirdPeriod())) {
@@ -1137,10 +1137,10 @@ table.table-sm>thead>tr>th:first-of-type {
                                                 }
 
                                                 echo '<tr >
-                                                    <td style="width:24%">' . $scoringTemp['TEAM'] . '</td>
+                                                    <td style="width:23%">' . $scoringTemp['TEAM'] . '</td>
                                                     <td class="text-center" style="width:8%">' . $scoringTemp['TIME'] . '</td>
                                                     <td style="width:60%">' . $scoringTemp['SCORE'] . '</td>
-                                                    <td class="text-center" style="width:8%">' . $awayScoreCounter . '-' . $homeScoreCounter . '</td>
+                                                    <td class="text-center" style="width:9%">' . $awayScoreCounter . '-' . $homeScoreCounter . '</td>
                                                 </tr>';
                                             }
                                         }

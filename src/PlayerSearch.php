@@ -33,7 +33,7 @@ $teams = new TeamHolder($gmFile);
 
 </style>
 
-<div class="container" >
+<div class="container px-2" >
 	
 	<div class="card">
     		<?php include 'SectionHeader.php';?>
@@ -308,8 +308,7 @@ $teams = new TeamHolder($gmFile);
                 scrollCollapse: true,
                 order: [[ 17, "desc" ]],
                 fixedColumns:   {
-                    leftColumns: 1,
-                    rightColumns: 1
+                    leftColumns: 1
                 },
                 "ajax": "<?php echo BASE_URL?>PlayerSearchAjax.php",
                 "columns": [

@@ -1,11 +1,11 @@
 <?php
 
-require_once 'config.php';
-include_once 'lang.php';
-include_once 'common.php';
+require_once __DIR__.'/../config.php';
+include_once FS_ROOT.'lang.php';
+include_once FS_ROOT.'common.php';
 include_once FS_ROOT.'style.php';
-include_once 'classes/ScheduleHolder.php';
-include_once 'classes/ScheduleObj.php';
+include_once FS_ROOT.'classes/ScheduleHolder.php';
+include_once FS_ROOT.'classes/ScheduleObj.php';
 ?>
 
 <style>
@@ -13,8 +13,10 @@ include_once 'classes/ScheduleObj.php';
 .latest-game {
     border-radius:5%; 
     border-style: solid; 
-    margin:2px;
-    border-color:var(--color-primary-1);
+/*     margin:2px; */
+    border-width: 1px;
+    margin:5px;
+    border-color:var(--color-primary-2);
 }
  .latest-image { max-width: 50%; height: auto; }
 
@@ -24,6 +26,16 @@ include_once 'classes/ScheduleObj.php';
      justify-content: center;  
      align-items: center;
   
+ }
+ 
+ .latest-score-day{
+
+/*     border: 1px; */
+    border-color:var(--color-primary-1);
+    border-style:solid;
+    border-width: 3px;
+/*     border-bottom-right-radius:3%; */
+/*     border-bottom-left-radius:3%; */
  }
 
 </style>
@@ -57,7 +69,7 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
 
 ?>
 
-<div class="fhlElement container-fluid">
+<div class="fhlElement container-fluid px-0">
 <div class="row justify-content-center no-gutters">
 <div class="col">
 
@@ -78,12 +90,12 @@ for ($i = $miniNextGame; $i <= $miniNextToProcess; $i ++) {
 
      if(!empty($miniGames)){
 
-    echo '<div>';
+    echo '<div class="mb-1">';
     //echo '<h5>Day' . $i . '</h5>';
-    echo '<h5 class="tableau-top my-1">Day' . $i . '</h5>';
-    echo '</div>';
+    echo '<h5 class="tableau-top m-0">Day' . $i . '</h5>';
+    //echo '</div>';
 
-    echo '<div class = "row no-gutters d-flex justify-content-center">';
+    echo '<div class = "row no-gutters d-flex justify-content-center latest-score-day">';
 
     foreach ($miniGames as $games) {
         
@@ -121,6 +133,7 @@ for ($i = $miniNextGame; $i <= $miniNextToProcess; $i ++) {
         }
     // }
 
+    echo '</div>';
     echo '</div>';
      }
 }

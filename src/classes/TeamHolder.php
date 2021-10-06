@@ -3,11 +3,11 @@
 class TeamHolder {
     var $teams = array();
     
-    public function __construct(string $file) {
+    public function __construct(string $gmFile) {
         
         $i = 0;
-        if(file_exists($file)) {
-            $contents = file($file);
+        if(file_exists($gmFile)) {
+            $contents = file($gmFile);
             foreach ($contents as $cle => $val) {
                 $val = utf8_encode($val);
                 if(substr_count($val, 'HREF') && !substr_count($val, '<BR>')) {

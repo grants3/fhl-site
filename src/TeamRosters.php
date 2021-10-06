@@ -20,7 +20,7 @@ include_once 'classes/PlayerVitalsHolder.php';
 ?>
 
 
-<div class="container">
+<div class="container px-0">
 	<div class="row no-gutters">
 	<div class="col"> 
 	<div class="card">
@@ -74,7 +74,7 @@ include_once 'classes/PlayerVitalsHolder.php';
              
                                 //create table header
                                 echo '<div class="table-responsive">';
-                                echo '<table id="'.$tableId.'" class="table table-sm table-striped table-hover fixed-column table-striped  text-center">';
+                                echo '<table id="'.$tableId.'" class="table table-sm table-striped table-hover fixed-column text-center">';
                                 
                                     echo '<thead>
                                         <tr>

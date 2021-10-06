@@ -89,7 +89,7 @@ if(file_exists($Fnm)) {
 }
 ?>
 
-<div class = "container">
+<div class = "container px-0">
 
 	<div class="card">
 

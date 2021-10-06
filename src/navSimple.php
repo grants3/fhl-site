@@ -1,4 +1,13 @@
 <style>
+/* navbar padding */
+/* body.fhlElement{ */
+/*     margin-top: 50px;  */
+/* } */
+
+    #main-navbar.navbar {
+        height: 50px;
+      }
+
 #main-navbar.navbar {
 	padding: .1rem .2rem
 }
@@ -35,10 +44,6 @@
     min-height: 45px;
 }
 
-body{
-    margin-top: 50px; 
-}
-
 #main-navbar .btn-outline-primary:hover {
     color: #fff;
     background-color: #444;
@@ -51,7 +56,7 @@ body{
 }
 
 
-<?php if($navbarMode == 3){
+<?php if($navbarMode == 3 || $navbarMode == 4){
 //need to override color for smaller nav bar as unable to read text.?>
 :root {
   --team-header-background-color-1:var(--color-primary-1); 
@@ -69,7 +74,8 @@ body{
 </style>
  
   <!-- Top menu -->
-	<nav class="navbar navbar-dark fixed-top navbar-expand-lg navbar-no-bg" id="main-navbar">
+<!-- 	<nav class="navbar navbar-dark fixed-top navbar-expand-lg navbar-no-bg" id="main-navbar"> -->
+	<nav class="navbar navbar-expand-lg navbar-dark sticky-top navbar-no-bg" id="main-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="<?php echo BASE_URL?>">HOME</a>
 
@@ -83,11 +89,11 @@ body{
                  
                      $navLink = $CurrentPage == 'Home' ? '' : $CurrentPage.'.php';
                  
-     				for($i=0;$i<count($gmequipe);$i++)
+     				for($i=0;$i<count($teamList);$i++)
      				{
-     				    $navTeamSelected = $currentTeam === $gmequipe[$i] ? 'selected' : '';
+     				    $navTeamSelected = $currentTeam === $teamList[$i] ? 'selected' : '';
      				    
-     				    echo '<option '.$navTeamSelected.' id="nav-team-'.$gmequipe[$i].'" value="'.$navLink.'?'.$plfLink.$dropLinkFarm.$dropLinkOne.'team='.$gmequipe[$i].'">'.$gmequipe[$i].'</a>';
+     				    echo '<option '.$navTeamSelected.' id="nav-team-'.$teamList[$i].'" value="'.$navLink.'?'.'team='.$teamList[$i].'">'.$teamList[$i].'</a>';
      				}
                  ?>
                 </select>

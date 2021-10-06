@@ -22,7 +22,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 
 ?>
 
-<div class="container">
+<div class="container px-2">
 
 	<div class="card">
 	
@@ -30,7 +30,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 		
 		<div class="card-body px-2 px-md-3">
 
-			<div class="col-sm-4 col-md-6 col-lg-4" style="display: flex;">
+			<div class="col-sm-12 col-md-6 col-lg-4" style="display: flex;">
 
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">

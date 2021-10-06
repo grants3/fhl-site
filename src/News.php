@@ -1,4 +1,4 @@
-<div class="container-responsive fhlElement">
+<div class="container-fluid fhlElement px-0">
     <div class="card">
       <img class="card-img-top" src="./assets/img/news/cup.jpg" alt="News Image">
       <div class="card-body">

@@ -12,45 +12,14 @@ include 'head.php';
 
 ?>
 
-<style>
-.team-header-content {
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cedce7+9,596a72+100 */
-    background: rgb(206,220,231); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(206,220,231,1) 9%, var(--color-primary-2) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(206,220,231,1) 9%,var(--color-primary-2) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(206,220,231,1) 9%,var(--color-primary-2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7',
-		endColorstr='#596a72', GradientType=0); /* IE6-9 */
-	border-radius: 5px;
-	margin-bottom: 10px;
-}
-
-</style>
 
 <?php
 $playoffs = isPlayoffs($folder, $playoffMode);
 ?>
 		
-		
-       
-		<div class="team-header-content mx-md-2 mx-lg-3">
-			<div class="row no-gutters">
-				<div class="col text-center">
-                <?php
-					sort($gmequipe); //sort
-					for($i=0;$i<count($gmequipe);$i++) { ?>
-					
-						<a href="TeamRosters.php?team=<?php echo urlencode($gmequipe[$i]) ?>">
-							<img src="<?php echo getTeamLogoUrl($gmequipe[$i])?>" width=55 alt="<?php echo $gmequipe[$i] ?>">
-						</a>
-
-					<?php }
-					
-				?>
-			   </div>
-		 	</div>
-         </div>
+		<div class="mx-md-2 mx-lg-3">
+			<?php include FS_ROOT.'component/TeamBanner.php'; ?>
+		</div>
 		
 		<div class="mx-xs-1 mx-md-2 mx-lg-3">
 			<?php //include 'ScoreCarousel.php'; ?>
@@ -118,7 +87,7 @@ $playoffs = isPlayoffs($folder, $playoffMode);
         						<h4 class="m-0">Next Games</h4>
         					</div>
         					<div class="card-body">
-        						<?php include FS_ROOT.'MiniNextGames.php'; ?>
+        						<?php include FS_ROOT.'component/MiniNextGames.php'; ?>
         					</div>
         				</div>
         

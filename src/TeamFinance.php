@@ -15,7 +15,7 @@ include_once 'classes/PlayerVitalsHolder.php';
 
 ?>
 
-<div class="container">
+<div class="container px-0">
 
 <?php
 $matches = glob($folder.'*'.$playoff.'Finance.html');
