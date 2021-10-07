@@ -1,7 +1,7 @@
 <?php
 
 function getBaseUrl(){
-    $protocol = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+    $protocol = getProtocol();
     $url = str_replace("\\",'/',$protocol.'://'.$_SERVER['HTTP_HOST'].substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])));
     
     $url = rtrim($url, '/') . '/';
@@ -13,6 +13,10 @@ function getBaseUrl(){
     $url = $url.str_replace(array('\\', '/'), '/', relativePath(getcwd(),__DIR__));
     
     return $url;
+}
+
+function getProtocol(){
+    return isset($_SERVER["HTTPS"]) ? 'https' : 'http';
 }
 
 /**
@@ -45,7 +49,7 @@ define("BASE_URL",getBaseUrl());
 define("FS_ROOT",__DIR__.'/');
 
 #Debug Mode. 1 = ON, 0 = OFF
-define("DEBUG_MODE",1);
+define("DEBUG_MODE",0);
 
 if(DEBUG_MODE){
     error_log('-------config path info ---------');

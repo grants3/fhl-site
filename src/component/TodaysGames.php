@@ -96,11 +96,11 @@ padding-right:30px;
 
 </style>
 
-<?php include '../head.php'?>
+
 
 <div id="scoringBanner" class="container">
 	<div class="row">
-	<div class="col-12">
+	<div class="col">
     
 
 <?php
@@ -264,8 +264,6 @@ if ($scheduleHolder->isSeasonStarted()) {
 
 </div>
 
-
-<?php include '../footer.php'?>
 
 
 

@@ -5,6 +5,8 @@
   --color-primary-3: rgb(0, 39, 79);
   --color-alternate-1: rgb(225, 239, 255);
   --color-alternate-2: rgb(176, 214, 255); 
+  
+  --color-text-primary-0: #323232;
   --color-text-primary-1: white;
   --color-text-primary-2: var(--color-primary-3);
   
@@ -55,18 +57,20 @@
 
 .fhlElement{  
 	font-size: 15px; 
-	font-family: "Open Sans2","Helvetica Neue", HelveticaNeue, Helvetica, Verdana , Arial, sans-serif;
+	font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Verdana , Arial, sans-serif;
 	font-weight: 300; 
-	color: #888;
+/* 	color: #888; */
+	color: var(--color-text-primary-0);
 	
 }
 
 body.fhlElement {  
 	/*margin-top: 60px; nav margins. much to each nav*/
 	font-size: 15px; 
-	font-family: "Open Sans2","Helvetica Neue", HelveticaNeue, Helvetica, Verdana , Arial, sans-serif;
+	font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Verdana , Arial, sans-serif;
 	font-weight: 300; 
-	color: #888;
+	/* 	color: #888; */
+	color: var(--color-text-primary-0);
 	
 	background:var(--background-gradient-webkit);
 	background:var(--background-gradient);
@@ -90,8 +94,8 @@ body.fhlElement {
 
 .fhlElement .medium-paragraph { font-size: 17px; line-height: 32px; }
 
-.fhlElement *::-moz-selection { background: #7762ac; color: #fff; text-shadow: none; }
-.fhlElement *::selection { background: #7762ac; color: #fff; text-shadow: none; }
+::-moz-selection { background: #7762ac; color: #fff; text-shadow: none; }
+::selection { background: #7762ac; color: #fff; text-shadow: none; }
 
 .lien-blanc  {
 font-size:10pt;
@@ -189,6 +193,7 @@ a:hover {
 .navbar {
 	background: #444;
 	-o-transition: all .6s; -moz-transition: all .6s; -webkit-transition: all .6s; -ms-transition: all .6s; transition: all .6s;
+	-webkit-backface-visibility: hidden; 
 	backface-visibility: hidden;
 	
 }
@@ -380,7 +385,7 @@ div .tableau-top{
 
 .table>tbody a { 
 	color: var(--table-link-color); 
-	font-weight: bold;
+/* 	font-weight: 550; */
 }
 
 
@@ -390,13 +395,16 @@ div .tableau-top{
     color:#ffffff;
 }
 
+.table{
+	color: var(--color-text-primary-0); /*table text colour*/
+}
 
 .table td {
-	font-size: 12px;
+	font-size: 13px; /*was 12 and 13*/
 	margin: 0px;
 }
 .table th {
-	font-size: 13px;
+	font-size: 14px;
  	margin: 0px; 
 }
 

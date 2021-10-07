@@ -66,6 +66,7 @@ border-bottom:1px solid blue;
 
 </style>
 
+<!-- <div class="container-fluid team-header-content px-0"> -->
 <div class="container team-header-content">
 
 <?php
@@ -73,14 +74,16 @@ border-bottom:1px solid blue;
 //$CurrentTitle .= ' - '.$currentTeam;
     
 //team logo links
+$navbarMode=232;
 if($navbarMode != 3){ ?>
    
-    <div class="row no-gutters">
-    <div class="col text-center">
-    <?php
-    sort($teamList); // sort
-    for ($i = 0; $i < count($teamList); $i ++) {
-        ?>
+	<div class="row">
+    	
+    		<div class="col text-center p-0">
+                <?php
+                sort($teamList); // sort
+                for ($i = 0; $i < count($teamList); $i ++) {
+                    ?>
         			
         			<a href="<?php echo BASE_URL?>TeamRosters.php?team=<?php echo urlencode($teamList[$i]) ?>">
         				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" width=55 alt="<?php echo $teamList[$i] ?>">
@@ -88,24 +91,27 @@ if($navbarMode != 3){ ?>
         
         		<?php } ?>
         	</div>
-    	</div>
-
-    <?php 
-}?>
     
-<div class="row justify-content-center team-nav">
-    <nav id ="header-nav" class="nav justify-content-center">
-        <a class="nav-item nav-link" href="TeamScoring.php"><?php echo $allScoring ?></a>
-        <a class="nav-item nav-link" href="TeamFinance.php"><?php echo $allFinances ?></a>
-        <a class="nav-item nav-link" href="TeamRosters.php"><?php echo $allRosters ?></a>
-        <a class="nav-item nav-link" href="TeamLines.php"><?php echo $allLines ?></a>
-        <a class="nav-item nav-link" href="TeamFutures.php"><?php echo $allProspects ?></a>
-        <a class="nav-item nav-link" href="TeamTransactions.php">Transactions</a>
-        <a class="nav-item nav-link" href="TeamOverview.php"><?php echo $allTeamCard ?></a>
-        <a class="nav-item nav-link" href="TeamSchedule.php"><?php echo $schedTitle ?></a>
-    </nav>
-</div>
+    </div>
+<?php }?>
 
+
+    
+    <div class="row team-nav">
+    	<div class="col p-0">
+            <nav id ="header-nav" class="nav justify-content-center">
+                <a class="nav-item nav-link" href="TeamScoring.php"><?php echo $allScoring ?></a>
+                <a class="nav-item nav-link" href="TeamFinance.php"><?php echo $allFinances ?></a>
+                <a class="nav-item nav-link" href="TeamRosters.php"><?php echo $allRosters ?></a>
+                <a class="nav-item nav-link" href="TeamLines.php"><?php echo $allLines ?></a>
+                <a class="nav-item nav-link" href="TeamFutures.php"><?php echo $allProspects ?></a>
+                <a class="nav-item nav-link" href="TeamTransactions.php">Transactions</a>
+                <a class="nav-item nav-link" href="TeamOverview.php"><?php echo $allTeamCard ?></a>
+                <a class="nav-item nav-link" href="TeamSchedule.php"><?php echo $schedTitle ?></a>
+            </nav>
+        </div>
+    </div>
+</div>
 
 
 
@@ -137,4 +143,4 @@ $(document).ready(function() {
 
 </script>
 
-</div>
+

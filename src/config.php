@@ -70,7 +70,7 @@ define("LOGO_DIR",'logos/');
 $folderTeamLogos = LOGO_DIR;
 
 #GMO Location. 
-//Location of Online GM editor
+//Location of Online GM editor relative to the location of the config file. Leave blank if not used.
 define("GMO_DIR",'gmo/');
 $folderGmo = GMO_DIR;
 

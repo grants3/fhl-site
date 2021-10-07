@@ -32,10 +32,10 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
     		 <?php include 'TeamCardHeader.php'; ?>
     	
     	</div>
-    	<div class="card-body">
-    			<div class="row mb-2">
+    	<div class="card-body p-1">
+    			<div class="row pb-1">
             		
-            		<div class="col col-md-8 col-lg-6">
+            		<div class="col-sm-12 col-md-8 col-lg-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<label class="input-group-text" for="contractsMenu">Season</label>

@@ -474,8 +474,8 @@ table.table-sm>thead>tr>th:first-of-type {
 ?>
 
 <div class="container px-0">
-	<div class="row">
-		<div class="col">
+	<div class="row2 no-gutters2">
+		<div class="col2">
 			<div class="card">
 				<div class="card-header p-1 text-center text-white" style="background-color: rgb(50, 52, 54); border-color:rgb(128, 128, 128);">
 					<span>FINAL<?php 
@@ -1500,7 +1500,7 @@ table.table-sm>thead>tr>th:first-of-type {
 	<!-- end main row -->
 
 	<!-- start farm -->
-	<div class="row mt-3">
+	<div class="row no-gutters mt-1">
 		<div class="col">
 
 			<div class="accordion" id="farmAccordian">

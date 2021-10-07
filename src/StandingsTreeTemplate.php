@@ -84,7 +84,7 @@ for($j=1;$j<=$existRnd;$j++) {
         $order++;
     }
     
-    echo '<div class="col-12 order-'.$order.' col-lg-3 order-lg-1">';
+    echo '<div class="col-12 order-'.$order.' col-md-12 col-lg-3 order-lg-1">';
 	echo '<div class = "tableau-top">'.$roundName.'</div>';
 
 	$TeamNumber = 100;

@@ -202,4 +202,30 @@ if (!function_exists('mb_strlen')){
 }
 
 
+function URL_exists($url){
+
+    //override ssl context for the call
+    stream_context_set_default( [
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
+    ]);
+
+    $headers = @get_headers($url->_value);
+    if(strpos($headers[0],'200')===false)return false;
+    
+    stream_context_set_default( [
+        'ssl' => [
+            'verify_peer' => true,
+            'verify_peer_name' => true,
+        ],
+    ]);
+    
+    return true;
+    
+  //  return $exists;
+}
+
+
 ?>

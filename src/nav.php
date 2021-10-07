@@ -44,20 +44,28 @@
 					  <!--<li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>Standings.php">Standings</a></li>-->
 					  <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>TeamRosters.php">Teams</a></li>
 					  
-					  <li class="nav-item dropdown">
+					  <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navStandingsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Standings
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navStandingsDropdown">
-                          <a class="nav-item dropdown-item" href="<?php echo BASE_URL?>Standings.php">Pro&nbsp;Standings</a>
+                          <a class="nav-item dropdown-item" href="<?php //echo BASE_URL?>Standings.php">Pro&nbsp;Standings</a>
                           <div class="dropdown-divider"></div>
-                          <a class="nav-item dropdown-item" href="<?php echo BASE_URL?>FarmStandings.php?s=1">Farm&nbsp;Standings</a>
+                          <a class="nav-item dropdown-item" href="<?php //echo BASE_URL?>FarmStandings.php?s=1">Farm&nbsp;Standings</a>
                         </div>
-                      </li>
+                      </li>-->
 					  
+					  <li class="dropdown">
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Standings<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Standings.php">Pro&nbsp;Standings</a></li>
+						  <li class="dropdown-divider"></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>FarmStandings.php?s=1">Farm&nbsp;Standings</a></li>
+						</ul>
+					  </li>
 
 					  <li class="dropdown">
-						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stats&nbsp;<span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stats<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>PlayerScoring.php">Player Stats</a></li>
 						  <li class="dropdown-divider"></li>

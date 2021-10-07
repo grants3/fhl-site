@@ -13,7 +13,7 @@ include_once FS_ROOT.'classes/TeamHolder.php';
 	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7',
 		endColorstr='#596a72', GradientType=0); /* IE6-9 */
-	border-radius: 5px;
+/* 	border-radius: 5px; */
 /* 	margin-bottom: 10px; */
 }
 </style>
@@ -38,10 +38,10 @@ if(!isset($teamList)){
 
 ?>
 
-<div class="component-fluid px-0">
-    <div class="team-header-content">
-    	<div class="row no-gutters">
-    		<div class="col text-center">
+<div class="container-fluid team-header-content px-0">
+    <div class="row no-gutters justify-content-center team-header-content ">
+    	<div class="">
+    		<div class="col text-center p-0">
                 <?php
                 sort($teamList); // sort
                 for ($i = 0; $i < count($teamList); $i ++) {

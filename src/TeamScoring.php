@@ -10,6 +10,7 @@ include 'lang.php';
 $CurrentHTML = 'TeamScoring.php';
 $CurrentTitle = $scoringTitle;
 $CurrentPage = 'TeamScoring';
+
 include 'head.php';
 include 'TeamHeader.php';
 
@@ -42,11 +43,11 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 			
 		</div>
 		<!--end card header -->
-		<div class="card-body px-2 px-lg-4 pt-2">
-			<div class="row selection-content justify-content-center">
+		<div class="card-body p-1">
+			<div class="row selection-content2 justify-content-center no-gutters">
 				<div class="col col-md-8 col-lg-6">
-					<div class="row">
-						<div class="col">
+					<div class="row no-gutters">
+						<div class="col py-1 pr-1">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<label class="input-group-text" for="seasonMenu">Season</label>
@@ -68,7 +69,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 						</div>
 
 
-						<div class="col">
+						<div class="col py-1">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<label class="input-group-text" for="typeMenu">Type</label>

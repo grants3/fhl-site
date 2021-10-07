@@ -55,6 +55,11 @@
     border-color: var(--color-primary-2);
 }
 
+#main-navbar.navbar-dark { font-size: 15px; color: #fff; text-transform: uppercase; }
+#main-navbar.navbar-dark  .nav-link { color: #4C96D7; color: rgba(182,219,251, 0.8); border: 0; }
+#main-navbar.navbar-dark  .nav-link:hover { color: #fff; }
+#main-navbar.navbar-dark  .nav-link:focus { color: #fff; outline: 0; }
+
 
 <?php if($navbarMode == 3 || $navbarMode == 4){
 //need to override color for smaller nav bar as unable to read text.?>
@@ -77,8 +82,20 @@
 <!-- 	<nav class="navbar navbar-dark fixed-top navbar-expand-lg navbar-no-bg" id="main-navbar"> -->
 	<nav class="navbar navbar-expand-lg navbar-dark sticky-top navbar-no-bg" id="main-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="<?php echo BASE_URL?>">HOME</a>
-
+			<div class = "row no-gutters">
+    			<div class="col">
+    				<a class="nav-item nav-link pl-0 pr-1" href="<?php echo BASE_URL?>">HOME</a>
+    				<!-- <a class="navbar-brand" href="<?php //echo BASE_URL?>index.php">Navbar</a>-->
+    			</div>
+    			<?php if(!empty(GMO_DIR)){?>
+    			<div class="col">
+    				<a class="nav-item nav-link px-1" href="<?php echo BASE_URL.GMO_DIR;?>">GMO</a>
+    			</div>
+    			<?php }?>
+    			<div class="col">
+    				<a class="nav-item nav-link backButton px-1" href="#">Back</a>
+    			</div>
+			</div>
 			<!-- only display for team pages -->
 			<?php if($navbarMode == 3 && str_starts_with($CurrentPage, 'Team')){?>
 
@@ -105,3 +122,10 @@
 		</div>
 	</nav>
 	
+<script>
+$(".backButton").on("click", function(e){
+    e.preventDefault();
+    window.history.back();
+});
+
+</script>

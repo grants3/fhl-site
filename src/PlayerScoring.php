@@ -29,6 +29,12 @@ if(isset($_GET['seasonType']) || isset($_POST['seasonType'])) {
     $playoff = htmlspecialchars($seasonType);
 }
 
+//points is column6. handles this better
+$sort = 6;
+if(isset($_GET['sort']) || isset($_POST['sort'])) {
+    $sort = htmlspecialchars(( isset($_GET['sort']) ) ? $_GET['sort'] : $_POST['sort']);
+}
+
 // if(isset($_GET['team']) || isset($_POST['team'])) {
 //     $currentTeam = ( isset($_GET['team']) ) ? $_GET['team'] : $_POST['team'];
 //     $currentTeam = htmlspecialchars($currentTeam);
@@ -39,15 +45,15 @@ if(isset($_GET['seasonType']) || isset($_POST['seasonType'])) {
 include 'head.php';
 
 ?>
-<div class="container">
+<div class="container px-0">
 
 	<div class="card">
 		<?php include 'SectionHeader.php';?>
     	<div class="card-body p-2">
-			<div class="row" id="searchFields">
+			<div class="row no-gutters" id="searchFields">
 				<div class="col">
 					<!-- position -->
-					<div class="row">
+					<div class="row no-gutters">
 						<div class="input-group mb-3 col-sm-6">
 							<div class="input-group-prepend">
 								<label class="input-group-text" for="positionInputField">Position</label>
@@ -124,7 +130,7 @@ include 'head.php';
 $(function() {
 	var table = $('#player-scoring-table').DataTable({
 		//dom: 'lftBip',
-		dom:'<"row"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-8"f>><ti><"row"<"col-sm-12 col-md-8"p><"col-sm-12 col-md-4"B>>',
+		dom:'<"row no-gutters"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-8"f>><ti><"row no-gutters"<"col-sm-12 col-md-8"p><"col-sm-12 col-md-4"B>>',
 		"processing":false,
 		"serverSide":true,  
 		"responsive": true,
@@ -140,7 +146,7 @@ $(function() {
         language: {
             "lengthMenu": "Display _MENU_ records"
         },   
-		"order": [[ "6", "desc" ]],
+		"order": [[ "<?php echo $sort?>", "desc" ]],
 		"ajax": {
 			url : '<?php echo BASE_URL.'api/scoring'; ?>',
 				type: "GET"  

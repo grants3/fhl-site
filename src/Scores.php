@@ -433,7 +433,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
     </style>
 	
 	
-	<div id="scores" class = "container">
+	<div id="scores" class = "container px-0">
 	<div class="card">
 
 	<?php 

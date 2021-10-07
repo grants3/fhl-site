@@ -715,7 +715,7 @@ if(file_exists($Fnm)) {
 	}
 }
 
-echo '<div class = "container px-2">';
+echo '<div class = "container px-0">';
 
 echo '<div class="card">';
 

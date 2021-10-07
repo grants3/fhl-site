@@ -256,7 +256,7 @@ if(isset($navbarMode) && $navbarMode != 0){
 ?>
 
 	
-<div class="container-fluid site-content header-content top-container px-0">
+<div class="container-fluid2 site-content header-content top-container">
 
 <style>
 

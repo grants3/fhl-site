@@ -17,11 +17,13 @@ include 'head.php';
 $playoffs = isPlayoffs($folder, $playoffMode);
 ?>
 		
-		<div class="mx-md-2 mx-lg-3">
+<!-- 		<div class="mx-md-2 mx-lg-3"> -->
+		<div class="">
 			<?php include FS_ROOT.'component/TeamBanner.php'; ?>
 		</div>
 		
-		<div class="mx-xs-1 mx-md-2 mx-lg-3">
+<!-- 		<div class="mx-xs-1 mx-md-2 mx-lg-3"> -->
+		<div class="">
 			<?php //include 'ScoreCarousel.php'; ?>
 			<?php include FS_ROOT.'component/ScoreCarousel.php'; ?>
 		</div>
@@ -34,10 +36,10 @@ $playoffs = isPlayoffs($folder, $playoffMode);
     			<div class="col-sm-12 col-md-5 col-lg-4 pr-md-3 pr-lg-4">
     					        			
         			    <div class="card">
-        					<div class="card-header">
+        					<div class="card-header p-2">
         						<h4 class="m-0">Waivers</h4>
         					</div>
-        					<div class="card-body">
+        					<div class="card-body p-2">
         						<?php //include 'MiniWaivers.php'; ?>
         						<?php include FS_ROOT.'component/MiniWaivers.php'; ?>
         						
@@ -45,10 +47,10 @@ $playoffs = isPlayoffs($folder, $playoffMode);
         				</div>
         
     				    <div class="card mt-3">
-        					<div class="card-header">
+        					<div class="card-header p-2">
         						<h4 class="m-0">News</h4>
         					</div>
-        					<div class="card-body">
+        					<div class="card-body p-2">
         						<?php include FS_ROOT.'News.php'; ?>
         					</div>
         				</div>
@@ -59,7 +61,7 @@ $playoffs = isPlayoffs($folder, $playoffMode);
         			<div class="card-columns">
 
         				<div class="card">
-        					<div class="card-header">
+        					<div class="card-header p-2">
         						<h4 class="m-0"><?php
         						if ($playoffs) {
                                     echo 'Playoff Tree';
@@ -70,7 +72,7 @@ $playoffs = isPlayoffs($folder, $playoffMode);
                                 ?></h4>
                    
         					</div>
-        					<div class="card-body">
+        					<div class="card-body p-2">
         						<?php
         						if ($playoffs) {
         						    include FS_ROOT.'MiniStandingsTree.php';
@@ -83,22 +85,31 @@ $playoffs = isPlayoffs($folder, $playoffMode);
         				</div>
         
         				<div class="card">
-        					<div class="card-header">
+        					<div class="card-header p-2">
         						<h4 class="m-0">Next Games</h4>
         					</div>
-        					<div class="card-body">
+        					<div class="card-body p-2">
         						<?php include FS_ROOT.'component/MiniNextGames.php'; ?>
         					</div>
         				</div>
         
         				<div class="card">
-        					<div class="card-header">
+        					<div class="card-header p-2">
         						<h4 class="m-0">Leaders</h4>
         					</div>
-        					<div class="card-body">
+        					<div class="card-body p-2">
         						<?php include FS_ROOT.'MiniTop5.php'; ?>
         					</div>
         				</div>
+        				
+<!--         				<div class="card"> -->
+<!--         					<div class="card-header p-2"> -->
+<!--         						<h4 class="m-0">Todays Games</h4> -->
+<!--         					</div> -->
+<!--         					<div class="card-body p-2"> -->
+        						<?php //include FS_ROOT.'component/MiniTodayGames3.php'; ?>
+<!--         					</div> -->
+<!--         				</div> -->
         
         			</div> <!-- card-columns end -->
     			</div> <!-- col end -->

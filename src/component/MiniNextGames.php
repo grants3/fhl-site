@@ -17,6 +17,7 @@ include_once FS_ROOT.'classes/ScheduleObj.php';
     border-width: 1px;
     margin:5px;
     border-color:var(--color-primary-2);
+
 }
  .latest-image { max-width: 50%; height: auto; }
 
@@ -36,6 +37,10 @@ include_once FS_ROOT.'classes/ScheduleObj.php';
     border-width: 3px;
 /*     border-bottom-right-radius:3%; */
 /*     border-bottom-left-radius:3%; */
+    border-bottom-right-radius:2%; 
+    border-bottom-left-radius:2%; 
+    
+    padding:5px;
  }
 
 </style>
@@ -90,48 +95,34 @@ for ($i = $miniNextGame; $i <= $miniNextToProcess; $i ++) {
 
      if(!empty($miniGames)){
 
-    echo '<div class="mb-1">';
+    $miniNexyAddMargin = ($i % 2 == 0) ? 'mb-2' : '';
+    echo '<div class="'.$miniNexyAddMargin.'">';
     //echo '<h5>Day' . $i . '</h5>';
+
     echo '<h5 class="tableau-top m-0">Day' . $i . '</h5>';
     //echo '</div>';
 
     echo '<div class = "row no-gutters d-flex justify-content-center latest-score-day">';
-
     foreach ($miniGames as $games) {
-        
-        if(!$games->getIsRequired()){
+
+        if (! $games->getIsRequired()) {
             continue;
         }
-        
-            $matches = glob($folderTeamLogos . strtolower($games->team1) . '.*');
-            $todayImage1 = '';
-            for ($j = 0; $j < count($matches); $j ++) {
-                $todayImage1 = $matches[$j];
-                break 1;
-            }
-            $matches = glob($folderTeamLogos . strtolower($games->team2) . '.*');
-            $todayImage2 = '';
-            for ($j = 0; $j < count($matches); $j ++) {
-                $todayImage2 = $matches[$j];
-                break 1;
-            }
-    
-            // echo '<div class="next-game">';
-            // echo '<div class="next-image"><img src="'.$todayImage1.'" alt="'.$nextEquipe1[$i].'"></div>';
-            // echo '<div class="next-image"><img src="'.$todayImage2.'" alt="'.$nextEquipe2[$i].'"></div>';
-            // echo '</div>';
-    
-            echo '<div class="col-2 latest-game ">';
-            echo '<div class="row latest-score">';
-            echo '<div class="latest-image"><img src="' . $todayImage1 . '" alt="' . $games->team1 . ' "></div>';
-            echo '</div>';
-    
-            echo '<div class="row latest-score ">';
-            echo '<div class="latest-image"><img src="' . $todayImage2 . '" alt="' . $games->team2 . ' "></div>';
-            echo '</div>';
-            echo '</div>';
-        }
-    // }
+
+        $todayImage1 = getTeamLogoUrl($games->team1);
+        $todayImage2 = getTeamLogoUrl($games->team2);
+
+        echo '<div class="col-2 latest-game ">';
+        echo '<div class="row latest-score">';
+        echo '<div class="latest-image"><img src="' . $todayImage1 . '" alt="' . $games->team1 . ' "></div>';
+        echo '</div>';
+
+        echo '<div class="row latest-score ">';
+        echo '<div class="latest-image"><img src="' . $todayImage2 . '" alt="' . $games->team2 . ' "></div>';
+        echo '</div>';
+        echo '</div>';
+    }
+
 
     echo '</div>';
     echo '</div>';

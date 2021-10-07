@@ -55,14 +55,14 @@ $teamAbbr = $teamAbbrHolder->getAbbr($team);
 </style>
 
 <div class="card">
-	<div id="standingsTabs" class="card-header px-2 px-lg-4 pb-1 pt-2">
+	<div id="standingsTabs" class="card-header p-1">
 		<ul class="nav nav-tabs nav-fill">
 			<li class="nav-item"><a	class="nav-link active" href="#TeamTrades"	data-toggle="tab">Trades</a></li>
 			<li class="nav-item"><a	class="nav-link" href="#TeamEvents" data-toggle="tab">Transactions</a></li>
 			<li class="nav-item"><a	class="nav-link" href="#TransactInjuries" data-toggle="tab">Injuries</a></li>
 		</ul>
 	</div>
-	<div class="card-body tab-content m-0 p-0 pt-2">
+	<div class="card-body tab-content p-1">
 		<div class="tab-pane active" id="TeamTrades">
 			<div id="ExtensionsInner">
 				<div class="row no-gutters">
@@ -196,7 +196,7 @@ $("#team-injuries-table").tablesorter({
 //     sortInitialOrder: 'asc'
 // }); 
 
-
+	
 
 </script>
 

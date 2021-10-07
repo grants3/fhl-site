@@ -4,12 +4,6 @@ ini_set('display_errors', '1');
 
 require_once 'config.php';
 include 'lang.php';
-$CurrentHTML = 'TeamRosters.php';
-$CurrentTitle = $rostersTitle;
-$CurrentPage = 'TeamRosters';
-include 'head.php';
-include 'TeamHeader.php';
-
 include_once 'common.php';
 include_once 'classes/RosterObj.php';
 include_once 'classes/RosterAvgObj.php';
@@ -17,18 +11,25 @@ include_once 'classes/RostersHolder.php';
 include_once 'classes/PlayerVitalObj.php';
 include_once 'classes/PlayerVitalsHolder.php';
 
+$CurrentHTML = 'TeamRosters.php';
+$CurrentTitle = $rostersTitle;
+$CurrentPage = 'TeamRosters';
+
+include 'head.php';
+include 'TeamHeader.php';
+
 ?>
 
 
 <div class="container px-0">
-	<div class="row no-gutters">
-	<div class="col"> 
+	<div class="row2">
+	<div class="col2"> 
 	<div class="card">
 	<div class="card-header p-1">
 		<?php include 'TeamCardHeader.php'?>
 	</div>
 <!--     	<div class="card-body px-2 px-lg-4 pt-3"> -->
-		<div class="card-body px-2 px-lg-4 pt-3">
+		<div class="card-body p-1">
     
                     <?php
 

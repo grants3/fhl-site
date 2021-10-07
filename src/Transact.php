@@ -3,6 +3,7 @@
 require_once 'config.php';
 require_once 'common.php';
 require_once 'lang.php';
+$dataTablesRequired = 1;
 
 $CurrentHTML = 'Transact.php';
 $CurrentTitle = $transactTitle;
@@ -16,24 +17,8 @@ include_once 'classes/TransactionEventObj.php';
 
 include 'head.php';
 
-$matches = glob($folder.'*'.$playoff.'Transact.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-    if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-        $folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Transact')-strrpos($matches[$j], '/')-1);
-        break 1;
-    }
-}
-$filename = $folder.$folderLeagueURL.'Transact.html';
-
-$transactionHolder = new TransactionHolder($filename);
-
-if(DEBUG_MODE){
-    error_log(jsonPrettify(json_encode($transactionHolder )));
-}
-
+$fileName = getLeagueFile($folder, $playoff, 'Transact.html', 'Transact');
+$transactionHolder = new TransactionHolder($fileName);
 
 ?>
 
@@ -53,35 +38,34 @@ if(DEBUG_MODE){
 }
 </style>
 
-<div class="container px-2">
+<div class="container px-0">
 
 	<div class="card">
 		<?php include 'SectionHeader.php';?>
 		
-		<div class="card-body">
+		<div class="card-body p-1">
 
             <div class="card">
             	<div id="transactTabs" class="card-header px-2 px-lg-4 pb-1 pt-2">
             		<ul class="nav nav-tabs nav-fill">
-            			<li class="nav-item"><a	class="nav-link active" href="#TransactTrades"	data-toggle="tab">Trades</a></li>
-            			<li class="nav-item"><a	class="nav-link" href="#TransactEvents"	data-toggle="tab">Transactions</a></li>
+            			<li class="nav-item"><a	class="nav-link" href="#TransactTrades"	data-toggle="tab">Trades</a></li>
+            			<li class="nav-item"><a	class="nav-link active" href="#TransactEvents"	data-toggle="tab">Transactions</a></li>
             			<li class="nav-item"><a	class="nav-link" href="#TransactInjuries" data-toggle="tab">Injuries</a></li>
             		</ul>
             	</div>
             	<div class="card-body tab-content m-0 p-0 pt-2">
             		
-            		<div class="tab-pane active" id="TransactTrades">
+            		<div class="tab-pane" id="TransactTrades">
 						<div id="TransactTradesInner">
 							<div class="row no-gutters">
-								<div class="col-sm-12 col-md-12">
-									<table
-										class="table table-sm table-striped table-rounded-bottom">
+								<div class="col">
+									<table id="trades-table" class="table table-sm table-striped table-rounded-bottom" style="width:100%">
 										<thead>
 											<tr>
-												<th class="col-2">Team 1</th>
-												<th class="col-4">Players 1</th>
-												<th class="col-2">Team 2</th>
-												<th class="col-4">Players 2</th>
+												<th class="col-1">Team 1</th>
+												<th class="col-5">Players 1</th>
+												<th class="col-1">Team 2</th>
+												<th class="col-5">Players 2</th>
 											</tr>
 										</thead>
 										<tbody> 
@@ -102,72 +86,127 @@ if(DEBUG_MODE){
 							</div>
 						</div>
 					</div>
-            		
-            		<div class="tab-pane" id="TransactEvents">
-            			<div id="TransactEventsInner">
-            				 			<div class="row no-gutters"> 
-             				<div class="col-sm-12 col-md-12"> 
-             					<table class="table table-sm table-striped table-rounded-bottom"> 
-             						<thead> 
-             							<tr> 
-             								<th class="col-2">Team</th> 
-             								<th class="col-3">Transaction</th> 
-             								<th class="col-7">Details</th> 
-             							</tr> 
-             						</thead> 
-             						<tbody> 
+					
+					<div class="tab-pane active" id="TransactEvents">
+						<div id="TransactEventsInner">
+							<div class="row no-gutters">
+								<div class="col">
+									<table id="events-table" class="table table-sm table-striped table-rounded-bottom" style="width:100%">
+										<thead>
+											<tr>
+												<th class="col-2">Team</th> 
+                 								<th class="col-3">Transaction</th> 
+                 								<th class="col-7">Details</th> 
+											</tr>
+										</thead>
+										<tbody> 
             							
             						<?php foreach ($transactionHolder->getEventsByType(TransactionHolder::$typeTransaction) as $event) { ?>
-             						    <tr> 
-            						    	<td><?php echo $event->getTeam(); ?></td>
-            						    	<td><?php echo $event->getAction(); ?></td>
-            						    	<td><?php echo $event->getValue(); ?></td>
-             						    </tr> 
-            						<?php }?>
+                 						    <tr> 
+                						    	<td><?php echo $event->getTeam(); ?></td>
+                						    	<td><?php echo $event->getAction(); ?></td>
+                						    	<td><?php echo $event->getValue(); ?></td>
+                 						    </tr> 
+                						<?php }?>
             						
-             						</tbody> 
-            
-             					</table> 
-             				</div> 
-             			</div> 
-            			</div>	
-            		</div>
+             						</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
             		
             		<div class="tab-pane" id="TransactInjuries">
-            			<div id="TransactEventsInner">
-            				 			<div class="row no-gutters"> 
-             				<div class="col-sm-12 col-md-12"> 
-             					<table class="table table-sm table-striped table-rounded-bottom"> 
-             						<thead> 
-             							<tr> 
-             								<th class="col-2">Team</th> 
-             								<th class="col-3">Player</th> 
-             								<th class="col-7">Status</th> 
-             								
-             							</tr> 
-             						</thead> 
-             						<tbody> 
+						<div id="TransactInjuriesInner">
+							<div class="row no-gutters">
+								<div class="col">
+									<table id="inj-table" class="table table-sm table-striped table-rounded-bottom" style="width:100%">
+										<thead style="width:100%">
+											<tr>
+												<th class="col-2">Team</th> 
+                 								<th class="col-3">Player</th> 
+                 								<th class="col-7">Status</th> 
+											</tr>
+										</thead>
+										<tbody> 
             							
             						<?php foreach ($transactionHolder->getEventsByType(TransactionHolder::$typeInjury) as $event) { ?>
-             						    <tr> 
-            						    	<td><?php echo $event->getTeam(); ?></td>
-            						    	<td><?php echo $event->getValue(); ?></td>
-            						    	<td><?php echo $event->getAction(); ?></td>
-             						    </tr> 
-            						<?php }?>
+                 						    <tr> 
+                						    	<td><?php echo $event->getTeam(); ?></td>
+                						    	<td><?php echo $event->getAction(); ?></td>
+                						    	<td><?php echo $event->getValue(); ?></td>
+                 						    </tr> 
+                						<?php }?>
             						
-             						</tbody> 
-            
-             					</table> 
-             				</div> 
-             			</div> 
-            			</div>	
-            		</div>
-            	</div>
+             						</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+            	
+            		
+            	
+            	</div> <!-- end card body -->
             
             </div>
 		</div>
 	</div>
 </div>
+
+<script>
+
+$(function() {
+
+	var transTables = [
+      "#trades-table",
+      "#events-table",
+      "#inj-table"
+    ];
+    
+    for (let index = 0; index < transTables.length; ++index) {
+    	var test =  $(transTables[index]).DataTable({
+		//dom: 'lftBip',
+		dom:'<"row no-gutters"<"col-sm-6 col-md-4"l><"col-sm-6 col-md-8"f>><ti><"row no-gutters"<"col-sm-12 col-md-8"p><"col-sm-12 col-md-4">>',
+		scrollY:        false,
+        scrollX:        false,
+        scrollCollapse: false,
+        order: [],
+        paging:         true,
+        pagingType: "numbers",
+        lengthMenu: [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
+        language: {
+            "lengthMenu": "_MENU_"
+        },   
+        search: {
+            "regex": true
+          },    
+        initComplete: function () {
+        	$(transTables[index]).show(); 
+        	
+        	
+        }
+	});
+	}
+	
+
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+             // var target = $(e.target).attr("href") // activated tab
+              //alert(target);
+             
+              
+//               $(transTables[0]).columns.adjust().draw();
+//               $(transTables[1]).columns.adjust().draw();
+//               $(transTables[2]).columns.adjust().draw();
+          });
+   
+});
+
+
+
+
+</script>
 
 <?php include 'footer.php'; ?>

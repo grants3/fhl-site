@@ -8,7 +8,7 @@ include_once 'classes/ScoringPlayerObj.php';
 include_once 'classes/ScoringGoalieObj.php';
 include_once 'classes/ScoringObj.php';
 include_once 'classes/TeamAbbrHolder.php';
-include_once 'classes/ScoringAccumulator.php';
+//include_once 'classes/ScoringAccumulator.php';
 
 $seasonId = '';
 //$playoff = '';
@@ -60,10 +60,10 @@ $tieLabel = $shootoutMode ? $scoringOTLm : $scoringTm;
 $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
 
 ?>
-<div class = "row">
+<div class = "row no-gutters">
 	<div class="col-sm-12 col-md-10 offset-md-1">
 
-    	<div class="row">
+    	<div class="row no-gutters">
         	<div class="col">
         		<div class="tableau-top"><?php echo $scoringScoring?></div>
         		<div class="table-responsive">
@@ -143,7 +143,7 @@ $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
     	</div>  	
 
     	
-    	<div class="row">
+    	<div class="row no-gutters">
         	<div class="col">
             	<div class="tableau-top"><?php echo $scoringGoalie?></div>
         		<div class="table-responsive">
@@ -217,7 +217,7 @@ $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
         	</div>
     	</div>
     	
-    	<div class="row">
+    	<div class="row no-gutters">
     		<div class="col">
      			<h5 class = "text-center"><?php echo $allLastUpdate.' '.$scoringHolder->getLastUpdated()?></h5> 
      		</div>

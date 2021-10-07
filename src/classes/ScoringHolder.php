@@ -15,6 +15,8 @@ class ScoringHolder{
     private $goalies = array();
     private $shootoutMode = false;
     
+    private $filteredSkaters;
+    
     public function __construct(string $teamScoringFile, string $searchTeam = null) {
         
         if(!file_exists($teamScoringFile)) {
@@ -329,8 +331,14 @@ class ScoringHolder{
     
     /*
      * we want to accumulate stats and only include totals.
+     * This will cache on the first time it runs. Subsequent calls will get the cached array.
      */
     public function getFilteredSkaters(){
+        
+        if(isset($this->filteredSkaters)){
+            return $this->filteredSkaters;
+        }
+        
         $buffered = null;
         $result = array();
         foreach($this->getSkaters() as $ps){
@@ -357,6 +365,10 @@ class ScoringHolder{
         //get last buffered entry
         if(isset($buffered)){
             array_push($result, $buffered);
+        }
+        
+        if(!isset($this->filteredSkaters)){
+            $this->filteredSkaters = $result;
         }
         
         return $result;
