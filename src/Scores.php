@@ -624,9 +624,9 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 				
 
 				//header
-				echo '<div class="col-sm-12 col-md-6 col-lg-4" style="padding-left: 7px; padding-right: 7px;">';
+				echo '<div class="col-sm-12 col-md-6 col-lg-4 d-flex" style="padding-left: 7px; padding-right: 7px;">';
 				
-				echo '<div class="card border-dark" style="margin-top:15px;">';
+				echo '<div class="card border-dark flex-fill" style="margin-top:15px;">';
 				echo '<div class="card-header box-score" style="padding-bottom: 0px; padding-top: 0px;">';
 				    echo '<div class = "text-center" style = "text-transform: uppercase;">
                         '.$lastEquipe1.' @ '.$lastEquipe2.' '.$gameOvertime[$i].
@@ -634,7 +634,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 				
 				   // echo '<div class="row tableau-top"><span style="color:#ffffff">'.$lastEquipe1.' @ '.$lastEquipe2.' Final'.$gameOvertime[$i].'</span></div>';
 				echo '</div>';
-				echo '<div class="card-body p-3">';
+				echo '<div class="card-body p-3 flex-fill" style ="background-color: #f0f1f2;">';
 				
 				echo '<div class = "row" style=" margin-top: -15px;">';
 				    echo '<table class = "table table-sm table-bordered" >';
@@ -739,7 +739,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
                 
                 echo '</div>'; // end scoring details
                 
-               echo '<div class = "row game-score-footer" style="margin-bottom: -15px;">'; //goalie details 
+               echo '<div class = "row game-score-footer" style="margin-bottom: -15px; border-bottom:0px;">'; //goalie details 
                  echo '<div class = "footer-header text-left" style="width: 100%;">Goalies</div>';
                  echo '<div>'.$lastEquipe1.' - '.$gameGoal1[$i].'</div>';
                  echo '<div>'.$lastEquipe2.' - '.$gameGoal2[$i].'</div>';      

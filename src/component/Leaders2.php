@@ -10,7 +10,7 @@ include_once FS_ROOT.'classes/ScoringAccumulator.php';
 
 //include FS_ROOT.'head.php';
 ?>
-<?php if(!isset($scriptsLoaded)){ ?>
+
 	<?php if(CDN_SUPPORT) {?>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600"/>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
@@ -52,7 +52,7 @@ include_once FS_ROOT.'classes/ScoringAccumulator.php';
 	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/jquery.waypoints.min.js"></script>
 	<?php }?>
 
-<?php }?>
+
 <?php
 
 if(!isset($teamList)){
@@ -253,7 +253,7 @@ function getProfilePhoto($csName){
  } 
 
 
-#mini-scoring-container ul { 
+ul { 
      display: block; 
      list-style-type: disc; 
      margin-block-start: 1em; 
@@ -280,14 +280,14 @@ function getProfilePhoto($csName){
 }
   
 
-#mini-scoring-container li { 
+ li { 
      display: list-item; 
      text-align: -webkit-match-parent; 
      text-align: match-parent
  } 
 
 </style>
-<div class="container" id="mini-scoring-container">
+<div class="container">
 <section class="styles__Module-owf6ne-0 ctbpu">
 	<header class="border">
 		<h1 class="styles__Title-owf6ne-1 hRjSuW">Skaters</h1>
@@ -297,65 +297,69 @@ function getProfilePhoto($csName){
 				href="#" class="NavLinkButton-sc-1hg1q10-0 kEEjoJ">Assists</a>
 		</div>
 	</header>
-
-	<?php if($goalsArray){
-	    $playerCareersLink = getBaseUrl().'CareerStatsPlayer.php?csName='.htmlspecialchars_decode($goalsArray[0]->getName())
-
-	    ?>
-		<div class="styles__LeaderContent-owf6ne-3 fdyHxu">
+	<div class="styles__LeaderContent-owf6ne-3 border">
+    	<?php if($goalsArray){
+    	    $playerCareersLink = getBaseUrl().'CareerStatsPlayer.php?csName='.htmlspecialchars_decode($goalsArray[0]->getName())
+    
+    	    ?>
+    
+    	<div class="styles__LeaderContent-owf6ne-3 fdyHxu">
 			<div class="styles__Player-sc-16cx6ic-0 dpFoLl">
-				<a href="http://www.nhl.com/player/8478402"
-					class="styles__ImgContainer-sc-16cx6ic-1 hmnSFV"><div
-						class="team-display-container EDM "
-						style="position: absolute; bottom: 0px; right: -20px;">
-						<div class="team-display ">
-							<img class="team-logo"
-								src="https://assets.nhle.com/logos/nhl/svg/EDM_light.svg"
-								alt="Edmonton Oilers">
-						</div>
-					</div>
-					<img
-					src="https://assets.nhle.com/mugs/nhl/20202021/EDM/8478402.png"
-					class="styles__Headshot-sc-16cx6ic-2 kxFCqJ player-avatar__img player-headshot"></a>
-				<div class="styles__PlayerDetails-sc-16cx6ic-3 bvjVjv">
-					<a href="http://www.nhl.com/player/8478402"><div
-							class="styles__NumberContainer-sc-16cx6ic-4 hHORBn">
-							<span class="styles__Hash-sc-16cx6ic-5 gPPmv">#</span>97
-						</div>
-						<div class="styles__NameContainer-sc-16cx6ic-6 jPZtbn">
-							<span>Connor</span><span>McDavid</span>
-						</div></a><a href="http://www.nhl.com/player/8478402"
-						class="styles__TeamNameContainer-sc-16cx6ic-7 cWNqKo"><span
-						class="styles__TeamName-sc-16cx6ic-8 izUOIu">Edmonton Oilers</span><span>C</span></a>
-				</div>
-				<div class="styles__StatDetails-sc-16cx6ic-9 glDXkE">
-					<p class="styles__StatCategoryName-sc-16cx6ic-10 KRrDV">Points</p>
-					<p class="styles__StatCategoryValue-sc-16cx6ic-11 bSCsVG">105</p>
-				</div>
-			</div>
-			
-			<div class="styles__LeaderListContainer-owf6ne-4 cOAcdw">
-				<ul class="styles__LeaderList-owf6ne-5 ANxrZ leaders-list">
-        			<?php 
-        			foreach ($goalsArray as $skater) {
-        			
-        			?>
-        			<li class="styles__LeaderListItem-owf6ne-6 eTUABY">
-        				<span><?php echo $skater->getName();?></span><span><?php echo $skater->getGoals();?></span>
-        			</li>
-        					
-        			<?php }?>
+        		<a href="<?php echo $playerCareersLink;?>"
+        			class="styles__ImgContainer-sc-16cx6ic-1 hmnSFV"><div
+        				class="team-display-container EDM "
+        				style="position: absolute; bottom: 0px; right: -20px;">
+        				<div class="team-display ">
+        					<img class="team-logo"
+        						src="<?php echo getTeamLogoUrl($goalsArray[0]->getTeam())?>"
+        						alt="<?php echo $goalsArray[0]->getTeam()?>">
+        				</div>
+        			</div>
+        			<img src="<?php echo getProfilePhoto($goalsArray[0]->getName());?>" class="styles__Headshot-sc-16cx6ic-2 kxFCqJ player-avatar__img player-headshot"></a>
+        		
+        		
+        		<div class="styles__PlayerDetails-sc-16cx6ic-3 bvjVjv">
+        			<a href="<?php echo $playerCareersLink;?>"><div
+        					class="styles__NumberContainer-sc-16cx6ic-4 hHORBn">
+        					<span class="styles__Hash-sc-16cx6ic-5 gPPmv">#</span><?php echo $goalsArray[0]->getNumber();?>
+        				</div>
+        				<div class="styles__NameContainer-sc-16cx6ic-6 jPZtbn">
+        				<?php $nameExploded = explode(" ", $goalsArray[0]->getName());?>
+<!--          					<span>Connor</span><span>McDavid</span>  -->
+        					<span><?php echo $nameExploded[0];?></span><span><?php echo $nameExploded[1];?></span>
         
-        		</ul>
-        		<a class="styles__LeadersNavLink-owf6ne-8 bvgUsd" href="<?php echo getBaseUrl().'PlayerScoring.php?sort=4';?>">All Leaders</a>
-	
-			</div>
-		</div>
+        				</div></a><a href="<?php echo $playerCareersLink;?>"
+        				class="styles__TeamNameContainer-sc-16cx6ic-7 cWNqKo"><span
+        				class="styles__TeamName-sc-16cx6ic-8 izUOIu"><?php echo $goalsArray[0]->getTeam();?></span><span><?php echo $goalsArray[0]->getPosition();?></span></a>
+        		</div>
+        		
+        		<div class="styles__StatDetails-sc-16cx6ic-9 glDXkE">
+        			<p class="styles__StatCategoryName-sc-16cx6ic-10 KRrDV">Goals</p>
+        			<p class="styles__StatCategoryValue-sc-16cx6ic-11 bSCsVG"><?php echo $goalsArray[0]->getGoals() ?></p>
+        		</div>
+   
+            	<div class="styles__LeaderListContainer-owf6ne-4 cOAcdw">
+            		<ul class="styles__LeaderList-owf6ne-5 ANxrZ leaders-list">
+            			<?php 
+            			foreach ($goalsArray as $skater) {
+            			
+            			?>
+            			<li class="styles__LeaderListItem-owf6ne-6 eTUABY active">
+            				<span><?php echo $skater->getName();?></span><span><?php echo $skater->getGoals();?></span>
+            			</li>
+            					
+            			<?php }?>
+            
+            		</ul>
+            		<a class="styles__LeadersNavLink-owf6ne-8 bvgUsd" href="<?php echo getBaseUrl().'PlayerScoring.php?sort=4';?>">All Leaders</a>
+            	</div>
+            </div>
+         </div>
 
-		<?php }else{
-	   echo '<h5>Files not found</5>';
-	}?>
-
+    	<?php }else{
+    	   echo '<h5>Files not found</5>';
+    	}?>
+	</div>
 </section>
 </div>
 	

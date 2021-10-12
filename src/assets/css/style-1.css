@@ -57,7 +57,7 @@
 
 .fhlElement{  
 	font-size: 15px; 
-	font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Verdana , Arial, sans-serif;
+	font-family: 'Roboto','Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif;
 	font-weight: 300; 
 /* 	color: #888; */
 	color: var(--color-text-primary-0);
@@ -67,7 +67,7 @@
 body.fhlElement {  
 	/*margin-top: 60px; nav margins. much to each nav*/
 	font-size: 15px; 
-	font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Verdana , Arial, sans-serif;
+	font-family: 'Roboto',"Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
 	font-weight: 300; 
 	/* 	color: #888; */
 	color: var(--color-text-primary-0);
@@ -199,7 +199,7 @@ a:hover {
 }
 #main-navbar.navbar.navbar-no-bg { background: #444; background: rgba(0, 0, 0, 0.5); }
 
-#main-navbar.navbar-dark .navbar-nav { font-size: 15px; color: #fff; text-transform: uppercase; }
+#main-navbar.navbar-dark .navbar-nav { font-size: 17px; color: #fff; text-transform: uppercase; }
 #main-navbar.navbar-dark .navbar-nav .nav-link { color: #4C96D7; color: rgba(182,219,251, 0.8); border: 0; }
 #main-navbar.navbar-dark .navbar-nav .nav-link:hover { color: #fff; }
 #main-navbar.navbar-dark .navbar-nav .nav-link:focus { color: #fff; outline: 0; }
@@ -400,11 +400,11 @@ div .tableau-top{
 }
 
 .table td {
-	font-size: 13px; /*was 12 and 13*/
+	font-size: 0.8rem; /*was 12 and 13*/
 	margin: 0px;
 }
 .table th {
-	font-size: 14px;
+	font-size: 0.9rem;
  	margin: 0px; 
 }
 

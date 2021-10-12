@@ -26,7 +26,10 @@ class ScoringGoalieObj implements \JsonSerializable, ScoringObj{
     var $pim;
     var $assists;
  
-    
+    function __get($name)
+    {
+        return$this->$name;
+    } 
 
     /**
      * @return mixed

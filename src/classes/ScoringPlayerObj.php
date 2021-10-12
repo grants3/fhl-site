@@ -27,6 +27,11 @@ class ScoringPlayerObj implements \JsonSerializable, ScoringObj{
     var $shotPct;
     var $goalStreak;
     var $pointStreak;
+    
+    function __get($name)
+    {
+        return$this->$name;
+    }  
   
     /**
      * @return mixed

@@ -16,6 +16,7 @@ class ScoringHolder{
     private $shootoutMode = false;
     
     private $filteredSkaters;
+    private $filteredGoalies;
     
     public function __construct(string $teamScoringFile, string $searchTeam = null) {
         
@@ -328,20 +329,39 @@ class ScoringHolder{
     {
         return $this->shootoutMode;
     }
-    
-    /*
-     * we want to accumulate stats and only include totals.
-     * This will cache on the first time it runs. Subsequent calls will get the cached array.
-     */
+       
     public function getFilteredSkaters(){
-        
         if(isset($this->filteredSkaters)){
             return $this->filteredSkaters;
         }
         
+        $this->filteredSkaters = $this->getFiltered($this->getSkaters());
+        
+        return $this->filteredSkaters;
+    }
+    
+    public function getFilteredGoalies(){
+        if(isset($this->filteredGoalies)){
+            return $this->filteredGoalies;
+        }
+        
+        $this->filteredGoalies = $this->getFiltered($this->getGoalies());
+        
+        return $this->filteredGoalies;
+    }
+    /*
+     * we want to accumulate stats and only include totals.
+     * This will cache on the first time it runs. Subsequent calls will get the cached array.
+     */
+    public function getFiltered(array $players){
+        
+//         if(isset($this->filteredSkaters)){
+//             return $this->filteredSkaters;
+//         }
+        
         $buffered = null;
         $result = array();
-        foreach($this->getSkaters() as $ps){
+        foreach($players as $ps){
             
             if(isset($buffered)){
                 if(!IsNullOrEmptyString($ps->getName())){
@@ -367,9 +387,9 @@ class ScoringHolder{
             array_push($result, $buffered);
         }
         
-        if(!isset($this->filteredSkaters)){
-            $this->filteredSkaters = $result;
-        }
+//         if(!isset($this->filteredSkaters)){
+//             $this->filteredSkaters = $result;
+//         }
         
         return $result;
     }

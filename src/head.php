@@ -103,6 +103,11 @@ $teamList = $teamHolder->get_teams();
     <link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/ex/font-awesome-all.css"/>
 	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/ex/animate.css"/>
 	<?php }?>
+	
+	<!-- TODO add local -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
      
      <!-- JQuery and bootstrap init -->
     <?php if(CDN_SUPPORT) {?>
@@ -232,7 +237,7 @@ $teamList = $teamHolder->get_teams();
         });
 
 	</script>
-	
+	<?php $scriptsLoaded=true;?>
 	
 	<!-- style overrides -->
 	<?php include_once FS_ROOT.'style.php' ?>

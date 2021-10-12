@@ -1,0 +1,360 @@
+<?php require_once __DIR__.'/../config.php';
+include_once FS_ROOT.'fileUtils.php';
+include_once FS_ROOT.'classes/TeamHolder.php';
+include_once FS_ROOT.'classes/ScoringHolder.php';
+include_once FS_ROOT.'classes/ScoringPlayerObj.php';
+include_once FS_ROOT.'classes/ScoringGoalieObj.php';
+include_once FS_ROOT.'classes/ScoringObj.php';
+include_once FS_ROOT.'classes/TeamAbbrHolder.php';
+include_once FS_ROOT.'classes/ScoringAccumulator.php';
+
+//include FS_ROOT.'head.php';
+?>
+<?php if(!isset($scriptsLoaded)){ ?>
+	<?php if(CDN_SUPPORT) {?>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/> -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css"/>
+	<?php }else{?>
+	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/ex/fonts.css"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL?>assets/css/ex/bootstrap.min.css"/>
+    <link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/ex/font-awesome-all.css"/>
+	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/ex/animate.css"/>
+	<?php }?>
+     
+     <!-- JQuery and bootstrap init -->
+    <?php if(CDN_SUPPORT) {?>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
+	<?php }else{?>
+	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/popper.min.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/jquery.tablesorter.min.js"></script>
+	<?php }?>
+     
+
+	 <!-- Other scripts -->
+	<?php if(CDN_SUPPORT) {?>
+<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script> -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+	<?php }else{?>
+<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script> -->
+	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/jquery.backstretch.min.js"></script>
+	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/wow.min.js"></script>
+	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/jquery.waypoints.min.js"></script>
+	<?php }?>
+	
+		<?php 
+	//cache bust css.(should evade caching same filename when contents changes)
+	$cssHash = hash_file('crc32',FS_ROOT.'assets/css/style-1.css');
+	$cssMediaHash = hash_file('crc32',FS_ROOT.'assets/css/media-queries-1.css');
+	$jsHash = hash_file('crc32',FS_ROOT.'assets/js/scripts-1.js');
+
+	$cssHashUrl= '?m='.$cssHash;
+	$jsHashUrl= '?m='.$jsHash;
+	$cssMediaHashUrl= '?m='.$cssMediaHash;
+	?>
+
+	<!-- Custom scripts and styling and overrides (load last)-->
+	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/style-1.css<?php echo $cssHashUrl;?>"/>
+	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/media-queries-1.css<?php echo $cssMediaHashUrl;?>"/>
+	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/scripts-1.js<?php echo $jsHashUrl;?>"></script>
+
+	
+<?php 
+$scriptsLoaded=true;
+}
+?>
+<?php
+
+if(!isset($playoff)){
+    include_once FS_ROOT.'common.php';
+    
+    $playoff = '';
+    
+    if(isPlayoffs(TRANSFER_DIR, LEAGUE_MODE)){
+        $playoff = 'PLF';
+    }
+}
+
+
+$scoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
+$scoringHolder = new ScoringHolder($scoringFile);
+$scoringAccumulator = new ScoringAccumulator($scoringHolder);
+
+$pointsArray = $scoringAccumulator->getTopPoints(10);
+$goalsArray = $scoringAccumulator->getTopGoals(10);
+$assistsArray = $scoringAccumulator->getTopAssists(10);
+
+$pointsArrayD = $scoringAccumulator->getTopPoints(10,'D');
+$goalsArrayD = $scoringAccumulator->getTopGoals(10,'D');
+$assistsArrayD = $scoringAccumulator->getTopAssists(10,'D');
+
+$goaliesGaaArray = $scoringAccumulator->getTopGoalies('gaa',10, 'ASC');
+$goaliesSvPctArray = $scoringAccumulator->getTopGoalies('savePct',10,'DESC');
+$goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,'DESC');
+
+?>
+
+<style>
+
+/* /*  main */ */
+.top-player-details {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    padding-top: 25px;
+}
+
+
+/* image */
+
+.playerImageLogo { 
+     border-radius:50%;
+     width:8rem; height:8rem;
+     
+     object-fit: cover; 
+}
+
+
+//* player details */ 
+.bvjVjv { 
+     display: flex; 
+     -webkit-box-align: center; 
+     align-items: center; 
+     flex-direction: column; 
+ } 
+.hHORBn { 
+     display: inline-block; 
+     vertical-align: top; 
+     padding-right: 5px; 
+     line-height: 30px; 
+     font-size: 20px; 
+ } 
+
+.jPZtbn { 
+     border-left: 1px solid rgb(102, 102, 102); 
+     display: inline-block; 
+     font-size: 16px; 
+     line-height: 16px; 
+     padding-left: 5px; 
+     text-align: left; 
+ } 
+
+.cWNqKo { 
+     display: block; 
+     font-size: 12px; 
+     line-height: 22px; 
+ } 
+
+/* /*amount details*/ */
+.glDXkE { 
+     display: flex; 
+     flex-direction: column; 
+     font-weight: bold; 
+     margin-top: 15px; 
+     text-align: center; 
+ } 
+
+.ANxrZ { 
+     list-style: none; 
+     margin: 0px; 
+     padding: 10px 5px 0px; 
+     width: 100%; 
+ } 
+
+/*All leaders*/   
+
+.top-leader-list ul { 
+     display: block; 
+     list-style-type: disc; 
+     margin-block-start: 0.51em; 
+     margin-block-end: 1em; 
+     margin-inline-start: 0px; 
+     margin-inline-end: 0px; 
+     padding-inline-start: 10px; 
+ } 
+
+/* .eTUABY.active { */
+/*     font-weight: bold; */
+/* } */
+
+
+ .eTUABY { 
+     display: flex; 
+     -webkit-box-pack: justify; 
+     justify-content: space-between; 
+     margin-bottom: 10px; 
+     font-size: 12px; 
+   }
+   
+  
+.top-leader-list {
+    text-align: right;
+}
+
+
+</style>
+
+<div class="container-fluid" id="mini-scoring-container">
+  <div class="row">
+  
+    <div class="col-sm-12 p-0">
+      <div class="card">
+        <div class="card-header">
+         <div class="card-heading">Skaters</div>
+          <ul class="nav nav-tabs card-header-tabs" id="top-scorers-list" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" href="#top-scoring-points" role="tab" aria-controls="top-scoring-points" aria-selected="true">Points</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="#top-scoring-goals" role="tab" aria-controls="top-scoring-goals" aria-selected="false">Goals</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#top-scoring-assists" role="tab" aria-controls="top-scoring-assists" aria-selected="false">Assists</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body p-0">
+		  
+           <div class="tab-content mt-1">
+            <div class="tab-pane active" id="top-scoring-points" role="tabpanel">
+                <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
+                  array('scoringArray' => $pointsArray, 'attribute' => 'points', 'sort' => 6)); ?>
+              
+            </div><!-- end points -->
+             
+            <div class="tab-pane" id="top-scoring-goals" role="tabpanel" aria-labelledby="top-scoring-goals-tab">  
+            	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
+                  array('scoringArray' => $goalsArray, 'attribute' => 'goals', 'sort' => 4)); ?>
+              
+            </div> <!-- end goals -->
+             
+            <div class="tab-pane" id="top-scoring-assists" role="tabpanel" aria-labelledby="top-scoring-assists-tab">
+              <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
+                  array('scoringArray' => $assistsArray, 'attribute' => 'assists', 'sort' => 5)); ?>
+              
+            </div> <!-- end assists -->
+            
+          </div><!-- end tab content -->
+        </div> <!-- end card body -->
+      </div><!-- end skaters card -->
+    </div><!-- end skaters col -->
+    
+    <div class="col-sm-12 p-0">
+      <div class="card">
+        <div class="card-header">
+         <div class="card-heading">Defense</div>
+          <ul class="nav nav-tabs card-header-tabs" id="top-scorers-defense-list" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" href="#top-scoring-defense-points" role="tab" aria-controls="top-scoring-defense-points" aria-selected="true">Points</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="#top-scoring-defense-goals" role="tab" aria-controls="top-scoring-defense-goals" aria-selected="false">Goals</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#top-scoring-defense-assists" role="tab" aria-controls="top-scoring-defense-assists" aria-selected="false">Assists</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body p-0">
+		  
+           <div class="tab-content mt-1">
+            <div class="tab-pane active" id="top-scoring-defense-points" role="tabpanel">
+                <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
+                  array('scoringArray' => $pointsArrayD, 'attribute' => 'points', 'sort' => 6, 'positionType' => 'D')); ?>
+              
+            </div><!-- end points -->
+             
+            <div class="tab-pane" id="top-scoring-defense-goals" role="tabpanel" aria-labelledby="top-scoring-defense-goals-tab">  
+            	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
+            	    array('scoringArray' => $goalsArrayD, 'attribute' => 'goals', 'sort' => 4, 'positionType' => 'D')); ?>
+              
+            </div> <!-- end goals -->
+             
+            <div class="tab-pane" id="top-scoring-defense-assists" role="tabpanel" aria-labelledby="top-scoring-defense-assists-tab">
+              <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
+                  array('scoringArray' => $assistsArrayD, 'attribute' => 'assists', 'sort' => 5, 'positionType' => 'D')); ?>
+              
+            </div> <!-- end assists -->
+            
+          </div><!-- end tab content -->
+        </div> <!-- end card body -->
+      </div><!-- end defense card -->
+    </div><!-- end defense col -->
+    
+    <div class="col-sm-12 p-0">
+      <div class="card">
+        <div class="card-header">
+         <div class="card-heading">Goalies</div>
+          <ul class="nav nav-tabs card-header-tabs" id="top-goalies-list" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" href="#top-scoring-goalies-points" role="tab" aria-controls="top-scoring-goalies-points" aria-selected="true">GAA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="#top-scoring-goalies-goals" role="tab" aria-controls="top-scoring-goalies-goals" aria-selected="false">SV%</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#top-scoring-goalies-assists" role="tab" aria-controls="top-scoring-goalies-assists" aria-selected="false">SHUTOUTS</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body p-0">
+		  
+           <div class="tab-content mt-1">
+            <div class="tab-pane active" id="top-scoring-goalies-points" role="tabpanel">
+                <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
+                    array('scoringArray' => $goaliesGaaArray, 'attribute' => 'gaa', 'sort' => 6)); ?>
+              
+            </div><!-- end points -->
+             
+            <div class="tab-pane" id="top-scoring-goalies-goals" role="tabpanel" aria-labelledby="top-scoring-goalies-goals-tab">  
+            	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
+            	    array('scoringArray' => $goaliesSvPctArray, 'attribute' => 'savePct', 'sort' => 4)); ?>
+              
+            </div> <!-- end goals -->
+             
+            <div class="tab-pane" id="top-scoring-goalies-assists" role="tabpanel" aria-labelledby="top-scoring-goalies-assists-tab">
+              <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
+                  array('scoringArray' => $goaliesShutoutArray, 'attribute' => 'shutouts', 'sort' => 5)); ?>
+              
+            </div> <!-- end assists -->
+            
+          </div><!-- end tab content -->
+        </div> <!-- end card body -->
+      </div><!-- end goalies card -->
+    </div><!-- end goalies col -->
+    
+    
+  </div>
+</div>
+
+<script>
+
+$('#top-scorers-list a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+$('#top-scorers-defense-list a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+$('#top-goalies-list a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+</script>
+
+	

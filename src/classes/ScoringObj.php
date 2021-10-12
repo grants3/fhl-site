@@ -14,6 +14,7 @@ interface ScoringObj {
 
     public function getAssists();
     public function getPim();
+    
 }
 
 

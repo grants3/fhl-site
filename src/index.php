@@ -34,32 +34,7 @@ $playoffs = isPlayoffs($folder, $playoffMode);
 			
 			     <!-- fixed left side menu -->
     			<div class="col-sm-12 col-md-5 col-lg-4 pr-md-3 pr-lg-4">
-    					        			
-        			    <div class="card">
-        					<div class="card-header p-2">
-        						<h4 class="m-0">Waivers</h4>
-        					</div>
-        					<div class="card-body p-2">
-        						<?php //include 'MiniWaivers.php'; ?>
-        						<?php include FS_ROOT.'component/MiniWaivers.php'; ?>
-        						
-        					</div>
-        				</div>
-        
-    				    <div class="card mt-3">
-        					<div class="card-header p-2">
-        						<h4 class="m-0">News</h4>
-        					</div>
-        					<div class="card-body p-2">
-        						<?php include FS_ROOT.'News.php'; ?>
-        					</div>
-        				</div>
-    			</div> <!-- col end -->
-			
-				<!-- card columns (left side of page, non fixed) -->
-				<div class="col-sm-12 col-md-7 col-lg-8">
-        			<div class="card-columns">
-
+        				
         				<div class="card">
         					<div class="card-header p-2">
         						<h4 class="m-0"><?php
@@ -84,6 +59,36 @@ $playoffs = isPlayoffs($folder, $playoffMode);
         					</div>
         				</div>
         
+    				    <div class="card mt-3">
+        					<div class="card-header p-2">
+        						<h4 class="m-0">News</h4>
+        					</div>
+        					<div class="card-body p-2">
+        						<?php include FS_ROOT.'News.php'; ?>
+        					</div>
+        				</div>
+        				
+        				    					        			
+        			    <div class="card">
+        					<div class="card-header p-2">
+        						<h4 class="m-0">Waivers</h4>
+        					</div>
+        					<div class="card-body p-2">
+        						<?php //include 'MiniWaivers.php'; ?>
+        						<?php include FS_ROOT.'component/MiniWaivers.php'; ?>
+        						
+        					</div>
+        				</div>
+        				
+        				
+    			</div> <!-- col end -->
+			
+				<!-- card columns (left side of page, non fixed) -->
+				<div class="col-sm-12 col-md-7 col-lg-8">
+        			<div class="card-columns">
+
+        	
+        
         				<div class="card">
         					<div class="card-header p-2">
         						<h4 class="m-0">Next Games</h4>
@@ -98,7 +103,8 @@ $playoffs = isPlayoffs($folder, $playoffMode);
         						<h4 class="m-0">Leaders</h4>
         					</div>
         					<div class="card-body p-2">
-        						<?php include FS_ROOT.'MiniTop5.php'; ?>
+        						<?php //include FS_ROOT.'MiniTop5.php'; ?>
+        						<?php include FS_ROOT.'component/MiniLeaders.php'; ?>
         					</div>
         				</div>
         				
