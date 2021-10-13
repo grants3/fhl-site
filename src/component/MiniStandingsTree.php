@@ -8,8 +8,8 @@
 </style>
 
 <?php
-require_once 'config.php';
-include_once 'lang.php';
+require_once __DIR__.'/../config.php';
+include_once FS_ROOT.'lang.php';
 
 $Fnm = '';
 $existRnd = 0;

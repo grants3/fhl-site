@@ -40,23 +40,23 @@ padding-right:30px;
 }
 
 #scoringBanner .table {
-	height: 90px;
+	height: 92px;
 }
 
 #scoringBanner .table th {
 	vertical-align: middle;
-	background-color: #dcdee0;
-	border: 0;
+/* 	background-color: #dcdee0; */
+/* 	border: 0; */
+    background-color: var(--color-primary-1);
+    color:white;
 	height: 20px;
 	line-height: 10px;
 }
 
 #scoringBanner .table td {
-	border: 1px solid #dcdee0;
-	font-size: 15px;
-	font-family: Arial, Helvetica, sans-serif;
+/* 	border: 1px solid #dcdee0; */
 	vertical-align: middle;
-	background-color: #fff;
+	background-color: #fff; 
 	/*    line-height: 45px; */
 }
 
@@ -67,21 +67,22 @@ padding-right:30px;
 #scoringBanner .team-acronym {
 	color: #323232;
 	font-size: 15px;
-	font-weight: bold;
-	padding-left: 10px;
+/* 	font-weight: bold; */
+    padding-top:.25rem;  
+ 	padding-left: 3px; 
 	vertical-align: middle;
+	float:left; 
+
 }
 
-.slick-prev, .slick-next {
-	background-color: inherit;
+#scoringBanner .team-score{
+	color: #323232;
+ font-size: 15px;
+  padding-top:.5rem;  
 }
 
-.slick-slide {
-	width: 95px;
-}
-
-.dayPlayed {
-	height: 90px;
+#scoringBanner .dayPlayed {
+	height: 92px;
 	/*      line-height: 90px;  */
 	width: 50px;
 	color: black;
@@ -91,15 +92,15 @@ padding-right:30px;
     margin-top:10px;
 }
 
-.dayPlayed span {
-	display: inline-flex;
-    align-items: center;
-    min-height: 90px;
-}
+#scoringBanner .dayPlayed span { 
+ 	display: inline-flex; 
+    align-items: center; 
+    min-height: 92px; 
+ } 
 
-.banner-game{
-    width:90px;  
-    height:90px;  
+#scoringBanner .banner-game{
+    width:95px;  
+    height:92px;  
     margin-left:2px;
     margin-right:2px;
     margin-bottom:10px;
@@ -229,31 +230,31 @@ if ($scheduleHolder->isSeasonStarted()) {
             
             echo '<div class="banner-game">';
             echo '<a href="'.BASE_URL.'games.php?num=' . $games->getGameNumber() . $playoffLink . '">';
-            echo '<table class = "table table-sm mb-0"  >';
-            echo '<tbody>';
-            echo '<tr class="d-flex" style = "text-transform: uppercase;">'; // header
-            echo '<th class="col-9 p-1">Final'. (($games->getIsOt()) ? '(OT)' : '').'</th>';
-            echo '<th class="col-3 p-1"></th>';
+            echo '<table class = "table table-sm table-striped mb-0"  >';
+            //echo '<tbody>';
+            echo '<col><col>'; //define two columns so we can still colspan the header.
+            echo '<tr style = "text-transform: uppercase;">'; // header
+            echo '<th colspan="2">Final'. (($games->getIsOt()) ? '(OT)' : '').'</th>';
             echo '</tr>';
             
-            echo '<tr class="d-flex">'; // header
-            echo '<td class="col-9 p-1">
+            echo '<tr class="d-flex">'; // score 1
+            echo '<td class="col-9 ">
                 <div><img class="logo" src="'. BASE_URL.LOGO_DIR. $todayImage1 . '" alt="' . $games->team1 . '"</img></div>
                 <div class = "team-acronym">' . $team1Abbr . '</div>
              </td>';
             
-            echo '<td class = "col-3 p-1 dark-text text-center"><strong>' . $games->team1Score . '</strong></td>';
+            echo '<td class = "team-score col-3 text-center"><strong>' . $games->team1Score . '</strong></td>';
             echo '</tr>';
             
-            echo '<tr class="d-flex">'; // header
-            echo '<td class="col-9 p-1">
+            echo '<tr class="d-flex">'; // score 2
+            echo '<td class="col-9">
                 <div><img class="logo" src="' . BASE_URL.LOGO_DIR.$todayImage2 . '" alt="' . $games->team2 . '"</img></div>
                 <div class = "team-acronym">' . $team2Abbr . '</div>
              </td>';
-            echo '<td class = "col-3 p-1 dark-text text-center"><strong>' . $games->team2Score . '</strong></td>';
+            echo '<td class = "team-score col-3 dark-text text-center"><strong>' . $games->team2Score . '</strong></td>';
             echo '</tr>';
             
-            echo '</tbody>';
+           // echo '</tbody>';
             echo '</table>'; // end score-main table
             echo '</a>';
             echo '</div>';
@@ -318,15 +319,14 @@ for ($x = $nextGame; $x <= $nextGamesToProcess; $x ++) {
         echo '<div class="banner-game">';
         // echo '<a href="games.php?num='.$games->getGameNumber().$playoffLink.'">';
         echo '<table class = "table table-sm ">';
-        echo '<tbody>';
-        echo '<tr class="d-flex" style = "text-transform: uppercase;">'; // header
-                                                                         // echo '<th class="col-9 p-1">Final</th>';
-        echo '<th class="col-9 p-1">Game ' . $games->getGameNumber() . '</th>';
-        echo '<th class="col-3 p-1"></th>';
+        //echo '<tbody>';
+        echo '<col><col>'; //define two columns so we can still colspan the header.
+        echo '<tr style = "text-transform: uppercase;">'; // header
+        echo '<th colspan="2">Game ' . $games->getGameNumber() . '</th>';
         echo '</tr>';
 
         echo '<tr class="d-flex">'; // header
-        echo '<td class="col-12 p-1">
+        echo '<td class="col-12">
                 <div><img class="logo" src="' .BASE_URL.$todayImage1 . '" alt="' . $games->team1 . '"</img></div>
                 <div class = "team-acronym">' . $team1Abbr . '</div>
              </td>';
@@ -335,14 +335,14 @@ for ($x = $nextGame; $x <= $nextGamesToProcess; $x ++) {
         echo '</tr>';
 
         echo '<tr class="d-flex">'; // header
-        echo '<td class="col-12 p-1">
+        echo '<td class="col-12">
                 <div><img class="logo" src="' .BASE_URL.$todayImage2 . '" alt="' . $games->team2 . '"</img></div>
                 <div class = "team-acronym">' . $team2Abbr . '</div>
              </td>';
         // echo '<td class = "col-3 p-1 dark-text text-center"><strong>'.$games->team2Score.'</strong></td>';
         echo '</tr>';
 
-        echo '</tbody>';
+        //echo '</tbody>';
         echo '</table>'; // end score-main table
                          // echo '</a>';
         echo '</div>';
@@ -369,6 +369,8 @@ $(function() {
 		  slidesToShow: 9,
 		  slidesToScroll: 9,
 		  mobileFirst: true,
+		 // prevArrow:"<img class='a-left control-c prev slick-prev' src='../images/shoe_story/arrow-left.png'>",
+          //nextArrow:"<i class="a-left control-c prev slick-prev fas fa-angle-right">",
 		  responsive: [
 		  	{
 		      breakpoint: 1024,

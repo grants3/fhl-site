@@ -50,9 +50,9 @@ $playoffs = isPlayoffs($folder, $playoffMode);
         					<div class="card-body p-2">
         						<?php
         						if ($playoffs) {
-        						    include FS_ROOT.'MiniStandingsTree.php';
+        						    include FS_ROOT.'component/MiniStandingsTree.php';
                                 } else {
-                                    include FS_ROOT.'MiniStandings.php';
+                                    include FS_ROOT.'component/MiniStandings.php';
                                 }
                         
                                 ?>
@@ -64,7 +64,7 @@ $playoffs = isPlayoffs($folder, $playoffMode);
         						<h4 class="m-0">News</h4>
         					</div>
         					<div class="card-body p-2">
-        						<?php include FS_ROOT.'News.php'; ?>
+        						<?php include FS_ROOT.'component/News.php'; ?>
         					</div>
         				</div>
         				

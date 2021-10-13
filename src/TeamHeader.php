@@ -34,7 +34,7 @@ border-bottom:1px solid blue;
     background: linear-gradient(to bottom, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72', GradientType=0); /* IE6-9 */
 	
-	border-radius: 5px;   
+/* 	border-radius: 5px;    */
 /*     margin-bottom:10px; */
 }
 
@@ -67,14 +67,14 @@ border-bottom:1px solid blue;
 </style>
 
 <!-- <div class="container-fluid team-header-content px-0"> -->
-<div class="container team-header-content">
+<div class="container-fluid team-header-content">
 
 <?php
 
 //$CurrentTitle .= ' - '.$currentTeam;
     
 //team logo links
-$navbarMode=232;
+
 if($navbarMode != 3){ ?>
    
 	<div class="row">
@@ -85,7 +85,7 @@ if($navbarMode != 3){ ?>
                 for ($i = 0; $i < count($teamList); $i ++) {
                     ?>
         			
-        			<a href="<?php echo BASE_URL?>TeamRosters.php?team=<?php echo urlencode($teamList[$i]) ?>">
+        			<a href="<?php echo BASE_URL.$CurrentPage;?>.php?team=<?php echo urlencode($teamList[$i]) ?>">
         				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" width=55 alt="<?php echo $teamList[$i] ?>">
         			</a>
         

@@ -79,7 +79,7 @@ require_once __DIR__.'/config.php';
 				</article>
 				<article>
 					<div>Waivers Mini
-						<?php include FS_ROOT.'MiniWaivers.php'; ?>	
+						<?php include FS_ROOT.'component/MiniWaivers.php'; ?>	
 					</div>					
 				</article>
 				<article>
@@ -89,22 +89,22 @@ require_once __DIR__.'/config.php';
 				</article>
 				<article>
 					<div style="width:75%">Next Games Mini
-						<?php include FS_ROOT.'MiniNextGames.php'; ?>	
+						<?php //include FS_ROOT.'MiniNextGames.php'; ?>	
 					</div>						
 				</article>
 				<article>
 					<div>Top 5 Mini
-						<?php include FS_ROOT.'MiniTop5.php'; ?>	
+						<?php include FS_ROOT.'component/MiniLeaders.php'; ?>	
 					</div>	
 				</article>
 				<article>
 					<div style="width:50%">Full Standings Mini
-                        <?php include FS_ROOT.'MiniStandings.php';?>
+                        <?php include FS_ROOT.'component/MiniStandings.php';?>
 					</div>
 				</article>
 				<article>
 					<div style="width:50%">Playoff Tree Mini
-						<?php include FS_ROOT.'MiniStandingsTree.php';?>
+						<?php include FS_ROOT.'component/MiniStandingsTree.php';?>
 					</div>
 				</article>
 				

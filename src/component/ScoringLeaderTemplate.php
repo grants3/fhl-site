@@ -1,20 +1,5 @@
  <?php 
  
- if (!function_exists('isPic')){
-     function isPic($url){
-         $url = get_headers($url,1);
-         if(is_array($url['Content-Type'])){ //In some responses Content-type is an array
-             $video = strpos($url['Content-Type'][1],'image/png');
-         }else{
-             $video = strpos($url['Content-Type'],'image/png');
-         }
-         if($video !== false)
-             return true;
-             
-             return false;
-     }
- }
- 
  if (!function_exists('getProfilePhoto')){
      function getProfilePhoto($csName){
          

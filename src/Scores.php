@@ -452,7 +452,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 // 	}
 	?>
 
-	<div class = "card-body pt-2">
+	<div class = "card-body pt-0">
 	
 	<div class="row align-items-center justify-content-center"> 
 	
@@ -626,7 +626,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 				//header
 				echo '<div class="col-sm-12 col-md-6 col-lg-4 d-flex" style="padding-left: 7px; padding-right: 7px;">';
 				
-				echo '<div class="card border-dark flex-fill" style="margin-top:15px;">';
+				echo '<div class="card border-dark flex-fill" style="margin-top:14px;">';
 				echo '<div class="card-header box-score" style="padding-bottom: 0px; padding-top: 0px;">';
 				    echo '<div class = "text-center" style = "text-transform: uppercase;">
                         '.$lastEquipe1.' @ '.$lastEquipe2.' '.$gameOvertime[$i].
@@ -637,7 +637,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 				echo '<div class="card-body p-3 flex-fill" style ="background-color: #f0f1f2;">';
 				
 				echo '<div class = "row" style=" margin-top: -15px;">';
-				    echo '<table class = "table table-sm table-bordered" >';
+				    echo '<table class = "table table-sm table-bordered" style="background-color:white";>';
 				    echo '<tbody>';
     				echo '<tr class="d-flex"  style = "text-transform: uppercase;">'; //header
     				    echo '<th class = "col-6"></th>';
@@ -739,7 +739,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
                 
                 echo '</div>'; // end scoring details
                 
-               echo '<div class = "row game-score-footer" style="margin-bottom: -15px; border-bottom:0px;">'; //goalie details 
+               echo '<div class = "row game-score-footer" style="margin-bottom: -15px;">'; //goalie details 
                  echo '<div class = "footer-header text-left" style="width: 100%;">Goalies</div>';
                  echo '<div>'.$lastEquipe1.' - '.$gameGoal1[$i].'</div>';
                  echo '<div>'.$lastEquipe2.' - '.$gameGoal2[$i].'</div>';      

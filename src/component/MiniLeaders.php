@@ -8,73 +8,6 @@ include_once FS_ROOT.'classes/ScoringObj.php';
 include_once FS_ROOT.'classes/TeamAbbrHolder.php';
 include_once FS_ROOT.'classes/ScoringAccumulator.php';
 
-//include FS_ROOT.'head.php';
-?>
-<?php if(!isset($scriptsLoaded)){ ?>
-	<?php if(CDN_SUPPORT) {?>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600"/>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/> -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css"/>
-	<?php }else{?>
-	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/ex/fonts.css"/>
-	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL?>assets/css/ex/bootstrap.min.css"/>
-    <link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/ex/font-awesome-all.css"/>
-	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/ex/animate.css"/>
-	<?php }?>
-     
-     <!-- JQuery and bootstrap init -->
-    <?php if(CDN_SUPPORT) {?>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
-	<?php }else{?>
-	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/popper.min.js"></script>
-    <script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/jquery.tablesorter.min.js"></script>
-	<?php }?>
-     
-
-	 <!-- Other scripts -->
-	<?php if(CDN_SUPPORT) {?>
-<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script> -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-	<?php }else{?>
-<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script> -->
-	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/jquery.backstretch.min.js"></script>
-	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/wow.min.js"></script>
-	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/ex/jquery.waypoints.min.js"></script>
-	<?php }?>
-	
-		<?php 
-	//cache bust css.(should evade caching same filename when contents changes)
-	$cssHash = hash_file('crc32',FS_ROOT.'assets/css/style-1.css');
-	$cssMediaHash = hash_file('crc32',FS_ROOT.'assets/css/media-queries-1.css');
-	$jsHash = hash_file('crc32',FS_ROOT.'assets/js/scripts-1.js');
-
-	$cssHashUrl= '?m='.$cssHash;
-	$jsHashUrl= '?m='.$jsHash;
-	$cssMediaHashUrl= '?m='.$cssMediaHash;
-	?>
-
-	<!-- Custom scripts and styling and overrides (load last)-->
-	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/style-1.css<?php echo $cssHashUrl;?>"/>
-	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/media-queries-1.css<?php echo $cssMediaHashUrl;?>"/>
-	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/scripts-1.js<?php echo $jsHashUrl;?>"></script>
-
-	
-<?php 
-$scriptsLoaded=true;
-}
-?>
-<?php
-
 if(!isset($playoff)){
     include_once FS_ROOT.'common.php';
     
@@ -202,16 +135,31 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,'DESC');
     text-align: right;
 }
 
+.card-header:first-child {
+    
+}
+
 
 </style>
 
 <div class="container-fluid" id="mini-scoring-container">
   <div class="row">
-  
-    <div class="col-sm-12 p-0">
+    <div class="col-12 px-0">
+ <!--      <div class= "section-header logo-gradient" style="border-bottom-left-radius:0px;border-bottom-right-radius:0px;">
+         <div class="header-container"> -->
+    
+<!--     		<div class="gloss"></div> -->
+<!--     		<span class="header">Skaters</span> -->
+    
+<!--     	</div> -->
+<!--       </div>	 -->
+	  <h5 class="tableau-top">Skaters</h5>
       <div class="card">
-        <div class="card-header">
-         <div class="card-heading">Skaters</div>
+        <div class="card-header pt-0">
+      
+         <div class="card-heading">
+         
+         </div>
           <ul class="nav nav-tabs card-header-tabs" id="top-scorers-list" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" href="#top-scoring-points" role="tab" aria-controls="top-scoring-points" aria-selected="true">Points</a>
@@ -250,10 +198,20 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,'DESC');
       </div><!-- end skaters card -->
     </div><!-- end skaters col -->
     
-    <div class="col-sm-12 p-0">
+
+    <div class="col-12 px-0">
+<!--      <div class= "section-header logo-gradient" style="border-bottom-left-radius:0px;border-bottom-right-radius:0px;">
+          <div class="header-container"> -->
+    
+<!--     		<div class="gloss"></div> -->
+<!--     		<span class="header">Defenseman</span> -->
+    
+<!--     	</div> -->
+<!--       </div> -->
+	  <h5 class="tableau-top">Defenseman</h5>
       <div class="card">
-        <div class="card-header">
-         <div class="card-heading">Defense</div>
+        <div class="card-header pt-0">
+         <div class="card-heading"></div>
           <ul class="nav nav-tabs card-header-tabs" id="top-scorers-defense-list" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" href="#top-scoring-defense-points" role="tab" aria-controls="top-scoring-defense-points" aria-selected="true">Points</a>
@@ -292,10 +250,20 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,'DESC');
       </div><!-- end defense card -->
     </div><!-- end defense col -->
     
-    <div class="col-sm-12 p-0">
+
+    <div class="col-12 px-0">
+ <!--     <div class= "section-header logo-gradient" style="border-bottom-left-radius:0px;border-bottom-right-radius:0px;">
+          <div class="header-container"> -->
+    
+<!--     		<div class="gloss"></div> -->
+<!--     		<span class="header">Goalies</span> -->
+    
+<!--     	</div> -->
+<!--    	  </div> -->
+   	  <h5 class="tableau-top">Goalies</h5>
       <div class="card">
-        <div class="card-header">
-         <div class="card-heading">Goalies</div>
+        <div class="card-header pt-0">
+         
           <ul class="nav nav-tabs card-header-tabs" id="top-goalies-list" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" href="#top-scoring-goalies-points" role="tab" aria-controls="top-scoring-goalies-points" aria-selected="true">GAA</a>

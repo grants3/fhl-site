@@ -4,7 +4,8 @@
 <table id ="miniStandings" class="table table-sm table-striped tableFixHead table-rounded text-center">
 
 <?php
-include 'phpGetAbbr.php'; // Output $TSabbr
+require_once __DIR__.'/../config.php';
+include FS_ROOT.'phpGetAbbr.php'; // Output $TSabbr
 
 //default these so warnings are not throw. clean this up
 $playoff = '';
@@ -79,12 +80,14 @@ if(file_exists($Fnm)) {
 			$reste = trim(substr($reste, strpos($reste, ' ')));
 			$standingsW[$d] = substr($reste, 0, strpos($reste, ' '));
 			$reste = trim(substr($reste, strpos($reste, ' ')));
-			$reste = trim(substr($reste, strpos($reste, ' ')));
+			$standingsL[$d] = substr($reste, 0, strpos($reste, ' '));
 			$reste = trim(substr($reste, strpos($reste, ' ')));
 			if(!$shootoutMode){
+			    $standingsT[$d] = substr($reste, 0, strpos($reste, ' '));
 			    $reste = trim(substr($reste, strpos($reste, ' ')));
 			}
-			//$reste = trim(substr($reste, strpos($reste, ' ')));
+			$standingsOL[$d] = substr($reste, 0, strpos($reste, ' '));
+			$reste = trim(substr($reste, strpos($reste, ' ')));
 			$standingsPts[$d] = substr($reste, 0, strpos($reste, ' '));
 			$reste = trim(substr($reste, strpos($reste, ' ')));
 			$reste = trim(substr($reste, strpos($reste, ' ')));
@@ -107,6 +110,12 @@ if(file_exists($Fnm)) {
 	echo '<th class="text-left" style="padding-left:1rem">' . $standingTeam . '</th>';
 	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingGPFull.'">'. $standingGP .'</th>';
 	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingWFull.'">' . $standingW . '</th>';
+	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingLFull.'">' . $standingL . '</th>';
+	if(!$shootoutMode){
+	    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingEFull.'">' . $standingE . '</th>';
+	}else{
+	    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingOTFull.'">' . $standingOT . '</th>';
+	}
 	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingPTSFull.'">' . $standingPTS . '</th>';
 	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingL10Full.'">' . $standingL10 . '</th>';
 	echo '</tr>';
@@ -139,6 +148,12 @@ if(file_exists($Fnm)) {
 		echo '<td class="text-left"><a style="display:block; width:100%;" href="TeamRosters.php?team='.urlencode($equipe[$key]).'">'.$equipe[$key].'</a></td>';
 		echo '<td>'.$pj[$key].'</td>';
 		echo '<td>'.$standingsW[$key].'</td>';
+		echo '<td>'.$standingsL[$key].'</td>';
+		if(!$shootoutMode){
+		    echo '<td>'.$standingsT[$key].'</td>';
+		}else{
+		    echo '<td>'.$standingsOL[$key].'</td>';
+		}
 		echo '<td>'.$standingsPts[$key].'</td>';
 		echo '<td>'.$standingsL10[$key].'</td>';
 		echo '</tr>';

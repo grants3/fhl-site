@@ -767,7 +767,7 @@ if(isset($lastNumber)) {
 
 if(isset($nextNumber)) {
 	echo '<a href="'.$nextGameFile.'">';
-	echo '<table class="table table-sm table-striped table-rounded text-center">';
+	echo '<table class="table table-sm table-striped table-rounded">';
 	echo '<thead>';
 	echo '<tr><th><h5 class="m-0">'.$teamCardNextGame.' #'.$nextNumber.'</h5></th></tr>';
 	echo '</thead>';
@@ -779,7 +779,7 @@ if(isset($nextNumber)) {
 }
 
 if(isset($propayroll)) {
-	echo '<a href="Finance.php">';
+	//echo '<a href="Finance.php">';
     echo '<table class="table table-sm table-striped table-rounded">';
     echo '<thead>';
 	echo '<tr><th colspan="2"><h5 class="m-0">'.$teamCardFinancial.'</h5></th></tr>';
@@ -798,7 +798,8 @@ if(isset($propayroll)) {
 	$restant = number_format($restant, 0, ' ', ',');
 	echo '<tr><td>'.$teamCardPayrollRemaining.'</td><td class="text-right">'.$restant.'</td></tr>';
 	echo '</tbody>';
-	echo '</table></a>';
+	echo '</table>';
+	//echo '</a>';
 }
 
 echo '<div>';
