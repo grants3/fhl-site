@@ -57,7 +57,7 @@ function makeSortable(table) {
     if (th) i = th.length;
     else return; // if no `<thead>` then do nothing
     while (--i >= 0) (function (i) {
-        var dir = 0; //0 for largest to smallest, 1 for smallest to largest
+        var dir = 1; //0 for largest to smallest, 1 for smallest to largest
         th[i].addEventListener('click', function () {sortTable(table, i, (dir = 1 - dir))});
         
         //add blank link, swap text from header.
