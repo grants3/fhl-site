@@ -17,22 +17,13 @@ include 'head.php';
 
 <?php
 
-$matches = glob($folder.'*'.$playoff.'Coaches.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Coaches')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-$Fnm = $folder.$folderLeagueURL.'Coaches.html';
+$fileName = getLeagueFile($folder, $playoff, 'Coaches.html', 'Coaches');
+
 $a = 0;
 $c = 1;
 $lastUpdated = '';
-if(file_exists($Fnm)) {
-	$tableau = file($Fnm);
+if(file_exists($fileName)) {
+    $tableau = file($fileName);
 	while(list($cle,$val) = myEach($tableau)) {
 		$val = utf8_encode($val);
 		if(substr_count($val, '<P>(As of')){

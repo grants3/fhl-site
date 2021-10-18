@@ -52,7 +52,7 @@ class PlayerScoringModel {//implements Model{
         return $scoringHolder;
     }
 
-    public function getAll(int $seasonId, string $seasonType): array{
+    public function find(int $seasonId, string $seasonType): array{
         $startIndex = isset($this->requestData['start']) ? $this->requestData['start'] : 0;
         $draw = isset($this->requestData['draw']) ? $this->requestData['draw'] : 0;
         $length = isset($this->requestData['length']) ? $this->requestData['length'] : 100;

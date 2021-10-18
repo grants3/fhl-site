@@ -17,24 +17,24 @@ include 'head.php';
 
 
 // Recherche des saisons antérieurs (get previous seasons)
-if($folderCarrerStats != '0') {
+if(CAREER_STATS_DIR != '0') {
 	$hashFolder = '';
 	$tmpLong = 0;
-	for($i=0;$i<substr_count($folderCarrerStats, '/');$i++) {
+	for($i=0;$i<substr_count(CAREER_STATS_DIR, '/');$i++) {
 		if($hashFolder != '') $tmpLong = strlen($hashFolder)+1;
-		$hashFolder = substr($folderCarrerStats, 0+$tmpLong, strpos($folderCarrerStats, '/'));
+		$hashFolder = substr(CAREER_STATS_DIR, 0+$tmpLong, strpos(CAREER_STATS_DIR, '/'));
 		if(substr_count($hashFolder, '#') > 0) break 1;
 	}
-	$Fnm = str_replace("#/","*",$folderCarrerStats);
+	$Fnm = str_replace("#/","*",CAREER_STATS_DIR);
 // 	$NumberSeason = 0;
 // 	$dirs = glob($Fnm, GLOB_ONLYDIR);
 // 	for($j=0;$j<count($dirs);$j++) {
 // 		if(substr_count($dirs[$j], $hashFolder)) {
-// 			$tmpYear = substr($dirs[$j], strlen($folderCarrerStats)-2);
+// 			$tmpYear = substr($dirs[$j], strlen(CAREER_STATS_DIR)-2);
 // 			if($NumberSeason < $tmpYear) $NumberSeason = $tmpYear;
 // 		}
 // 	}
-	$NumberSeason = count(getPreviousSeasons($folderCarrerStats));
+	$NumberSeason = count(getPreviousSeasons(CAREER_STATS_DIR));
 	
 }
 
@@ -111,7 +111,7 @@ if($csName != '') {
 	for($n=0;$n<$NumberSeason;$n++) {
 		$workSeason--;
 		if($workSeason == 0) break 1;
-		$Fnmtmp = str_replace("#",$workSeason,$folderCarrerStats);
+		$Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
 		$matches = glob($Fnmtmp.'*PlayerVitals.html');
 		$folderLeagueURL = '';
 		for($j=0;$j<count($matches);$j++) {
@@ -352,7 +352,7 @@ if($csName != '') {
 	// TeamScoring - Previous Seasons
 	for($n=0;$n<$NumberSeason;$n++) {
 		$workSeason--;
-		$Fnmtmp = str_replace("#",$workSeason,$folderCarrerStats);
+		$Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
 		$matches = glob($Fnmtmp.'*TeamScoring.html');
 		$folderLeagueURL = '';
 		for($j=0;$j<count($matches);$j++) {
@@ -712,7 +712,7 @@ if($csName != '') {
 	// TeamScoring - Previous Playoff
 	for($n=0;$n<$NumberSeason;$n++) {
 		$workSeason--;
-		$Fnmtmp = str_replace("#",$workSeason,$folderCarrerStats);
+		$Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
 		$matches = glob($Fnmtmp.'*PLFTeamScoring.html');
 		$folderLeagueURL = '';
 		for($j=0;$j<count($matches);$j++) {
@@ -1117,43 +1117,54 @@ if($csName != '' && $lastTeam != '-') {
 // Entête
 //echo '<img src="http://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId='.$csNametmp.'&width=200&height=200" alt="'.$csName.'"><br>';
 if($csName != '') {
-	$csNametmp = strtolower($csName);
-	$csNametmp = str_replace(' ', '-', $csNametmp);
-	$csNametmpFirst = substr($csNametmp, 0, 1);
+// 	$csNametmp = strtolower($csName);
+// 	$csNametmp = str_replace(' ', '-', $csNametmp);
+// 	$csNametmpFirst = substr($csNametmp, 0, 1);
+
+    $imageLink = getProfilePhoto($csName);
+    $unknownImageLink = getBaseUrl().'assets/img/unknown-player.png';
 	
 	echo '<div class="container">';
 	
 	echo '<div class="card">';
 
- 	echo '<div class="card-header heading-footer"></div>';
-			echo '<div class="card-block text-center">';
+ 	echo '<div class="card-header heading-footer text-center">';
+			//echo '<div class="card-block text-center">';
 
-			if(URL_exists('https://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png')) echo '<img src="http://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png" style="height:180px;" alt="'.$csName.'">';
-			//else echo '<img class="panel-profile-img rounded-circle" src="https://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId='.$csNametmp.'&width=200&height=180" " alt="'.$csName.'">';
-			else echo '<img class="panel-profile-img rounded-circle" src="'.getBaseUrl().'assets/img/unknown-player.png" alt="'.$csName.'">';
+// 			if(URL_exists('https://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png')) echo '<img src="http://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png" style="height:180px;" alt="'.$csName.'">';
+// 			//else echo '<img class="panel-profile-img rounded-circle" src="https://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId='.$csNametmp.'&width=200&height=180" " alt="'.$csName.'">';
+// 			else echo '<img class="panel-profile-img rounded-circle" src="'.getBaseUrl().'assets/img/unknown-player.png" alt="'.$csName.'">';
+			echo '<img style="height:180px; width:200px; object-fit: cover;" class="panel-profile-img rounded-circle"';
+			echo ' src="'.$imageLink.'"';
+			echo ' onerror="if(this.src='.$unknownImageLink.'); this.src='.$unknownImageLink.';"';
+			echo ' alt="'.$csName.'">';
+            echo '</img>';
 
-			echo '<div class ="col">';
-				echo '<span style="font-size:30px;">'.$csName.'</span><br>';
-				if(isset($statsNumber) && isset($playerVitalsNumero)) echo '<span style="font-size:18px;">#'.$playerVitalsNumero.', '.$playerVitalsPosition.', '.$lastTeam.'</span><br>';
-				if(!isset($statsNumber) && isset($statsPLFNumber) && isset($playerVitalsNumero)) echo '<span style="font-size:18px;">#'.$playerVitalsNumero.', '.$playerVitalsPosition.', '.$lastTeam.'</span><br>';
-				if(isset($playerVitalsNumero)) {
-					echo '<span style="font-size:16px;">Age: '.$playerVitalsAge.' - '.$careerStatsHeight.': '.$playerVitalsGrandeur.' - '.$careerStatsWeight.': '.$playerVitalsPoids.'<br>';
-					echo $careerStatsSalary.': '.$playerVitalsSalaire.' - '.$careerStatsLenght.': '.$playerVitalsContrat.'</span>';
-				}
 
-			echo '</div>';
+	echo '</div>';
 
-	echo '</div>'; 
-
-	
 }	
 
 if($csName != '' && (isset($statsNumber) || isset($statsPLFNumber))) {
 	if(isset($statsPLFNumber) || isset($statsNumber)){
 
 		echo '
-		<div class="card-body">
-		<div class = "row">
+		<div class="card-body">';
+		
+		echo '<div class="row">';
+		echo '<div class ="col text-center">';
+		echo '<span style="font-size:30px;">'.$csName.'</span><br>';
+		if(isset($statsNumber) && isset($playerVitalsNumero)) echo '<span style="font-size:18px;">#'.$playerVitalsNumero.', '.$playerVitalsPosition.', '.$lastTeam.'</span><br>';
+		if(!isset($statsNumber) && isset($statsPLFNumber) && isset($playerVitalsNumero)) echo '<span style="font-size:18px;">#'.$playerVitalsNumero.', '.$playerVitalsPosition.', '.$lastTeam.'</span><br>';
+		if(isset($playerVitalsNumero)) {
+		    echo '<span style="font-size:16px;">Age: '.$playerVitalsAge.' - '.$careerStatsHeight.': '.$playerVitalsGrandeur.' - '.$careerStatsWeight.': '.$playerVitalsPoids.'<br>';
+		    echo $careerStatsSalary.': '.$playerVitalsSalaire.' - '.$careerStatsLenght.': '.$playerVitalsContrat.'</span>';
+		}
+		
+		echo '</div>';
+		echo '</div>';
+		
+		echo '<div class = "row">
 		<div class = "col-sm-12 col-md-12 col-lg-8 offset-lg-2">
         <h3 class = "tableau-top text-center">'.$careerStatsTitle.'</h3>
 		<div class="table-responsive">

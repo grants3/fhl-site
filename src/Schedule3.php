@@ -21,7 +21,7 @@ if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
 if(trim($seasonId) == false){
     $baseFolder = $folder;
 }else{
-    $baseFolder = str_replace("#",$seasonId,$folderCarrerStats);
+    $baseFolder = str_replace("#",$seasonId,CAREER_STATS_DIR);
 }
 
 $Fnm = '';

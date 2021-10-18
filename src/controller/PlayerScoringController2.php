@@ -52,12 +52,7 @@ class PlayerScoringController2 implements Controller{
 
         switch ($this->apiRequest->getHTTPMethod()) {
             case 'GET':
-//                 if ($this->userId) {
-//                     $response = $this->getUser($this->userId);
-//                 } else {
-//                     $response = $this->getAllUsers();
-//                 };
-                $response = $this->getAll();
+                $response = $this->find();
                 break;
             case 'POST':
                 $response = $this->notFoundResponse();
@@ -81,7 +76,7 @@ class PlayerScoringController2 implements Controller{
         }
     }
     
-    private function getAll()
+    private function find()
     {
      
 
@@ -139,12 +134,7 @@ class PlayerScoringController2 implements Controller{
                 
                 $a = (array) $a;
                 $b = (array) $b;
-                
-//                 if($orderDirection == 'asc'){
-//                     return $a[$orderColumn] <=> $b[$orderColumn];
-//                 }else{
-//                     return $b[$orderColumn] <=> $a[$orderColumn];
-//                 }
+
                 //multi sort with attribute and then name.
                 if($orderDirection == 'asc'){
                     //return [$a[$orderColumn], $a['name']] <=> [$b[$orderColumn], $b['name']];
@@ -211,28 +201,13 @@ class PlayerScoringController2 implements Controller{
     private function sortAttribs($a, $b, $orderColumn, $orderDirection)
     {
         if($orderDirection == 'asc'){
-            return $a->goals <=> $b->goals;
+            return $a->$orderColumn <=> $b->$orderColumn;
         }else{
-            return $b->goals <=> $a->goals;
+            return $b->$orderColumn <=> $a->$orderColumn;
         }
         
     }
-    
-    
-    private function getUser($id)
-    {
-        $result = $this->personGateway->find($id);
-        if (! $result) {
-            return $this->notFoundResponse();
-        }
-
-        $response['status_code_header'] = 'HTTP/1.1 201 Created';
-        $response['content_type'] = 'Content-Type: application/json';
-        $response['body'] = json_encode($result);
-        return $response;
-    }
-    
-    
+        
     private function unprocessableEntityResponse()
     {
         $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';

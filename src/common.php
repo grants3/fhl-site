@@ -1,5 +1,7 @@
 <?php
 
+$leagueMode = false;
+
 function isAuthenticated(){
     
     if(isset($_SESSION['authenticated']) && $_SESSION['authenticated']){
@@ -126,15 +128,15 @@ function getFilteredArray($aFilterKey, $aFilterValue, $array) {
     return $filtered_array;
 }
 
-function getPreviousSeasons($folderCarrerStats):array{
+function getPreviousSeasons($careerStatsFolder):array{
     $seasons = array();
     
-    if(isset($folderCarrerStats)) {
+    if(isset($careerStatsFolder) && $careerStatsFolder) {
 
-        $dirs = array_filter(glob(str_replace("#/","*",$folderCarrerStats)), 'is_dir');
+        $dirs = array_filter(glob(str_replace("#/","*",$careerStatsFolder)), 'is_dir');
 
         foreach($dirs as $dir) {
-            $tmpYear = substr($dir, strlen($folderCarrerStats)-2);
+            $tmpYear = substr($dir, strlen($careerStatsFolder)-2);
             array_push($seasons, $tmpYear);
         }
         
@@ -201,6 +203,16 @@ if (!function_exists('mb_strlen')){
     }
 }
 
+function getProfilePhoto($csName){
+    
+    $csNametmp = strtolower($csName);
+    $csNametmp = str_replace(' ', '-', $csNametmp);
+    $csNametmpFirst = substr($csNametmp, 0, 1);
+    
+    $imgUrl = 'http://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png';
+    
+    return $imgUrl;
+}
 
 function URL_exists($url){
 

@@ -15,24 +15,24 @@ if($ctlOneTeams == 1) $ctlOneLink = "window.location.href.split('?')[0]";
 if($ctlOneTeams == 1) include 'phpGetAbbr.php'; // Output $TSabbr / $folderLeagueURL2
 
 // Recherche des saisons antérieurs
-if($folderCarrerStats != '0') {
+if(CAREER_STATS_DIR != '0') {
 	$hashFolder = '';
 	$tmpLong = 0;
-	for($i=0;$i<substr_count($folderCarrerStats, '/');$i++) {
+	for($i=0;$i<substr_count(CAREER_STATS_DIR, '/');$i++) {
 		if($hashFolder != '') $tmpLong = strlen($hashFolder)+1;
-		$hashFolder = substr($folderCarrerStats, 0+$tmpLong, strpos($folderCarrerStats, '/'));
+		$hashFolder = substr(CAREER_STATS_DIR, 0+$tmpLong, strpos(CAREER_STATS_DIR, '/'));
 		if(substr_count($hashFolder, '#') > 0) break 1;
 	}
-	$Fnm = str_replace("#/","*",$folderCarrerStats);
+	$Fnm = str_replace("#/","*",CAREER_STATS_DIR);
 // 	$NumberSeason = 0;
 // 	$dirs = glob($Fnm, GLOB_ONLYDIR);
 // 	for($j=0;$j<count($dirs);$j++) {
 // 		if(substr_count($dirs[$j], $hashFolder)) {
-// 			$tmpYear = substr($dirs[$j], strlen($folderCarrerStats)-2);
+// 			$tmpYear = substr($dirs[$j], strlen(CAREER_STATS_DIR)-2);
 // 			if($NumberSeason < $tmpYear) $NumberSeason = $tmpYear;
 // 		}
 // 	}
-	$NumberSeason = count(getPreviousSeasons($folderCarrerStats));
+	$NumberSeason = count(getPreviousSeasons(CAREER_STATS_DIR));
 }
 //echo "Total Seasons: ".$NumberSeason."<br>";
 
@@ -74,7 +74,7 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
 		}
 		else {
 			if($z == 0) {
-				$Fnmtmp = str_replace("#",$workSeason,$folderCarrerStats);
+				$Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
 				$matches = glob($Fnmtmp.'*TeamScoring.html');
 				$folderLeagueURL = '';
 				for($k=0;$k<count($matches);$k++) {
@@ -86,7 +86,7 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
 				}
 			}
 			if($z == 1) {
-				$Fnmtmp = str_replace("#",$workSeason,$folderCarrerStats);
+				$Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
 				$matches = glob($Fnmtmp.'*PLFTeamScoring.html');
 				$folderLeagueURL = '';
 				for($k=0;$k<count($matches);$k++) {

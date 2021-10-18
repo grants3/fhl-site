@@ -59,24 +59,24 @@ if(isset($currentTeam) && $currentTeam != '') {
 	else echo $allFileNotFound.' - '.$Fnm;
 	
 	// Recherche des saisons antérieurs
-	if($folderCarrerStats != '0' && $TSabbr == '') {
+	if(CAREER_STATS_DIR != '0' && $TSabbr == '') {
 		$hashFolder = '';
 		$tmpLong = 0;
-		for($i=0;$i<substr_count($folderCarrerStats, '/');$i++) {
+		for($i=0;$i<substr_count(CAREER_STATS_DIR, '/');$i++) {
 			if($hashFolder != '') $tmpLong = strlen($hashFolder)+1;
-			$hashFolder = substr($folderCarrerStats, 0+$tmpLong, strpos($folderCarrerStats, '/'));
+			$hashFolder = substr(CAREER_STATS_DIR, 0+$tmpLong, strpos(CAREER_STATS_DIR, '/'));
 			if(substr_count($hashFolder, '#') > 0) break 1;
 		}
-		$Fnm = str_replace("#/","*",$folderCarrerStats);
+		$Fnm = str_replace("#/","*",CAREER_STATS_DIR);
 		$NumberSeason = 0;
 		$dirs = glob($Fnm, GLOB_ONLYDIR);
 		for($j=0;$j<count($dirs);$j++) {
 			if(substr_count($dirs[$j], $hashFolder)) {
-				$tmpYear = substr($dirs[$j], strlen($folderCarrerStats)-2);
+				$tmpYear = substr($dirs[$j], strlen(CAREER_STATS_DIR)-2);
 				if($NumberSeason < $tmpYear) $NumberSeason = $tmpYear;
 			}
 		}
-		$Fnmtmp = str_replace("#",$NumberSeason,$folderCarrerStats);
+		$Fnmtmp = str_replace("#",$NumberSeason,CAREER_STATS_DIR);
 		$matches = glob($Fnmtmp.'*TeamScoring.html');
 		$folderLeagueURL3 = '';
 		for($k=0;$k<count($matches);$k++) {

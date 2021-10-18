@@ -626,7 +626,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 				//header
 				echo '<div class="col-sm-12 col-md-6 col-lg-4 d-flex" style="padding-left: 7px; padding-right: 7px;">';
 				
-				echo '<div class="card border-dark flex-fill" style="margin-top:14px;">';
+				echo '<div class="card border-dark " style="margin-top:14px;">';
 				echo '<div class="card-header box-score" style="padding-bottom: 0px; padding-top: 0px;">';
 				    echo '<div class = "text-center" style = "text-transform: uppercase;">
                         '.$lastEquipe1.' @ '.$lastEquipe2.' '.$gameOvertime[$i].

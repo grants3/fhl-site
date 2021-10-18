@@ -22,12 +22,14 @@ function leagueFileExists(string $baseName, string $seasonType, int $seasonId, s
     return file_exists(_getLeagueFile($seasonType, $baseName, $seasonId, $exclude));
 }
 
-function getLeagueFile5(string $baseName, bool $playoff, int $seasonId, string $exclude=null) {
+
+
+function getLeagueFile5(string $baseName, string $exclude=null) {
     if($playoff) $playoff = 'PLF';
     return _getLeagueFile($baseName, $playoff, $seasonId, $exclude);
 }
 
-function _getLeagueFile(string $baseName, string $seasonType, int $seasonId, string $exclude=null) {
+function _getLeagueFile(string $baseName, string $seasonType, int $seasonId = 0, string $exclude=null) {
     
     $filePrefix = '';
     if(isset($seasonType)){
@@ -50,7 +52,7 @@ function _getLeagueFile(string $baseName, string $seasonType, int $seasonId, str
         $filePrefix = 'PLF';
     }
     
-    return getLeagueFile3($searchFolder, $filePrefix.'TeamScoring.html', 'TeamScoring');
+    return getLeagueFile3($searchFolder, $filePrefix.'TeamScoring.html', $exclude);
 }
 
 /*

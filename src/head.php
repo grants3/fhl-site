@@ -3,14 +3,29 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once 'config.php';
-include_once 'lang.php';
-include_once 'common.php';
-include_once 'classes/TeamHolder.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_name(SESSION_NAME);
     session_start();
 }
+
+
+//override lang
+if(isset($_GET['lang'])) {
+	if($_GET['lang'] == 'EN' || $_GET['lang'] == 'FR'){
+	    $_SESSION['lang'] = $_GET['lang'];
+	}
+}
+
+if(isset($_SESSION['lang'])){
+    $leagueLang = $_SESSION['lang'];
+}
+
+include 'lang.php';
+include_once 'common.php';
+include_once 'classes/TeamHolder.php';
+
+
 
 if(!isset($CurrentPage)){
     $CurrentPage = '';
@@ -25,7 +40,7 @@ if(!isset($navbarEnabled)){
 }
 
 //set theme
-if(isset($_GET['theme']) || isset($_POST['theme'])) {
+if(isset($_GET['theme'])) {
     $_SESSION["theme"] = $_GET['theme'];
 }
 else if(!isset($_SESSION['theme'])){
@@ -33,13 +48,14 @@ else if(!isset($_SESSION['theme'])){
 }
 
 //set nav type
-if(isset($_GET['navbarMode']) || isset($_POST['navbarMode'])) {
+if(isset($_GET['navbarMode'])) {
     $_SESSION["navbarMode"] = $_GET['navbarMode'];
     $navbarMode = $_SESSION["navbarMode"];
 }
 else if(isset($_SESSION['navbarMode'])){
     $navbarMode = $_SESSION["navbarMode"];
 }
+
 
 //page info
 
@@ -60,10 +76,9 @@ if(isset($_GET['team']) || isset($_POST['team'])) {
     
     $_SESSION["team"] = $currentTeam;
 }
-else {
-    if(isset($_SESSION["team"])){
-        $currentTeam = $_SESSION["team"];
-    }
+
+if(isset($_SESSION["team"])){
+    $currentTeam = $_SESSION["team"];
 }
 
 
@@ -316,7 +331,10 @@ if(isset($demoMode) && $demoMode){
     <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=0">None</a>
     <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=2">Simple</a>
     <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=3">Simple Min</a>
-    <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=4">Custom</a>
+	<a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=4">Custom</a>
+	<h3 class="text-left font-weight-bold">Language</h3>
+	<a href="<?php echo BASE_URL.$CurrentHTML?>?lang=EN">English</a>
+	<a href="<?php echo BASE_URL.$CurrentHTML?>?lang=FR">French</a>
 </nav>
 </div>
 <?php }

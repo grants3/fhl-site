@@ -11,7 +11,8 @@ include_once FS_ROOT.'common.php';
 include_once FS_ROOT.'controller/PlayerScoringController2.php';
 include_once FS_ROOT.'api/ApiRequest.php';
 
-$apiPlayerStats = 'playerStats';
+$apiStats = 'stats';
+$apiPlayer = 'stats';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode( '/', $uri );
@@ -37,7 +38,7 @@ if(isset($apiParam)){
     $request = new ApiRequest($requestURI);
     error_log(print_r($request,1));
     
-    if($apiPlayerStats == $apiParam){
+    if($apiStats == $apiParam){
         // pass the request method and user ID to the PlayerScoringController and process the HTTP request:
         $controller = new PlayerScoringController2($request);
         $controller->processRequest();
