@@ -26,30 +26,44 @@ if(DEBUG_MODE){
 }
 
 $apiParam = null;
+$apiMethod = null;
+if(isset($_GET['api']) || isset($_POST['api'])) {
+    $apiParam = ( isset($_GET['api']) ) ? $_GET['api'] : $_POST['api'];
+}
+$apiParam = null;
 if(isset($_GET['api']) || isset($_POST['api'])) {
     $apiParam = ( isset($_GET['api']) ) ? $_GET['api'] : $_POST['api'];
 }
 
-if(isset($apiParam)){
-    // Get the REQUEST_URI.
-    $requestURI = $_SERVER['REQUEST_URI'];
-    
-    // Build an API Request and pass the REQUEST_URI var.
-    $request = new ApiRequest($requestURI);
-    error_log(print_r($request,1));
-    
-    if($apiStats == $apiParam){
-        // pass the request method and user ID to the PlayerScoringController and process the HTTP request:
-        $controller = new PlayerScoringController2($request);
-        $controller->processRequest();
+
+try {
+    if(isset($apiParam)){
+        // Get the REQUEST_URI.
+        $requestURI = $_SERVER['REQUEST_URI'];
+        
+        // Build an API Request and pass the REQUEST_URI var.
+        $request = new ApiRequest($requestURI);
+        error_log(print_r($request,1));
+        
+        if($apiStats == $apiParam){
+            // pass the request method and user ID to the PlayerScoringController and process the HTTP request:
+            $controller = new PlayerScoringController2($request);
+            $controller->processRequest();
+        }else{
+            http_response_code( 404 );
+        }
+        
+        
     }else{
         http_response_code( 404 );
     }
- 
-    
-}else{
-    http_response_code( 404 );
 }
+catch(Exception $e) {
+    error_log($e);
+    http_response_code( 500 );
+}
+
+
 
 
 

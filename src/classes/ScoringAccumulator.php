@@ -67,13 +67,16 @@ class ScoringAccumulator
         
     }
         
-    public function getScorers(string $sortFunction, int $limit = null, string $filter = null)
+    public function getScorers(string $sortFunction, int $limit = null, array $filter = null)
     {
         $skaters = $this->scoringHolder->getFilteredSkaters();
         
         if(isset($filter)){
             $skaters = array_filter($skaters, function($obj)use(&$filter){
-                if ($obj->getPosition() == $filter) return true;
+               // if ($obj->getPosition() == $filter) return true;
+                foreach ($filter as $key => $value){
+                    if ($obj->__get($key) == $value) return true;
+                }
                 
                 return false;
             });

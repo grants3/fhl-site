@@ -27,7 +27,24 @@
 	if(!isset($scoringArray)) return;
 	if(!isset($attribute)) return;
 	if(!isset($sort)) return;
+	if(!isset($sortOrder)) $sortOrder = 'desc';
 	if(!isset($positionType)) $positionType = null; //dont filter
+	if(!isset($rookie)) $rookie = false;
+	
+	$link = 'StatsSkaters.php?sort='.$sort.'&sortOrder='.$sortOrder;
+	if(isset($positionType)&& $positionType){
+	    if('G' == $positionType){
+	        $link = 'StatsGoalies.php?sort='.$sort.'&sortOrder='.$sortOrder;
+	    }else if('D' == $positionType){
+	        $link = 'StatsSkaters.php?sort='.$sort.'&sortOrder='.$sortOrder.'&position=D';
+	    }else{
+	        //error
+	    }
+	}
+	if($rookie){
+	    $link = $link.'&rookie=1';
+	}
+	
 	
 	if(!$scoringArray){
 	    
@@ -45,7 +62,7 @@
 	<div style="display: flex;">
 
       	<div class="top-player-details">
-      		<div class="card border-0" style="width: 13rem; padding-top:25px">
+      		<div class="card border-0" style="width: 13rem;">
       		  <div class="row no-gutters text-center mx-auto d-block">
               	<img id= "top-player-img-<?php echo $attribute.$positionType?>" data-img-url="<?php echo $imageLink;?>"
               		 onerror="if(this.src='<?php echo $unknownImageLink;?>'); this.src='<?php echo $unknownImageLink;?>';"
@@ -97,7 +114,12 @@
         			<?php }?>
         
         		</ul>
-        		<a class="styles__LeadersNavLink-owf6ne-8 bvgUsd" href="<?php echo getBaseUrl().'PlayerScoring.php?sort='.$sort;?>">All Leaders</a>
+        		
+        		<?php 
+        		
+        		
+        		?>
+        		<a class="styles__LeadersNavLink-owf6ne-8 bvgUsd" href="<?php echo getBaseUrl().$link?>">All Leaders</a>
 	
 			</div>
 		</div>

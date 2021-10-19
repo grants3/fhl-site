@@ -155,7 +155,7 @@ if($currentPLF){
                     			        echo '<div class="col-sm-12 col-md-6 col-lg-4 mt-3">';
                     			        echo '<div class="card ">';
                     			        echo '<div class="card-header day-header p-0">
-                                            	<h5 class="mb-0"> Day: '.$schedule->getGameDay().($schedule->getGameDay() == $scheduleHolder->getTradeDeadline() ? ' TRADE DEADLINE' : '').'</h5>
+                                            	<h5 class="mb-0 ml-2"> Day: '.$schedule->getGameDay().($schedule->getGameDay() == $scheduleHolder->getTradeDeadline() ? ' TRADE DEADLINE' : '').'</h5>
                                               </div>';
                     			        echo '<div class="card-body p-1">';
                     			        $lastDay = $schedule->getGameDay();
@@ -246,7 +246,7 @@ if($currentPLF){
                     			        echo '<div class="col-sm-12 col-md-6 col-lg-4 mt-3">';
                     			        echo '<div class="card ">';
                     			        echo '<div class="card-header day-header p-0">
-                                            	<h5 class="mb-0"> Day: '.$schedule->getGameDay().($schedule->getGameDay() == $scheduleHolder->getTradeDeadline() ? ' TRADE DEADLINE' : '').'</h5>
+                                            	<h5 class="mb-0 ml-2"> Day: '.$schedule->getGameDay().($schedule->getGameDay() == $scheduleHolder->getTradeDeadline() ? ' TRADE DEADLINE' : '').'</h5>
                                               </div>';
                     			        echo '<div class="card-body p-1">';
                     			        $lastDay = $schedule->getGameDay();

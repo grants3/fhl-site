@@ -6,14 +6,14 @@ require_once 'config.php';
 if(isset($_SESSION["theme"])){
     $siteColorTheme = $_SESSION["theme"];
 }else{
-    $siteColorTheme = SITE_THEME_COLOR;
+    $siteColorTheme = SITE_THEME;
 }
 
 ?>
 
 <style type="text/css">
 
-/* site color overrides */
+/* site color overrides. blue is default*/
 
 <?php 
 if($siteColorTheme == 'green') {

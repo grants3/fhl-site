@@ -34,7 +34,7 @@ include_once FS_ROOT.'classes/ScheduleObj.php';
 /*     border: 1px; */
     border-color:var(--color-primary-1);
     border-style:solid;
-    border-width: 3px;
+    border-width: 1px;
 /*     border-bottom-right-radius:3%; */
 /*     border-bottom-left-radius:3%; */
     border-bottom-right-radius:2%; 

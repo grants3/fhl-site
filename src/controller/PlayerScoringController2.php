@@ -87,12 +87,18 @@ class PlayerScoringController2 implements Controller{
         
         //load and init data
         $this->load();
-        $data = $this->scoringHolder->getFilteredSkaters();
+       // $data = $this->scoringHolder->getFilteredSkaters();
+       
+        $type = array_key_exists('type',$this->requestData) ? $this->requestData['type'] : null;
+        if(isset($type) && 'goalie' == $type){
+            $data = $this->scoringHolder->getFilteredGoalies();
+        }else{
+            $data = $this->scoringHolder->getFilteredSkaters();
+        }
 
         //count unfilteed
         $total = count($data);
 
- 
         //search value support
         //hardcode to name field for now.
         if(isset($this->requestData['search']) && $this->requestData['search']['value']){

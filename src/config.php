@@ -13,10 +13,10 @@ $cdnSupport = true;
 // Language | Français: 'FR' | English: 'EN'
 $leagueLang = "EN";
 
-//enter where you site home address is located in comparison to the TablePage addon. Will be used on nav home button/league logo.
-//Same folder "";
+//enter where you site home address (your main index.html/php) is located in comparison to the TablePage addon. 
+//Will be used on nav home button/league logo. Same folder "";
 //ex: if http://yourLeague.com/ is your home page and -> Add-on folder: http://yourLeague.com/TablePage/
-//then set value to "../" . 
+//then set value to "../"  
 $home = "";
 
 // Enter where your FHLSim Generated HTML files are located in your website in comparison to this config file. Same folder = '';, Previous directory = '../';
@@ -44,9 +44,6 @@ $folderTeamLogos = "logos/";
 #GMO Location. 
 //Location of Online GM editor relative to the location of the config file. Leave blank if not used. If set, this will cause link to appear on nav
 $folderGmo = "gmo/";
-
-// For more information about timezone available : http://php.net/manual/en/timezones.php, copy paste your timezone in the box bellow!
-$leagueTimeZone = 'America/Toronto';
 
 # Rosters PAGE (neither of these work yet)
 // Choose between hockeyDB : 1 or EliteProspect : 2
@@ -92,10 +89,10 @@ $playoffMode = 1;
 $navbarMode = 1;
 
 #text to display in footer(bottom) of each page.
-$footerText="FHL Online 2021";
+$footerText="FHL TableSim 2.0";
 
 //default color scheme.
-//blue,green,red
+//blue,green,red,custom
 $siteTheme="blue";
 
 //-----------------------------------------
@@ -119,13 +116,37 @@ define("CAP_INJ_MODE",$leagueSalaryCapInjuryMode);
 define("OVERTIME_POINT_MODE",$leagueOvertimePoint);
 define("MIN_ACTIVE_PLAYERS",$minActivePlayers);
 
-define("LEAGUE_TZ",$leagueTimeZone);
+
 define("FUTURES_LINK_MODE",$leagueFuturesLink);
 define("FUTURES_DRAFT_YEARS",$leagueFuturesDraftYears);
 define("LEAGUE_MODE",$playoffMode);
 define("NAVBAR_MODE",$navbarMode);
 define("FOOTER_TEXT", $footerText);
-define("SITE_THEME_COLOR", $siteTheme);
+define("SITE_THEME", $siteTheme);
 
+unset($sessionName);
+unset($cdnSupport);
+//unset($leagueLang);
+unset($home);
+// unset($folder);
+// unset($folderGames);
+ unset($folderCarrerStats);
+//unset($folderTeamLogos);
+unset($folderGmo);
+//unset($leagueRostersLink);
+//unset($leagueFuturesLink);
+//unset($leagueFuturesDraftYears );
+// unset($leagueSalaryIncFarm);
+// unset($leagueSalaryCap);
+// unset($leagueSalaryClose);
+// unset($leagueSalaryCapFloor);
+// unset($leagueSalaryCapInjuryMode);
+unset($minActivePlayers);
+// unset($leagueOvertimePoint);
+
+// unset($playoffMode);
+ unset($navbarMode);
+ unset($footerText);
+ unset($siteTheme);
 
 ?>

@@ -34,12 +34,16 @@
 
 		<div class="container">
 			<a class="navbar-brand" href="<?php echo HOME?>">Navbar</a>
+
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse navbar-nav-scroll" id="navbarNav">
 				<ul class="navbar-nav ml-auto scrollable text-right">
-
+					  <?php if(!empty(GMO_DIR)){?>
+    					<li class="nav-item"><a class="nav-item nav-link" href="<?php echo BASE_URL.GMO_DIR;?>">GMO</a></li>
+    				  <?php }?>
+					  
 					  <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>Scores.php">Scores</a></li>
 					  <!--<li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>Standings.php">Standings</a></li>-->
 					  <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>TeamRosters.php">Teams</a></li>
@@ -67,7 +71,7 @@
 					  <li class="dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stats<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>PlayerScoring.php">Player Stats</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Stats.php">Statistics</a></li>
 						  <li class="dropdown-divider"></li>
 						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>TeamStats.php">Team Stats</a></li>
 						  <li class="dropdown-divider"></li>

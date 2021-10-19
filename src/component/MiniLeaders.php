@@ -27,9 +27,12 @@ $pointsArray = $scoringAccumulator->getTopPoints(10);
 $goalsArray = $scoringAccumulator->getTopGoals(10);
 $assistsArray = $scoringAccumulator->getTopAssists(10);
 
-$pointsArrayD = $scoringAccumulator->getTopPoints(10,'D');
-$goalsArrayD = $scoringAccumulator->getTopGoals(10,'D');
-$assistsArrayD = $scoringAccumulator->getTopAssists(10,'D');
+$dFilter = array(
+    "position" => "D"
+);
+$pointsArrayD = $scoringAccumulator->getTopPoints(10,$dFilter);
+$goalsArrayD = $scoringAccumulator->getTopGoals(10,$dFilter);
+$assistsArrayD = $scoringAccumulator->getTopAssists(10,$dFilter);
 
 $goaliesGaaArray = $scoringAccumulator->getTopGoalies('gaa',10, 'ASC');
 $goaliesSvPctArray = $scoringAccumulator->getTopGoalies('savePct',10,'DESC');
@@ -39,107 +42,102 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,'DESC');
 
 <style>
 
-/* /*  main */ */
-.top-player-details {
-    display: flex;
-    flex-direction: column;
-    -webkit-box-align: center;
-    align-items: center;
-    padding-top: 25px;
-}
+/*  main */
 
+.top-player-details {
+	display: flex;
+	flex-direction: column;
+	-webkit-box-align: center;
+	align-items: center;
+	padding-top: 10px;
+}
 
 /* image */
-
-.playerImageLogo { 
-     border-radius:50%;
-     width:8rem; height:8rem;
-     
-     object-fit: cover; 
+.playerImageLogo {
+	border-radius: 50%;
+	width: 8rem;
+	height: 8rem;
+	object-fit: cover;
+	
+	border-color:var(--color-primary-1);
+    border-style:solid;
+    border-width: 2px;
 }
 
+/ /* player details */
+.bvjVjv {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	flex-direction: column;
+}
 
-//* player details */ 
-.bvjVjv { 
-     display: flex; 
-     -webkit-box-align: center; 
-     align-items: center; 
-     flex-direction: column; 
- } 
-.hHORBn { 
-     display: inline-block; 
-     vertical-align: top; 
-     padding-right: 5px; 
-     line-height: 30px; 
-     font-size: 20px; 
- } 
+.hHORBn {
+	display: inline-block;
+	vertical-align: top;
+	padding-right: 5px;
+	line-height: 30px;
+	font-size: 20px;
+}
 
-.jPZtbn { 
-     border-left: 1px solid rgb(102, 102, 102); 
-     display: inline-block; 
-     font-size: 16px; 
-     line-height: 16px; 
-     padding-left: 5px; 
-     text-align: left; 
- } 
+.jPZtbn {
+	border-left: 1px solid rgb(102, 102, 102);
+	display: inline-block;
+	font-size: 16px;
+	line-height: 16px;
+	padding-left: 5px;
+	text-align: left;
+}
 
-.cWNqKo { 
-     display: block; 
-     font-size: 12px; 
-     line-height: 22px; 
- } 
+.cWNqKo {
+	display: block;
+	font-size: 12px;
+	line-height: 22px;
+}
 
-/* /*amount details*/ */
-.glDXkE { 
-     display: flex; 
-     flex-direction: column; 
-     font-weight: bold; 
-     margin-top: 15px; 
-     text-align: center; 
- } 
+/* /*amount details*/
+* /
+.glDXkE {
+	display: flex;
+	flex-direction: column;
+	font-weight: bold;
+	margin-top: 15px;
+	text-align: center;
+}
 
-.ANxrZ { 
-     list-style: none; 
-     margin: 0px; 
-     padding: 10px 5px 0px; 
-     width: 100%; 
- } 
+.ANxrZ {
+	list-style: none;
+	margin: 0px;
+	padding: 10px 5px 0px;
+	width: 100%;
+}
 
-/*All leaders*/   
+/*All leaders*/
+.top-leader-list ul {
+	display: block;
+	list-style-type: disc;
+	margin-block-start: 0.51em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	padding-inline-start: 10px;
+}
 
-.top-leader-list ul { 
-     display: block; 
-     list-style-type: disc; 
-     margin-block-start: 0.51em; 
-     margin-block-end: 1em; 
-     margin-inline-start: 0px; 
-     margin-inline-end: 0px; 
-     padding-inline-start: 10px; 
- } 
+.eTUABY {
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	font-size: 12px;
+}
 
-/* .eTUABY.active { */
-/*     font-weight: bold; */
-/* } */
-
-
- .eTUABY { 
-     display: flex; 
-     -webkit-box-pack: justify; 
-     justify-content: space-between; 
-     margin-bottom: 10px; 
-     font-size: 12px; 
-   }
-   
-  
 .top-leader-list {
-    text-align: right;
+	text-align: right;
 }
 
 .card-header:first-child {
-    
+	
 }
-
-
 </style>
 
 <div class="container-fluid" id="mini-scoring-container">
@@ -157,9 +155,7 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,'DESC');
       <div class="card">
         <div class="card-header pt-0">
       
-         <div class="card-heading">
-         
-         </div>
+         <div class="card-heading"></div>
           <ul class="nav nav-tabs card-header-tabs" id="top-scorers-list" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" href="#top-scoring-points" role="tab" aria-controls="top-scoring-points" aria-selected="true">Points</a>
@@ -281,19 +277,19 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,'DESC');
            <div class="tab-content mt-1">
             <div class="tab-pane active" id="top-scoring-goalies-points" role="tabpanel">
                 <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                    array('scoringArray' => $goaliesGaaArray, 'attribute' => 'gaa', 'sort' => 6)); ?>
+                    array('scoringArray' => $goaliesGaaArray, 'attribute' => 'gaa', 'sort' => 5, 'positionType' => 'G', 'sortOrder' => 'asc')); ?>
               
             </div><!-- end points -->
              
             <div class="tab-pane" id="top-scoring-goalies-goals" role="tabpanel" aria-labelledby="top-scoring-goalies-goals-tab">  
             	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-            	    array('scoringArray' => $goaliesSvPctArray, 'attribute' => 'savePct', 'sort' => 4)); ?>
+            	    array('scoringArray' => $goaliesSvPctArray, 'attribute' => 'savePct', 'sort' => 12, 'positionType' => 'G')); ?>
               
             </div> <!-- end goals -->
              
             <div class="tab-pane" id="top-scoring-goalies-assists" role="tabpanel" aria-labelledby="top-scoring-goalies-assists-tab">
               <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                  array('scoringArray' => $goaliesShutoutArray, 'attribute' => 'shutouts', 'sort' => 5)); ?>
+                  array('scoringArray' => $goaliesShutoutArray, 'attribute' => 'shutouts', 'sort' => 9, 'positionType' => 'G')); ?>
               
             </div> <!-- end assists -->
             
