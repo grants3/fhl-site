@@ -69,16 +69,12 @@ if(isset($_SESSION['teamId'])){
     $teamID = $_SESSION['teamId'];
 }
 
-
+//backwards compatibility
+$folder = FS_ROOT;
+$folderGames = GAMES_DIR;
 //TRACK PLAYOFF STATE
 $playoff = '';
 $currentPLF = 0;
-
-// if(isPlayoffs(TRANSFER_DIR, LEAGUE_MODE)){
-//     $playoff = 'PLF';
-//     $currentPLF = 1;
-// }
-//backwards compat
 if(isPlayoffs2()){
     $playoff = 'PLF';
     $currentPLF = 1;
@@ -93,7 +89,7 @@ $teamList = $teamHolder->get_teams();
 
 
 //TRACK TEAM STATE
-$currentTeam = $teamList[0]; //default to first team on list.
+if($teamList) $currentTeam = $teamList[0]; //default to first team on list.
 if(isset($_GET['team']) || isset($_POST['team'])) {
     $currentTeam = ( isset($_GET['team']) ) ? $_GET['team'] : $_POST['team'];
     $currentTeam = htmlspecialchars($currentTeam);

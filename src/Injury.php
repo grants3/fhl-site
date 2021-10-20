@@ -8,8 +8,6 @@ include 'head.php';
 ?>
 
 <div class = "container">
-<div class = "row">
-<div class = "col-sm-12 col-md-8 offset-md-2">
 <div class="card">
 <?php include 'SectionHeader.php' ?>
 <div class ="card-body">
@@ -18,17 +16,7 @@ include 'head.php';
 
 
 <?php
-$matches = glob($folder.'*'.$playoff.'Injury.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Injury')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-$Fnm = $folder.$folderLeagueURL.'Injury.html';
+$Fnm= getLeagueFile('Injury');
 $b = 0;
 $c = 1;
 $d = 0;
@@ -43,6 +31,8 @@ if(file_exists($Fnm)) {
 			$val = substr($val, 10, $pos);
 			$lastUpdated = $val;
 			
+			echo '<div class="row">';
+			echo '<div class="col-sm-12 col-md-6 offset-md-3">';
 			echo '<table class="table table-sm table-striped table-rounded"">';
 			echo '<tbody>';
 		}
@@ -93,7 +83,7 @@ if(file_exists($Fnm)) {
 }
 else echo '<tr><td>'.$allFileNotFound.' - '.$Fnm.'</td></tr>';
 if(!$d)echo '<tr><td>'.$injuryNoInjury.'</td></tr>';
-echo '</tbody></table>';
+echo '</tbody></table></div></div>';
 echo '<h5>'.$allLastUpdate.' '.$lastUpdated.'</h5>';
 ?>
 

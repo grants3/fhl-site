@@ -51,7 +51,7 @@ include 'head.php';
                 	<div class = "row"> 
                 	<?php
                 
-                    $Fnm = getLeagueFile($folder, $playoff, 'FreeAgents.html', 'FreeAgents');
+                    $Fnm = getLeagueFile('FreeAgents');
                 		
                 		$a = 0;
                 		$i = 0;

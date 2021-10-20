@@ -52,7 +52,7 @@ include_once 'common.php';
                 	<div class = "row"> 
                 	<?php
                 
-                    $Fnm = getLeagueFile($folder, $playoff, 'Unassigned.html', 'Unassigned');
+                    $Fnm = getLeagueFile('Unassigned');
                 		
                 		$a = 0;
                 		$i = 0;

@@ -37,29 +37,17 @@ if($currentFarm == 1) {
 	$tableColGoaltending = 4;
 	$playoff = '';
 }
-include 'phpGetAbbr.php'; // Output $TSabbr
 
 $a = 0;
 $b = 0;
 $c = 1;
 $i = 0;
 $lastUpdated = '';
-$matches = glob($folder.'*'.$playoff.$farm.'Leaders.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if((!substr_count($matches[$j], 'Farm') && $farm == '') || (substr_count($matches[$j], 'Farm') && $farm == 'Farm')) {
-	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], $farm.'Leaders')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-	}
-}
-$Fnm = $folder.$folderLeagueURL.$farm.'Leaders.html';
+
+$Fnm = getLeagueFile($farm.'Leaders');
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = utf8_encode($val);
 		if(substr_count($val, '<P>(As of')){
 			$pos = strpos($val, ')');

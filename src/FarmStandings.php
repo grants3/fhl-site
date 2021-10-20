@@ -6,27 +6,32 @@ $CurrentHTML = 'FarmStandings.php';
 $CurrentTitle = $standingTitle;
 $CurrentPage = 'FarmStandings';
 
-$farm = '';
-$currentFarm = 0;
-if(isset($_GET['s']) || isset($_POST['s'])) {
-    $currentFarm = ( isset($_GET['s']) ) ? $_GET['s'] : $_POST['s'];
-    $currentFarm = htmlspecialchars($currentFarm);
-    if($currentFarm == 1) {
-        $farm = 'Farm';
-        //if($CurrentPage == 'Standings') $CurrentTitle = $standingTitleFarm;
-        //if($CurrentPage == 'OverallStandings') $CurrentTitle = $standingTitleFarm;
-        if($CurrentPage == 'Leaders') $CurrentTitle = $leaderTitleFarm;
-    }
-}
+// $farm = '';
+// $currentFarm = 0;
+// if(isset($_GET['s']) || isset($_POST['s'])) {
+//     $currentFarm = ( isset($_GET['s']) ) ? $_GET['s'] : $_POST['s'];
+//     $currentFarm = htmlspecialchars($currentFarm);
+//     if($currentFarm == 1) {
+//         $farm = 'Farm';
+//         //if($CurrentPage == 'Standings') $CurrentTitle = $standingTitleFarm;
+//         //if($CurrentPage == 'OverallStandings') $CurrentTitle = $standingTitleFarm;
+//         if($CurrentPage == 'Leaders') $CurrentTitle = $leaderTitleFarm;
+//     }
+// }
 
 include 'head.php';
 
-if($currentFarm == 1) {
-    $tableCol = 11;
-    include 'phpGetAbbr.php'; // Output $TSabbr
-    $playoff = '';
-    $CurrentTitle = 'Farm '.$CurrentTitle;
-}
+// if($currentFarm == 1) {
+//     $tableCol = 11;
+//     include 'phpGetAbbr.php'; // Output $TSabbr
+//     $playoff = '';
+//     $CurrentTitle = 'Farm '.$CurrentTitle;
+// }
+
+//hardcode to farm
+$currentFarm = 1;
+$tableCol = 11;
+$CurrentTitle = 'Farm '.$CurrentTitle;
 ?>
 
 <!--<h3 class = "text-center"><?php echo $CurrentTitle; ?></h3>-->
@@ -39,14 +44,9 @@ if($currentFarm == 1) {
 
 
 <?php
-$tableCol = 15;
+//$tableCol = 15;
 
-
-if( isset($farm) && $farm != ''){
-    $Fnm = getLeagueFile($folder, '', $farm.'Standings.html', $farm.'Standings');
-}else{
-    $Fnm = getLeagueFile2($folder, '', 'Standings.html', 'Standings', 'Farm'); //exclude farm
-}
+$Fnm = getCurrentLeagueFile('FarmStandings');
 
 $c = 1;
 $d = 0;

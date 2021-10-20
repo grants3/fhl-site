@@ -8,16 +8,14 @@ include 'head.php';
 
 ?>
 
-<div class="container">
-<div class="row no-gutters">
-<div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3"> 	
+<div class="container">	
 <div class="card">
 	<?php include 'SectionHeader.php';?>
 	<div class="card-body p-2 px-lg-4">
 
 <?php
 
-$fileName = getLeagueFile($folder, $playoff, 'Coaches.html', 'Coaches');
+$fileName = getLeagueFile('Coaches');
 
 $a = 0;
 $c = 1;
@@ -31,7 +29,8 @@ if(file_exists($fileName)) {
 			$pos = $pos - 10;
 			$val = substr($val, 10, $pos);
 			$lastUpdated = $val;
-	
+			echo '<div class="row">';
+	        echo '<div class="col-sm-12 col-md-6 offset-md-3">';
 			echo '<div class="table-responsive">';
 			echo '<table id ="coachTable" class="table table-sm table-striped table-hover text-center table-rounded">';
 		}
@@ -86,13 +85,13 @@ if(file_exists($fileName)) {
 }
 else echo '<tr><td>'.$allFileNotFound.' - '.$Fnm.'</td></tr>';
 
-echo '</tbody></table></div>
+echo '</tbody></table></div></div></div>
 
 <h5 class = "text-center">'.$allLastUpdate.' '.$lastUpdated.'</h5>
 			    
 ';
 ?>
-</div></div></div></div></div>
+</div></div></div>
 
 <script>
 

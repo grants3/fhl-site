@@ -22,10 +22,11 @@ include 'head.php';
 //tab activation
 $leadersActive = 'active';
 
-$seasonFolder =  str_replace("#",2,CAREER_STATS_DIR);
-//$scoringFile = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
+//$seasonFolder =  str_replace("#",2,CAREER_STATS_DIR);
+////$scoringFile = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
 
-$scoringFile = getLeagueFile(TRANSFER_DIR, $playoff, 'TeamScoring.html', 'TeamScoring');
+//$scoringFile = getLeagueFile(TRANSFER_DIR, $playoff, 'TeamScoring.html', 'TeamScoring');
+$scoringFile = getCurrentLeagueFile('TeamScoring');
 $scoringHolder = new ScoringHolder($scoringFile);
 $scoringAccumulator = new ScoringAccumulator($scoringHolder);
 
@@ -33,7 +34,7 @@ $scoringAccumulator = new ScoringAccumulator($scoringHolder);
 $minGoalieGames = 1;
 $maxMinGoalieGames = 15;
 $minGameCount = 1;
-if(empty($playoff)){
+if(empty(!isPlayoffs2())){
     $teamInfo = new TeamInfo(TRANSFER_DIR, $playoff, $teamList[0]);
     $gameCount = $teamInfo->getWins() +  $teamInfo->getLosses() +  $teamInfo->getTies();
 

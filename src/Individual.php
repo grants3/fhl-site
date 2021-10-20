@@ -1,6 +1,8 @@
 <?php
 require_once 'config.php';
 include 'lang.php';
+include 'fileUtils.php';
+
 $CurrentHTML = 'Individual.php';
 $CurrentTitle = $individualTitle;
 $CurrentPage = 'Individual';
@@ -29,26 +31,16 @@ function firstNumber($string) {
 	return substr($string, $start);
 }
 
-include 'phpGetAbbr.php'; // Output $TSabbr
+$Fnm = getLeagueFile('Individual');
 
-$matches = glob($folder.'*'.$playoff.'Individual.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Individual')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-$Fnm = $folder.$folderLeagueURL.'Individual.html';
 $a = 0;
 $c = 1;
 $i = 0;
 $lastUpdated = '';
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+
+	foreach ($tableau as $cle => $val) {
 		$val = utf8_encode($val);
 		if(substr_count($val, '<P>(As of')){
 			$pos = strpos($val, ')');

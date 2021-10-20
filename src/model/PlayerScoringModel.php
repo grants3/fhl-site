@@ -1,8 +1,8 @@
-<?php
+<?php   
 
 require_once __DIR__.'/../config.php';
 include_once FS_ROOT.'common.php';
-
+include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'classes/ScoringHolder.php';
 include_once FS_ROOT.'classes/ScoringPlayerObj.php';
 include_once FS_ROOT.'classes/ScoringGoalieObj.php';
@@ -30,20 +30,22 @@ class PlayerScoringModel {//implements Model{
         //already processed. we want to use previous cached result
         if(isset($this->seasonStats[$seasonId])) return $this->seasonStats[$seasonId];
         
-        $seasonId = '0';
-        $playoff='';
-        $fileName=null;
+       // $seasonId = '0';
+        //$playoff='';
+       //$fileName=null;
         
-        if('PLF' == $seasonType){
-            $playoff = $seasonType;
-        }
+//         if('PLF' == $seasonType){
+//             $playoff = $seasonType;
+//         }
         
-        if(trim($seasonId) == false){
-            $fileName = getLeagueFile(TRANSFER_DIR, $playoff, 'TeamScoring.html', 'TeamScoring');
-        }else{
-            $seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
-            $fileName = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
-        }
+//         if(trim($seasonId) == false){
+//             $fileName = getLeagueFile(TRANSFER_DIR, $playoff, 'TeamScoring.html', 'TeamScoring');
+//         }else{
+//             $seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
+//             $fileName = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
+//         }
+
+        $fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
         
         $scoringHolder = new ScoringHolder($fileName);
         

@@ -37,28 +37,31 @@ if(CAREER_STATS_DIR != '0') {
 //echo "Total Seasons: ".$NumberSeason."<br>";
 
 // Recherche Seasons TeamScoring - Current Season
-$matches = glob($folder.'*TeamScoring.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if(!substr_count($matches[$j], 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
-		$FnmCurrentSeason = $folder.$folderLeagueURL.'TeamScoring.html';
-		break 1;
-	}
-}
-$matches = glob($folder.'*PLFTeamScoring.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if(substr_count($matches[$j], 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'PLFTeamScoring')-strrpos($matches[$j], '/')-1);
-		$FnmCurrentPlayoff = $folder.$folderLeagueURL.'PLFTeamScoring.html';
-		break 1;
-	}
-}
+// $matches = glob($folder.'*TeamScoring.html');
+// $folderLeagueURL = '';
+// $matchesDate = array_map('filemtime', $matches);
+// arsort($matchesDate);
+// foreach ($matchesDate as $j => $val) {
+// 	if(!substr_count($matches[$j], 'PLF')) {
+// 		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
+// 		$FnmCurrentSeason = $folder.$folderLeagueURL.'TeamScoring.html';
+// 		break 1;
+// 	}
+// }
+// $matches = glob($folder.'*PLFTeamScoring.html');
+// $folderLeagueURL = '';
+// $matchesDate = array_map('filemtime', $matches);
+// arsort($matchesDate);
+// foreach ($matchesDate as $j => $val) {
+// 	if(substr_count($matches[$j], 'PLF')) {
+// 		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'PLFTeamScoring')-strrpos($matches[$j], '/')-1);
+// 		$FnmCurrentPlayoff = $folder.$folderLeagueURL.'PLFTeamScoring.html';
+// 		break 1;
+// 	}
+// }
+$FnmCurrentSeason = _getLeagueFile('TeamScoring');
+$FnmCurrentPlayoff = _getLeagueFile('TeamScoring', 'PLF');
+
 $i = 0;
 $j = 0;
 $iPLF = 0;

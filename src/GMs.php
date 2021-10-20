@@ -18,7 +18,7 @@ include 'head.php';
 
 <?php
 
-$Fnm = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
+$Fnm = getLeagueFile('GMs');
 
 $c = 1;
 $i = 0;

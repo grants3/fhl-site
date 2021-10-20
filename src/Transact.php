@@ -17,7 +17,7 @@ include_once 'classes/TransactionEventObj.php';
 
 include 'head.php';
 
-$fileName = getLeagueFile($folder, $playoff, 'Transact.html', 'Transact');
+$fileName = getLeagueFile('Transact');
 $transactionHolder = new TransactionHolder($fileName);
 
 ?>

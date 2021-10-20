@@ -3,6 +3,7 @@
 require_once 'config.php';
 include 'lang.php';
 include 'common.php';
+include 'fileUtils.php';
 
 include_once 'classes/RosterObj.php';
 include_once 'classes/RosterAvgObj.php';
@@ -15,16 +16,11 @@ include_once 'classes/PlayerSearchWrapper.php';
 include_once 'classes/PlayerVitalObj.php';
 include_once 'classes/PlayerVitalsHolder.php';
 
-$playoffs='';
-if(isPlayoffs(TRANSFER_DIR, LEAGUE_MODE)){
-    $playoffs = 'PLF';
-}
-
-$gmFile = getLeagueFile(TRANSFER_DIR, $playoffs, 'GMs.html', 'GMs');
-$rosterFile = getLeagueFile(TRANSFER_DIR, $playoffs, 'Rosters.html', 'Rosters');
-$unassignedFile = getLeagueFile(TRANSFER_DIR, $playoffs, 'Unassigned.html', 'Unassigned');
-$futuresFile = getLeagueFile(TRANSFER_DIR, $playoffs, 'Futures.html', 'Futures');
-$vitalsFileName = getLeagueFile(TRANSFER_DIR, $playoffs, 'PlayerVitals.html', 'PlayerVitals');
+$gmFile = getLeagueFile('GMs');
+$rosterFile = getLeagueFile('Rosters');
+$unassignedFile = getLeagueFile('Unassigned');
+$futuresFile = getLeagueFile('Futures');
+$vitalsFileName = getLeagueFile('PlayerVitals');
 
 if (!file_exists($rosterFile) || !file_exists($gmFile)) {
     http_response_code(400);

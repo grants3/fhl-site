@@ -5,31 +5,18 @@
 
 <?php
 require_once __DIR__.'/../config.php';
-include FS_ROOT.'phpGetAbbr.php'; // Output $TSabbr
 
 //default these so warnings are not throw. clean this up
 $playoff = '';
 $farm = '';
 $shootoutMode = false;
 
-$matches = glob($folder.'*'.$playoff.$farm.'Standings.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if(!substr_count($matches[$j], 'Farm')) {
-		if((!substr_count($matches[$j], 'Farm') && $farm == '') || (substr_count($matches[$j], 'Farm') && $farm == 'Farm')) {
-			if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-				$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], $farm.'Standings')-strrpos($matches[$j], '/')-1);
-				break 1;
-			}
-		}
-	}
-}
+$Fnm =  getCurrentLeagueFile('Standings','Farm');
+
 $c = 1;
 $d = 0;
 $e = 0;
-$Fnm = $folder.$folderLeagueURL.$farm.'Standings.html';
+
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	
@@ -141,7 +128,6 @@ if(file_exists($Fnm)) {
 	$sorted = array_orderby($data, 'pts', SORT_DESC, 'gp', SORT_ASC);
 	
 	for($d=0;$d<count($sorted);$d++) {
-	//for($d=0;$d<=5;$d++) { //only list top 5 (we need to process the entire standings first so that the results can be sorted)
 		$key = $sorted[$d]['id'];
 		$pos = $d + 1;
 		echo '<tr class="hover'.$c.'">';

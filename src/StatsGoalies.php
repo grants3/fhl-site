@@ -2,6 +2,7 @@
 require_once __DIR__.'/config.php';
 include_once FS_ROOT.'lang.php';
 include_once FS_ROOT.'common.php';
+include_once FS_ROOT.'fileUtils.php';
 
 include_once 'classes/ScoringHolder.php';
 include_once 'classes/ScoringPlayerObj.php';
@@ -15,6 +16,8 @@ $CurrentPage = 'StatsGoalies';
 
 $dataTablesRequired = 1; //require datatables import
 
+$seasonId='';
+$seasonType='';
 if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
     $seasonId = htmlspecialchars(( isset($_GET['seasonId']) ) ? $_GET['seasonId'] : $_POST['seasonId']);
 }
@@ -22,11 +25,11 @@ if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
 if(isset($_GET['seasonType']) || isset($_POST['seasonType'])) {
     $seasonType = ( isset($_GET['seasonType']) ) ? $_GET['seasonType'] : $_POST['seasonType'];
     
-    $playoff = htmlspecialchars($seasonType);
+    //$playoff = htmlspecialchars($seasonType);
 }
 
-//gaa is column5. handles this better
-$sort = 5;
+//gaa is column6. handles this better
+$sort = 6;
 if(isset($_GET['sort']) || isset($_POST['sort'])) {
     $sort = htmlspecialchars(( isset($_GET['sort']) ) ? $_GET['sort'] : $_POST['sort']);
 }
@@ -41,12 +44,14 @@ if(isset($_GET['sortOrder']) || isset($_POST['sortOrder'])) {
 //tab activation
 $goaliesActive = 'active';
 
-if(trim($seasonId) == false){
-    $fileName = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
-}else{
-    $seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
-    $fileName = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
-}
+// if(trim($seasonId) == false){
+//     $fileName = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
+// }else{
+//     $seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
+//     $fileName = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
+// }
+
+$fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
 
 $scoringHolder = new ScoringHolder($fileName, $currentTeam);
 $shootoutMode = $scoringHolder->isShootoutMode();

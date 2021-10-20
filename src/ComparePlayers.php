@@ -12,8 +12,8 @@ $tableauGrey2 = "#ECECEC";
 
 include 'head.php';
 
-$Fnm = getLeagueFile($folder, $playoff, 'Rosters.html', 'Rosters');
-$Fnm2 = getLeagueFile($folder, $playoff, 'PlayerVitals.html', 'PlayerVitals');
+$Fnm = getLeagueFile('Rosters');
+$Fnm2 = getLeagueFile('PlayerVitals');
 $a = 0;
 $c = 1;
 $d = 0;

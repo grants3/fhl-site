@@ -37,7 +37,7 @@ $dr = 'background-color:#8B0000;'; // Under Floor Salary Cap
 
 <?php
 
-$gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
+$gmFile = getLeagueFile('GMs');
 
 function isValidRoster(RostersHolder $rosters, PlayerVitalsHolder $vitals): bool{
     
@@ -73,8 +73,8 @@ function isValidRoster(RostersHolder $rosters, PlayerVitalsHolder $vitals): bool
 if (file_exists($gmFile)) {
     
     $teams = new TeamHolder($gmFile);
-    $rostersFile = getLeagueFile($folder, $playoff, 'Rosters.html', 'Rosters');
-    $vitalsFile = getLeagueFile($folder, $playoff, 'PlayerVitals.html', 'PlayerVitals');
+    $rostersFile = getLeagueFile('Rosters');
+    $vitalsFile = getLeagueFile('PlayerVitals');
 
     $length = count($teams->get_teams());
     for ($i = 0; $i < $length; $i++) {
@@ -127,21 +127,11 @@ if (file_exists($gmFile)) {
 
 
 $i = 0;
-$matches = glob($folder.'*'.$playoff.'Injury.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Injury')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
 
-$Fnm = $folder.$folderLeagueURL.'Injury.html';
+$Fnm = getLeagueFile('Injury');
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		if(substr_count($val, 'A NAME')) {
 			$i++;
 			$blessure[$i] = '';
@@ -170,7 +160,8 @@ $no = 0;
 $nv = 0;
 $nr = 0;
 $nrFloor = 0;
-$Fnm = $folder.$folderLeagueURL.'Finance.html';
+
+$Fnm = getLeagueFile('Finance');
 //$colspan = 8;
 //if($leagueSalaryIncFarm == 1) $colspan = 7;
 $colspan = ($leagueSalaryCapInjuryMode == 0) ? 10: 9;

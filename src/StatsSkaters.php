@@ -43,8 +43,8 @@ if(isset($_GET['rookie']) || isset($_POST['rookie'])) {
     $rookie = ( isset($_GET['rookie']) ) ? $_GET['rookie'] : $_POST['rookie'];
 }
 
-//points is column6. handles this better
-$sort = 6;
+//points is column7. handles this better
+$sort = 7;
 if(isset($_GET['sort']) || isset($_POST['sort'])) {
     $sort = htmlspecialchars(( isset($_GET['sort']) ) ? $_GET['sort'] : $_POST['sort']);
 }

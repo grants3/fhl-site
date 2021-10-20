@@ -10,7 +10,7 @@ include 'head.php';
 
 include_once 'classes/TeamHolder.php';
 
-$gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
+$gmFile = getLeagueFile('GMs');
 $teams = new TeamHolder($gmFile);
 
 ?>

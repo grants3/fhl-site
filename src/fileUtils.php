@@ -121,7 +121,7 @@ function getLeagueFile(string $baseName, $seasonId = null, string $exclude=null)
     return _getLeagueFile($baseName, $seasonType, $seasonId, $exclude);
 }
 
-function _getLeagueFile(string $baseName, $seasonType, $seasonId = null, string $exclude=null) {
+function _getLeagueFile(string $baseName, $seasonType = null, $seasonId = null, string $exclude=null) {
  
     $isPlayoffs = false;
     if(isset($seasonType)){
