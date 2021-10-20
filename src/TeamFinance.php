@@ -31,8 +31,10 @@ foreach ($matchesDate as $j => $val) {
 	}
 }
 $Fnm = $folder.$folderLeagueURL.'Finance.html';
-$rosterFileName = getLeagueFile($folder, $playoff, 'Rosters.html', 'Rosters');
-$vitalsFileName = getLeagueFile($folder, $playoff, 'PlayerVitals.html', 'PlayerVitals');
+// $rosterFileName = getLeagueFile($folder, $playoff, 'Rosters.html', 'Rosters');
+// $vitalsFileName = getLeagueFile($folder, $playoff, 'PlayerVitals.html', 'PlayerVitals');
+$rosterFileName = getCurrentLeagueFile('Rosters');
+$vitalsFileName = getCurrentLeagueFile('PlayerVitals');
 
 $a = 0;
 $b = 0;

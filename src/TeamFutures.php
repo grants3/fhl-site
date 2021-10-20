@@ -14,7 +14,8 @@ include 'TeamHeader.php';
 
 <?php
 
-$Fnm = getLeagueFile($folder, $playoff, 'Futures.html', 'Futures');
+//$Fnm = getLeagueFile($folder, $playoff, 'Futures.html', 'Futures');
+$Fnm = getCurrentLeagueFile('Futures');
 
 $a = 0;
 $b = 0;

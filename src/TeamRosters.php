@@ -5,6 +5,7 @@ ini_set('display_errors', '1');
 require_once 'config.php';
 include 'lang.php';
 include_once 'common.php';
+include_once 'fileUtils.php';
 include_once 'classes/RosterObj.php';
 include_once 'classes/RosterAvgObj.php';
 include_once 'classes/RostersHolder.php';
@@ -33,8 +34,14 @@ include 'TeamHeader.php';
     
                     <?php
 
-                    $fileName = getLeagueFile($folder, $playoff, 'Rosters.html', 'Rosters');
-                    $vitalsFileName = getLeagueFile($folder, $playoff, 'PlayerVitals.html', 'PlayerVitals');
+                    //$fileName = getLeagueFile($folder, $playoff, 'Rosters.html', 'Rosters');
+                    $fileName = getCurrentLeagueFile('Rosters');
+                    error_log('----------------------------------------------');
+                    error_log($fileName);
+                    error_log('----------------------------------------------');
+                   // exit;
+                    //$vitalsFileName = getLeagueFile($folder, $playoff, 'PlayerVitals.html', 'PlayerVitals');
+                    $vitalsFileName = getCurrentLeagueFile('PlayerVitals');
                     $lastUpdated = '';
                     
                     if (file_exists($fileName) && file_exists($vitalsFileName)) {

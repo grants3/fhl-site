@@ -7,12 +7,14 @@ include_once FS_ROOT.'common.php';
 include_once FS_ROOT.'classes/WaiversHolder.php';
 include_once FS_ROOT.'classes/WaiverObj.php';
 
-$playoff = isPlayoffs($folder, $playoffMode);
+// $playoff = isPlayoffs($folder, $playoffMode);
 
-if ($playoff == 1)
-    $playoff = 'PLF';
+// if ($playoff == 1)
+//     $playoff = 'PLF';
 
-$fileName = getLeagueFile($folder, $playoff, 'Waivers.html', 'Waivers');
+// $fileName = getLeagueFile($folder, $playoff, 'Waivers.html', 'Waivers');
+
+$fileName = getLeagueFile('Waivers');
 
 if (file_exists($fileName)) {
     
@@ -52,7 +54,7 @@ if (file_exists($fileName)) {
              	</table>
 			</div>
 			<?php }else{?>
-			<h6><?php echo $waiversNothing;?></h6>
+			<h6 class="text-center"><?php echo $waiversNothing;?></h6>
 			<?php }?>
 		</div>
 	</div>

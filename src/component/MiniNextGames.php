@@ -45,7 +45,8 @@ include_once FS_ROOT.'classes/ScheduleObj.php';
 
 </style>
 <?php
-if(isPlayoffs($folder, $playoffMode)){
+//if(isPlayoffs($folder, $playoffMode)){
+if(isPlayoffs2()){
     $round = 0;
     if(file_exists($folder.'cehlPLF-Round4-Schedule.html')) {
         //$fileName = $folder.'cehlPLF-Round4-Schedule.html';
@@ -61,11 +62,12 @@ if(isPlayoffs($folder, $playoffMode)){
         $round = 1;
     }
     
-    $fileName = getLeagueFile($folder, 'PLF', '-Round'.$round.'-Schedule.html', '-Round'.$round.'-Schedule');
+    $fileName = getLeagueFileOld($folder, 'PLF', '-Round'.$round.'-Schedule.html', '-Round'.$round.'-Schedule');
     $playoffLink = '&rnd='.$round;
     
 }else{
-    $fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
+   // $fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
+    $fileName = getLeagueFile('Schedule');
 }
 
 
@@ -87,7 +89,8 @@ if($scheduleHolder->isScheduleComplete()){
 
 //only display one day for playoffs, 2 for reg season
 $miniNextGame = $scheduleHolder->getLastDayPlayed() + 1;
-$miniNextToProcess = !isPlayoffs($folder, $playoffMode) ? $miniNextGame + 1 : $miniNextGame;
+//$miniNextToProcess = !isPlayoffs($folder, $playoffMode) ? $miniNextGame + 1 : $miniNextGame;
+$miniNextToProcess = !isPlayoffs2() ? $miniNextGame + 1 : $miniNextGame;
 
 for ($i = $miniNextGame; $i <= $miniNextToProcess; $i ++) {
 

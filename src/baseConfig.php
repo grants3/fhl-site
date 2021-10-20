@@ -1,5 +1,48 @@
 <?php
 
+
+//define("BASE_URL",getBaseUrl());
+define("BASE_URL",getBaseUrl());
+define("FS_ROOT",__DIR__.'/');
+
+#Debug Mode. 1 = ON, 0 = OFF
+define("DEBUG_MODE",0);
+
+if(DEBUG_MODE){
+    error_log('-------config path info ---------');
+    error_log('FS_ROOT='.FS_ROOT);
+    error_log('BASE_URL='.BASE_URL);
+    error_log('DOCUMENT_ROOT='.$_SERVER['DOCUMENT_ROOT']);
+    error_log('FILE='.__FILE__);
+    error_log('WORKING DIR='.getcwd());
+    error_log('---------------------------------');
+}
+
+//DO NOT TOUCH ME 
+
+function inferLeagueMode($leagueMode) :string{
+    
+    //only run this logic once. cache result.
+    if(isset($GLOBALS["GLOB_LEAGUE_MODE"])) return $GLOBALS["GLOB_LEAGUE_MODE"];
+    
+    //regular season
+    $result = 'REG';
+    
+    if($leagueMode == 1){
+        $result = 'PLF';
+    }else if ($leagueMode == 2){ //auto
+        if(!empty(glob(FS_ROOT.'*PLFGMs.html'))){
+            $result = 'PLF';
+        }
+    }
+    
+    $GLOBALS["GLOB_LEAGUE_MODE"] = $result;
+    
+    error_log('SETTING SEASON MODE TO:'.$GLOBALS["GLOB_LEAGUE_MODE"]);
+    
+    return $result;
+}
+
 function getBaseUrl(){
     $protocol = getProtocol();
     $url = str_replace("\\",'/',$protocol.'://'.$_SERVER['HTTP_HOST'].substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])));
@@ -43,23 +86,6 @@ function relativePath($from, $to, $separator = DIRECTORY_SEPARATOR)
     return str_pad("", count($arFrom) * 3, '..'.$separator).implode($separator, $arTo);
 }
 
-
-//define("BASE_URL",getBaseUrl());
-define("BASE_URL",getBaseUrl());
-define("FS_ROOT",__DIR__.'/');
-
-#Debug Mode. 1 = ON, 0 = OFF
-define("DEBUG_MODE",0);
-
-if(DEBUG_MODE){
-    error_log('-------config path info ---------');
-    error_log('FS_ROOT='.FS_ROOT);
-    error_log('BASE_URL='.BASE_URL);
-    error_log('DOCUMENT_ROOT='.$_SERVER['DOCUMENT_ROOT']);
-    error_log('FILE='.__FILE__);
-    error_log('WORKING DIR='.getcwd());
-    error_log('---------------------------------');
-}
 
 
 ?>

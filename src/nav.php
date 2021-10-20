@@ -89,7 +89,7 @@
 					  <li class="dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">League&nbsp;<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Schedule3.php">Schedule</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Schedule.php">Schedule</a></li>
 							<li class="dropdown-divider"></li>
 							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Transact.php">Transactions</a></li>
 							<li class="dropdown-divider"></li>

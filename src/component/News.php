@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__.'/../config.php';
+include FS_ROOT.'newsConfig.php'?>
 
 <style>
 
@@ -26,16 +29,14 @@
       <div class="carousel-inner">
         <div class="carousel-item active">
            <div class="card">
-              <img class="card-img-top" src="./assets/img/news/cup.jpg" alt="News Image">
+              <img class="card-img-top" src="<?php echo $news1Image;?>" alt="News Image">
               <div class="card-body">
-                <h5 class="card-title">Example New Title 1</h5>
+                <h5 class="card-title"><?php echo $news1Title;?></h5>
                 
-                <p class="small-paragraph text-left">Example paragraph 1</p>
-            
-            	<p class="small-paragraph text-left">Example paragraph 2</p>
-              	
-              	<p class="small-paragraph text-left">Example paragraph 3</p>
-            
+                <?php foreach(preg_split("/\r\n|\n|\r/", $news1Text) as $paragraph){?>
+                	  <p class="small-paragraph text-left"><?php echo $paragraph;?></p>
+                <?php }?>
+                
               </div>
             </div>
         </div>

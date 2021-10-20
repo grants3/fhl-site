@@ -1,7 +1,5 @@
 <?php
 
-$leagueMode = false;
-
 function isAuthenticated(){
     
     if(isset($_SESSION['authenticated']) && $_SESSION['authenticated']){
@@ -42,10 +40,10 @@ function myEach(&$arr) {
     return $result;
 }
 
-function getLeagueFile($rootFolder, $playoff, $fileName, $name) {
-    
+function getLeagueFileOld($rootFolder, $playoff, $fileName, $name) {
+
     $fileName = $name.'.html';
-    
+
     //handle boolean and txt value. assumes any text value other than empty means playoffs is active (legacy support)
     if (!isset($playoff)){
         $playoff = '';
@@ -70,44 +68,89 @@ function getLeagueFile($rootFolder, $playoff, $fileName, $name) {
     return $rootFolder.$folderLeagueURL . $fileName;
 }
 
-function getLeagueFile2($rootFolder, $playoff, $fileName, $name, $exclude) {
+// function getLeagueFile($rootFolder, $playoff, $fileName, $name) {
     
-    if (! isset($playoff))
-        $playoff = '';
-        
-        $matches = glob($rootFolder . '*' . $playoff . $fileName);
-        $folderLeagueURL = '';
-        $matchesDate = array_map('filemtime', $matches);
-        arsort($matchesDate);
-        foreach ($matchesDate as $j => $val) {
+//     $fileName = $name.'.html';
+    
+//     //handle boolean and txt value. assumes any text value other than empty means playoffs is active (legacy support)
+//     if (!isset($playoff)){
+//         $playoff = '';
+//     }else{
+//         if($playoff && !empty($playoff)){
+//             $playoff = 'PLF';
+//         }else{
+//             $playoff = '';
+//         }
+//     }
 
-            if(isset($exclude) && $exclude != '' && substr_count($matches[$j], $exclude)){
-               continue; 
-            }
+//     $matches = glob($rootFolder . '*' . $playoff . $fileName);
+//     $folderLeagueURL = '';
+//     $matchesDate = array_map('filemtime', $matches);
+//     arsort($matchesDate);
+//     foreach ($matchesDate as $j => $val) {
+//         if ((! substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
+//             $folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/') + 1, strpos($matches[$j], $name) - strrpos($matches[$j], '/') - 1);
+//             break 1;
+//         }
+//     }
+//     return $rootFolder.$folderLeagueURL . $fileName;
+// }
+
+// function getLeagueFile2($rootFolder, $playoff, $fileName, $name, $exclude) {
+    
+//     if (! isset($playoff))
+//         $playoff = '';
+        
+//         $matches = glob($rootFolder . '*' . $playoff . $fileName);
+//         $folderLeagueURL = '';
+//         $matchesDate = array_map('filemtime', $matches);
+//         arsort($matchesDate);
+//         foreach ($matchesDate as $j => $val) {
+
+//             if(isset($exclude) && $exclude != '' && substr_count($matches[$j], $exclude)){
+//                continue; 
+//             }
             
-            if ((! substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-                $folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/') + 1, strpos($matches[$j], $name) - strrpos($matches[$j], '/') - 1);
-                break 1;
-            }
-        }
-        return $rootFolder.$folderLeagueURL . $fileName;
-}
+//             if ((! substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
+//                 $folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/') + 1, strpos($matches[$j], $name) - strrpos($matches[$j], '/') - 1);
+//                 break 1;
+//             }
+//         }
+//         return $rootFolder.$folderLeagueURL . $fileName;
+// }
 
 //check playoff mode. 0 = auto detect, 1 regular season, 2 playoffs.
-function isPlayoffs($rootFolder, $playoffMode){
+//function isPlayoffs($rootFolder = null , $playoffMode = null){
+function isPlayoffs($rootFolder , $playoffMode){
 
+    //only run this logic once. cache result.
+    if(isset($GLOBALS["isPlayoffs"])) return $GLOBALS["isPlayoffs"];
+    
+    $isPlayoffs = false;
+    
     if (!isset($playoffMode)){
         $playoffMode = 0;
     }
     
     if($playoffMode == 0){
         if(!empty(glob($rootFolder . '*PLFGMs.html'))){
-            return true;
+            $isPlayoffs = true;
         }
     }else{
         if($playoffMode == 2){
-            return true;
+            $isPlayoffs =  true;
         }
+    }
+    
+    $GLOBALS["isPlayoffs"] = $isPlayoffs;
+    
+    return $isPlayoffs;
+}
+
+function isPlayoffs2(){
+    
+    if(isset($GLOBALS["GLOB_LEAGUE_MODE"])){
+        return $GLOBALS["GLOB_LEAGUE_MODE"] == 'PLF';
     }
     
     return false;
@@ -182,6 +225,18 @@ function strposX($haystack, $needle, $number)
     // decode utf8 because of this behaviour: https://bugs.php.net/bug.php?id=37391
     preg_match_all("/$needle/", utf8_decode($haystack), $matches, PREG_OFFSET_CAPTURE);
     return $matches[0][$number-1][1];
+}
+
+function str_lreplace($search, $replace, $subject)
+{
+    $pos = strrpos($subject, $search);
+    
+    if($pos !== false)
+    {
+        $subject = substr_replace($subject, $replace, $pos, strlen($search));
+    }
+    
+    return $subject;
 }
 
 /*backwards compatibility functions if mb module is not loaded in php*

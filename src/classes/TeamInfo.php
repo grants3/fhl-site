@@ -21,7 +21,8 @@ class TeamInfo
 
     public function __construct(string $rootFolder, string $playoff, string $team) {
         
-        $fileName = getLeagueFile2($rootFolder, $playoff, 'Standings.html', 'Standings', 'Farm'); // exclude farm
+        //$fileName = getLeagueFile2($rootFolder, $playoff, 'Standings.html', 'Standings', 'Farm'); // exclude farm
+        $fileName = getLeagueFile('Standings','',0,'Farm'); // exclude farm
         
         $e = 0;
         
@@ -125,7 +126,8 @@ class TeamInfo
         $i = 0;
         $j = 0;
         $k = 0;
-        $financeFileName = getLeagueFile($rootFolder, $playoff, 'Finance.html', 'Finance'); // exclude farm
+        //$financeFileName = getLeagueFile($rootFolder, $playoff, 'Finance.html', 'Finance'); // exclude farm
+        $financeFileName = getCurrentLeagueFile('Finance');
         if (file_exists($financeFileName)) {
             $tableau = file($financeFileName);
 

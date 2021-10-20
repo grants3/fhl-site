@@ -15,32 +15,32 @@ class ScoringAccumulator
         $this->scoringHolder = $scoringHolder;
     }
 
-    public function getTopGoals(int $limit = null, $filter = null) 
-    {
-        return $this->getScorers('sortGoals', $limit, $filter);
-    }
+//     public function getTopGoals(int $limit = null, $filter = null) 
+//     {
+//         return $this->getScorers('sortGoals', $limit, $filter);
+//     }
     
-    public function getTopAssists(int $limit = null, $filter = null)
-    {
+//     public function getTopAssists(int $limit = null, $filter = null)
+//     {
         
-        return $this->getScorers('sortAssists', $limit, $filter);
+//         return $this->getScorers('sortAssists', $limit, $filter);
         
-    }
+//     }
     
-    public function getTopPoints(int $limit = null, $filter = null)
-    {
+//     public function getTopPoints(int $limit = null, $filter = null)
+//     {
         
-        return $this->getScorers('sortPoints', $limit, $filter);
+//         return $this->getScorers('sortPoints', $limit, $filter);
         
-    }
+//     }
     
-    public function getTopGoalies(string $attribute, int $limit = null, string $direction = 'DESC')
+    public function getTopGoalies(string $attribute, int $limit = null, $minGames = 2, string $direction = 'DESC')
     {
         $goalies = $this->scoringHolder->getFilteredGoalies();
         
-        //apply 15 game filter unless nobody has reached the threshold.
-        $goaliesTemp = array_filter($goalies, function($obj){
-            if ($obj->getGamesPlayed() > 3) return true;
+        //apply 2 game filter unless nobody has reached the threshold.
+        $goaliesTemp = array_filter($goalies, function($obj)use($minGames){
+            if ($obj->getGamesPlayed() >= $minGames) return true;
             
             return false;
         });
@@ -66,14 +66,14 @@ class ScoringAccumulator
         return $goalies;
         
     }
-        
-    public function getScorers(string $sortFunction, int $limit = null, array $filter = null)
+    
+    public function getTopScorers(string $attribute, int $limit = null, array $filter = null, string $direction = 'DESC')
     {
-        $skaters = $this->scoringHolder->getFilteredSkaters();
-        
+        $scorers = $this->scoringHolder->getFilteredSkaters();
+
         if(isset($filter)){
-            $skaters = array_filter($skaters, function($obj)use(&$filter){
-               // if ($obj->getPosition() == $filter) return true;
+            $scorers = array_filter($scorers, function($obj)use(&$filter){
+                // if ($obj->getPosition() == $filter) return true;
                 foreach ($filter as $key => $value){
                     if ($obj->__get($key) == $value) return true;
                 }
@@ -81,19 +81,52 @@ class ScoringAccumulator
                 return false;
             });
         }
+        
+        usort($scorers, function($a, $b)use(&$attribute, $direction){
+            if($direction == 'DESC') {
+                return $b->__get($attribute) <=> $a->__get($attribute);
+            }
+            return $a->__get($attribute) <=> $b->__get($attribute);
+            
+        });
+            
+            if(isset($limit) && $limit > 0){
+                if(sizeof($scorers) > $limit){
+                    return array_slice($scorers, 0, $limit);
+                }
+            }
+            
+       return $scorers;
+                
+    }
+        
+//     public function getScorers(string $sortFunction, int $limit = null, array $filter = null)
+//     {
+//         $skaters = $this->scoringHolder->getFilteredSkaters();
+        
+//         if(isset($filter)){
+//             $skaters = array_filter($skaters, function($obj)use(&$filter){
+//                // if ($obj->getPosition() == $filter) return true;
+//                 foreach ($filter as $key => $value){
+//                     if ($obj->__get($key) == $value) return true;
+//                 }
+                
+//                 return false;
+//             });
+//         }
 
         
-        usort( $skaters, $sortFunction );
+//         usort( $skaters, $sortFunction );
         
-        if(isset($limit) && $limit > 0){
-            if(sizeof($skaters) > $limit){
-                return array_slice($skaters, 0, $limit);
-            }
-        }
+//         if(isset($limit) && $limit > 0){
+//             if(sizeof($skaters) > $limit){
+//                 return array_slice($skaters, 0, $limit);
+//             }
+//         }
         
-        return $skaters;
+//         return $skaters;
         
-    }
+//     }
     
    
 
@@ -107,18 +140,18 @@ class ScoringAccumulator
 //     });
 // }
 
-function sortGoals($a, $b)
-{
-    return $b->goals <=> $a->goals;
-}
+// function sortGoals($a, $b)
+// {
+//     return $b->goals <=> $a->goals;
+// }
 
-function sortAssists($a, $b)
-{
-    return $b->assists <=> $a->assists;
-}
+// function sortAssists($a, $b)
+// {
+//     return $b->assists <=> $a->assists;
+// }
 
-function sortPoints($a, $b)
-{
-    return $b->points <=> $a->points;
-}
+// function sortPoints($a, $b)
+// {
+//     return $b->points <=> $a->points;
+// }
 

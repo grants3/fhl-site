@@ -2,6 +2,7 @@
 require_once 'config.php';
 include_once 'lang.php';
 include_once 'common.php';
+include_once 'fileUtils.php';
 
 include_once 'classes/TransactionHolder.php';
 include_once 'classes/TransactionTradeObj.php';
@@ -19,15 +20,17 @@ if(isset($_GET['team']) || isset($_POST['team'])) {
     $team = ( isset($_GET['team']) ) ? $_GET['team'] : $_POST['team'];
     //$team = filter_var($seasonId, FILTER_SANITIZE_STRING);
 }
-$playoff = '';
-if(trim($seasonId) == false){
-    $fileName = getLeagueFile($folder, $playoff, 'Transact.html', 'Transact');
-    $scoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
-}else{
-    $seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
-    $fileName = getLeagueFile($seasonFolder, $playoff, 'Transact.html', 'Transact');
-    $scoringFile = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
-}
+// $playoff = '';
+// if(trim($seasonId) == false){
+//     $fileName = getLeagueFile($folder, $playoff, 'Transact.html', 'Transact');
+//     $scoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
+// }else{
+//     $seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
+//     $fileName = getLeagueFile($seasonFolder, $playoff, 'Transact.html', 'Transact');
+//     $scoringFile = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
+// }
+$fileName = getLeagueFile('Transact', $seasonId);
+$scoringFile = getLeagueFile('TeamScoring', $seasonId);
 
 if(empty($team)){
     http_response_code(400);

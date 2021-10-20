@@ -48,10 +48,10 @@ echo '<div class = "row">';
 echo '<div class = "col">';
 
 echo '<nav id ="tree-nav" class="nav nav-justified-center justify-content-center">';
-if($existRnd >= 4)echo'<a class="nav-item nav-link" href="Schedule2.php?plf=1&rnd=4">Cup Finals</a>';
-if($existRnd >= 3)echo'<a class="nav-item nav-link" href="Schedule2.php?plf=1&rnd=3">'.$scheldRound.' 3</a>';
-if($existRnd >= 2)echo'<a class="nav-item nav-link" href="Schedule2.php?plf=1&rnd=2">'.$scheldRound.' 2</a>';
-if($existRnd >= 1)echo'<a class="nav-item nav-link" href="Schedule2.php?plf=1&rnd=1">'.$scheldRound.' 1</a>';
+if($existRnd >= 4)echo'<a class="nav-item nav-link" href="Schedule.php?rnd=4">Cup Finals</a>';
+if($existRnd >= 3)echo'<a class="nav-item nav-link" href="Schedule.php?rnd=3">'.$scheldRound.' 3</a>';
+if($existRnd >= 2)echo'<a class="nav-item nav-link" href="Schedule.php?rnd=2">'.$scheldRound.' 2</a>';
+if($existRnd >= 1)echo'<a class="nav-item nav-link" href="Schedule.php?rnd=1">'.$scheldRound.' 1</a>';
 echo '</nav>';
 
 echo '</div>';
@@ -189,7 +189,7 @@ $j = $existRnd;
 				for($w=1;$w<=8;$w++) {
 					if(isset($day[$w]) && isset($score1[$w])) echo '<td style="width:5%" class = "col-xs-1"><a class="lien-blanc" href="games.php?num='.$day[$w].'&rnd='.$j.'" >'.$w.'</a></td>';
 					//else echo '<td>'.$w.'</td>';
-					elseif($w == 8) echo '<th style="width:5%"><a class="lien-blanc" href="Schedule2.php">Series</a></th>';
+					elseif($w == 8) echo '<th style="width:5%"><a class="lien-blanc" href="Schedule.php">Series</a></th>';
 					else echo '<th style="width:5%"></th>';
 				}
 				//echo '<td></td>';

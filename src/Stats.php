@@ -11,6 +11,7 @@ include_once FS_ROOT.'classes/ScoringGoalieObj.php';
 include_once FS_ROOT.'classes/ScoringObj.php';
 include_once FS_ROOT.'classes/TeamAbbrHolder.php';
 include_once FS_ROOT.'classes/ScoringAccumulator.php';
+include_once FS_ROOT.'classes/TeamInfo.php';
 
 $CurrentHTML = 'Stats.php';
 $CurrentTitle = 'Statistics';
@@ -21,31 +22,51 @@ include 'head.php';
 //tab activation
 $leadersActive = 'active';
 
-$scoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
+$seasonFolder =  str_replace("#",2,CAREER_STATS_DIR);
+//$scoringFile = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
+
+$scoringFile = getLeagueFile(TRANSFER_DIR, $playoff, 'TeamScoring.html', 'TeamScoring');
 $scoringHolder = new ScoringHolder($scoringFile);
 $scoringAccumulator = new ScoringAccumulator($scoringHolder);
 
-$pointsArray = $scoringAccumulator->getTopPoints(10);
-$goalsArray = $scoringAccumulator->getTopGoals(10);
-$assistsArray = $scoringAccumulator->getTopAssists(10);
+//init teamheader so that we can figure out how far season has progressed to get min gp amounts for stats
+$minGoalieGames = 1;
+$maxMinGoalieGames = 15;
+$minGameCount = 1;
+if(empty($playoff)){
+    $teamInfo = new TeamInfo(TRANSFER_DIR, $playoff, $teamList[0]);
+    $gameCount = $teamInfo->getWins() +  $teamInfo->getLosses() +  $teamInfo->getTies();
+
+    if($gameCount >= $minGoalieGames){
+        $minGameCount = ceil(($gameCount/82) * $maxMinGoalieGames);
+        $minGameCount = max($minGoalieGames,$minGameCount);
+    }else{
+        $minGameCount = 1;
+    }
+
+}
+
+$pointsArray = $scoringAccumulator->getTopScorers('points',10);
+$goalsArray = $scoringAccumulator->getTopScorers('goals',10);
+$assistsArray = $scoringAccumulator->getTopScorers('assists',10);
 
 $dFilter = array(
     "position" => "D"
 );
-$pointsArrayD = $scoringAccumulator->getTopPoints(10,$dFilter);
-$goalsArrayD = $scoringAccumulator->getTopGoals(10,$dFilter);
-$assistsArrayD = $scoringAccumulator->getTopAssists(10,$dFilter);
+$pointsArrayD = $scoringAccumulator->getTopScorers('points',10, $dFilter);
+$goalsArrayD = $scoringAccumulator->getTopScorers('goals',10, $dFilter);
+$assistsArrayD = $scoringAccumulator->getTopScorers('assists',10, $dFilter);
 
-$goaliesGaaArray = $scoringAccumulator->getTopGoalies('gaa',10, 'ASC');
-$goaliesSvPctArray = $scoringAccumulator->getTopGoalies('savePct',10,'DESC');
-$goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,'DESC');
+$goaliesGaaArray = $scoringAccumulator->getTopGoalies('gaa',10, $minGameCount, 'ASC');
+$goaliesSvPctArray = $scoringAccumulator->getTopGoalies('savePct',10,$minGameCount,'DESC');
+$goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGameCount,'DESC');
 
 $rFilter = array(
     "rookieStatus" => "1"
 );
-$pointsArrayR = $scoringAccumulator->getTopPoints(10,$rFilter);
-$goalsArrayR = $scoringAccumulator->getTopGoals(10,$rFilter);
-$assistsArrayR = $scoringAccumulator->getTopAssists(10,$rFilter);
+$pointsArrayR = $scoringAccumulator->getTopScorers('points',10, $rFilter);
+$goalsArrayR = $scoringAccumulator->getTopScorers('goals',10, $rFilter);
+$assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
 
 
 
@@ -171,7 +192,7 @@ $assistsArrayR = $scoringAccumulator->getTopAssists(10,$rFilter);
         </div>
     	<div class="card-body p-2">
 			<div class="row no-gutters">
-				<div class="col-sm-12 col-md-6 col-lg-6 p-1">
+				<div class="col-sm-12 col-md-12 col-lg-6 p-1">
 					<h5 class="tableau-top">Skaters</h5>
 					<div class="leader-container">
     					<div class="card">
@@ -216,7 +237,7 @@ $assistsArrayR = $scoringAccumulator->getTopAssists(10,$rFilter);
                           </div><!-- end skaters card -->
 					</div>
 				</div>
-				<div class="col-sm-12 col-md-6 col-lg-6 p-1">
+				<div class="col-sm-12 col-md-12 col-lg-6 p-1">
 					<h5 class="tableau-top">Defenseman</h5>
 					<div class="leader-container">
 
@@ -262,8 +283,9 @@ $assistsArrayR = $scoringAccumulator->getTopAssists(10,$rFilter);
 
 					</div>
 				</div>
-				<div class="col-sm-12 col-md-6 col-lg-6 p-1">
-					<h5 class="tableau-top">Goalies</h5>
+				<div class="col-sm-12 col-md-12 col-lg-6 p-1">
+					<h5 class="tableau-top">Goalies <span style="font-size: 0.75rem">(played for <?php echo $minGameCount;?> or more games)</span></h5>
+					</h6>
 					<div class="leader-container">
 
                     	<div class="card">
@@ -286,19 +308,19 @@ $assistsArrayR = $scoringAccumulator->getTopAssists(10,$rFilter);
                                <div class="tab-content mt-1">
                                 <div class="tab-pane active" id="top-scoring-goalies-points" role="tabpanel">
                                     <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                        array('scoringArray' => $goaliesGaaArray, 'attribute' => 'gaa', 'sort' => 5, 'positionType' => 'G', 'sortOrder' => 'asc')); ?>
+                                        array('scoringArray' => $goaliesGaaArray, 'attribute' => 'gaa', 'sort' => 6, 'positionType' => 'G', 'sortOrder' => 'asc')); ?>
                                   
                                 </div><!-- end points -->
                                  
                                 <div class="tab-pane" id="top-scoring-goalies-goals" role="tabpanel" aria-labelledby="top-scoring-goalies-goals-tab">  
                                 	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                	    array('scoringArray' => $goaliesSvPctArray, 'attribute' => 'savePct', 'sort' => 12, 'positionType' => 'G')); ?>
+                                	    array('scoringArray' => $goaliesSvPctArray, 'attribute' => 'savePct', 'sort' => 13, 'positionType' => 'G')); ?>
                                   
                                 </div> <!-- end goals -->
                                  
                                 <div class="tab-pane" id="top-scoring-goalies-assists" role="tabpanel" aria-labelledby="top-scoring-goalies-assists-tab">
                                   <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                      array('scoringArray' => $goaliesShutoutArray, 'attribute' => 'shutouts', 'sort' => 9, 'positionType' => 'G')); ?>
+                                      array('scoringArray' => $goaliesShutoutArray, 'attribute' => 'shutouts', 'sort' => 10, 'positionType' => 'G')); ?>
                                   
                                 </div> <!-- end assists -->
                                 
@@ -309,7 +331,7 @@ $assistsArrayR = $scoringAccumulator->getTopAssists(10,$rFilter);
 					</div>
 				</div><!-- end goalies col -->
 				
-				<div class="col-sm-12 col-md-6 col-lg-6 p-1">
+				<div class="col-sm-12 col-md-12 col-lg-6 p-1">
 					<h5 class="tableau-top">Rookies</h5>
 					<div class="leader-container">
 

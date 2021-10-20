@@ -1,6 +1,7 @@
 <?php
 require_once 'config.php';
 include 'lang.php';
+include 'fileUtils.php';
 $CurrentHTML = 'TeamStats.php';
 $CurrentTitle = $teamStatsTitle;
 $CurrentPage = 'TeamStats';
@@ -176,7 +177,8 @@ foreach ($matchesDate as $j => $val) {
 		break 1;
 	}
 }
-$Fnm = $folder.$folderLeagueURL.'TeamStats.html';
+//$Fnm = $folder.$folderLeagueURL.'TeamStats.html';
+$Fnm = getCurrentLeagueFile('TeamStats');
 
 $a = 0;
 $c = 1;

@@ -218,7 +218,7 @@ for($j=1;$j<=$existRnd;$j++) {
 			    for($w=1;$w<=8;$w++) {
 			        if(isset($day[$w]) && isset($score1[$w])) echo '<th style="width:5%"><a class="lien-blanc" href="games.php?seasonId='.$seasonId.'&num='.$day[$w].'&rnd='.$j.'" >'.$w.'</a></th>';
 			        //else echo '<td>'.$w.'</td>';
-			        elseif($w == 8) echo '<th style="width:5%"><a class="lien-blanc" href="Schedule2.php?seasonId='.$seasonId.'&rnd='.$j.'">Series</a></th>';
+			        elseif($w == 8) echo '<th style="width:5%"><a class="lien-blanc" href="Schedule.php?seasonId='.$seasonId.'&rnd='.$j.'">Series</a></th>';
 			        else echo '<th style="width:5%"></th>';
 			    }
 			   

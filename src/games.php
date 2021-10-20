@@ -2,78 +2,48 @@
 require_once 'config.php';
 include 'lang.php';
 include_once 'common.php';
+include_once 'fileUtils.php';
 include_once 'classes/GameHolder.php';
 include_once 'classes/RosterObj.php';
 include_once 'classes/RostersHolder.php';
 include_once 'classes/TeamAbbrHolder.php';
 
-$baseFolder = '';
+
+$matchNumber ='';
+$round = '';
 $seasonId = '';
-$awayTeamAbbr='';
-$homeTeamAbbr='';
+$linkHTML = '';
+
+if(isset($_GET['num']) || isset($_POST['num'])) {
+    $matchNumber = htmlspecialchars($_GET['num']);
+}
+
+if(isset($_GET['rnd']) || isset($_POST['rnd'])) {
+    $round = htmlspecialchars($_GET['rnd']);
+}
+
 if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
     $seasonId = ( isset($_GET['seasonId']) ) ? $_GET['seasonId'] : $_POST['seasonId'];
 }
 
-if(trim($seasonId) == false){
-    $baseFolder = $folder;
-}else{
-    $baseFolder = str_replace("#",$seasonId,CAREER_STATS_DIR);
-}
 
-$matchNumber = '';
-$linkHTML = '';
-$round = '';
-if(isset($_GET['num']) || isset($_POST['num'])) {
-	$matchNumber = ( isset($_GET['num']) ) ? $_GET['num'] : $_POST['num'];
-	$matchNumber = htmlspecialchars($matchNumber);
-	$linkHTML = $matchNumber;
-	//$round = '';
-	if(isset($_GET['rnd']) || isset($_POST['rnd'])) {
-		$round = ( isset($_GET['rnd']) ) ? $_GET['rnd'] : $_POST['rnd'];
-		$round = htmlspecialchars($round);
-	}
-	if($matchNumber != '') {
-		if($round != '') {
-			$playoff = 'PLF';
-			$matches = glob($baseFolder.'*'.$playoff.'GMs.html');
-			$folderLeagueURL = '';
-			$matchesDate = array_map('filemtime', $matches);
-			arsort($matchesDate);
-			foreach ($matchesDate as $j => $val) {
-				if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-					$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'GMs')-strrpos($matches[$j], '/')-1);
-					break 1;
-				}
-			}
-			$Fnm = $baseFolder.$folderGames.$folderLeagueURL.'-R'.$round.'-'.$matchNumber.'.html';
-			$linkHTML = '-R'.$round.'-'.$matchNumber;
-		}
-		else {
-			$playoff = '';
-			$matches = glob($baseFolder.'*'.$playoff.'GMs.html');
-			$folderLeagueURL = '';
-			$matchesDate = array_map('filemtime', $matches);
-			arsort($matchesDate);
-			foreach ($matchesDate as $j => $val) {
-				if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-					$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'GMs')-strrpos($matches[$j], '/')-1);
-					break 1;
-				}
-			}
-			$Fnm = $baseFolder.$folderGames.$folderLeagueURL.$matchNumber.'.html';
-		}
-	}
-}
+$baseFolder = '';
+$awayTeamAbbr='';
+$homeTeamAbbr='';
 
 $rondes = '';
 if($round != '') $rondes = ' - '.$scheldRound.' '.$round;
 
+$Fnm = getGameFile($matchNumber, $seasonId, $round);
+
+error_log(print_r(getLeaguePrefix('PLF'),TRUE));
+error_log($Fnm);
+
 //override filename
 if(isset($_GET['override']) || isset($_POST['override'])) {
     $override = ( isset($_GET['override']) ) ? $_GET['override'] : $_POST['override'];
-    $Fnm = $baseFolder.$folderGames.$override.'.html';
-    //echo $Fnm;
+
+    $Fnm = getLeagueFileAbsolute($override.'.html',$seasonId);
 }
 
 

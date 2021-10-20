@@ -79,9 +79,10 @@ $leagueOvertimePoint = 1;
 //Min Active Players | Min required active players on roster. (Not injured or suspended) 0:Off
 $minActivePlayers = 20;
 
-# Playoff mode (Auto mode will check if playoff files exist in transfer directory, otherwise mode is selected manualy)
-# Auto: 0 Regular Season : 1 or Playoffs : 2
-$playoffMode = 1;
+# League mode (Auto mode will check if playoff files exist in transfer directory, otherwise mode is selected manualy)
+# Regular Season: 0 | Playoffs : 1 | Auto Detect : 2
+//$playoffMode = 1;
+$leagueMode = 0;
 
 # Whether or not main navbar should be displayed and the type of nav to be displayed.
 # Default navbar includes all site links, simple nav only contains home button and team links.
@@ -119,10 +120,14 @@ define("MIN_ACTIVE_PLAYERS",$minActivePlayers);
 
 define("FUTURES_LINK_MODE",$leagueFuturesLink);
 define("FUTURES_DRAFT_YEARS",$leagueFuturesDraftYears);
-define("LEAGUE_MODE",$playoffMode);
+//define("LEAGUE_MODE",$playoffMode);
+define("LEAGUE_MODE",inferLeagueMode($leagueMode));
+define("PLAYOFF_MODE",LEAGUE_MODE == 1);
 define("NAVBAR_MODE",$navbarMode);
 define("FOOTER_TEXT", $footerText);
 define("SITE_THEME", $siteTheme);
+
+$GLOBALS["GLOB_LEAGUE_MODE2"] = 'TEST';
 
 unset($sessionName);
 unset($cdnSupport);

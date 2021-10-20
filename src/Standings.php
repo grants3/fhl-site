@@ -9,12 +9,14 @@ $CurrentPage = 'Standings';
 
 include 'head.php';
 
-if($currentPLF == 1){
-    $playoffActive = 'active';
-    $seasonActive = '';
+$playoffActive = '';
+$seasonActive = '';
+if(isPlayoffs2()){
+    //$playoffActive = 'active';
+   // $seasonActive = '';
 }else{
-    $playoffActive = '';
-    $seasonActive = 'active';
+   // $playoffActive = '';
+   // $seasonActive = 'active';
 }
 
 //get seasons which will be used to populate previous season dropdown if they exist
@@ -88,6 +90,8 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 
 <script>
 
+	
+
 	//$('#Season').load('./StandingsTemplate.php');
 	//$('#Playoffs').load('./StandingsTreeTemplate.php');
 
@@ -98,7 +102,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
     		selection = '';
     	}
 
-    	window.location.hash = selection;
+    	//window.location.hash = selection;
     	
     	$.ajax({
     	    type: "GET",
@@ -121,48 +125,52 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
     	    	$('#PlayoffsInner').html(data.trim());
     	    }
     	});
+    	
+    	var activeTab = $('[href="' + location.hash + '"]');
+  
+        if (activeTab.length) {
+            activeTab.tab('show');
+        } else {
+            $('.nav-tabs a:first').tab('show');
+        }
         
     } );
 
-    //this is a hack to support retaining state after back button press.
-    //TODO: properly implement
-    $(window).on('pageshow', function(){
+
+$(document).ready(function() {
+
+	var isPlayoffs = <?php echo isPlayoffs2() ? 'true' : 'false';?>;
+
+	//handle active tab.
+    var url = document.location.toString();
+    if (url.match('#')) {
+       $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+    }else{
+    	//just default to first table active.
+    	if(isPlayoffs){
+    		$('.nav-tabs a[href="#Playoffs"]').tab('show');
+    	}else{
+    		$('.nav-tabs a:first').tab('show');
+    	}
        
-		console.info(window.location.hash);
-        if(window.location.hash){
+    }
 
-            var selection = window.location.hash;
-            selection = selection.replace("#", "");
-            
-        	$.ajax({
-        	    type: "GET",
-        	    dataType: "html",
-        	    url: '<?php echo BASE_URL?>StandingsTemplate.php',
-        	    data: {seasonId: selection},
-        	    success: function(data){
-        	    	$('#SeasonInner').html(data);
-        	    },
-              	 error: function(XMLHttpRequest, textStatus, errorThrown) {
-           	 		$('#SeasonInner').html('<p>Error loading data</p>');
-           	 	}
-        	});
+	  // add a hash to the URL when the user clicks on a tab
+    $('a[data-toggle="tab"]').on('click', function(e) {
+        history.pushState(null, null, $(this).attr('href'));
+    });
 
-        	$.ajax({
-        	    type: "GET",
-        	    dataType: "html",
-        	    url: '<?php echo BASE_URL?>StandingsTreeTemplate.php',
-        	    data: {seasonId: selection},
-        	    success: function(data){
-        	    	$('#PlayoffsInner').html(data);
-        	    },
-               	 error: function(XMLHttpRequest, textStatus, errorThrown) {
-          	 		$('#PlayoffsInner').html('<p>Error loading data</p>');
-          	 	}
-        	});
-
-        	$("#seasonMenu").val(selection);
+    // navigate to a tab when the history changes
+    window.addEventListener("popstate", function(e) {
+        var activeTab = $('[href="' + location.hash + '"]');
+  
+        if (activeTab.length) {
+            activeTab.tab('show');
+        } else {
+            $('.nav-tabs a:first').tab('show');
         }
     });
+});
 
 </script>
 

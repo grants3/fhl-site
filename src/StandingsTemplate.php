@@ -3,6 +3,7 @@
 require_once 'config.php';
 include_once 'lang.php';
 include_once 'common.php';
+include_once 'fileUtils.php';
 
 $seasonId = '';
 if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
@@ -10,10 +11,13 @@ if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
 }
 
 if(trim($seasonId) == false){
-    $Fnm = getLeagueFile2($folder, '', 'Standings.html', 'Standings', 'Farm'); // exclude farm
+   // $Fnm = getLeagueFile2($folder, '', 'Standings.html', 'Standings', 'Farm'); // exclude farm
+    $Fnm =  getCurrentLeagueFile('Standings','Farm');
 }else{
-    $seasonFolder = str_replace("#",$seasonId,CAREER_STATS_DIR);
-    $Fnm = getLeagueFile2($seasonFolder, '', 'Standings.html', 'Standings', 'Farm'); // exclude farm
+   //$seasonFolder = str_replace("#",$seasonId,CAREER_STATS_DIR);
+    //$Fnm = getLeagueFile2($seasonFolder, '', 'Standings.html', 'Standings', 'Farm'); // exclude farm
+    $Fnm = _getLeagueFile('Standings', null, $seasonId, 'Farm'); // exclude farm
+    error_log($Fnm);
 }
 
 

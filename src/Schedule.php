@@ -1,377 +1,357 @@
 <?php
 require_once 'config.php';
 include 'lang.php';
+include_once 'common.php';
 
-$matches = glob($folder.'*Schedule.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if(!substr_count($matches[$j], 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Schedule')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-$Fnm = $folder.$folderLeagueURL.'Schedule.html';
-$linkSchedule = 'Schedule';
-$rnd = 0;
-$existRnd = 0;
-if(isset($_GET['plf']) || isset($_POST['plf'])) {
-	$matches = glob($folder.'*PLF-Round1-Schedule.html');
-	$folderLeagueURL2 = '';
-	$matchesDate = array_map('filemtime', $matches);
-	arsort($matchesDate);
-	foreach ($matchesDate as $j => $val) {
-		if(substr_count($matches[$j], 'PLF')) {
-			$folderLeagueURL2 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'PLF-Round1-Schedule.html')-strrpos($matches[$j], '/')-1);
-			break 1;
-		}
-	}
-	if (file_exists($folder.$folderLeagueURL2.'PLF-Round1-Schedule.html')) {
-		$Fnm = $folder.$folderLeagueURL2.'PLF-Round1-Schedule.html';
-		$linkSchedule = '-Round1-Schedule';
-		$rnd = 1;
-		$existRnd = 1;
-	}
-	if (file_exists($folder.$folderLeagueURL2.'PLF-Round2-Schedule.html')) {
-		$Fnm = $folder.$folderLeagueURL2.'PLF-Round2-Schedule.html';
-		$linkSchedule = '-Round2-Schedule';
-		$rnd = 2;
-		$existRnd = 2;
-	}
-	if (file_exists($folder.$folderLeagueURL2.'PLF-Round3-Schedule.html')) {
-		$Fnm = $folder.$folderLeagueURL2.'PLF-Round3-Schedule.html';
-		$linkSchedule = '-Round3-Schedule';
-		$rnd = 3;
-		$existRnd = 3;
-	}
-	if (file_exists($folder.$folderLeagueURL2.'PLF-Round4-Schedule.html')) {
-		$Fnm = $folder.$folderLeagueURL2.'PLF-Round4-Schedule.html';
-		$linkSchedule = '-Round4-Schedule';
-		$rnd = 4;
-		$existRnd = 4;
-	}
-	if(isset($_GET['rnd']) || isset($_POST['rnd'])) {
-		$currentRND = ( isset($_GET['rnd']) ) ? $_GET['rnd'] : $_POST['rnd'];
-		$Fnm = $folder.$folderLeagueURL2.'PLF-Round'.$currentRND.'-Schedule.html';
-		$linkSchedule = '-Round'.$currentRND.'-Schedule';
-		$rnd = $currentRND;
-	}
-}
-$schedTitlePlayoff = '';
-if($rnd) $schedTitlePlayoff = ' - '.$scheldRound.' '.$rnd;
-
-$CurrentHTML = $linkSchedule;
-$CurrentTitle = $schedTitle;
 $CurrentPage = 'Schedule';
-include 'head.php';
+$CurrentHTML = 'Schedule.php';
+$CurrentTitle = 'Schedule';
 
-if($checked != ''){
-    include 'TeamHeader.php';
+include 'head.php';
+include_once 'classes/ScheduleHolder.php';
+include_once 'classes/ScheduleObj.php';
+
+//$baseFolder = '';
+$seasonId = '';
+$round = 0;
+$currentRound = 0;
+if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
+    $seasonId = ( isset($_GET['seasonId']) ) ? $_GET['seasonId'] : $_POST['seasonId'];
 }
+
+if(isset($_GET['rnd']) || isset($_POST['rnd'])) {
+    $round = ( isset($_GET['rnd']) ) ? $_GET['rnd'] : $_POST['rnd'];
+}
+
+$baseFileName = 'Schedule';
+$seasonType='';
+if($seasonId || $round){
+    $seasonTitle = '';
+    $roundTitle = '';
+    if($seasonId){
+        $seasonTitle = ' Season '.$seasonId;
+    }
+    //assumes playoffs
+    if($round){
+        $baseFileName = '-Round'.$round.'-Schedule';
+        $seasonType = 'PLF';
+        $currentRound = getPlayoffRound();
+        if($round == 4){
+            $roundTitle = ' Cup Finals';
+        }else{
+            $roundTitle = ' Round '.$round;
+        }
+        
+    }
+    
+    $CurrentTitle = $schedTitle.' - '.$seasonTitle.$roundTitle;
+    
+    $fileName = _getLeagueFile($baseFileName, $seasonType, $seasonId);
+    
+}else{
+    if(isPlayoffs2()){
+        //current playoffs
+        $round = getPlayoffRound();
+        $baseFileName = '-Round'.$round.'-Schedule';
+        $currentRound = getPlayoffRound();
+        
+        $CurrentTitle = $schedTitle.' - Round '.$round;
+    }
+    $fileName = getCurrentLeagueFile($baseFileName);
+}
+
+
+
+$scheduleHolder = new ScheduleHolder($fileName, '');
+
 
 ?>
 
-<!--<div style="clear:both; width:555px; margin-left:auto; margin-right:auto; border: solid 1px <?php echo $couleur_contour; ?>;"-->
-<!--<div class = "row" style="clear:both; width:555px; margin-left:auto; margin-right:auto;">-->
-<!--<h3 class = "text-center"><?php echo $schedTitle.$schedTitlePlayoff; ?></h3>-->
+<style>
 
-<div class = "container">
+    .day-header{
+        background-color: var(--color-primary-1);
+        color: white;
+    }
+    
+</style>
+
+<div class = "container px-2">
 
 
 	<div class="card">
-
-		<div class="card-header" style="padding-bottom: 0px; padding-top: 2px;">
-			<div class = "row d-flex align-items-center justify-content-center">
-				<?php
-				$teamCardLogoSrc = glob($folderTeamLogos.strtolower($currentTeam).'.*');
-				if(isset($teamCardLogoSrc[0]) && $checked !='') {
-					echo'		<img class="float-left card-img-top" src="'.$teamCardLogoSrc[0].'" alt="'.$currentTeam.'">';
-				}?>
-				<h3><?php echo $CurrentTitle; ?></h3>
-			</div>
-		</div>
+				
+		<?php include 'SectionHeader.php';?>
 		<div class="card-body">
-		
-        	<?php 
-        	if($currentPLF == 1 && isset($existRnd)) {
-        	    echo '<div class = "row">';
-        	    echo '<div class = "col">';
-        	    if($existRnd >= 4) echo '<a href="'.$CurrentPage.'.php?plf=1&rnd=4" class="lien-noir">'.$scheldRound.' 4</a>';
-        	    if($existRnd >= 3) echo ' - <a href="'.$CurrentPage.'.php?plf=1&rnd=3" class="lien-noir">'.$scheldRound.' 3</a>';
-        	    if($existRnd >= 2) echo ' - <a href="'.$CurrentPage.'.php?plf=1&rnd=2" class="lien-noir">'.$scheldRound.' 2</a>';
-        	    if($existRnd >= 1) echo ' - <a href="'.$CurrentPage.'.php?plf=1&rnd=1" class="lien-noir">'.$scheldRound.' 1</a>';
-        	    echo '</div>';
-        	    echo '</div>';
-        	}
-        	?>
+			<div class="card">
+			    <?php 
+			    if($round) {
+            	    echo '<div class = "row">';
+            	    echo '<div class = "col">';
+            	    
+            	    echo '<nav id ="playoff-header-nav" class="nav justify-content-center">';
+            	    if($currentRound >= 4)echo'<a class="nav-item nav-link '.(4 == $round ? 'active font-weight-bold' : '').'" href="'.$CurrentPage.'.php?rnd=4">Cup Finals</a>';
+            	    if($currentRound >= 3)echo'<a class="nav-item nav-link '.(3 == $round ? 'active font-weight-bold' : '').'" href="'.$CurrentPage.'.php?rnd=3">'.$scheldRound.' 3</a>';
+            	    if($currentRound >= 2)echo'<a class="nav-item nav-link '.(2 == $round ? 'active font-weight-bold' : '').'" href="'.$CurrentPage.'.php?rnd=2">'.$scheldRound.' 2</a>';
+            	    if($currentRound >= 1)echo'<a class="nav-item nav-link '.(1 == $round ? 'active font-weight-bold' : '').'" href="'.$CurrentPage.'.php?rnd=1">'.$scheldRound.' 1</a>';
+            	    echo '</nav>';
+            	    
+            	    echo '</div>';
+            	    echo '</div>';
+				}?>
+			
+				<div id="standingsTabs" class="card-header px-2 px-lg-4 pb-1 pt-2">
+					<ul class="nav nav-tabs nav-fill">
+						<li class="nav-item">
+							<a class="nav-link active" href="#remaining" data-toggle="tab">Remaining</a>
+						</li>
 
-			<div class = "row">
-				<div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2">
-				<div class = "table-responsive">
-					<table class="table table-sm">
-
-					<?php
-					$a = 0;
-					$c = 1;
-					$i = 0;
-					$scheduleWin = 0;
-					$scheduleLoose = 0;
-					$scheduleTie = 0;
-					$scheduleGF = 0;
-					$scheduleGA = 0;
-					if(isset($teamList)) {
-						for($j=0;$j<count($teamList);$j++) {
-							$teamListWin[$j] = 0;
-							$teamListLoose[$j] = 0;
-							$teamListTie[$j] = 0;
-							$teamListLeft[$j] = 0;
-							$teamListGA[$j] = 0;
-							$teamListGF[$j] = 0;
-						}
-						if (file_exists($Fnm)) {
-							$tableau = file($Fnm);
-							while(list($cle,$val) = myEach($tableau)) {
-								if(substr_count($val, 'Day')){
-									$status[$i] = 'Jour';
-									$reste = trim(substr($val, strpos($val, 'Day')));
-									$day[$i] = trim(substr($reste, strpos($reste, 'Day')+4, strpos($reste, '< ')-strpos($reste, 'Day')-4));
-									$i++;
-								}
-								if(substr_count($val, ' at ') && !substr_count($val, '<strike>')){
-									$status[$i] = 'at';
-									$reste = trim(str_replace('<br>','', $val));
-									$reste = trim(str_replace('<BR>','', $reste));
-									$number[$i] = substr($reste, 0, strpos($reste, ' '));
-									$reste = trim(substr($reste, strpos($reste, ' ')));
-									$equipe1[$i] = substr($reste, 0, strpos($reste, ' at '));
-									$reste = trim(substr($reste, strpos($reste, ' at ')+4));
-									$equipe2[$i] = $reste;
-									if($checked != '' && ($equipe1[$i] == $currentTeam || $equipe2[$i] == $currentTeam)) {
-										for($j=0;$j<count($teamList);$j++) {
-											if($teamList[$j] != $currentTeam && ($teamList[$j] == $equipe1[$i] || $teamList[$j] == $equipe2[$i])) {
-												$teamListLeft[$j]++;
-											}
-										}
-									}
-									$i++;
-								}
-								if(substr_count($val, 'A HREF=')){
-									if($a == 0) $a = $i;
-									$status[$i] = 'game';
-									$reste = trim(substr($val, strpos($val, '> ')+1));
-									$number[$i] = substr($reste, 0, strpos($reste, ' '));
-									$reste = trim(substr($reste, strpos($reste, ' ')));
-									$count = strlen($reste);
-									$z = 0;
-									while( $z < $count ) {
-										if( ctype_digit($reste[$z]) ) {
-											$pos3 = $z;
-											break 1;
-										}
-										$z++;
-									}
-									$equipe1[$i] = substr($reste, 0, $pos3-1);
-									$reste = trim(substr($reste, $pos3));
-									$score1[$i] = substr($reste, 0, strpos($reste, ' '));
-									$reste = trim(substr($reste, strpos($reste, ' ')));
-									$z = 0;
-									while( $z < $count ) {
-										if( ctype_digit($reste[$z]) ) {
-											$pos3 = $z;
-											break 1;
-										}
-										$z++;
-									}
-									$equipe2[$i] = substr($reste, 0, $pos3-1);
-									$reste = trim(substr($reste, $pos3));
-									$score2[$i] = $reste;
-									if($checked != '' && ($equipe1[$i] == $currentTeam || $equipe2[$i] == $currentTeam)) {
-										if($equipe1[$i] == $currentTeam) {
-											if($score1[$i] < $score2[$i]) $schelduleResult[$i] = 'L';
-											if($score1[$i] > $score2[$i]) $schelduleResult[$i] = 'W';
-											$scheduleGF += $score1[$i];
-											$scheduleGA += $score2[$i];
-										}
-										if($equipe2[$i] == $currentTeam) {
-											if($score1[$i] < $score2[$i]) $schelduleResult[$i] = 'W';
-											if($score1[$i] > $score2[$i]) $schelduleResult[$i] = 'L';
-											$scheduleGF += $score2[$i];
-											$scheduleGA += $score1[$i];
-										}
-										if($score1[$i] == $score2[$i]) {
-											$schelduleResult[$i] = 'T';
-											$scheduleTie++;
-										}
-										if($schelduleResult[$i] == 'W') {
-											$scheduleWin++;
-										}
-										if($schelduleResult[$i] == 'L') {
-											$scheduleLoose++;
-										}
-										$scheduleRecord[$i] = $scheduleWin.'-'.$scheduleLoose.'-'.$scheduleTie;
-										$scheduleGFGA[$i] = $scheduleGF.'-'.$scheduleGA;
-										for($j=0;$j<count($teamList);$j++) {
-											if($teamList[$j] != $currentTeam && ($teamList[$j] == $equipe1[$i] || $teamList[$j] == $equipe2[$i])) {
-												if($teamList[$j] == $equipe1[$i]) {
-													if($score1[$i] < $score2[$i]) $teamListWin[$j] += 1;
-													if($score1[$i] > $score2[$i]) $teamListLoose[$j] += 1;
-													$teamListGA[$j] += $score1[$i];
-													$teamListGF[$j] += $score2[$i];
-												}
-												if($teamList[$j] == $equipe2[$i]) {
-													if($score1[$i] < $score2[$i]) $teamListLoose[$j] += 1;
-													if($score1[$i] > $score2[$i]) $teamListWin[$j] += 1;
-													$teamListGA[$j] += $score2[$i];
-													$teamListGF[$j] += $score1[$i];
-												}
-												if($score1[$i] == $score2[$i]) $teamListTie[$j] += 1;
-											}
-										}
-									}
-									$i++;
-								}
-								if(substr_count($val, '(OT)')){
-									$i--;
-									$prol[$i] = 'PROL';
-									$i++;
-								}
-								if(substr_count($val, 'TRADE DEADLINE')){
-									$status[$i] = 'Trade';
-									$i++;
-								}
-							}
-						
-							$a = $a - 1;
-							for($i=0;$i<count($status);$i++) {
-								if($a == $i){
-									if($checked != '') {
-										echo '<tr class="tableau-top">';
-										echo '<td>'.$ScheldGameNum.'</td>';
-										echo '<td>'.$ScheldVisitor.'</td>';
-										echo '<td>VS</td>';
-										echo '<td>'.$ScheldHome.'</td>';
-										echo '<td>HS</td>';
-										echo '<td style="text-align:center;">'.$schedOT.'</td>';
-										echo '<td style="text-align:center;">'.$ScheldRes.'</td>';
-										echo '<td style="text-align:right;">'.$ScheldRecord.'</td>';
-										echo '<td style="text-align:right;">'.$ScheldGAGF.'</td>';
-										echo '</tr>';
-									}
-									else {
-										echo '<tr class="tableau-top">';
-										echo '<td>'.$ScheldGameNum.'</td>';
-										echo '<td>'.$ScheldVisitor.'</td>';
-										echo '<td style="text-align:center;">'.$ScheldScore.'</td>';
-										echo '<td>'.$ScheldHome.'</td>';
-										echo '<td style="text-align:center;">'.$ScheldScore.'</td>';
-										echo '<td style="text-align:center;">'.$schedOT.'</td>';
-										echo '</tr>';
-									}
-								}
-								if($status[$i] == 'Jour' && $checked == ''){
-									echo '<tr class="tableau-top"><td colspan="6" style="text-align:center;">'.$schedDay.' '.$day[$i].'</td></tr>';
-									$c = 1;
-								}
-								if($status[$i] == 'Trade'){
-									$tmpColSpan = 9;
-									if($checked == '') $tmpColSpan = 6;
-									echo '<tr><td colspan="'.$tmpColSpan.'" style="padding-top:15px; padding-bottom:15px; text-align:center; font-weight:bold;">'.$schedTradeDeadline.'</td></tr>';
-								}
-								if(isset($equipe1[$i]) && ( $equipe1[$i] == $currentTeam || $equipe2[$i] == $currentTeam ) && $checked == '') $bold = 'font-weight:bold;';
-								else $bold = '';
-								if($status[$i] == 'game'){
-									if((($equipe1[$i] == $currentTeam || $equipe2[$i] == $currentTeam) && $checked) || $checked == '') {
-										if($c == 1) $c = 2;
-										else $c = 1;
-										echo '<tr class="hover'.$c.'">';
-										$linkRnd = '';
-										if($rnd != 0) {
-											$linkRnd = '&rnd='.$rnd;
-										}
-										echo '<td '.$bold.'"><a class="lien-noir" style="display:block; width:100%;" href="games.php?num='.$number[$i].$linkRnd.'">'.$number[$i].'</a></td>';
-										echo '<td '.$bold.'">'.$equipe1[$i].'</td>';
-										echo '<td '.$bold.'">'.$score1[$i].'</td>';
-										echo '<td '.$bold.'">'.$equipe2[$i].'</td>';
-										echo '<td '.$bold.'">'.$score2[$i].'</td>';
-										if(isset($prol[$i]) && $prol[$i] == 'PROL') echo '<td style="text-align:center; width:40px;'.$bold.'">'.$schedOT.'</td>';
-										else echo '<td></td>';
-										if($checked != '') {
-											$replaceOrigin = array('W', 'L', 'T');
-											$replaceBy = array($ScheldW, $ScheldL, $ScheldT);
-											$schelduleResult[$i] = str_replace($replaceOrigin, $replaceBy, $schelduleResult[$i]);
-											echo '<td>'.$schelduleResult[$i].'</td>';
-											echo '<td>'.$scheduleRecord[$i].'</td>';
-											echo '<td>'.$scheduleGFGA[$i].'</td>';
-										}
-										echo '</tr>';
-									}
-								}
-								if($status[$i] == 'at'){
-									if((($equipe1[$i] == $currentTeam || $equipe2[$i] == $currentTeam) && $checked) || $checked == '') {
-										if($c == 1) $c = 2;
-										else $c = 1;
-										echo '<tr class="hover'.$c.'">';
-										echo '<td style="width:40px;'.$bold.'">'.$number[$i].'</td>';
-										echo '<td style="width:100px;'.$bold.'">'.$equipe1[$i].'</td>';
-										echo '<td style="text-align:center; width:20px;'.$bold.'">@</td>';
-										if($checked != '') echo '<td colspan="6">'.$equipe2[$i].'</td>';
-										else echo '<td style="'.$bold.'" colspan="3">'.$equipe2[$i].'</td>';
-										echo '</tr>';
-									}
-								}
-							}
-						}
-						else { 
-							echo '<tr><td>'.$allFileNotFound.' - '.$Fnm.'</td></tr>';
-						}
-					}
-					?>
-					</table>
+						<li class="nav-item">
+							<a class="nav-link" href="#completed" data-toggle="tab">Completed</a>
+						</li>
+					</ul>
 				</div>
+				<div class="card-body">
+				
+					<div class="tab-content">
+    						
+    					<div role="tabpanel" class="tab-pane active" id="remaining">
+            				<?php
+                                $daysPerRow = 3;
+                                
+                                $rowCount = 0;
+                                $lastDay = 0;
+                    			$dayCount = 0;
+                    			
+                    			foreach ($scheduleHolder->getRemainingSchedule() as $schedule) {
 
-				<?php
-				if($checked != '') {
-					/* echo '<div class="titre"><span class="bold-blanc">'.$ScheldMatchups.'</span></div>'; */
-					echo '<div><span>'.$ScheldMatchups.'</span></div>';
-					echo '<div class="table-responsive">';
-					echo '<table class="table table-sm">';
-					echo '<tr class="tableau-top">';
-					echo '<td>'.$ScheldTeam.'</td>';
-					echo '<td>'.$ScheldGP.'</td>';
-					echo '<td>'.$ScheldW.'</td>';
-					echo '<td>'.$ScheldL.'</td>';
-					echo '<td>'.$ScheldT.'</td>';
-					echo '<td>'.$ScheldLeft.'</td>';
-					echo '<td>'.$ScheldGAGF.'</td>';
-					echo '</tr>';
-					$c = 1;
-					for($j=0;$j<count($teamList);$j++) {
-						if($teamList[$j] != $currentTeam) {
-							if($c == 1) $c = 2;
-							else $c = 1;
-							$GP = $teamListWin[$j]+$teamListLoose[$j]+$teamListTie[$j];
-							echo '<tr class="hover'.$c.'">';
-							echo '<td>'.$teamList[$j].'</td>';
-							echo '<td>'.$GP.'</td>';
-							echo '<td>'.$teamListWin[$j].'</td>';
-							echo '<td>'.$teamListLoose[$j].'</td>';
-							echo '<td>'.$teamListTie[$j].'</td>';
-							echo '<td>'.$teamListLeft[$j].'</td>';
-							/* echo '<td>'.$teamListGA[$j].'-'.$teamListGF[$j].'</td>'; */
-							echo '<td>'.$teamListGF[$j].'-'.$teamListGA[$j].'</td>';
-							echo '</tr>';
-						}
-					}
-					echo '</table>';
-					echo '</div>';
-				}
-				else 
-				?>
+                    			    //new day
+                    			    if($lastDay != $schedule->getGameDay()){
+                    			        
+                    			        if($dayCount % $daysPerRow == 0){
+                    			            
+                    			            if( $dayCount > 0){
+                    			                echo '</div>'; //end row
+                    			            }
+                    			            
+                    			            echo '<div class="row ">';
+                    			        }
+
+                    			        
+                    			        if($dayCount > 0){
+                    			            echo '</div>';
+                    			            echo '</div>'; //end card
+                    			            echo '</div>'; //end col
+                    			        }
+                    	
+                    			        echo '<div class="col-sm-12 col-md-6 col-lg-4 mt-3">';
+                    			        echo '<div class="card ">';
+                    			        echo '<div class="card-header day-header p-0">
+                                            	<h5 class="mb-0 ml-2"> Day: '.$schedule->getGameDay().($schedule->getGameDay() == $scheduleHolder->getTradeDeadline() ? ' TRADE DEADLINE' : '').'</h5>
+                                              </div>';
+                    			        echo '<div class="card-body p-1">';
+                    			        $lastDay = $schedule->getGameDay();
+                    			        $dayCount++;
+                    			       // $rowCount = 0; //want to rest count every day.
+                    			    }
+                    
+                        			?>
+                    			    
+                    			    <div class = "col-sm-12 pb-1 pr-1 pl-1">
+                                      	<ul class="list-group">
+                                      		<?php if($schedule->getIsPlayed()){
+                                      		    $linkRnd = '';
+                                      		    $linkSeasonId = '';
+                                      		    $textStyle = '';
+                                      		    if($round) {
+                                      		        $linkRnd = '&rnd='.$round;
+                                      		    }
+                                      		    if($seasonId) {
+                                      		        $linkSeasonId = '&seasonId='.$seasonId;
+                                      		    }
+
+                                      		    ?>
+                                      		
+                                      		 <li class="list-group-item p-1 border-0">
+                                      		 	<a class="lien-noir" style="display:block; width:100%;" href="games.php?num=<?php echo$schedule->getGameNumber().$linkSeasonId.$linkRnd?>">
+                                             	<span><strong><?php echo $schedule->getTeam1().' at '.$schedule->getTeam2()?></strong>
+                                             	  <?php echo $schedule->getTeam1Score().' - '.$schedule->getTeam2Score().' '.$schedule->getGameTitle()?></span>
+                                             	</a>
+                                             </li>
+                                            <?php }else{
+                                            
+                                                
+                                                //skip if not required
+                                                if(!$schedule->getIsRequired()){
+                                                    $textStyle = 'text-decoration: line-through;';
+        
+                                                }
+                                                
+                                                ?>
+                                          	 <li class="list-group-item p-1 border-0 lien-noir"><span style="<?php echo $textStyle;?>"><?php echo $schedule->getTeam1().' at '.$schedule->getTeam2() ?></span></li>
+                                             <?php 
+                        			
+                        			         }?>
+                                      	</ul>
+                                  	</div>
+          	    
+                    			<?php 
+                    			
+                    			
+                    			//if($rowCount == 9) break;
+                    			
+                    			$rowCount++;
+                    			
+                    			}?>
+  
+                    			<?php if(!empty($scheduleHolder->getRemainingSchedule())){?>
+                    			</div><!-- last body -->
+                    			</div><!-- last card -->
+                    			</div><!-- last col -->
+                    			</div><!-- last row -->
+                    			<?php }else{?>
+                    			    <div>
+                    			    	<h5>No Games Remaining</h5>
+                    			    </div>
+                    		
+                    			<?php }?>
+            			</div>
+            			
+            			
+						<div role="tabpanel" class="tab-pane" id="completed">
+
+            				<?php
+                                $daysPerRow = 3;
+                                
+                                $rowCount = 0;
+                                $lastDay = 0;
+                    			$dayCount = 0;
+
+                    			foreach (array_reverse($scheduleHolder->getCompletedSchedule()) as $schedule) {
+                    			    //new day
+                    			    if($lastDay != $schedule->getGameDay()){
+                    			        
+                    			        if($dayCount % $daysPerRow == 0){
+                    			            
+                    			            if( $dayCount > 0){
+                    			                echo '</div>'; //end row
+                    			            }
+                    			            
+                    			            echo '<div class="row ">';
+                    			        }
+                    			        
+                    
+                    			        
+                    			        if($dayCount > 0){
+                    			           // echo '</div>'; //end col
+                    			            //echo '</div>'; //end row
+                    			            echo '</div>';
+                    			            echo '</div>'; //end card
+                    			            echo '</div>'; //end col
+                    			        }
+                    	
+                    			        echo '<div class="col-sm-12 col-md-6 col-lg-4 mt-3">';
+                    			        echo '<div class="card ">';
+                    			        echo '<div class="card-header day-header p-0">
+                                            	<h5 class="mb-0 ml-2"> Day: '.$schedule->getGameDay().($schedule->getGameDay() == $scheduleHolder->getTradeDeadline() ? ' TRADE DEADLINE' : '').'</h5>
+                                              </div>';
+                    			        echo '<div class="card-body p-1">';
+                    			        $lastDay = $schedule->getGameDay();
+                    			        $dayCount++;
+                    			       // $rowCount = 0; //want to rest count every day.
+                    			    }
+                    
+                        			?>
+                    			    
+                    			    <div class = "col-sm-12 pb-1 pr-1 pl-1">
+                                      	<ul class="list-group">
+                                      		<?php if($schedule->getIsPlayed()){
+                                      		    $linkRnd = '';
+                                      		    $linkSeasonId = '';
+                                      		    if($round) {
+                                      		        $linkRnd = '&rnd='.$round;
+                                      		    }
+                                      		    if($seasonId) {
+                                      		        $linkSeasonId = '&seasonId='.$seasonId;
+                                      		    }
+                                      		    ?>
+                                      		
+                                      		 <li class="list-group-item p-1 border-0">
+                                      		 	<a class="lien-noir" style="display:block; width:100%;" href="games.php?num=<?php echo$schedule->getGameNumber().$linkSeasonId.$linkRnd?>">
+                                             	<span><strong><?php echo $schedule->getTeam1().' at '.$schedule->getTeam2()?></strong>
+                                             	  <?php echo $schedule->getTeam1Score().' - '.$schedule->getTeam2Score().' '.$schedule->getGameTitle()?></span>
+                                             	</a>
+                                             </li>
+                                            <?php }else{?>
+                                          	 <li class="list-group-item p-1 border-0 lien-noir"><span><?php echo $schedule->getTeam1().' at '.$schedule->getTeam2() ?></span></li>
+                                             <?php 
+                        			
+                        			         }?>
+                                      	</ul>
+                                  	</div>
+          	    
+                    			<?php 
+                    			
+                    			
+                    			//if($rowCount == 9) break;
+                    			
+                    			$rowCount++;
+                    			
+                    			}?>
+                    			
+ 								<?php if(!empty($scheduleHolder->getCompletedSchedule())){?>
+                    			</div><!-- last body -->
+                    			</div><!-- last card -->
+                    			</div><!-- last col -->
+                    			</div><!-- last row -->
+                    			<?php }else{?>
+                    			    <div>
+                    			    	<h5>No Games Completed</h5>
+                    			    </div>
+                    		
+                    			<?php }?>
+            			</div>
+            			
+        			</div>
+        			
 				</div>
 			</div>
+			
+	
 		</div>
 	</div>
 </div>
+
+<script>
+
+$(document).ready(function() {
+//     var url = document.location.toString();
+    
+//     if (url.match('#')) {
+//         $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+//     } 
+    var url = document.location.toString();
+    if (url.match('#')) {
+       $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+    }
+
+	  // add a hash to the URL when the user clicks on a tab
+    $('a[data-toggle="tab"]').on('click', function(e) {
+        history.pushState(null, null, $(this).attr('href'));
+    });
+
+    // navigate to a tab when the history changes
+    window.addEventListener("popstate", function(e) {
+        var activeTab = $('[href="' + location.hash + '"]');
+  
+        if (activeTab.length) {
+            activeTab.tab('show');
+        } else {
+            $('.nav-tabs a:first').tab('show');
+        }
+    });
+});
+
+</script>
 
 <?php include 'footer.php'; ?>

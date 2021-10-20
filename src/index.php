@@ -14,7 +14,8 @@ include 'head.php';
 
 
 <?php
-$playoffs = isPlayoffs($folder, $playoffMode);
+//$playoffs = isPlayoffs($folder, $playoffMode);
+$playoffs = isPlayoffs2();
 ?>
 		
 <!-- 		<div class="mx-md-2 mx-lg-3"> -->
@@ -25,7 +26,7 @@ $playoffs = isPlayoffs($folder, $playoffMode);
 <!-- 		<div class="mx-xs-1 mx-md-2 mx-lg-3"> -->
 		<div class="">
 			<?php //include 'ScoreCarousel.php'; ?>
-			<?php include FS_ROOT.'component/ScoreCarousel.php'; ?>
+			<?php //include FS_ROOT.'component/ScoreCarousel.php'; ?>
 		</div>
 		
 	
@@ -108,14 +109,6 @@ $playoffs = isPlayoffs($folder, $playoffMode);
         					</div>
         				</div>
         				
-<!--         				<div class="card"> -->
-<!--         					<div class="card-header p-2"> -->
-<!--         						<h4 class="m-0">Todays Games</h4> -->
-<!--         					</div> -->
-<!--         					<div class="card-body p-2"> -->
-        						<?php //include FS_ROOT.'component/MiniTodayGames3.php'; ?>
-<!--         					</div> -->
-<!--         				</div> -->
         
         			</div> <!-- card-columns end -->
     			</div> <!-- col end -->

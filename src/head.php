@@ -23,6 +23,7 @@ if(isset($_SESSION['lang'])){
 
 include 'lang.php';
 include_once 'common.php';
+include_once 'fileUtils.php';
 include_once 'classes/TeamHolder.php';
 
 
@@ -69,8 +70,30 @@ if(isset($_SESSION['teamId'])){
 }
 
 
+//TRACK PLAYOFF STATE
+$playoff = '';
+$currentPLF = 0;
+
+// if(isPlayoffs(TRANSFER_DIR, LEAGUE_MODE)){
+//     $playoff = 'PLF';
+//     $currentPLF = 1;
+// }
+//backwards compat
+if(isPlayoffs2()){
+    $playoff = 'PLF';
+    $currentPLF = 1;
+}
+
+// // CREATE TEAM LIST
+//$gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
+$gmFile = getCurrentLeagueFile('GMs');
+$teamHolder = new TeamHolder($gmFile);
+//needs to retain order.
+$teamList = $teamHolder->get_teams();
+
+
 //TRACK TEAM STATE
-$currentTeam = '';
+$currentTeam = $teamList[0]; //default to first team on list.
 if(isset($_GET['team']) || isset($_POST['team'])) {
     $currentTeam = ( isset($_GET['team']) ) ? $_GET['team'] : $_POST['team'];
     $currentTeam = htmlspecialchars($currentTeam);
@@ -83,20 +106,7 @@ if(isset($_SESSION["team"])){
 }
 
 
-//TRACK PLAYOFF STATE
-$playoff = '';
-$currentPLF = 0;
 
-if(isPlayoffs(TRANSFER_DIR, LEAGUE_MODE)){
-    $playoff = 'PLF';
-    $currentPLF = 1;
-}
-
-// // CREATE TEAM LIST
-$gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
-$teamHolder = new TeamHolder($gmFile);
-//needs to retain order.
-$teamList = $teamHolder->get_teams();
 
 ?>
 <!DOCTYPE html>

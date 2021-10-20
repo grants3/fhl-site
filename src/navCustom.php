@@ -84,7 +84,7 @@
 						<ul class="dropdown-menu">
 							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Coaches.php">Coaches</a></li>
 							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Injury.php">Injuries</a></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Schedule3.php">Schedule</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Schedule.php">Schedule</a></li>
 							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Transact.php">Transactions</a></li>
 							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Waivers.php">Waivers</a></li>
 							<li class="dropdown-divider"></li>

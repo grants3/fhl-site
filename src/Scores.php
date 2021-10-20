@@ -8,7 +8,8 @@ if(isset($_GET['dayNum']) || isset($_POST['dayNum'])) {
 }
 
 require_once 'config.php';
-include 'lang.php';
+include_once 'lang.php';
+include_once 'fileUtils.php';
 include_once 'classes/ScheduleHolder.php';
 include_once 'classes/ScheduleObj.php';
 include_once 'classes/TeamAbbrHolder.php';
@@ -18,84 +19,30 @@ $CurrentTitle = 'Scores';
 $CurrentPage = 'Scores';
 include 'head.php';
 
-
-
-if(!function_exists('search')) {
-    function search($Fnm,$currentTeam) {
-        $b = 0;
-        $d = 0;
-        $tableau = file($Fnm);
-        while(list($cle,$val) = myEach($tableau)) {
-            $val = utf8_encode($val);
-            if(substr_count($val, 'A NAME='.$currentTeam)) {
-                $b = 1;
-            }
-            if($b == 1 && $d == 1) {
-                $reste = trim($val);
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                if(substr($reste, 0, 1) == '*') {
-                    $reste = trim(substr($reste, 1));
-                }
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                return $TSabbr = trim(substr($reste, strrpos($reste, ' ')));
-            }
-            if($b == 1 && substr_count($val, 'PCTG')) {
-                $d = 1;
-            }
-        }
-    }
-}
-
 // Today Games
-$fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
+//$fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
 $i = 0;
 $j = 0;
-$round = 4;
+$round = 0;
 $playoffLink = '';
 
-if(isPlayoffs($folder, $playoffMode)){
-    $round = 0;
-    if(file_exists($folder.'cehlPLF-Round4-Schedule.html')) {
-        //$fileName = $folder.'cehlPLF-Round4-Schedule.html';
-        $round = 4;
-    }else if(file_exists($folder.'cehlPLF-Round3-Schedule.html')) {
-        //$fileName = $folder.'cehlPLF-Round3-Schedule.html';
-        $round = 3;
-    }else if(file_exists($folder.'cehlPLF-Round2-Schedule.html')) {
-        //$fileName = $folder.'cehlPLF-Round2-Schedule.html';
-        $round = 2;
-    }else if(file_exists($folder.'cehlPLF-Round1-Schedule.html')) {
-        //$fileName = $folder.'cehlPLF-Round1-Schedule.html';
-        $round = 1;
-    }
-    
-    $fileName = getLeagueFile($folder, 'PLF', '-Round'.$round.'-Schedule.html', '-Round'.$round.'-Schedule');
+if(isPlayoffs2()){
+
+    $round = getPlayoffRound();
+    $baseFileName = '-Round'.$round.'-Schedule';
     $playoffLink = '&rnd='.$round;
     
 }else{
-    $fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
+   // $fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
+    $baseFileName = 'Schedule';
 }
 
+$fileName = getCurrentLeagueFile($baseFileName);
 
 
 $scheduleHolder = new ScheduleHolder($fileName, '');
 
-$teamScoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
+$teamScoringFile = getCurrentLeagueFile('TeamScoring');
 $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
 
 
@@ -111,16 +58,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 
 
     if(isset($lastGames)) {
-		$matches = glob($folder.'*'.$playoff.'GMs.html');
-		$folderLeagueURL = '';
-		$matchesDate = array_map('filemtime', $matches);
-		arsort($matchesDate);
-		foreach ($matchesDate as $j => $val) {
-			if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-				$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'GMs')-strrpos($matches[$j], '/')-1);
-				break 1;
-			}
-		}
+
 
 		foreach ($lastGames as $game) {
 		//for($i=0;$i<count($lastGames);$i++) {
@@ -140,8 +78,10 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 
 			//$matchNumber = $lastGames[$i];
 		    $matchNumber = $game->getGameNumber();
-			if($playoff == '') $Fnm = $folder.$folderGames.$folderLeagueURL.$matchNumber.'.html';
-			if($playoff == 'PLF')  $Fnm = $folder.$folderGames.$folderLeagueURL.'-R'.$round.'-'.$matchNumber.'.html';
+			//if($playoff == '') $Fnm = $folder.$folderGames.$folderLeagueURL.$matchNumber.'.html';
+			//if($playoff == 'PLF')  $Fnm = $folder.$folderGames.$folderLeagueURL.'-R'.$round.'-'.$matchNumber.'.html';
+		    $Fnm = getGameFile($matchNumber, null, $round );
+		    
 			$a = 0;
 			$b = 0;
 			$d = 0;
@@ -603,25 +543,27 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 					break 1;
 				}
 				
-				// Find Teams Abbr
-				$matches = glob($folder.'*TeamScoring.html');
-				$folderLeagueURL3 = '';
-				$matchesDate = array_map('filemtime', $matches);
-				arsort($matchesDate);
-				foreach ($matchesDate as $j => $val) {
-					if(!substr_count($matches[$j], 'PLF')) {
-						$folderLeagueURL3 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
-						break 1;
-					}
-				}
+// 				// Find Teams Abbr
+// 				$matches = glob($folder.'*TeamScoring.html');
+// 				$folderLeagueURL3 = '';
+// 				$matchesDate = array_map('filemtime', $matches);
+// 				arsort($matchesDate);
+// 				foreach ($matchesDate as $j => $val) {
+// 					if(!substr_count($matches[$j], 'PLF')) {
+// 						$folderLeagueURL3 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
+// 						break 1;
+// 					}
+// 				}
 	
-				$FnmAbbr = $folder.$folderLeagueURL3.'TeamScoring.html';
-				if(file_exists($FnmAbbr)) {
-					$lastEquipe1Abbr = search($FnmAbbr,$lastEquipe1);
-					$lastEquipe2Abbr = search($FnmAbbr,$lastEquipe2);
-				}
-				else echo $allFileNotFound.' - '.$FnmAbbr;
-				
+// 				$FnmAbbr = $folder.$folderLeagueURL3.'TeamScoring.html';
+// 				if(file_exists($FnmAbbr)) {
+// 					$lastEquipe1Abbr = search($FnmAbbr,$lastEquipe1);
+// 					$lastEquipe2Abbr = search($FnmAbbr,$lastEquipe2);
+// 				}
+// 				else echo $allFileNotFound.' - '.$FnmAbbr;
+
+				$lastEquipe1Abbr = $teamAbbrHolder->getAbbr($lastEquipe1);
+				$lastEquipe2Abbr = $teamAbbrHolder->getAbbr($lastEquipe2);
 
 				//header
 				echo '<div class="col-sm-12 col-md-6 col-lg-4 d-flex" style="padding-left: 7px; padding-right: 7px;">';

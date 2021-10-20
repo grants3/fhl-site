@@ -1,6 +1,7 @@
 <?php
 require_once 'config.php';
 include 'lang.php';
+include 'fileUtils.php';
 $CurrentHTML = 'TeamOverview.php';
 $CurrentTitle = $teamCardTitle;
 $CurrentPage = 'TeamOverview';
@@ -218,18 +219,19 @@ $recordAwayLos = 0;
 $recordAwayTie = 0;
 $recordAwayPts = 0;
 
-if (file_exists($folder.$folderLeagueURL2.'PLF-Round1-Schedule.html')) {
-	$round = 1;
-}
-if (file_exists($folder.$folderLeagueURL2.'PLF-Round2-Schedule.html')) {
-	$round = 2;
-}
-if (file_exists($folder.$folderLeagueURL2.'PLF-Round3-Schedule.html')) {
-	$round = 3;
-}
-if (file_exists($folder.$folderLeagueURL2.'PLF-Round4-Schedule.html')) {
-	$round = 4;
-}
+// if (file_exists($folder.$folderLeagueURL2.'PLF-Round1-Schedule.html')) {
+// 	$round = 1;
+// }
+// if (file_exists($folder.$folderLeagueURL2.'PLF-Round2-Schedule.html')) {
+// 	$round = 2;
+// }
+// if (file_exists($folder.$folderLeagueURL2.'PLF-Round3-Schedule.html')) {
+// 	$round = 3;
+// }
+// if (file_exists($folder.$folderLeagueURL2.'PLF-Round4-Schedule.html')) {
+// 	$round = 4;
+// }
+$round = getPlayoffRound();
 
 $Fnm = $folder.$folderLeagueURL2.'Schedule.html';
 for($j=0;$j<=$round;$j++) {
@@ -248,11 +250,11 @@ for($j=0;$j<=$round;$j++) {
 				$nextEquipe1 = substr($reste, 0, strpos($reste, ' at'));
 				$reste = trim(substr($reste, strpos($reste, 'at')+2));
 				$nextEquipe2 = $reste;
-				if($j == 0) $nextGameFile = 'Schedule2.php';
-				if($j == 1) $nextGameFile = 'Schedule2.php&plf=1&rnd=1';
-				if($j == 2) $nextGameFile = 'Schedule2.php&plf=1&rnd=2';
-				if($j == 3) $nextGameFile = 'Schedule2.php&plf=1&rnd=3';
-				if($j == 4) $nextGameFile = 'Schedule2.php&plf=1&rnd=4';
+				if($j == 0) $nextGameFile = 'Schedule.php';
+				if($j == 1) $nextGameFile = 'Schedule.php&rnd=1';
+				if($j == 2) $nextGameFile = 'Schedule.php&rnd=2';
+				if($j == 3) $nextGameFile = 'Schedule.php&rnd=3';
+				if($j == 4) $nextGameFile = 'Schedule.php&rnd=4';
 				break 2;
 			}
 			if(substr_count($val, $currentTeam) && substr_count($val, 'A HREF=')){

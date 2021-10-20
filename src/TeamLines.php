@@ -12,7 +12,9 @@ include 'TeamHeader.php';
 
 <?php
 
-$Fnm = getLeagueFile($folder, $playoff, 'Lines.html', 'Lines');
+//$Fnm = getLeagueFile($folder, $playoff, 'Lines.html', 'Lines');
+$Fnm = getCurrentLeagueFile('Lines');
+
 $a = 0;
 $b = 0;
 $c = 1;

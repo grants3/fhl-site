@@ -1,6 +1,6 @@
 <?php 
 
-include_once 'classes/TeamInfo.php';
+include_once FS_ROOT.'classes/TeamInfo.php';
 $teamInfoAway = new TeamInfo($folder, $playoff, $currentTeam);
 
 ?>
