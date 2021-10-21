@@ -29,8 +29,8 @@ if(isset($_GET['team']) || isset($_POST['team'])) {
 //     $fileName = getLeagueFile($seasonFolder, $playoff, 'Transact.html', 'Transact');
 //     $scoringFile = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
 // }
-$fileName = getLeagueFile('Transact', $seasonId);
-$scoringFile = getLeagueFile('TeamScoring', $seasonId);
+$fileName = _getLeagueFile('Transact', $seasonId);
+$scoringFile = _getLeagueFile('TeamScoring', $seasonId);
 
 if(empty($team)){
     http_response_code(400);

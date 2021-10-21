@@ -12,7 +12,7 @@ if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
 
 if(trim($seasonId) == false){
    // $Fnm = getLeagueFile2($folder, '', 'Standings.html', 'Standings', 'Farm'); // exclude farm
-    $Fnm =  getCurrentLeagueFile('Standings',null,'Farm');
+    $Fnm =  _getLeagueFile('Standings', null, null, 'Farm'); // exclude farm
 }else{
    //$seasonFolder = str_replace("#",$seasonId,CAREER_STATS_DIR);
     //$Fnm = getLeagueFile2($seasonFolder, '', 'Standings.html', 'Standings', 'Farm'); // exclude farm

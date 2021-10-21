@@ -7,7 +7,6 @@ $CurrentPage = 'ComparePlayers';
 
 
 $couleur_contour = "#484848";
-$mouseHoverTableLine = '#FFC741';
 $tableauGrey2 = "#ECECEC";
 
 include 'head.php';
@@ -382,10 +381,12 @@ function selectTeam(x,m) {
 		for(var i=0;i<teamBox.length;i++) {
 			teamBox[i].style.fontWeight = "normal";
 			teamBox[i].style.backgroundColor = "";
+			//teamBox[i].style.className = "lien-noir compare-team-entry";
+			teamBox[i].classList.remove("compare-selection");
 		}
 	}
 	document.getElementById("side"+x+"t"+m).style.fontWeight = "bold";
-	document.getElementById("side"+x+"t"+m).style.backgroundColor = "<?php echo $mouseHoverTableLine; ?>";
+	document.getElementById("side"+x+"t"+m).classList.add("compare-selection");
 	
 	document.getElementById("team"+x).textContent = "";
 	var result = document.getElementById("team"+x);
@@ -507,6 +508,7 @@ function selectPlayer(side,t,p,status) {
 		var x = document.getElementsByClassName(tdID);
 		for(var i = 0; i < x.length; i++) {
 			x[i].style.backgroundColor = "";
+			x[i].classList.remove("compare-selection");
 			x[i].style.fontWeight = "normal";
 		}
 	}
@@ -514,7 +516,7 @@ function selectPlayer(side,t,p,status) {
 		tmpCheckbox.checked = true;
 		var x = document.getElementsByClassName(tdID);
 		for(var i = 0; i < x.length; i++) {
-			x[i].style.backgroundColor = "<?php echo $mouseHoverTableLine; ?>";
+			x[i].classList.add("compare-selection");
 			x[i].style.fontWeight = "bold";
 		}
 	}
@@ -1482,6 +1484,32 @@ document.addEventListener("DOMContentLoaded", function() {
 //-->
 </script>
 
+<style>
+
+/*fix compare table header colour*/
+.table>tbody a.info,
+.table>tbody a.lien-blanc {
+    color: white;
+    /* font-weight: 550; */
+}
+
+.compare-team-entry{
+    height:25px;
+    line-height: 25px;
+    vertical-align: middle;
+}
+
+
+/*alternate override for selection*/
+a.compare-selection,
+.table-striped>tbody>tr>td.compare-selection{
+     background-color:var(--color-primary-2);
+    color:#fff;
+}
+
+
+</style>
+
 <div class="container px-2">
 
 <div class="card">
@@ -1492,33 +1520,33 @@ document.addEventListener("DOMContentLoaded", function() {
 <div style="display:none; border:solid 1px<?php echo $couleur_contour; ?>" id="windowSearch">
 	
 	<div class = "row no-gutters">
-    	<div class= "col-3" style=" height:300px;overflow: auto;">
+    	<div class= "col-3" style=" height:300px;overflow: auto; background-color: var(--color-alternate-1);">
     		<?php
     		for($i=0;$i<count($teamList);$i++) {
-    			echo '<a id="side1t'.$i.'" style="display:block; width:100%;" class="lien-noir" href="javascript:selectTeam(\'1\',\''.$i.'\');">'.$teamList[$i].'</a>';
+    			echo '<a id="side1t'.$i.'" style="display:block; width:100%;" class="lien-noir compare-team-entry" href="javascript:selectTeam(\'1\',\''.$i.'\');">'.$teamList[$i].'</a>';
     		}
     		?>
     	</div>
-    	<div class= "col-9" id="team1" style=" height:300px; overflow: auto;">
+    	<div class= "col-9" id="team1" style=" height:300px; overflow: auto; background-color: var(--color-alternate-3);">
     		<?php echo $compareSelectTeam; ?>
     	</div>
 	</div>
 	
 	<div class = "row no-gutters mt-2 border-top ">
-    	<div class= "col-3" style=" height:300px; overflow: auto;">
+    	<div class= "col-3" style=" height:300px; overflow: auto; background-color: var(--color-alternate-3);">
     		<?php
     		for($i=0;$i<count($teamList);$i++) {
-    			echo '<a id="side2t'.$i.'" style="display:block; width:100%;" class="lien-noir" href="javascript:selectTeam(\'2\',\''.$i.'\');">'.$teamList[$i].'</a>';
+    			echo '<a id="side2t'.$i.'" style="display:block; width:100%;" class="lien-noir compare-team-entry" href="javascript:selectTeam(\'2\',\''.$i.'\');">'.$teamList[$i].'</a>';
     		}
     		?>
     	</div>
-    	<div class = "col-9" id="team2" style="height:300px; overflow: auto;">
+    	<div class = "col-9" id="team2" style="height:300px; overflow: auto; background-color: var(--color-alternate-1);">
     		<?php echo $compareSelectTeam; ?>
     	</div>
 	</div>
 	
 	<div class="row mt-2 border-top">
-		<div class="col" style="clear:both"><input onclick="javascript:searchResult();" style="width:100%;" type="button" value="<?php echo $compareCompare; ?>"></div>
+		<div class="col" style="clear:both"><input class="btn btn-primary" onclick="javascript:searchResult();" style="width:100%;" type="button" value="<?php echo $compareCompare; ?>"></div>
 	</div>
 </div>
 

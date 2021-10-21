@@ -18,21 +18,8 @@ include_once 'classes/PlayerVitalsHolder.php';
 <div class="container px-0">
 
 <?php
-$matches = glob($folder.'*'.$playoff.'Finance.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-$lastUpdated = '';
 
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Finance')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-$Fnm = $folder.$folderLeagueURL.'Finance.html';
-// $rosterFileName = getLeagueFile($folder, $playoff, 'Rosters.html', 'Rosters');
-// $vitalsFileName = getLeagueFile($folder, $playoff, 'PlayerVitals.html', 'PlayerVitals');
+$Fnm =  getCurrentLeagueFile('Finance');
 $rosterFileName = getCurrentLeagueFile('Rosters');
 $vitalsFileName = getCurrentLeagueFile('PlayerVitals');
 

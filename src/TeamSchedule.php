@@ -1,18 +1,19 @@
 <?php
 require_once 'config.php';
-include 'lang.php';
-
-$matches = glob($folder.'*Schedule.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if(!substr_count($matches[$j], 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Schedule')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-$Fnm = $folder.$folderLeagueURL.'Schedule.html';
+include_once 'lang.php';
+include_once 'fileUtils.php';
+// $matches = glob($folder.'*Schedule.html');
+// $folderLeagueURL = '';
+// $matchesDate = array_map('filemtime', $matches);
+// arsort($matchesDate);
+// foreach ($matchesDate as $j => $val) {
+// 	if(!substr_count($matches[$j], 'PLF')) {
+// 		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Schedule')-strrpos($matches[$j], '/')-1);
+// 		break 1;
+// 	}
+// }
+// $Fnm = $folder.$folderLeagueURL.'Schedule.html';
+$Fnm = getLeagueFile('Schedule');
 $linkSchedule = 'TeamSchedule';
 $rnd = 0;
 $existRnd = 0;

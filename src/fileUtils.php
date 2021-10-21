@@ -39,7 +39,7 @@ function getLeagueFileAbsolute($name, $seasonId = null) {
     }
 
     error_log($searchFolder.$name);
-    $matches = glob($searchFolder.$name);
+    $matches = glob($searchFolder.$name,GLOB_NOSORT);
 
     //filter duplicates
     return filterMatches($matches);
@@ -54,7 +54,7 @@ function getLeaguePrefix($baseDir, bool $playoffs = false){
         $filter = ''; //no filter.
     }
     
-    $matches = glob($baseDir.$search);
+    $matches = glob($baseDir.$search,GLOB_NOSORT);
     
     //exclude playoff from reg seaon results.
     $result = filterMatches($matches, $filter);
@@ -103,6 +103,10 @@ function getGameFile($gameNumber, $seasonId = null, $round = null) {
  */
 function getCurrentLeagueFile(string $baseName, string $exclude=null) {
     return getLeagueFile($baseName, null, $exclude);
+}
+
+function getCurrentPlayoffLeagueFile(string $baseName, string $exclude=null) {
+    return _getLeagueFile($baseName, 'PLF', null, $exclude);
 }
 
 function getLeagueFile(string $baseName, $seasonId = null, string $exclude=null) {

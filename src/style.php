@@ -24,8 +24,9 @@ if($siteColorTheme == 'green') {
    --color-primary-1: #18A558; 
    --color-primary-2: #116530; 
    --color-primary-3: #A3EBB1; 
-   --color-alternate-1:#D7FFF1; 
-   --color-alternate-2:#8CD790; 
+   --color-alternate-1:#D4FFE7; 
+   --color-alternate-2:#BCFFC7; 
+   --color-alternate-3:#E9FFF3;
 
    --table-link-color:#116530; 
    --table-sort-asc:#0a4323; 
@@ -43,8 +44,9 @@ if($siteColorTheme == 'red') {
    --color-primary-1: #7d1e26; 
    --color-primary-2: #6C1E1E; 
    --color-primary-3: #A75B5B; 
-   --color-alternate-1:#ebbec2; 
-   --color-alternate-2:#FFF5F6; 
+   --color-alternate-1:#FFF5F6; 
+   --color-alternate-2:#EBDCDD;
+   --color-alternate-3:#F7EFF0;
 
    --table-link-color:#6C1E1E; 
    --table-sort-asc:#763838; 
