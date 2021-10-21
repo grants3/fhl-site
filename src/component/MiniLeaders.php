@@ -100,6 +100,10 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
 	flex-direction: column;
 }
 
+.leader-container a{
+    color:var(--color-primary-2);;
+}
+
 .hHORBn {
 	display: inline-block;
 	vertical-align: top;
@@ -180,7 +184,7 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
 <!--     	</div> -->
 <!--       </div>	 -->
 	  <h5 class="tableau-top">Skaters</h5>
-      <div class="card">
+      <div class="card leader-container">
         <div class="card-header pt-0">
       
          <div class="card-heading"></div>
@@ -233,7 +237,7 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
 <!--     	</div> -->
 <!--       </div> -->
 	  <h5 class="tableau-top">Defenseman</h5>
-      <div class="card">
+      <div class="card leader-container">
         <div class="card-header pt-0">
          <div class="card-heading"></div>
           <ul class="nav nav-tabs card-header-tabs" id="top-scorers-defense-list" role="tablist">
@@ -285,7 +289,7 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
 <!--     	</div> -->
 <!--    	  </div> -->
    	  <h5 class="tableau-top">Goalies</h5>
-      <div class="card">
+      <div class="card leader-container">
         <div class="card-header pt-0">
          
           <ul class="nav nav-tabs card-header-tabs" id="top-goalies-list" role="tablist">

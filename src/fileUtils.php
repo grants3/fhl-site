@@ -38,19 +38,18 @@ function getLeagueFileAbsolute($name, $seasonId = null) {
         $searchFolder =  str_lreplace("#",$seasonId,CAREER_STATS_DIR);
     }
 
-    error_log($searchFolder.$name);
     $matches = glob($searchFolder.$name,GLOB_NOSORT);
 
     //filter duplicates
     return filterMatches($matches);
 }
 
-function getLeaguePrefix($baseDir, bool $playoffs = false){
+function getLeaguePrefix($baseDir, bool $playoffs = false, $searchTerm = 'GMs.html'){
     
-    $search = '*GMs.html';
+    $search = '*'.$searchTerm;
     $filter = 'PLF'; //want to filter out in regular season play
     if($playoffs){
-        $search = '*PLFGMs.html';
+        $search = '*PLF'.$searchTerm;
         $filter = ''; //no filter.
     }
     
@@ -112,12 +111,6 @@ function getCurrentPlayoffLeagueFile(string $baseName, string $exclude=null) {
 function getLeagueFile(string $baseName, $seasonId = null, string $exclude=null) {
     $seasonType = '';
     
-    $converted_res = isPlayoffs2() ? 'true' : 'false';
-    //if(isPlayoffs(TRANSFER_DIR, LEAGUE_MODE)){
-    error_log('LEAGUE MODE ====='.LEAGUE_MODE);
-    error_log('ISPLAYOFFS ====='.$converted_res);
-    error_log('ISPLAYOFFS2 ====='.$GLOBALS["GLOB_LEAGUE_MODE2"]);
-    
     if(isPlayoffs2()){
         $seasonType = 'PLF';
     }
@@ -142,9 +135,6 @@ function _getLeagueFile(string $baseName, $seasonType = null, $seasonId = null, 
     
     //resolve league prefix.
     $leaguePrefix = getLeaguePrefix($searchFolder,$isPlayoffs);
-    
-    error_log($leaguePrefix);
-    error_log($leaguePrefix.$baseName.'.html');
     
     //return getLeagueFileAbsolute($leaguePrefix.$filePrefix.$baseName.'.html', $seasonId);
     return getLeagueFileAbsolute($leaguePrefix.$baseName.'.html', $seasonId);
@@ -174,7 +164,6 @@ function _getLeagueFile2(string $baseName, string $seasonType, int $seasonId = n
     
     if(isset($seasonId) && !$seasonId){
         $searchFolder =  str_lreplace("#",$seasonId,CAREER_STATS_DIR);
-        error_log($searchFolder);
     }
     
     if($seasonType){

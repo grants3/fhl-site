@@ -104,6 +104,10 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
 	flex-direction: column;
 }
 
+.leader-container a{
+    color:var(--color-primary-2);;
+}
+
 .hHORBn {
 	display: inline-block;
 	vertical-align: top;

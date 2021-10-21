@@ -422,7 +422,8 @@ table.table-sm>thead>tr>th:first-of-type {
 //     }
 //     else exit($allFileNotFound.' - '.$FnmAbbr);
 
-    $teamScoringFile = getLeagueFile($baseFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
+    $seasonType = $round ? 'PLF' : null;
+    $teamScoringFile = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
     if(file_exists($teamScoringFile)) {
         $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
         $awayTeamAbbr = $teamAbbrHolder->getAbbr($awayTeam);

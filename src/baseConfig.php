@@ -37,9 +37,7 @@ function inferLeagueMode($leagueMode) :string{
     }
     
     $GLOBALS["GLOB_LEAGUE_MODE"] = $result;
-    
-    error_log('SETTING SEASON MODE TO:'.$GLOBALS["GLOB_LEAGUE_MODE"]);
-    
+
     return $result;
 }
 

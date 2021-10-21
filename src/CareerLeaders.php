@@ -1,18 +1,37 @@
 <?php
 require_once 'config.php';
 include_once 'common.php';
+include_once 'fileUtils.php';
 include_once 'lang.php';
+include_once 'classes/TeamAbbrHolder.php';
 
 $CurrentHTML = 'CareerLeaders.php';
 $CurrentTitle = $langCareerLeadersTitle;
 $CurrentPage = 'CareerLeaders';
-$ctlOneLink = '?one=1';
+//$ctlOneLink = '?one=1';
 $ctlOneTeams = '';
+
+$teamFilter = '';
+if(isset($_GET['team'])) {
+    $teamFilter = $_GET['team'];
+    $ctlOneTeams == 1;
+    $scoringFile = getCurrentLeagueFile('TeamScoring');
+    error_log('???????'.$scoringFile);
+    $teamAbbrHolder = new TeamAbbrHolder($scoringFile);
+    $TSabbr = $teamAbbrHolder->getAbbr($teamFilter);
+    $TSabbr = 'WAS';
+    error_log('???????'.$teamFilter);
+    error_log('???????'.$TSabbr);
+    include 'phpGetAbbr.php';
+}
+
 include 'head.php';
-if($ctlOneTeams == 1) $ctlOneLink = "window.location.href.split('?')[0]";
+
+//if($ctlOneTeams == 1) $ctlOneLink = "window.location.href.split('?')[0]";
 
 // Obtenir l'abbréviation de l'équipe
-if($ctlOneTeams == 1) include 'phpGetAbbr.php'; // Output $TSabbr / $folderLeagueURL2
+//if($ctlOneTeams == 1) include 'phpGetAbbr.php'; // Output $TSabbr / $folderLeagueURL2
+
 
 // Recherche des saisons antérieurs
 if(CAREER_STATS_DIR != '0') {
@@ -351,7 +370,7 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
 					}
 					
 					if((isset($TSabbr) && $TSabbr == $tmpGoalTeam) || ($ctlOneTeams == '' && $tmpFwdTeam != 'TOT')) {
-						//if($ctlOneTeams != '') echo 'Key:'.$cle.' - Season #'.$workSeason.' - Team Abbr:'.$TSabbr.' - Team Found:'.$tmpGoalTeam.' - Player:'.$tmpGoalName.'<br>';
+						if($ctlOneTeams != '') echo 'Key:'.$cle.' - Season #'.$workSeason.' - Team Abbr:'.$TSabbr.' - Team Found:'.$tmpGoalTeam.' - Player:'.$tmpGoalName.'<br>';
 						$tmpCle = $cle + 1;
 						$tmpVal = $tableau[$tmpCle];
 						$tmpFound = 0;

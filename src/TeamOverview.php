@@ -1360,7 +1360,7 @@ echo '</div>';
 		echo '<div class = "row">';
 		//echo '<div class="col-sm-12 col-md-8 offset-md-2">';
 		echo '<div class="col-sm-12 col-lg-10 offset-lg-1">';
-		echo '<a href="CareerLeaders.php?one=1"><div style="clear:both;">';
+		echo '<a href="CareerLeaders.php?team='.htmlspecialchars($currentTeam).'"><div style="clear:both;">';
 		    echo '<div class="tableau-top">'.$teamCardBest10Players.'</div>';
 			echo '<div class="table-responsive">';
 			echo '<table class="table table-sm table-striped table-rounded-bottom text-center">';

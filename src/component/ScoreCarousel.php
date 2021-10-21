@@ -116,27 +116,30 @@ padding-right:30px;
     
 
 <?php
-$playoff = isPlayoffs($folder, $playoffMode);
-if ($playoff == 1) {
-    $playoff = 'PLF';
+//$playoff = isPlayoffs($folder, $playoffMode);
+if (isPlayoffs2()) {
+    //$playoff = 'PLF';
     $round = 0;
 
-    //if (file_exists($folder . 'cehlPLF-Round4-Schedule.html')) {
-    if (file_exists($folder . 'cehlPLF-Round4-Schedule.html')) {
-        // $fileName = $folder.'cehlPLF-Round4-Schedule.html';
-        $round = 4;
-    } else if (file_exists($folder . 'cehlPLF-Round3-Schedule.html')) {
-        // $fileName = $folder.'cehlPLF-Round3-Schedule.html';
-        $round = 3;
-    } else if (file_exists($folder . 'cehlPLF-Round2-Schedule.html')) {
-        // $fileName = $folder.'cehlPLF-Round2-Schedule.html';
-        $round = 2;
-    } else if (file_exists($folder . 'cehlPLF-Round1-Schedule.html')) {
-        // $fileName = $folder.'cehlPLF-Round1-Schedule.html';
-        $round = 1;
-    }
+//     //if (file_exists($folder . 'cehlPLF-Round4-Schedule.html')) {
+//     if (file_exists($folder . 'cehlPLF-Round4-Schedule.html')) {
+//         // $fileName = $folder.'cehlPLF-Round4-Schedule.html';
+//         $round = 4;
+//     } else if (file_exists($folder . 'cehlPLF-Round3-Schedule.html')) {
+//         // $fileName = $folder.'cehlPLF-Round3-Schedule.html';
+//         $round = 3;
+//     } else if (file_exists($folder . 'cehlPLF-Round2-Schedule.html')) {
+//         // $fileName = $folder.'cehlPLF-Round2-Schedule.html';
+//         $round = 2;
+//     } else if (file_exists($folder . 'cehlPLF-Round1-Schedule.html')) {
+//         // $fileName = $folder.'cehlPLF-Round1-Schedule.html';
+//         $round = 1;
+//     }
 
-    $fileName = getLeagueFile($folder, $playoff, '-Round' . $round . '-Schedule.html', '-Round' . $round . '-Schedule');
+    $round = getPlayoffRound();
+
+    //$fileName = getLeagueFile($folder, $playoff, '-Round' . $round . '-Schedule.html', '-Round' . $round . '-Schedule');
+    $fileName = getCurrentPlayoffLeagueFile('-Round' . $round . '-Schedule.html', '-Round' . $round . '-Schedule');
     $playoffLink = '&rnd=' . $round;
 
     $scheduleHolder = new ScheduleHolder($fileName, '');
@@ -147,13 +150,15 @@ if ($playoff == 1) {
     if ($scheduleHolder->isScheduleComplete() && $round > 1 && $round < 4) {
         $nextGameScheduleHolder = $scheduleHolder;
         $nextRound = $round + 1;
-        $fileName = getLeagueFile($folder, $playoff, '-Round' . $nextRound . '-Schedule.html', '-Round' . $nextRound . '-Schedule');
-
+        //$fileName = getLeagueFile($folder, $playoff, '-Round' . $nextRound . '-Schedule.html', '-Round' . $nextRound . '-Schedule');
+        $fileName = getCurrentPlayoffLeagueFile('-Round' . $nextRound . '-Schedule.html', '-Round' . $nextRound . '-Schedule');
+        
         $nextGamesRound = $nextRound;
     } else if (! $scheduleHolder->isSeasonStarted() && $round > 1) {
         $nextGameScheduleHolder = $scheduleHolder;
         $previousRound = $round - 1;
-        $fileName = getLeagueFile($folder, $playoff, '-Round' . $previousRound . '-Schedule.html', '-Round' . $previousRound . '-Schedule');
+        //$fileName = getLeagueFile($folder, $playoff, '-Round' . $previousRound . '-Schedule.html', '-Round' . $previousRound . '-Schedule');
+        $fileName = getCurrentPlayoffLeagueFile('-Round' . $previousRound . '-Schedule.html', '-Round' . $previousRound . '-Schedule');
         $scheduleHolder = new ScheduleHolder($fileName, '');
 
         $playedGamesRound = $previousRound;
@@ -163,20 +168,22 @@ if ($playoff == 1) {
     }
 
 } else {
-    $fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
+    //$fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
+    $fileName = getCurrentLeagueFile('Schedule');
     $scheduleHolder = new ScheduleHolder($fileName, '');
     $nextGameScheduleHolder = $scheduleHolder;
     $playoffLink = '';
 }
 
-$teamScoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
+//$teamScoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
+$teamScoringFile = getCurrentLeagueFile('TeamScoring');
 $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
 
 
 // last games played scores
 if ($scheduleHolder->isSeasonStarted()) {
     
-    if (! $playoff) {
+    if (!isPlayoffs2()) {
         if ($scheduleHolder->getLastDayPlayed() > 1) {
             $startDay = $scheduleHolder->getLastDayPlayed() - 1;
         } else {
@@ -193,7 +200,7 @@ if ($scheduleHolder->isSeasonStarted()) {
     for ($x = $startDay; $x <= $endGame; $x ++) {
         echo '<div class="dayPlayed text-center">';
         //echo '<div style ="padding-top:50%">';
-        if (! $playoff) {
+        if (!isPlayoffs2()) {
             echo '<span><strong>Day ' . ($x) . '</strong></span>';
         } else {
             echo '<span><strong>Rnd ' . ($playedGamesRound) . '</strong></span>';
@@ -264,7 +271,7 @@ if ($scheduleHolder->isSeasonStarted()) {
 
 // next games
 $nextGame = $nextGameScheduleHolder->getLastDayPlayed() + 1;
-$nextGamesToProcess = ! $playoff ? $nextGame + 1 : $nextGame;
+$nextGamesToProcess = ! isPlayoffs2() ? $nextGame + 1 : $nextGame;
 
 // only display one day for playoffs
 for ($x = $nextGame; $x <= $nextGamesToProcess; $x ++) {
@@ -286,7 +293,7 @@ for ($x = $nextGame; $x <= $nextGamesToProcess; $x ++) {
         continue;
 
     echo '<div class="dayPlayed text-center">';
-    if (! $playoff) {
+    if (!isPlayoffs2()) {
         echo '<span><strong>Day ' . ($x) . '</strong></span>';
     } else {
         echo '<span><strong>Rnd ' . ($nextGamesRound) . '</strong></span>';
