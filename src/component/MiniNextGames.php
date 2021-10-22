@@ -54,27 +54,14 @@ include_once FS_ROOT.'classes/ScheduleObj.php';
 <?php
 //if(isPlayoffs($folder, $playoffMode)){
 if(isPlayoffs2()){
-    $round = 0;
-    if(file_exists($folder.'cehlPLF-Round4-Schedule.html')) {
-        //$fileName = $folder.'cehlPLF-Round4-Schedule.html';
-        $round = 4;
-    }else if(file_exists($folder.'cehlPLF-Round3-Schedule.html')) {
-        //$fileName = $folder.'cehlPLF-Round3-Schedule.html';
-        $round = 3;
-    }else if(file_exists($folder.'cehlPLF-Round2-Schedule.html')) {
-        //$fileName = $folder.'cehlPLF-Round2-Schedule.html';
-        $round = 2;
-    }else if(file_exists($folder.'cehlPLF-Round1-Schedule.html')) {
-        //$fileName = $folder.'cehlPLF-Round1-Schedule.html';
-        $round = 1;
-    }
     
-    $fileName = getLeagueFileOld($folder, 'PLF', '-Round'.$round.'-Schedule.html', '-Round'.$round.'-Schedule');
+    $round = getPlayoffRound();
+    $fileName = getCurrentPlayoffLeagueFile('-Round'.$round.'-Schedule');
     $playoffLink = '&rnd='.$round;
     
 }else{
    // $fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
-    $fileName = getLeagueFile('Schedule');
+    $fileName = getCurrentLeagueFile('Schedule');
 }
 
 
@@ -90,53 +77,54 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
 <?php
 
 if($scheduleHolder->isScheduleComplete()){
-    echo '<h5>No Games Scheduled</h5>';
-}
+    echo '<h6 class="text-center">No Games Scheduled</h6>';
 
-
-//only display one day for playoffs, 2 for reg season
-$miniNextGame = $scheduleHolder->getLastDayPlayed() + 1;
-//$miniNextToProcess = !isPlayoffs($folder, $playoffMode) ? $miniNextGame + 1 : $miniNextGame;
-$miniNextToProcess = !isPlayoffs2() ? $miniNextGame + 1 : $miniNextGame;
-
-for ($i = $miniNextGame; $i <= $miniNextToProcess; $i ++) {
-
-     $miniGames = $scheduleHolder->getScheduleByDay($i);
-
-     if(!empty($miniGames)){
-
-    $miniNexyAddMargin = ($i % 2 == 0) ? 'mb-2' : '';
-    echo '<div class="'.$miniNexyAddMargin.'">';
-    //echo '<h5>Day' . $i . '</h5>';
-
-    echo '<h5 class="tableau-top m-0">Day ' . $i . '</h5>';
-    //echo '</div>';
-
-    echo '<div class = "row no-gutters d-flex justify-content-center latest-score-day">';
-    foreach ($miniGames as $games) {
-
-        if (! $games->getIsRequired()) {
-            continue;
+}else{
+    //only display one day for playoffs, 2 for reg season
+    $miniNextGame = $scheduleHolder->getLastDayPlayed() + 1;
+    //$miniNextToProcess = !isPlayoffs($folder, $playoffMode) ? $miniNextGame + 1 : $miniNextGame;
+    $miniNextToProcess = !isPlayoffs2() ? $miniNextGame + 1 : $miniNextGame;
+    
+    for ($i = $miniNextGame; $i <= $miniNextToProcess; $i ++) {
+    
+         $miniGames = $scheduleHolder->getScheduleByDay($i);
+    
+         if(!empty($miniGames)){
+    
+        $miniNexyAddMargin = ($i % 2 == 0) ? 'mb-2' : '';
+        echo '<div class="'.$miniNexyAddMargin.'">';
+        //echo '<h5>Day' . $i . '</h5>';
+    
+        echo '<h5 class="tableau-top m-0">Day ' . $i . '</h5>';
+        //echo '</div>';
+    
+        echo '<div class = "row no-gutters d-flex justify-content-center latest-score-day">';
+        foreach ($miniGames as $games) {
+    
+            if (! $games->getIsRequired()) {
+                continue;
+            }
+    
+            $todayImage1 = getTeamLogoUrl($games->team1);
+            $todayImage2 = getTeamLogoUrl($games->team2);
+    
+            echo '<div class="col-2 latest-game ">';
+            echo '<div class="row latest-score">';
+            echo '<div class="latest-image"><img src="' . $todayImage1 . '" alt="' . $games->team1 . ' "></div>';
+            echo '</div>';
+    
+            echo '<div class="row latest-score ">';
+            echo '<div class="latest-image"><img src="' . $todayImage2 . '" alt="' . $games->team2 . ' "></div>';
+            echo '</div>';
+            echo '</div>';
         }
-
-        $todayImage1 = getTeamLogoUrl($games->team1);
-        $todayImage2 = getTeamLogoUrl($games->team2);
-
-        echo '<div class="col-2 latest-game ">';
-        echo '<div class="row latest-score">';
-        echo '<div class="latest-image"><img src="' . $todayImage1 . '" alt="' . $games->team1 . ' "></div>';
-        echo '</div>';
-
-        echo '<div class="row latest-score ">';
-        echo '<div class="latest-image"><img src="' . $todayImage2 . '" alt="' . $games->team2 . ' "></div>';
+    
+    
         echo '</div>';
         echo '</div>';
+         }
     }
 
-
-    echo '</div>';
-    echo '</div>';
-     }
 }
 ?>
 

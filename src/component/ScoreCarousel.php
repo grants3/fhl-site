@@ -140,7 +140,7 @@ if (isPlayoffs2()) {
     $round = getPlayoffRound();
 
     //$fileName = getLeagueFile($folder, $playoff, '-Round' . $round . '-Schedule.html', '-Round' . $round . '-Schedule');
-    $fileName = getCurrentPlayoffLeagueFile('-Round' . $round . '-Schedule.html', '-Round' . $round . '-Schedule');
+    $fileName = getCurrentPlayoffLeagueFile('-Round' . $round . '-Schedule');
     $playoffLink = '&rnd=' . $round;
 
     $scheduleHolder = new ScheduleHolder($fileName, '');

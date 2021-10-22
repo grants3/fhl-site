@@ -58,6 +58,7 @@ if($seasonId || $round){
         
         $CurrentTitle = $schedTitle.' - Round '.$round;
     }
+    
     $fileName = getCurrentLeagueFile($baseFileName);
 }
 
