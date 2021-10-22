@@ -17,13 +17,27 @@ function getTeamLogo(string $teamName) :string{
 function getTeamLogoUrl(string $teamName) :string{    
     
     $teamLogo = getTeamLogo($teamName);
-    
-    error_log($teamLogo);
-    
+
     if($teamLogo) return BASE_URL.LOGO_DIR.basename(getTeamLogo($teamName));
     
     return BASE_URL.'assets/img/unknown-team.png';
     //return BASE_URL.LOGO_DIR.basename(getTeamLogo($teamName));
+}
+
+function getProfilePhoto($csName){
+    
+    $csNametmp = strtolower($csName);
+    $csNametmp = str_replace(' ', '-', $csNametmp);
+    
+    //SN requires extra parsing.
+    if(PLAYER_IMG_SOURCE == 2){
+        $csNametmpFirst = substr($csNametmp, 0, 1);
+        $imgUrl = 'http://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png';
+    }else{
+       $imgUrl = 'http://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId='.$csNametmp.'&width=200&height=180';
+    }
+
+    return $imgUrl;
 }
 
 function leagueFileExists(string $baseName, string $seasonType, int $seasonId, string $exclude=null) {
@@ -70,8 +84,6 @@ function getLeaguePrefix($baseDir, bool $playoffs = false, $searchTerm = 'GMs.ht
     if($result){
         $result = str_replace($searchTerm,'',$result);
     }
-    
-    error_log(basename($result));
     
     return basename($result);
 }

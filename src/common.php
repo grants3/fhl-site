@@ -249,17 +249,6 @@ if (!function_exists('mb_strlen')){
     }
 }
 
-function getProfilePhoto($csName){
-    
-    $csNametmp = strtolower($csName);
-    $csNametmp = str_replace(' ', '-', $csNametmp);
-    $csNametmpFirst = substr($csNametmp, 0, 1);
-    
-    $imgUrl = 'http://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png';
-    
-    return $imgUrl;
-}
-
 function URL_exists($url){
 
     //override ssl context for the call

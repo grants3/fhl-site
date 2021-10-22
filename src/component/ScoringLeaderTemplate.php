@@ -1,23 +1,5 @@
  <?php 
- 
- if (!function_exists('getProfilePhoto')){
-     function getProfilePhoto($csName){
-         
-         $csNametmp = strtolower($csName);
-         $csNametmp = str_replace(' ', '-', $csNametmp);
-         $csNametmpFirst = substr($csNametmp, 0, 1);
-         
-         $imgUrl = 'http://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png';
 
-         return $imgUrl;
-     }
- }
- 
- 
- 
- ?>
-	
-	<?php 
 	/*USAGE
 	 *
 	 * usage example: includeWithVariables('component/ScoringLeaderTemplate.php',array('scoringArray' => $scoringArray, 'type' => '$type', 'sort'=>'$sort'));

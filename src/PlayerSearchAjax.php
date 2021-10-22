@@ -16,11 +16,22 @@ include_once 'classes/PlayerSearchWrapper.php';
 include_once 'classes/PlayerVitalObj.php';
 include_once 'classes/PlayerVitalsHolder.php';
 
-$gmFile = getLeagueFile('GMs');
-$rosterFile = getLeagueFile('Rosters');
-$unassignedFile = getLeagueFile('Unassigned');
-$futuresFile = getLeagueFile('Futures');
-$vitalsFileName = getLeagueFile('PlayerVitals');
+$seasonType = null;
+$seasonId = null;
+if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
+    $seasonId = (int)( isset($_GET['seasonId']) ) ? $_GET['seasonId'] : $_POST['seasonId'];
+}
+
+if(isset($_GET['seasonType']) || isset($_POST['seasonType'])) {
+    $seasonType = ( isset($_GET['seasonType']) ) ? $_GET['seasonType'] : $_POST['seasonType'];
+}
+
+
+$gmFile = _getLeagueFile('GMs',$seasonType,$seasonId);
+$rosterFile = _getLeagueFile('Rosters',$seasonType,$seasonId);
+$unassignedFile = _getLeagueFile('Unassigned',$seasonType,$seasonId);
+$futuresFile = _getLeagueFile('Futures',$seasonType,$seasonId);
+$vitalsFileName = _getLeagueFile('PlayerVitals',$seasonType,$seasonId);
 
 if (!file_exists($rosterFile) || !file_exists($gmFile)) {
     http_response_code(400);

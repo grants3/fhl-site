@@ -98,7 +98,7 @@ $teams = new TeamHolder($gmFile);
 						<div class="accordion" id="searchAccordion">
                           <div class="card" id="advancedSearch">
                             <div class="card-header" id="advancedSearchHeader">
-                              <h5 class="mb-0">
+                              <h5 class="mb-0 text-center">
                                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch">
                                   Advanced Filter
                                 </button>
@@ -310,7 +310,7 @@ $teams = new TeamHolder($gmFile);
                 fixedColumns:   {
                     leftColumns: 1
                 },
-                "ajax": "<?php echo BASE_URL?>PlayerSearchAjax.php",
+                "ajax": "<?php echo BASE_URL.'PlayerSearchAjax.php?seasonType='.LEAGUE_MODE?>",
                 "columns": [
                     //{ "data": "name" },
                     { "data": "name",

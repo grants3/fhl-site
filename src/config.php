@@ -60,6 +60,10 @@ $leagueRostersLink = 1;
 // Choose between hockeyDB : 1 or EliteProspect : 2
 $leagueFuturesLink = 1;
 
+# Player images (stats and player profiles)
+// Choose between TSN : 1 or Sportsnet : 2
+$leaguePlayerImages = 1;
+
 //choose draft pick years (how many years ahead to display)
 $leagueFuturesDraftYears = 4;
 
@@ -89,7 +93,7 @@ $minActivePlayers = 20;
 # League mode (Auto mode will check if playoff files exist in transfer directory, otherwise mode is selected manualy)
 # Regular Season: 0 | Playoffs : 1 | Auto Detect : 2
 //$playoffMode = 1;
-$leagueMode = 0;
+$leagueMode = 1;
 
 # Whether or not main navbar should be displayed and the type of nav to be displayed.
 # Default navbar includes all site links, simple nav only contains home button and team links.
@@ -125,7 +129,7 @@ define("SALARY_CAP_FLOOR",$leagueSalaryCapFloor);
 define("CAP_INJ_MODE",$leagueSalaryCapInjuryMode);
 define("OVERTIME_POINT_MODE",$leagueOvertimePoint);
 define("MIN_ACTIVE_PLAYERS",$minActivePlayers);
-
+define("PLAYER_IMG_SOURCE",$leaguePlayerImages);
 
 define("FUTURES_LINK_MODE",$leagueFuturesLink);
 define("FUTURES_DRAFT_YEARS",$leagueFuturesDraftYears);
@@ -135,8 +139,6 @@ define("PLAYOFF_MODE",LEAGUE_MODE == 1);
 define("NAVBAR_MODE",$navbarMode);
 define("FOOTER_TEXT", $footerText);
 define("SITE_THEME", $siteTheme);
-
-$GLOBALS["GLOB_LEAGUE_MODE2"] = 'TEST';
 
 unset($sessionName);
 unset($leagueLogo);

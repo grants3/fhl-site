@@ -31,8 +31,6 @@ if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
 
 if(isset($_GET['seasonType']) || isset($_POST['seasonType'])) {
     $seasonType = ( isset($_GET['seasonType']) ) ? $_GET['seasonType'] : $_POST['seasonType'];
-    
-    $playoff = htmlspecialchars($seasonType);
 }
 
 if(isset($_GET['position']) || isset($_POST['position'])) {
