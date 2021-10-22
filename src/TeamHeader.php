@@ -68,7 +68,7 @@ if($navbarMode != 3){ ?>
                     ?>
         			
         			<a href="<?php echo BASE_URL.$CurrentPage;?>.php?team=<?php echo urlencode($teamList[$i]) ?>">
-        				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" width=55 alt="<?php echo $teamList[$i] ?>">
+        				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" width=55 alt="<?php echo $teamList[$i] ?>" title="<?php echo $teamList[$i] ?>">
         			</a>
         
         		<?php } ?>

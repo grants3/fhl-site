@@ -10,12 +10,20 @@ function getTeamLogo(string $teamName) :string{
         $teamLogoFile = $matches[$j];
         break 1;
     }
-    
+
     return $teamLogoFile;
 }
 
 function getTeamLogoUrl(string $teamName) :string{    
-    return BASE_URL.LOGO_DIR.basename(getTeamLogo($teamName));
+    
+    $teamLogo = getTeamLogo($teamName);
+    
+    error_log($teamLogo);
+    
+    if($teamLogo) return BASE_URL.LOGO_DIR.basename(getTeamLogo($teamName));
+    
+    return BASE_URL.'assets/img/unknown-team.png';
+    //return BASE_URL.LOGO_DIR.basename(getTeamLogo($teamName));
 }
 
 function leagueFileExists(string $baseName, string $seasonType, int $seasonId, string $exclude=null) {

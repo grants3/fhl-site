@@ -3,16 +3,10 @@ include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'classes/TeamHolder.php';
 
 if(!isset($teamList)){
-    include_once FS_ROOT.'common.php';
-
-    $playoff = '';
- 
-    if(isPlayoffs(TRANSFER_DIR, LEAGUE_MODE)){
-        $playoff = 'PLF';
-    }
+    include_once FS_ROOT.'fileUtils.php';
     
     // // CREATE TEAM LIST
-    $gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
+    $gmFile = getCurrentLeagueFile('GMs');
     $teamHolder = new TeamHolder($gmFile);
     //needs to retain order.
     $teamList = $teamHolder->get_teams();
@@ -30,7 +24,7 @@ if(!isset($teamList)){
                     ?>
         			
         			<a href="<?php echo BASE_URL?>TeamRosters.php?team=<?php echo urlencode($teamList[$i]) ?>">
-        				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" width=55 alt="<?php echo $teamList[$i] ?>">
+        				<img class="test-img" src="<?php echo getTeamLogoUrl($teamList[$i])?>" width=55 alt="<?php echo $teamList[$i] ?>" title="<?php echo $teamList[$i] ?>" >
         			</a>
         
         		<?php } ?>
