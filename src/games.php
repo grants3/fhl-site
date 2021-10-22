@@ -31,8 +31,8 @@ $baseFolder = '';
 $awayTeamAbbr='';
 $homeTeamAbbr='';
 
-$rondes = '';
-if($round != '') $rondes = ' - '.$scheldRound.' '.$round;
+$roundDisplay = '';
+if($round != '') $roundDisplay = ' - '.$scheldRound.' '.$round;
 
 $Fnm = getGameFile($matchNumber, $seasonId, $round);
 
@@ -49,7 +49,7 @@ if(isset($_GET['override']) || isset($_POST['override'])) {
 
 
 $CurrentHTML = $linkHTML;
-$CurrentTitle = $gamesTitle.' #'.$matchNumber.$rondes;
+$CurrentTitle = $gamesTitle.' #'.$matchNumber.$roundDisplay;
 $CurrentPage = 'games';
 include 'head.php';
 
@@ -395,10 +395,15 @@ table.table-sm>thead>tr>th:first-of-type {
 	
 <?php 
     include_once 'classes/TeamInfo.php';
+
+    //we want to get info from that particular season if set.
+    $seasonType = (isset($round) && $round) ? 'PLF' : null;
+    $standingsFile = _getLeagueFile('Standings',$seasonType,$seasonId,'Farm');
+    
     $awayTeam = $gameHolder->getAwayTeam();
     $homeTeam = $gameHolder->getHomeTeam();
-    $teamInfoAway = new TeamInfo($folder, $playoff, $awayTeam);
-    $teamInfoHome = new TeamInfo($folder, $playoff, $homeTeam);
+    $teamInfoAway = new TeamInfo($standingsFile, $awayTeam);
+    $teamInfoHome = new TeamInfo($standingsFile, $homeTeam);
     //$awayTeamAbbr='';
     //$homeTeamAbbr='';
     $isOvertime= $gameHolder->isOvertime();

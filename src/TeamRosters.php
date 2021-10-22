@@ -36,10 +36,7 @@ include 'TeamHeader.php';
 
                     //$fileName = getLeagueFile($folder, $playoff, 'Rosters.html', 'Rosters');
                     $fileName = getCurrentLeagueFile('Rosters');
-                    error_log('----------------------------------------------');
-                    error_log($fileName);
-                    error_log('----------------------------------------------');
-                   // exit;
+
                     //$vitalsFileName = getLeagueFile($folder, $playoff, 'PlayerVitals.html', 'PlayerVitals');
                     $vitalsFileName = getCurrentLeagueFile('PlayerVitals');
                     $lastUpdated = '';

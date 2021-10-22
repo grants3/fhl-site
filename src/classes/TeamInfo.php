@@ -1,9 +1,7 @@
-
 <?php
 
 class TeamInfo
 {
-
     var $wins = 0;
     private $gp = 0;
     private $losses= 0;
@@ -18,19 +16,16 @@ class TeamInfo
     private $last10='';
     private $streak='';
     private $arena='';
-   
 
-
-
-    public function __construct(string $rootFolder, string $playoff, string $team) {
+    public function __construct(string $standingsFile, string $team, string $seasonType=null, $seasonId = null) {
         
         //$fileName = getLeagueFile2($rootFolder, $playoff, 'Standings.html', 'Standings', 'Farm'); // exclude farm
-        $fileName = getLeagueFile('Standings','',0,'Farm'); // exclude farm
+        //$fileName = getLeagueFile('Standings','',0,'Farm'); // exclude farm
         
         $e = 0;
         
-        if (file_exists($fileName)) {
-            $contents = file($fileName);
+        if (file_exists($standingsFile)) {
+            $contents = file($standingsFile);
             $placeCount = 1;
 
             foreach ($contents as $cle => $val) {

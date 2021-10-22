@@ -1,7 +1,9 @@
 <?php 
 
 include_once FS_ROOT.'classes/TeamInfo.php';
-$teamInfoAway = new TeamInfo($folder, $playoff, $currentTeam);
+
+$standingsFile = getCurrentLeagueFile('Standings','Farm');
+$teamCardInfo = new TeamInfo($standingsFile, $currentTeam);
 
 ?>
 
@@ -93,8 +95,8 @@ $teamInfoAway = new TeamInfo($folder, $playoff, $currentTeam);
 		<div class="gloss"></div>
 		<div class="header">
 			<h3 class="mb-0" ><?php echo $CurrentTitle ?></h3>
-			<?php echo $currentTeam.' '.$teamInfoAway->getWins().'-'.$teamInfoAway->getLosses().'-'.$teamInfoAway->getTies() ?>
-			<?php echo '('.$teamInfoAway->getPlaceString().' '.$teamInfoAway->getConferenceSafeString().')' ?>
+			<?php echo $currentTeam.' '.$teamCardInfo->getWins().'-'.$teamCardInfo->getLosses().'-'.$teamCardInfo->getTies() ?>
+			<?php echo '('.$teamCardInfo->getPlaceString().' '.$teamCardInfo->getConferenceSafeString().')' ?>
 			
 		</div>
 	</div>
