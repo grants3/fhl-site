@@ -29,6 +29,13 @@ include_once FS_ROOT.'classes/ScheduleObj.php';
   
  }
  
+  <?php if(IS_IE){?>
+    .latest-score {  
+     margin-left:2em;
+     margin-right:0px;
+     }
+ <?php }?>
+ 
  .latest-score-day{
 
 /*     border: 1px; */

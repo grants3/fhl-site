@@ -109,7 +109,8 @@ if(isset($_SESSION["team"])){
 <html lang="en">
 <head>
   	<meta charset="UTF-8"/>
-  	<meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+<!--   	<meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1"> -->
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
   	<meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=3.0, minimum-scale=0.85"/>
   	<title><?php echo LEAGUE_NAME;?></title>
 

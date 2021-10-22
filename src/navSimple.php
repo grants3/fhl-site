@@ -81,19 +81,19 @@
   <!-- Top menu -->
 <!-- 	<nav class="navbar navbar-dark fixed-top navbar-expand-lg navbar-no-bg" id="main-navbar"> -->
 	<nav class="navbar navbar-expand-lg navbar-dark sticky-top navbar-no-bg" id="main-navbar">
-		<div class="container">
+		<div class="container px-0">
 			<div class = "row no-gutters">
     			<div class="col">
-    				<a class="nav-item nav-link pl-0 pr-1" href="<?php echo BASE_URL?>">HOME</a>
+    				<a class="nav-item nav-link pl-0 pr-2 pl-1" href="<?php echo BASE_URL?>">HOME</a>
     				<!-- <a class="navbar-brand" href="<?php //echo BASE_URL?>index.php">Navbar</a>-->
     			</div>
     			<?php if(!empty(GMO_DIR)){?>
     			<div class="col">
-    				<a class="nav-item nav-link px-1" href="<?php echo BASE_URL.GMO_DIR;?>">GMO</a>
+    				<a class="nav-item nav-link px-2" href="<?php echo BASE_URL.GMO_DIR;?>">GMO</a>
     			</div>
     			<?php }?>
     			<div class="col">
-    				<a class="nav-item nav-link backButton px-1" href="#">Back</a>
+    				<a class="nav-item nav-link backButton px-2" href="#">Back</a>
     			</div>
 			</div>
 			<!-- only display for team pages -->

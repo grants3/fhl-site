@@ -19,24 +19,6 @@ border-bottom:1px solid blue;
 /* 	font-size: large; */
 }
 
-.team-header-content { 
-/*     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cedce7+9,596a72+100 */ */
-/*     background: var(--team-header-background-color-2); /* Old browsers */ */
-/*     background: -moz-linear-gradient(top, var(--team-header-background-color-1) 9%, var(--team-header-background-color-2) 100%); /* FF3.6-15 */ */
-/*     background: -webkit-linear-gradient(top, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* Chrome10-25,Safari5.1-6 */ */
-/*     background: linear-gradient(to bottom, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ */
-/*     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72',GradientType=0 ); /* IE6-9 */ */
-    
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cedce7+9,596a72+100 */
-    background: rgb(206,220,231); /* Old browsers */
-    background: -moz-linear-gradient(top, var(--team-header-background-color-1) 9%, var(--team-header-background-color-2) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72', GradientType=0); /* IE6-9 */
-	
-/* 	border-radius: 5px;    */
-/*     margin-bottom:10px; */
-}
 
 .team-nav {
    a { color: rgba(225, 239, 255, 1.0); ; border-bottom: 1px ; text-decoration: none; transition: all .3; }

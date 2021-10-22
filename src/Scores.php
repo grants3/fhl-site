@@ -566,7 +566,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 				$lastEquipe2Abbr = $teamAbbrHolder->getAbbr($lastEquipe2);
 
 				//ie doesnt support flex
-				$isFlext = isIE() ? '' : 'd-flex';
+				$isFlext = IS_IE ? '' : 'd-flex';
 				
 				//header
 				echo '<div class="col-sm-12 col-md-6 col-lg-4 '.$isFlext.'" style="padding-left: 7px; padding-right: 7px;">';

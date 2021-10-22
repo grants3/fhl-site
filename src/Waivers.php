@@ -80,7 +80,7 @@ if(file_exists($Fnm)) {
 		}
 		
 		if(substr_count($val, '<pre>') || substr_count($val, '<PRE>')){
-			echo '<thead><tr class="tableau-top">';
+			echo '<thead><tr class="tableau-top text-left">';
 			echo '<td>'.$waiversPlayer.'</td>';
 			echo '<td>'.$waiversDate.'</td>';
 			echo '<td>'.$waiversBy.'</td>';

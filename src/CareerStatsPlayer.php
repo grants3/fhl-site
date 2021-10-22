@@ -925,7 +925,7 @@ if($csName != '' && $lastTeam != '-') {
 // 				}
 // 			}
 // 			$Fnm = $folder.$folderLeagueURL.'PLF-Round'.$rnd.'-Schedule.html';
-		    $Fnm = getCurrentPlayoffLeagueFile('-Round'.$rnd.'-Schedule.html');
+		    $Fnm = getCurrentPlayoffLeagueFile('-Round'.$rnd.'-Schedule');
 		}
 		else {
 // 			$matches = glob($folder.'*Schedule.html');

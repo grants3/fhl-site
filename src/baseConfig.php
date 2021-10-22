@@ -4,6 +4,7 @@
 //define("BASE_URL",getBaseUrl());
 define("BASE_URL",getBaseUrl());
 define("FS_ROOT",__DIR__.'/');
+define("IS_IE",isIE());
 
 #Debug Mode. 1 = ON, 0 = OFF
 define("DEBUG_MODE",0);
@@ -82,6 +83,15 @@ function relativePath($from, $to, $separator = DIRECTORY_SEPARATOR)
     }
     
     return str_pad("", count($arFrom) * 3, '..'.$separator).implode($separator, $arTo);
+}
+
+function isIE(){   
+    $ua = htmlentities($_SERVER['HTTP_USER_AGENT'], ENT_QUOTES, 'UTF-8');
+    if (preg_match('~MSIE|Internet Explorer~i', $ua) || (strpos($ua, 'Trident/7.0') !== false && strpos($ua, 'rv:11.0') !== false)) {
+       return true;
+    }
+
+    return false;
 }
 
 

@@ -10,32 +10,12 @@
 <?php
 require_once __DIR__.'/../config.php';
 include_once FS_ROOT.'lang.php';
+include_once FS_ROOT.'fileUtils.php';
 
-$Fnm = '';
-$existRnd = 0;
-$matches = glob($folder.'*PLF-Round1-Schedule.html');
-$folderLeagueURL2 = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if(substr_count($matches[$j], 'PLF')) {
-		$folderLeagueURL2 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'PLF-Round1-Schedule.html')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-if(file_exists($folder.$folderLeagueURL2.'PLF-Round1-Schedule.html')) {
-	$existRnd = 1;
-	if(file_exists($folder.$folderLeagueURL2.'PLF-Round2-Schedule.html')) {
-		$existRnd = 2;
-		if(file_exists($folder.$folderLeagueURL2.'PLF-Round3-Schedule.html')) {
-			$existRnd = 3;
-			if(file_exists($folder.$folderLeagueURL2.'PLF-Round4-Schedule.html')) {
-				$existRnd = 4;
-			}
-		}
-	}
-}
+//$Fnm = getCurrentPlayoffLeagueFile('-Round1-Schedule.html');
+$existRnd = getPlayoffRound();
 
+if(!$existRnd) exit('<h5>The Playoffs have not started</h5>');
 
 ?>
 
@@ -64,7 +44,8 @@ $j = $existRnd;
 	$TeamNumber = 100;
 	$currentTeamCpt = 0;
 	$equipe1 = '';
-	$Fnm = $folder.$folderLeagueURL2.'PLF-Round'.$j.'-Schedule.html';
+	//$Fnm = $folder.$folderLeagueURL2.'PLF-Round'.$j.'-Schedule.html';
+	$Fnm = getCurrentPlayoffLeagueFile('-Round'.$j.'-Schedule');
 	if(file_exists($Fnm)) {
 		for($x=0;$x<$TeamNumber;$x++) {
 			$tableau = file($Fnm);

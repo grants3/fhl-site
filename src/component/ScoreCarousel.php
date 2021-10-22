@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../config.php';
 include_once FS_ROOT.'common.php';
+include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'lang.php';
 include_once FS_ROOT.'classes/ScheduleHolder.php';
 include_once FS_ROOT.'classes/ScheduleObj.php';

@@ -73,7 +73,7 @@ require_once __DIR__.'/config.php';
 		<section id="page">
 			<main>
 				<article>
-					<div>Score Carousel
+					<div style="width:75%">Score Carousel
 						<?php include FS_ROOT.'component/ScoreCarousel.php'; ?>	
 					</div>			
 				</article>
@@ -84,7 +84,7 @@ require_once __DIR__.'/config.php';
 				</article>
 				<article>
 					<div style="width:65%">News
-						<?php include FS_ROOT.'News.php'; ?>	
+						<?php include FS_ROOT.'component/News.php'; ?>	
 					</div>		
 				</article>
 				<article>

@@ -65,86 +65,12 @@ else {
 ?>
 
 <style>
-:root {
 
-  --table-sort-asc:rgb(15, 40, 81);
-  --table-sort-desc:var(--color-primary-1);
-
-}
-
-
+/*don't want whitespace to wrap*/
 .table {
 	width: 100%;
 	white-space: normal;
-}
-
-/* .header-content { */
-/* 	margin-top: 65px; */
-/* 	margin-bottom: 10px; */
-/* } */
-
-.highlight-team {
-	-webkit-filter: sepia(1);
-	filter: sepia(1);
-	border-bottom: 1px solid blue;
-}
-
-#header-nav .active {
-	font-weight: 1000;
-	font-size: large;
-}
-
-.team-header-content {
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cedce7+9,596a72+100 */
-	background: rgb(206, 220, 231); /* Old browsers */
-	background: -moz-linear-gradient(top, rgba(206, 220, 231, 1) 9%,
-		rgba(89, 106, 114, 1) 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, rgba(206, 220, 231, 1) 9%,
-		rgba(89, 106, 114, 1) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, rgba(206, 220, 231, 1) 9%,
-		rgba(89, 106, 114, 1) 100%);
-	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7',
-		endColorstr='#596a72', GradientType=0); /* IE6-9 */
-	border-radius: 5px;
-	margin-bottom: 10px;
-}
-
-.team-nav {a { color:rgba(225, 239, 255, 1.0);;
-	border-bottom: 1px;
-	text-decoration: none;
-	transition: all .3;
-}
-
-a:hover, a:focus {
-	color: #856dc0;
-	border: 0;
-	text-decoration: none;
-	-webkit-filter: grayscale(100%);
-	-moz-filter: grayscale(100%);
-	filter: grayscale(100%);
-}
-
-}
-.team-nav a {
-	color: rgba(225, 239, 255, 1.0);
-	border-bottom: 1px;
-	text-decoration: none;
-	transition: all .3;
-}
-
-.panel-profile-img {
-	max-width: 75px;
-	margin-top: -10px;
-	margin-bottom: -10px;
-	margin-left: -20px;
-	/*  	border: 1px solid #fff;   */
-	/* 	background-color: #708090;  */
-	/* 	border-radius: 100%;   */
-}
-
-.nav-item {
-	text-transform: uppercase;
+	line-height: 20px;
 }
 
 .teamheader {
@@ -222,31 +148,11 @@ a:hover, a:focus {
 }
 
 .shootout-winner{
-text-align: center; 
-text-transform: uppercase;
-font-size: 80%;
+    text-align: center; 
+    text-transform: uppercase;
+    font-size: 80%;
 }
 
-/* .table-dark { */
-/* 	border-spacing: 2px; */
-/* 	border-color: grey; */
-/* 	width: 100%; */
-/* 	boder-width: 2px; */
-/* 	font-size: 12px; */
-/* 	font-weight: 400px; */
-/* } */
-
-/* .table-dark th { */
-/* 	background-color: rgb(39, 41, 43); */
-/* } */
-
-/* .table-dark2 th { */
-/* 	background-color: rgb(39, 41, 43); */
-/* } */
-
-.table {
-	line-height: 20px;
-}
 
  .table-dark2>thead th { 
  	background-color: rgb(50, 52, 54);
@@ -383,13 +289,6 @@ table.table-sm>thead>tr>th:first-of-type {
 	}
 }
 
-/* // Large devices (desktops, 992px and up) */
-/* @media ( min-width : 992px) { */
-
-/* } */
-
-/* // Extra large devices (large desktops, 1200px and up) */
-/* @media (min-width: 1200px) {  } */
 </style>
 
 	
@@ -404,28 +303,7 @@ table.table-sm>thead>tr>th:first-of-type {
     $homeTeam = $gameHolder->getHomeTeam();
     $teamInfoAway = new TeamInfo($standingsFile, $awayTeam);
     $teamInfoHome = new TeamInfo($standingsFile, $homeTeam);
-    //$awayTeamAbbr='';
-    //$homeTeamAbbr='';
     $isOvertime= $gameHolder->isOvertime();
-    
-    // Find Teams Abbr
-//     $matches = glob($folder.'*TeamScoring.html');
-//     $folderLeagueURL3 = '';
-//     $matchesDate = array_map('filemtime', $matches);
-//     arsort($matchesDate);
-//     foreach ($matchesDate as $j => $val) {
-//         if(!substr_count($matches[$j], 'PLF')) {
-//             $folderLeagueURL3 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
-//             break 1;
-//         }
-//     }
-    
-//     $FnmAbbr = $folder.$folderLeagueURL3.'TeamScoring.html';
-//     if(file_exists($FnmAbbr)) {
-//         $awayTeamAbbr = search($FnmAbbr,$awayTeam);
-//         $homeTeamAbbr = search($FnmAbbr,$homeTeam);
-//     }
-//     else exit($allFileNotFound.' - '.$FnmAbbr);
 
     $seasonType = $round ? 'PLF' : null;
     $teamScoringFile = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
@@ -437,12 +315,6 @@ table.table-sm>thead>tr>th:first-of-type {
 
     //if not set default abbr to first 3 chars (all star games etc)
     if(!$awayTeamAbbr){
-        //$awayTeamAbbr = 'Wes';
-        //$homeTeamAbbr = 'Eas';
-
-        //$awayTeamAbbr = substr($awayTeam, 0, 3);
-        //$homeTeamAbbr = substr($homeTeam, 0, 3);
-        
         $awayTeamAbbr = strtoupper(substr($awayTeam,'0','3'));
         $homeTeamAbbr = strtoupper(substr($homeTeam,'0','3'));
     }
@@ -1630,8 +1502,6 @@ table.table-sm>thead>tr>th:first-of-type {
 
 <script>
 
-
-
 $(document).ready(function() 
 	    { 
         	$('.collapse').on('shown.bs.collapse', function(e) {
@@ -1642,15 +1512,10 @@ $(document).ready(function()
         	});
 	    } 
 	); 
+	
 </script>
 
 
-<?php
 
-// echo '<pre>';
-// echo jsonPrettify(json_encode($gameHolder));
-// echo '</pre>';
-
-?>
 
 <?php include 'footer.php'; ?>

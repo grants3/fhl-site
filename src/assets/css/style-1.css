@@ -82,7 +82,20 @@ body.fhlElement {
 
 }
 
+/*team banner and logo gradients*/
+.team-header-content { 
 
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cedce7+9,596a72+100 */
+    background: rgb(206,220,231); /* Old browsers */
+    background: -moz-linear-gradient(top, var(--team-header-background-color-1) 9%, var(--team-header-background-color-2) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, var(--team-header-background-color-1) 9%,var(--team-header-background-color-2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72', GradientType=0); /* IE6-9 */
+
+}
+
+
+/*Base FHL element styling*/
 .fhlElement strong { font-weight: 600; }
 
 /*a { color: #4C96D7; text-decoration: none; transition: all .3s; }*/
@@ -220,7 +233,7 @@ a:hover {
 #main-navbar .navbar-brand {
 /* 	background: url(../img/nav-logo.png) left center no-repeat; */
 	background: var(--nav-logo-url);
-	max-height: 30px;
+	max-height: 40px;
 	max-width: 150px;
 	height: 40px;
 	width: 150px;

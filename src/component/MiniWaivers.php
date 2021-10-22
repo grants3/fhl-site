@@ -28,8 +28,8 @@ if (file_exists($fileName)) {
 ?>
 
 <div class="container">
-	<div class="row">
-		<div class="col">
+	<div class="card">
+		<div class="card-body">
 			<?php  if (isset($waivers) && !empty($waivers)) {?>
 			<div class="table-responsive">
 				<table class="table table-sm table-striped">
@@ -42,12 +42,18 @@ if (file_exists($fileName)) {
     					</tr>
     				</thead>
     				<tbody>
-    					<?php foreach ($waivers as $waiver) {?>
-    						<tr>
-    							<th><?php echo $waiver->player; ?></th>
-        						<th><?php echo $waiver->waiveDate; ?></th>
-        						<th><?php echo $waiver->waivedBy; ?></th>
-        						<th><?php echo $waiver->claimedBy; ?></th>
+    					<?php foreach ($waivers as $waiver) {
+    					    $waiveTextWeight = '';
+    					    if($waiver->claimedBy != 'NO CLAIMS'){
+    					        $waiveTextWeight = ' font-weight-bold';
+    					    }
+    					    
+    					    ?>
+    						<tr class="<?php echo $waiveTextWeight;?>">
+    							<td><?php echo $waiver->player; ?></td>
+        						<td><?php echo $waiver->waiveDate; ?></td>
+        						<td><?php echo $waiver->waivedBy; ?></td>
+        						<td><?php echo $waiver->claimedBy; ?></td>
     						</tr>
     					<?php }?>
     				</tbody>
