@@ -5,6 +5,12 @@ require_once 'baseConfig.php';
 //Session attributes
 $sessionName = 'FHL';
 
+//Site name - will be used as title (text on top of browser/tab)
+$leagueName = 'FHL League';
+
+//Logo used on large nav (if applicable). should be 40x150 at the maximum. Will use FHL default if not set.
+$leagueLogo = '';
+
 //CDN support for faster css/js assets 
 //(basically get required javascript and css libraries from the internet on much faster servers closer to your location than your own webserver)
 //uses less bandwith and should be faster. true = use CDN , false = use from your own webserver.
@@ -33,7 +39,8 @@ $folderGames = "";
 // This folder MUST have the same name and at the end, the number of the season. Ex: Season 1, Season 2, Season 3. Put # to replace the number!
 // Full example: ../backup/Season #/
 // The current season/playoff folder shouldn't be here,  it will duplicates stats.
-$folderCarrerStats = "backup/season#/";
+//$folderCarrerStats = "backup/season#/";
+$folderCareerStats = "backup/season#/";
 
 # BOXSCORE LOGO
 // Supported Formats: JPEG, GIF, PNG, BMP, ICO (PNG Recommanded)
@@ -93,13 +100,15 @@ $navbarMode = 1;
 $footerText="FHL TableSim 2.0";
 
 //default color scheme.
-//blue,green,red,custom
-$siteTheme="blue";
+//blue,green,red,teal,custom
+$siteTheme="teal";
 
 //-----------------------------------------
-//DO NOT TOUCH ME
+//DO NOT TOUCH ANYTHING BELOW HERE.
 //-----------------------------------------
 define("SESSION_NAME",$sessionName);
+define("LEAGUE_NAME",$leagueName);
+define("LEAGUE_LOGO",$leagueLogo);
 define("CDN_SUPPORT", $cdnSupport);
 define("LEAGUE_LANG",$leagueLang);
 define("HOME",BASE_URL.$home);
@@ -107,7 +116,7 @@ define("TRANSFER_DIR",FS_ROOT.$folder);
 define("GAMES_DIR",$folderGames);
 define("LOGO_DIR",$folderTeamLogos);
 define("GMO_DIR",$folderGmo);
-define("CAREER_STATS_DIR",FS_ROOT.$folderCarrerStats);
+define("CAREER_STATS_DIR",FS_ROOT.$folderCareerStats);
 
 define("CAP_MODE",$leagueSalaryIncFarm);
 define("SALARY_CAP",$leagueSalaryCap);
@@ -130,12 +139,13 @@ define("SITE_THEME", $siteTheme);
 $GLOBALS["GLOB_LEAGUE_MODE2"] = 'TEST';
 
 unset($sessionName);
+unset($leagueLogo);
 unset($cdnSupport);
 //unset($leagueLang);
 unset($home);
 unset($folder);
 unset($folderGames);
-unset($folderCarrerStats);
+unset($folderCareerStats);
 //unset($folderTeamLogos);
 unset($folderGmo);
 //unset($leagueRostersLink);

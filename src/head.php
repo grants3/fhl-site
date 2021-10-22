@@ -111,7 +111,7 @@ if(isset($_SESSION["team"])){
   	<meta charset="UTF-8"/>
   	<meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
   	<meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=3.0, minimum-scale=0.85"/>
-  	<title>Canadian Elite Hockey League</title>
+  	<title><?php echo LEAGUE_NAME;?></title>
 
 	<?php if(CDN_SUPPORT) {?>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600"/>
@@ -285,66 +285,5 @@ if(isset($navbarMode) && $navbarMode != 0){
 	
 <div class="container-fluid2 site-content header-content top-container">
 
-<style>
-
-<?php 
-//demo mode. change themes, navbar etc.
-$demoMode = true;
-
-if(isset($demoMode) && $demoMode){
-?>
-.floating-menu-main{
-    background-color: rgba(255,255,255,0.5);
-    margin-top:100px;
-    padding: 0px;
-    margin-left: 5px;
-    width: 100px;
-    z-index: 100;
-    position: fixed;
-}
-.floating-menu-main .btn-sm{
- background-color:transparent
-}
-
-    .floating-menu {
-
-    background-color:white;
-
-  }
-  .floating-menu a, 
-  .floating-menu h3 {
-    font-size: 0.9em;
-    display: block;
-    margin: 1em 0.5em;
-    color: black;
-  }
-  
-
-  
-</style>
-
-<?php if(isset($CurrentHTML) && ($CurrentHTML == 'index.php' || str_starts_with($CurrentHTML,'Team') )){?>
-<div class="floating-menu-main">
-<button class="btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    <span class="font-weight-bold">Demo Options</span>
-</button>
-<nav class="floating-menu collapse" id="collapseExample">
-    <h3 class="text-left font-weight-bold">Theme</h3>
-    <a href="<?php echo BASE_URL.$CurrentHTML?>?theme=blue">Blue</a>
-    <a href="<?php echo BASE_URL.$CurrentHTML?>?theme=green">Green</a>
-    <a href="<?php echo BASE_URL.$CurrentHTML?>?theme=red">Red</a>
-    <h3 class="text-left font-weight-bold">Nav Mode</h3>
-    <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=1">Full</a>
-    <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=0">None</a>
-    <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=2">Simple</a>
-    <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=3">Simple Min</a>
-	<a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=4">Custom</a>
-	<h3 class="text-left font-weight-bold">Language</h3>
-	<a href="<?php echo BASE_URL.$CurrentHTML?>?lang=EN">English</a>
-	<a href="<?php echo BASE_URL.$CurrentHTML?>?lang=FR">French</a>
-</nav>
-</div>
-<?php }
-}?>
-
+<?php include FS_ROOT.'demo.php'?>
 

@@ -1,12 +1,19 @@
 <?php
 
-function isAuthenticated(){
+function isIE(){
+    //only run this logic once. cache result.
+    if(isset($GLOBALS["IS_IE"])) return $GLOBALS["IS_IE"];
     
-    if(isset($_SESSION['authenticated']) && $_SESSION['authenticated']){
-        return true;
+    $isIE = false;
+    
+    $ua = htmlentities($_SERVER['HTTP_USER_AGENT'], ENT_QUOTES, 'UTF-8');
+    if (preg_match('~MSIE|Internet Explorer~i', $ua) || (strpos($ua, 'Trident/7.0') !== false && strpos($ua, 'rv:11.0') !== false)) {
+        $isIE = true;
     }
     
-    return false;
+    $GLOBALS["IS_IE"] = $isIE;
+    
+    return $isIE;
 }
 
 function jsonPrettify($json)

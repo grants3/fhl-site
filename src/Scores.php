@@ -28,7 +28,7 @@ $playoffLink = '';
 
 if(isPlayoffs2()){
 
-    $round = getPlayoffRound();
+    $round = getPlayoffRound(); //need to pass in seasonId once supported.
     $baseFileName = '-Round'.$round.'-Schedule';
     $playoffLink = '&rnd='.$round;
     
@@ -565,8 +565,11 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 				$lastEquipe1Abbr = $teamAbbrHolder->getAbbr($lastEquipe1);
 				$lastEquipe2Abbr = $teamAbbrHolder->getAbbr($lastEquipe2);
 
+				//ie doesnt support flex
+				$isFlext = isIE() ? '' : 'd-flex';
+				
 				//header
-				echo '<div class="col-sm-12 col-md-6 col-lg-4 d-flex" style="padding-left: 7px; padding-right: 7px;">';
+				echo '<div class="col-sm-12 col-md-6 col-lg-4 '.$isFlext.'" style="padding-left: 7px; padding-right: 7px;">';
 				
 				echo '<div class="card border-dark " style="margin-top:14px;">';
 				echo '<div class="card-header box-score" style="padding-bottom: 0px; padding-top: 0px;">';
@@ -576,7 +579,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 				
 				   // echo '<div class="row tableau-top"><span style="color:#ffffff">'.$lastEquipe1.' @ '.$lastEquipe2.' Final'.$gameOvertime[$i].'</span></div>';
 				echo '</div>';
-				echo '<div class="card-body p-3 flex-fill" style ="background-color: #f0f1f2;">';
+				echo '<div class="card-body p-3" style ="background-color: #f0f1f2;">';
 				
 				echo '<div class = "row" style=" margin-top: -15px;">';
 				    echo '<table class = "table table-sm table-bordered" style="background-color:white";>';

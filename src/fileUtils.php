@@ -45,7 +45,7 @@ function getLeagueFileAbsolute($name, $seasonId = null) {
 }
 
 function getLeaguePrefix($baseDir, bool $playoffs = false, $searchTerm = 'GMs.html'){
-    
+
     $search = '*'.$searchTerm;
     $filter = 'PLF'; //want to filter out in regular season play
     if($playoffs){
@@ -53,14 +53,17 @@ function getLeaguePrefix($baseDir, bool $playoffs = false, $searchTerm = 'GMs.ht
         $filter = ''; //no filter.
     }
     
+
     $matches = glob($baseDir.$search,GLOB_NOSORT);
     
     //exclude playoff from reg seaon results.
     $result = filterMatches($matches, $filter);
     
     if($result){
-        $result = str_replace('GMs.html','',$result);
+        $result = str_replace($searchTerm,'',$result);
     }
+    
+    error_log(basename($result));
     
     return basename($result);
 }
@@ -90,7 +93,7 @@ function getGameFile($gameNumber, $seasonId = null, $round = null) {
     //resolve league prefix.
     $leaguePrefix = getLeaguePrefix($searchFolder, $isPlayoffs);
     
-    return getLeagueFileAbsolute($leaguePrefix.$gameSearch, $seasonId);
+    return getLeagueFileAbsolute(GAMES_DIR.$leaguePrefix.$gameSearch, $seasonId);
 }
 
 /**
@@ -133,11 +136,13 @@ function _getLeagueFile(string $baseName, $seasonType = null, $seasonId = null, 
         $searchFolder =  str_lreplace("#",$seasonId,CAREER_STATS_DIR);
     }
     
+    $fileName = $baseName.'.html';
+    
     //resolve league prefix.
     $leaguePrefix = getLeaguePrefix($searchFolder,$isPlayoffs);
     
     //return getLeagueFileAbsolute($leaguePrefix.$filePrefix.$baseName.'.html', $seasonId);
-    return getLeagueFileAbsolute($leaguePrefix.$baseName.'.html', $seasonId);
+    return getLeagueFileAbsolute($leaguePrefix.$fileName, $seasonId);
 }
 
 /**
@@ -192,7 +197,7 @@ function filterMatches($matches, $exclude = null){
         if(count($matches) > 1){
             
             //sort by last modified.
-           // error_log(print_r($matches,TRUE));
+      
             usort( $matches, function( $a, $b ) { return filemtime($a) - filemtime($b); } );
             
             //attemp to use exclusion to filter.
@@ -213,15 +218,21 @@ function filterMatches($matches, $exclude = null){
             $result = $matches[0];
         }
     }
-    //error_log(print_r($result,TRUE));
+
     return $result;
 }
 
-function getPlayoffRound() : int{
+function getPlayoffRound($seasonId = null) : int{
     
     $round = 0;
     
-    $matches = glob(TRANSFER_DIR.'*PLF-Round1-Schedule.html');
+    $searchFolder = TRANSFER_DIR;
+    
+    if(isset($seasonId) && !$seasonId){
+        $searchFolder =  str_lreplace("#",$seasonId,CAREER_STATS_DIR);
+    }
+    
+    $matches = glob($searchFolder.'*PLF-Round1-Schedule.html');
     $folderLeagueURL2 = '';
     $matchesDate = array_map('filemtime', $matches);
     arsort($matchesDate);
@@ -231,16 +242,16 @@ function getPlayoffRound() : int{
             break 1;
         }
     }
-    if (file_exists(TRANSFER_DIR.$folderLeagueURL2.'PLF-Round1-Schedule.html')) {
+    if (file_exists($searchFolder.$folderLeagueURL2.'PLF-Round1-Schedule.html')) {
         $round = 1;
     }
-    if (file_exists(TRANSFER_DIR.$folderLeagueURL2.'PLF-Round2-Schedule.html')) {
+    if (file_exists($searchFolder.$folderLeagueURL2.'PLF-Round2-Schedule.html')) {
         $round = 2;
     }
-    if (file_exists(TRANSFER_DIR.$folderLeagueURL2.'PLF-Round3-Schedule.html')) {
+    if (file_exists($searchFolder.$folderLeagueURL2.'PLF-Round3-Schedule.html')) {
         $round = 3;
     }
-    if (file_exists(TRANSFER_DIR.$folderLeagueURL2.'PLF-Round4-Schedule.html')) {
+    if (file_exists($searchFolder.$folderLeagueURL2.'PLF-Round4-Schedule.html')) {
         $round = 4;
     }
     

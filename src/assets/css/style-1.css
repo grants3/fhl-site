@@ -11,6 +11,12 @@
   --color-text-primary-1: white;
   --color-text-primary-2: var(--color-primary-3);
   
+  --table-highlight:var(--color-primary-1);
+  --table-sort-asc:rgb(57, 27, 162);
+  --table-sort-desc:rgb(15, 40, 81);
+  --selection-border:rgb(0, 0, 102);
+  --table-link-color:var(--color-primary-2);
+  
   --background-gradient: gradient(linear, left top, left bottom, from(#fff), to(#cbccc8)) fixed;
   --background-gradient-webkit:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#cbccc8)) fixed;
    	
@@ -18,7 +24,7 @@
   --table-bg-color-2: var(--color-alternate-2);
   --table-header-bg:var(--color-primary-1);
   --table-header-text:var(--color-text-primary-1);
-  --table-link-color:#09367C;
+
   
 /*   --header-gradient:linear-gradient(rgb(0, 39, 79) 0%, rgb(0, 39, 79) 60%, rgb(27, 98, 162) 100%); */
   --header-gradient:linear-gradient(var(--color-primary-2) 0%, var(--color-primary-2) 60%, var(--color-primary-1) 100%);
@@ -27,10 +33,7 @@
   --team-header-background-color-1:rgba(206,220,231,1); /*grey*/
   --team-header-background-color-2:var(--color-primary-2);
 
-  --table-highlight:var(--color-primary-1);
-  --table-sort-asc:rgb(57, 27, 162);
-  --table-sort-desc:rgb(15, 40, 81);
-  --selection-border:rgb(0, 0, 102);
+  --nav-logo-url:url(../img/nav-logo.png) left center no-repeat;
  
 }
 
@@ -215,11 +218,12 @@ a:hover {
 #main-navbar.navbar-expand-lg .navbar-nav .nav-link-inner { padding-left: 1rem; padding-right: 1rem; }
 
 #main-navbar .navbar-brand {
+/* 	background: url(../img/nav-logo.png) left center no-repeat; */
+	background: var(--nav-logo-url);
 	max-height: 30px;
 	max-width: 150px;
 	height: 40px;
 	width: 150px;
-	background: url(../img/nav-logo.png) left center no-repeat;
 	-webkit-background-size: contain;
     -moz-background-size: contain;
     -o-background-size: contain;
@@ -227,6 +231,7 @@ a:hover {
 	border: 0;
 	text-indent: -99999px;
 }
+
 
 #main-navbar .navbar-nav ul{
  line-height:1.5;

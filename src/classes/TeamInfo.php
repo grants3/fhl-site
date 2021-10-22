@@ -5,6 +5,7 @@ class TeamInfo
 {
 
     var $wins = 0;
+    private $gp = 0;
     private $losses= 0;
     private $ties= 0;
     private $otlosses= 0;
@@ -18,6 +19,8 @@ class TeamInfo
     private $streak='';
     private $arena='';
    
+
+
 
     public function __construct(string $rootFolder, string $playoff, string $team) {
         
@@ -97,7 +100,7 @@ class TeamInfo
                     $reste = trim(substr($reste, strpos($reste, ' ')));
                     $standingsSTK = $reste;
                     
-                    
+                    $this->gp = $pj;
                     $this->wins = $standingsW;
                     $this->losses = $standingsL;
                     $this->ties = $standingsT;
@@ -375,7 +378,13 @@ class TeamInfo
         return $this->arena;
     }
 
-
+    /**
+     * @return <number, string>
+     */
+    public function getGp()
+    {
+        return $this->gp;
+    }
 
 
     

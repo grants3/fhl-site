@@ -35,7 +35,7 @@ if($seasonId || $round){
     if($round){
         $baseFileName = '-Round'.$round.'-Schedule';
         $seasonType = 'PLF';
-        $currentRound = getPlayoffRound();
+        $currentRound = getPlayoffRound($seasonId);
         if($round == 4){
             $roundTitle = ' Cup Finals';
         }else{
@@ -53,7 +53,8 @@ if($seasonId || $round){
         //current playoffs
         $round = getPlayoffRound();
         $baseFileName = '-Round'.$round.'-Schedule';
-        $currentRound = getPlayoffRound();
+       // $currentRound = getPlayoffRound();
+        $currentRound = $round;
         
         $CurrentTitle = $schedTitle.' - Round '.$round;
     }
@@ -159,7 +160,10 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
                     			    
                     			    <div class = "col-sm-12 pb-1 pr-1 pl-1">
                                       	<ul class="list-group">
-                                      		<?php if($schedule->getIsPlayed()){
+                                      		<?php 
+                                      		$textStyle = '';
+                                      		
+                                      		if($schedule->getIsPlayed()){
                                       		    $linkRnd = '';
                                       		    $linkSeasonId = '';
                                       		    $textStyle = '';

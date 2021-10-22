@@ -19,10 +19,7 @@ if(isset($_GET['team'])) {
     error_log('???????'.$scoringFile);
     $teamAbbrHolder = new TeamAbbrHolder($scoringFile);
     $TSabbr = $teamAbbrHolder->getAbbr($teamFilter);
-    $TSabbr = 'WAS';
-    error_log('???????'.$teamFilter);
-    error_log('???????'.$TSabbr);
-    include 'phpGetAbbr.php';
+
 }
 
 include 'head.php';
@@ -370,7 +367,7 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
 					}
 					
 					if((isset($TSabbr) && $TSabbr == $tmpGoalTeam) || ($ctlOneTeams == '' && $tmpFwdTeam != 'TOT')) {
-						if($ctlOneTeams != '') echo 'Key:'.$cle.' - Season #'.$workSeason.' - Team Abbr:'.$TSabbr.' - Team Found:'.$tmpGoalTeam.' - Player:'.$tmpGoalName.'<br>';
+						//if($ctlOneTeams != '') echo 'Key:'.$cle.' - Season #'.$workSeason.' - Team Abbr:'.$TSabbr.' - Team Found:'.$tmpGoalTeam.' - Player:'.$tmpGoalName.'<br>';
 						$tmpCle = $cle + 1;
 						$tmpVal = $tableau[$tmpCle];
 						$tmpFound = 0;

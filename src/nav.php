@@ -32,8 +32,8 @@
 <nav class="navbar navbar-dark fixed-top navbar-expand-lg navbar-no-bg scrollable" id="main-navbar"> 
 
 
-		<div class="container">
-			<a class="navbar-brand" href="<?php echo HOME?>">Navbar</a>
+		<div class="container px-0">
+			<a class="navbar-brand" href="<?php echo HOME?>">Home</a>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>

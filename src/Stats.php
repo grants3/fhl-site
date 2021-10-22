@@ -2,6 +2,7 @@
 require_once __DIR__.'/config.php';
 include_once FS_ROOT.'lang.php';
 include_once FS_ROOT.'common.php';
+include_once FS_ROOT.'fileFunctions.php';
 
 include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'classes/TeamHolder.php';
@@ -9,9 +10,10 @@ include_once FS_ROOT.'classes/ScoringHolder.php';
 include_once FS_ROOT.'classes/ScoringPlayerObj.php';
 include_once FS_ROOT.'classes/ScoringGoalieObj.php';
 include_once FS_ROOT.'classes/ScoringObj.php';
+include_once FS_ROOT.'classes/ScheduleHolder.php';
+include_once FS_ROOT.'classes/ScheduleObj.php';
 include_once FS_ROOT.'classes/TeamAbbrHolder.php';
 include_once FS_ROOT.'classes/ScoringAccumulator.php';
-include_once FS_ROOT.'classes/TeamInfo.php';
 
 $CurrentHTML = 'Stats.php';
 $CurrentTitle = 'Statistics';
@@ -30,19 +32,23 @@ $scoringFile = getCurrentLeagueFile('TeamScoring');
 $scoringHolder = new ScoringHolder($scoringFile);
 $scoringAccumulator = new ScoringAccumulator($scoringHolder);
 
-//init teamheader so that we can figure out how far season has progressed to get min gp amounts for stats
-$minGoalieGames = 1;
-$maxMinGoalieGames = 15;
-$minGameCount = 1;
-if(empty(!isPlayoffs2())){
-    $teamInfo = new TeamInfo(TRANSFER_DIR, $playoff, $teamList[0]);
-    $gameCount = $teamInfo->getWins() +  $teamInfo->getLosses() +  $teamInfo->getTies();
+$scheduleFile = getCurrentLeagueFile('Schedule');
+$scheduleHolder = new ScheduleHolder($scheduleFile, '');
 
-    if($gameCount >= $minGoalieGames){
-        $minGameCount = ceil(($gameCount/82) * $maxMinGoalieGames);
-        $minGameCount = max($minGoalieGames,$minGameCount);
+//figure out how far season has progressed to get min gp amounts for stats
+$maxMinGoalieGames = 15;
+$minGameCount = $scheduleHolder->isSeasonStarted() ? 2 : 0;
+
+if(!isPlayoffs2()){
+    
+    $standingsFile = getCurrentLeagueFile('Standings','Farm');
+    $maxGp = getMaxGp($standingsFile);
+    
+    if($maxGp >= $minGameCount){
+        $minGameCount = ceil(($maxGp/82) * $maxMinGoalieGames);
+        $minGameCount = max($minGameCount,$minGameCount);
     }else{
-        $minGameCount = 1;
+        $minGameCount = 2;
     }
 
 }

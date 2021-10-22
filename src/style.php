@@ -11,7 +11,17 @@ if(isset($_SESSION["theme"])){
 
 ?>
 
+
+
 <style type="text/css">
+
+<?php if(LEAGUE_LOGO){ ?>
+
+:root {
+	--nav-logo-url:url(<?php echo BASE_URL.LEAGUE_LOGO;?>) left center no-repeat;
+}
+
+<?php } ?>
 
 /* site color overrides. blue is default*/
 
@@ -28,15 +38,12 @@ if($siteColorTheme == 'green') {
    --color-alternate-2:#BCFFC7; 
    --color-alternate-3:#E9FFF3;
 
-   --table-link-color:#116530; 
    --table-sort-asc:#0a4323; 
    --table-sort-desc:#77AF9C; 
 }
 
 <?php }
-?>
-<?php 
-if($siteColorTheme == 'red') {
+else if($siteColorTheme == 'red') {
 
 ?>
 
@@ -48,13 +55,28 @@ if($siteColorTheme == 'red') {
    --color-alternate-2:#EBDCDD;
    --color-alternate-3:#F7EFF0;
 
-   --table-link-color:#6C1E1E; 
    --table-sort-asc:#763838; 
    --table-sort-desc:#5A1E1E; 
 }
 
-<?php } ?>
+<?php 
+} else if($siteColorTheme == 'teal') {
+    
+    ?>
 
+:root {
+   --color-primary-1: #006d77; 
+   --color-primary-2: #1a535c; 
+   --color-primary-3: #83c5be; 
+   --color-alternate-1:#ffddd2; 
+   --color-alternate-2:#edf6f9;
+   --color-alternate-3:#e29578;
+
+   --table-sort-asc:#798777; 
+   --table-sort-desc:#BDD2B6; 
+}
+
+<?php } ?>
 
 
 

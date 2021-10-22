@@ -15,6 +15,15 @@ class ScheduleHolder{
     private $lastDayPlayed;
     private $days;
     
+
+    /**
+     * @param mixed $tradeDeadline
+     */
+    public function setTradeDeadline($tradeDeadline)
+    {
+        $this->tradeDeadline = $tradeDeadline;
+    }
+
     public function __construct(string $file, string $filterTeam = '') {
         if(!file_exists($file)) {
             throw new InvalidArgumentException('File does not exist');
@@ -245,11 +254,7 @@ class ScheduleHolder{
 
     }
     
-    
-    
-    public function getNextGames($amount){
-        $filtered_array = array();
-    }
+
 
     /**
      * @return multitype:
@@ -265,6 +270,12 @@ class ScheduleHolder{
     
     public function getCompletedSchedule(){
         return getFilteredArray('isPlayed', true, $this->getSchedule());
+    }
+    
+    public function getPercentagePlayed(){
+        
+        if(!$this->isSeasonStarted()) return 0;
+        return $this->lastDayPlayed / $this->days;
     }
 
     /**
@@ -291,32 +302,18 @@ class ScheduleHolder{
         return $this->lastDayPlayed > 0;
     }
 
-    /**
-     * @param multitype: $schedule
-     */
-    public function setSchedule($schedule)
-    {
-        $this->schedule = $schedule;
-    }
 
     /**
-     * @param mixed $tradeDeadline
+     * @return number
      */
-    public function setTradeDeadline($tradeDeadline)
+    public function getDays()
     {
-        $this->tradeDeadline = $tradeDeadline;
+        return $this->days;
     }
-
-    /**
-     * @param Ambigous <number, string> $lastDayPlayed
-     */
-    public function setLastDayPlayed($lastDayPlayed)
-    {
-        $this->lastDayPlayed = $lastDayPlayed;
-    }
-
     
-    
+    public function getNextGames($amount){
+        $filtered_array = array();
+    }
     
 }
 
