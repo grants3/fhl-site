@@ -1,12 +1,12 @@
 <?php
+if(count(get_included_files()) ==1) die(header('HTTP/1.1 404 Not Found')); //must be included 
+
 require_once __DIR__.'/../../baseConfig.php';
 require_once FS_ROOT.'api/controller/BaseController.php';
 require_once FS_ROOT.'model/PlayerStatsModel.php';
 require_once FS_ROOT.'classes/ScoringAccumulator.php';
 
-
-
-class StatsController extends BaseController
+class PlayerSearchController extends BaseController
 {
     /**
      * "/user/list" Endpoint - Get list of users
@@ -70,14 +70,10 @@ class StatsController extends BaseController
                         
                         if(isset($column['search']) && !empty($column['search']['value'])){
                             
-                            $columnData = htmlspecialchars($column['data']);
-                            $searchValue = htmlspecialchars($column['search']['value']);
-                            $searchRegex = isset($column['search']['regex']) ? htmlspecialchars($column['search']['regex']) : false;
-                            
-                            if(DEBUG_MODE){
-                                error_log('filtering column '.$columnData .' search value '. $searchValue);
-                            }
-                            
+                            $columnData = $column['data'];
+                            $searchValue = $column['search']['value'];
+                            $searchRegex = isset($column['search']['regex']) ? $column['search']['regex'] : false;
+                               
                             $data = $this->dynamicFiltering($data, $columnData, $searchValue, $searchRegex);
                         }
                     }
@@ -92,23 +88,22 @@ class StatsController extends BaseController
                     
                     usort( $data,  function($a, $b) use($orderColumn,$orderDirection){
                         
-                        $a = (array) $a;
-                        $b = (array) $b;
+                        // $a = (array) $a;
+                        // $b = (array) $b;
                         
                         //multi sort with attribute and then name.
                         if($orderDirection == 'asc'){
-                            //return [$a[$orderColumn], $a['name']] <=> [$b[$orderColumn], $b['name']];
-                            if($a[$orderColumn] === $b[$orderColumn]){
-                                return $a['name'] <=>  $b['name'];
-                            }
                             
-                            return $a[$orderColumn] <=> $b[$orderColumn];
+                            $comp = $a->__get($orderColumn) <=> $b->__get($orderColumn);
+                            if($comp != 0) return $comp;
+                            
+                            return $a->__get('name') <=>  $b->__get('name');
                         }else{
-                            if($a[$orderColumn] === $b[$orderColumn]){
-                                return $a['name'] <=>  $b['name'];
-                            }
                             
-                            return $b[$orderColumn] <=> $a[$orderColumn];
+                            $comp = $b->__get($orderColumn) <=> $a->__get($orderColumn);
+                            if($comp != 0) return $comp;
+                            
+                            return $a->__get('name') <=>  $b->__get('name');
                         }
                         
                         

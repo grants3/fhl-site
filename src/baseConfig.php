@@ -1,7 +1,6 @@
 <?php
+/* DO NOT TOUCH ANYTHING IN HERE!! */
 
-
-//define("BASE_URL",getBaseUrl());
 define("BASE_URL",getBaseUrl());
 define("FS_ROOT",__DIR__.'/');
 define("IS_IE",isIE());
@@ -14,12 +13,8 @@ if(DEBUG_MODE){
     error_log('FS_ROOT='.FS_ROOT);
     error_log('BASE_URL='.BASE_URL);
     error_log('DOCUMENT_ROOT='.$_SERVER['DOCUMENT_ROOT']);
-    error_log('FILE='.__FILE__);
-    error_log('WORKING DIR='.getcwd());
     error_log('---------------------------------');
 }
-
-//DO NOT TOUCH ME 
 
 function inferLeagueMode($leagueMode) :string{
     
@@ -49,9 +44,6 @@ function getBaseUrl(){
     $url = rtrim($url, '/') . '/';
     
     //check relativepath
-    //$url = $url.relativePath(getcwd(),__DIR__);
-   //$url = str_replace(array('\\', '/'), '/', $url);
-    
     $url = $url.str_replace(array('\\', '/'), '/', relativePath(getcwd(),__DIR__));
     
     return $url;

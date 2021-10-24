@@ -1,6 +1,6 @@
 <?php
 
-if(file_exists(__DIR__.'/co2nfig.php')) {
+if(file_exists(__DIR__.'/config.php')) {
     
     require_once __DIR__.'/config.php';
     

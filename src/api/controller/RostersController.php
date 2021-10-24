@@ -1,10 +1,10 @@
 <?php
+if(count(get_included_files()) ==1) die(header('HTTP/1.1 404 Not Found')); //must be included 
+
 require_once __DIR__.'/../../baseConfig.php';
 require_once FS_ROOT.'/api/controller/BaseController.php';
 require_once FS_ROOT.'/classes/RostersHolder.php';
 require_once FS_ROOT.'/model/RostersModel.php';
-
-
 
 class RostersController extends BaseController
 {

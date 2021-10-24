@@ -122,13 +122,13 @@ foreach($unassignedHolder->getUnassigned() as $roster){
     $wrapper = new PlayerSearchWrapper();
     
     $wrapper->setType('Unassigned');
-    $wrapper->setTeam($roster->getTeam());
-    $wrapper->setNumber($roster->getNumber());
+//     $wrapper->setTeam($roster->getTeam());
+//     $wrapper->setNumber($roster->getNumber());
     $wrapper->setName($roster->getName());
     $wrapper->setPosition($roster->getPosition());
-    $wrapper->setHand($roster->getHand());
-    $wrapper->setCondition($roster->getCondition());
-    $wrapper->setInjStatus($roster->getInjStatus());
+//     $wrapper->setHand($roster->getHand());
+//     $wrapper->setCondition($roster->getCondition());
+//     $wrapper->setInjStatus($roster->getInjStatus());
     $wrapper->setIt($roster->getIt());
     $wrapper->setSp($roster->getSp());
     $wrapper->setSt($roster->getSt());

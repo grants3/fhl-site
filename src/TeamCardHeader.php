@@ -73,19 +73,20 @@ $teamCardInfo = new TeamInfo($standingsFile, $currentTeam);
 
 <div class= "teamheader logo-gradient">
 	<?php 
-	 $teamCardLogoSrc = glob($folderTeamLogos.strtolower($currentTeam).'.*');
+	 //$teamCardLogoSrc = glob($folderTeamLogos.strtolower($currentTeam).'.*');
+	 $teamCardLogoSrc = getTeamLogoUrl($currentTeam);
 	?>
  	<div class="team-logo gloss logo-gradient">
         <?php 
-            if(isset($teamCardLogoSrc[0])) {
-                echo'<img src="'.$teamCardLogoSrc[0].'" alt="'.$currentTeam.'">';
+            if(isset($teamCardLogoSrc)) {
+                echo'<img src="'.$teamCardLogoSrc.'" alt="'.$currentTeam.'">';
             }
         ?>
      </div>
      <div class="team-logo gloss logo-gradient team-logo-right">
         <?php 
-            if(isset($teamCardLogoSrc[0])) {
-                echo'<img src="'.$teamCardLogoSrc[0].'" alt="'.$currentTeam.'">';
+            if(isset($teamCardLogoSrc)) {
+                echo'<img src="'.$teamCardLogoSrc.'" alt="'.$currentTeam.'">';
             }
         ?>
      </div>

@@ -297,7 +297,8 @@ table.table-sm>thead>tr>th:first-of-type {
 
     //we want to get info from that particular season if set.
     $seasonType = (isset($round) && $round) ? 'PLF' : null;
-    $standingsFile = _getLeagueFile('Standings',$seasonType,$seasonId,'Farm');
+    //$standingsFile = _getLeagueFile('Standings',$seasonType,$seasonId,'Farm');
+    $standingsFile = _getLeagueFile('Standings','REG',$seasonId,'Farm'); //always show reg season record.
     
     $awayTeam = $gameHolder->getAwayTeam();
     $homeTeam = $gameHolder->getHomeTeam();

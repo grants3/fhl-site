@@ -1,4 +1,5 @@
 <?php
+include_once FS_ROOT.'classes/UnassignedObj.php';
 
 class UnassignedHolder implements \JsonSerializable{
 

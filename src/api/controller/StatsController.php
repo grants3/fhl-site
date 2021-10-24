@@ -1,10 +1,10 @@
 <?php
+if(count(get_included_files()) ==1) die(header('HTTP/1.1 404 Not Found')); //must be included 
+
 require_once __DIR__.'/../../baseConfig.php';
 require_once FS_ROOT.'/api/controller/BaseController.php';
 require_once FS_ROOT.'/model/PlayerStatsModel.php';
 require_once FS_ROOT.'/classes/ScoringAccumulator.php';
-
-
 
 class StatsController extends BaseController
 {
@@ -71,14 +71,10 @@ class StatsController extends BaseController
                         
                         if(isset($column['search']) && !empty($column['search']['value'])){
                             
-                            $columnData = htmlspecialchars($column['data']);
-                            $searchValue = htmlspecialchars($column['search']['value']);
-                            $searchRegex = isset($column['search']['regex']) ? htmlspecialchars($column['search']['regex']) : false;
-                            
-                            if(DEBUG_MODE){
-                                error_log('filtering column '.$columnData .' search value '. $searchValue);
-                            }
-                            
+                            $columnData = $column['data'];
+                            $searchValue = $column['search']['value'];
+                            $searchRegex = isset($column['search']['regex']) ? $column['search']['regex'] : false;
+
                             $data = $this->dynamicFiltering($data, $columnData, $searchValue, $searchRegex);
                         }
                     }
