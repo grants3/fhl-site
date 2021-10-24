@@ -82,14 +82,16 @@ if(file_exists($fileName)) {
 			$a = 1;
 		}
 	}
-}
-else echo '<tr><td>'.$allFileNotFound.' - '.$Fnm.'</td></tr>';
-
-echo '</tbody></table></div></div></div>
-
-<h5 class = "text-center">'.$allLastUpdate.' '.$lastUpdated.'</h5>
+	
+	echo '</tbody></table></div></div></div>
 			    
-';
+        <h5 class = "text-center">'.$allLastUpdate.' '.$lastUpdated.'</h5>
+        			    
+        ';
+}
+else echo '<tr><td>'.$allFileNotFound.' - Coaches</td></tr>';
+
+
 ?>
 </div></div></div>
 

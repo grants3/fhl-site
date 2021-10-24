@@ -178,6 +178,12 @@ if (isPlayoffs2()) {
 
 //$teamScoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
 $teamScoringFile = getCurrentLeagueFile('TeamScoring');
+
+if(!file_exists($teamScoringFile)) {
+    echo '<h5>'.$allFileNotFound.' - TeamScoring</h5>';
+    exit;
+}
+
 $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
 
 

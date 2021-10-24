@@ -158,7 +158,7 @@ $transactionHolder = new TransactionHolder($fileName);
 
 <script>
 
-$(function() {
+//$(function() {
 
 	var transTables = [
       "#trades-table",
@@ -202,7 +202,7 @@ $(function() {
 //               $(transTables[2]).columns.adjust().draw();
           });
    
-});
+//});
 
 
 

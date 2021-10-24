@@ -93,7 +93,7 @@ $minActivePlayers = 20;
 # League mode (Auto mode will check if playoff files exist in transfer directory, otherwise mode is selected manualy)
 # Regular Season: 0 | Playoffs : 1 | Auto Detect : 2
 //$playoffMode = 1;
-$leagueMode = 1;
+$leagueMode = 0;
 
 # Whether or not main navbar should be displayed and the type of nav to be displayed.
 # Default navbar includes all site links, simple nav only contains home button and team links.

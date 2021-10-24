@@ -1,6 +1,6 @@
 <?php
 
-class UnassignedHolder{
+class UnassignedHolder implements \JsonSerializable{
 
     private $unassigned = array();
 
@@ -19,13 +19,10 @@ class UnassignedHolder{
         $i = 0;
         $z = 0;
         
-        $curTeam = 'Unassigned';
-        $number = 0;
+
         $name = '';
         $position= '';
-        $hand= '';
-        $condition= '';
-        $injStatus= '';
+        $age = 0;
         $it = 0;
         $sp = 0;
         $st = 0;
@@ -79,19 +76,16 @@ class UnassignedHolder{
                 $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
                 $position = trim(substr($reste, strrpos($reste, ' ')));
                 $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                $unassignedAG[$i] = substr($reste, strrpos($reste, ' '));
+                //$unassignedAG[$i] = substr($reste, strrpos($reste, ' '));
+                $age = substr($reste, strrpos($reste, ' '));
                 $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
                 $name = $reste;
                 
                 
-                $roster = new RosterObj();
-                $roster->setTeam($curTeam);
-                $roster->setNumber($number);
+                $roster = new UnassignedObj();
                 $roster->setName($name);
+                $roster->setAge($age);
                 $roster->setPosition($position);
-                $roster->setHand($hand);
-                $roster->setCondition($condition);
-                $roster->setInjStatus($injStatus);
                 $roster->setIt($it);
                 $roster->setSp($sp);
                 $roster->setSt($st);
@@ -126,13 +120,9 @@ class UnassignedHolder{
         return $this->unassigned;
     }
 
-    /**
-     * @param multitype: $unassigned
-     */
-    public function setUnassigned($unassigned)
+    public function jsonSerialize()
     {
-        $this->unassigned = $unassigned;
+        return get_object_vars($this);
     }
-
 
 }

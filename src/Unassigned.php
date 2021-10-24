@@ -9,6 +9,9 @@ $CurrentPage = 'Unassigned';
 include 'head.php';
 
 include_once 'common.php';
+
+$sort = 16;
+$position = '';
 ?>
 
 <style>
@@ -50,64 +53,10 @@ include_once 'common.php';
                 	</div>
                 	
                 	<div class = "row"> 
-                	<?php
-                
-                    $Fnm = getCurrentLeagueFile('Unassigned');
-                		
-                		$a = 0;
-                		$i = 0;
-                		if (file_exists($Fnm)) {
-                		    $tableau = file($Fnm);
-                		    while(list($cle,$val) = myEach($tableau)) {
-                		        $val = utf8_encode($val);
-                		        if(substr_count($val, '</PRE>')) {
-                		            $a = 0;
-                		        }
-                		        if($a == 1) {
-                		            $reste = trim($val);
-                		            $unassignedOV[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedLD[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedEX[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedSC[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedDF[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedPC[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedPA[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedSK[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedDI[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedDU[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedEN[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedST[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedSP[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedIT[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedPO[$i] = trim(substr($reste, strrpos($reste, ' ')));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedAG[$i] = substr($reste, strrpos($reste, ' '));
-                		            $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-                		            $unassignedPL[$i] = $reste;
-                		            $i++;
-                		        }
-                		        if(substr_count($val, '<PRE>Player')) {
-                		            $a = 1;
-                		        }
-                		    }
-                		    if(isset($unassignedPL)) {
+                		<?php 
                 		        
                 		        echo '<div class="col px-0 px-md-2 px-lg-3">';
-                		        echo '<table id="faTable" class="table table-sm table-striped nowrap show " style="width:100%">';
+                		        echo '<table id="unassigned-table" class="table table-sm table-striped nowrap show " style="width:100%">';
                 		          echo '<thead>
                                             <tr>
                                                 <th>'.$rostersName.'</th>
@@ -132,42 +81,12 @@ include_once 'common.php';
                                         </thead>';
                 		        echo '<tbody style="font-weight:normal">';
                 		        
-                		        for ($x = 0; $x < $i; $x++) {
-                		            echo '<tr>';
-                		            
-                		            $scoringNameSearch = htmlspecialchars($unassignedPL[$x]);
-                		            $scoringNameLink = 'http://www.google.com/search?q='.$scoringNameSearch.'%nhl.com&btnI';
-                		            
-                		            // 		            echo '<td class="text-left">'.$unassignedPL[$x].'</td>';
-                		            echo '<td class="text-left"><a href="'.$scoringNameLink.'">'.$unassignedPL[$x].'</a></td>';
-                		            echo '<td>'.$unassignedAG[$x].'</td>';
-                		            echo '<td>'.$unassignedPO[$x].'</td>';
-                		            echo '<td>'.$unassignedIT[$x].'</td>';
-                		            echo '<td>'.$unassignedSP[$x].'</td>';
-                		            echo '<td>'.$unassignedST[$x].'</td>';
-                		            echo '<td>'.$unassignedEN[$x].'</td>';
-                		            echo '<td>'.$unassignedDU[$x].'</td>';
-                		            echo '<td>'.$unassignedDI[$x].'</td>';
-                		            echo '<td>'.$unassignedSK[$x].'</td>';
-                		            echo '<td>'.$unassignedPA[$x].'</td>';
-                		            echo '<td>'.$unassignedPC[$x].'</td>';
-                		            echo '<td>'.$unassignedDF[$x].'</td>';
-                		            echo '<td>'.$unassignedSC[$x].'</td>';
-                		            echo '<td>'.$unassignedEX[$x].'</td>';
-                		            echo '<td>'.$unassignedLD[$x].'</td>';
-                		            echo '<td>'.$unassignedOV[$x].'</td>';
-                		            echo '</tr>';        
-                		        } 
+                		      
                 		        echo '</tbody>';
                 		        echo '</table>';
                 		        echo '</div>';
                 		        
-                		    }else {
-                		        echo $langUnassignedPlayersNotFound;
-                		    }
-                
-                		}
-                		else echo $allFileNotFound.' - '.$Fnm;
+                	
                 		?>
                 		
                 	</div>
@@ -178,67 +97,126 @@ include_once 'common.php';
 
 	
 	</div>
+	
+	
+<script>
 
-	<script>
+<?php //if($position){?>
+	//needs to be set before datatable initializes
+	//$("#positionInputField option[value=D]").attr('selected', 'selected');
 
-// 	window.onload = function () {
-// 		makeTableSortable('freeAgents');
-// 	};
+<?php // }?>
 
-
-	var table = $('#faTable').DataTable({
+$(function() {
+	var table = $('#unassigned-table').DataTable({
 		//dom: 'lftBip',
-		dom:'<"row"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-8"f>><ti><"row"<"col-sm-12 col-md-8"p><"col-sm-12 col-md-4"B>>',
+		dom:'<"row no-gutters"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-8"f>><ti><"row no-gutters"<"col-sm-12 col-md-8"p><"col-sm-12 col-md-4"B>>',
+		"processing":false,
+		"serverSide":true,  
+		"responsive": true,
+		searchDelay: 500,
 		scrollY:        true,
         scrollX:        true,
-        scrollCollapse: true,
-        order: [[ 16, "desc" ]],
+        scrollCollapse: false,
         fixedColumns:   {
-            leftColumns: 1,
-            rightColumns: 1
+            leftColumns: 1
         },
-        paging:         true,
-        pagingType: "simple_numbers",
-        lengthMenu: [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
+		"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
         language: {
             "lengthMenu": "Display _MENU_ records"
         },   
-        search: {
-            "regex": true
-          },    
-        initComplete: function () {
-        	$("#faTable").show(); 
-        },
-        
-        buttons: [
-        	'copyHtml5',
-            {
-                extend: 'excelHtml5',
-                title: 'UnassignedExport'
-            },
-            {
-                extend: 'csvHtml5',
-                title: 'UnassignedExport'
-            }
-        ]
-        
+		"order": [[ "<?php echo $sort?>", "desc" ]],
+       
+        "searchCols": [
+            null,
+            null,
+             <?php if($position){?>
+            { "search": "<?php echo $position;?>"},
+                <?php }else{ echo 'null,';}?>
+          ],
+    
+		
+		"ajax": {
+			url : '<?php echo BASE_URL.'api?api=unassigned&action=find&seasonType='.LEAGUE_MODE; ?>',
+				type: "GET"  
+			},
+            "columns": [
+                    { name: "name" ,"data": "name" },
+                	{ name: "age" ,"data": "age", "orderSequence": [ "desc","asc" ] },
+                    { name: "position" ,"data": "position" },
+                    { name: "it" ,"data": "it", "orderSequence": [ "desc","asc" ] },
+                    { name: "sp" ,"data": "sp", "orderSequence": [ "desc","asc" ] },
+                    { name: "st" ,"data": "st", "orderSequence": [ "desc","asc" ] },
+                    { name: "en" ,"data": "en", "orderSequence": [ "desc","asc" ] },
+                    { name: "du" ,"data": "du", "orderSequence": [ "desc","asc" ] },
+                    { name: "di" ,"data": "di" , "orderSequence": [ "desc","asc" ]},
+                    { name: "sk" ,"data": "sk" , "orderSequence": [ "desc","asc" ]},
+                    { name: "pa" ,"data": "pa" , "orderSequence": [ "desc","asc" ]},
+                    { name: "pc" ,"data": "pc" , "orderSequence": [ "desc","asc" ]},
+                    { name: "df" ,"data": "df" , "orderSequence": [ "desc","asc" ]},
+                    { name: "sc" ,"data": "sc" , "orderSequence": [ "desc","asc" ]},
+                    { name: "ex" ,"data": "ex" , "orderSequence": [ "desc","asc" ] },
+                    { name: "ld" ,"data": "ld" , "orderSequence": [ "desc","asc" ] },
+                    { name: "ov" ,"data": "ov" , "orderSequence": [ "desc","asc" ]},
+
+                ],
+			"columnDefs":[  
+				{  
+// 					"targets":[0],  
+// 					"orderable":false,
+				},  
+
+			],
+			"initComplete": function () {
+		        	
+		        },
+		    "buttons": [
+		        	'copy',
+		            {
+		                extend: 'excel',
+		                title: 'Unassigned',
+		                className: 'btn btn-primary',
+		                exportOptions: {
+		                    modifier: {
+		                    	order : 'current', // 'current', 'applied','index', 'original'
+		                        page : 'all', // 'all', 'current'
+		                        search : 'applied' // 'none', 'applied', 'removed' 
+		                    }
+		                }
+			                
+		            },
+		            {
+		                extend: 'csv',
+		                title: 'Unassigned',
+		                exportOptions: {
+		                    modifier: {
+		                    	order : 'current', // 'current', 'applied','index', 'original'
+		                        page : 'all', // 'all', 'current'
+		                        search : 'applied' // 'none', 'applied', 'removed' 
+		                    }
+		                }
+		            }
+		        ]
+		            
+		         
+		});
+
+        $("#positionInputField").on('change', function() {  
+            var pos = $(this).val();
+            if(pos == 'Skaters'){
+            	table.column('position:name').search('[C]|[RW]|[LW]|[D]', true, false).draw();
+            }else if(pos == 'Forwards'){
+            	table.column( 'position:name' ).search('[C]|[RW]|[LW]', true, false).draw();
+            }else{
+            	table.column('position:name').search(pos).draw() ; 
+            }    
+            
+        } );
+
 	});
+	
 
+</script>
 
-    $("#positionInputField").on('change', function() {  
-        var pos = $(this).val();
-        if(pos == 'Skaters'){
-        	table.column(2).search('^(?=.*?(C|RW|LW|D)).*?', true, false).draw();
-        }else if(pos == 'Forwards'){
-        	table.column(2).search('^(?=.*?(C|RW|LW)).*?', true, false).draw();
-        }else{
-        	table.column(2).search(pos).draw() ; 
-        }    
-        
-    } );
-
-
-
-	</script>
 
 <?php include 'footer.php'; ?>

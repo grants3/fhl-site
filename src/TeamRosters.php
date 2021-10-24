@@ -12,6 +12,7 @@ include_once 'classes/RostersHolder.php';
 include_once 'classes/PlayerVitalObj.php';
 include_once 'classes/PlayerVitalsHolder.php';
 
+
 $CurrentHTML = 'TeamRosters.php';
 $CurrentTitle = $rostersTitle;
 $CurrentPage = 'TeamRosters';

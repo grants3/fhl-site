@@ -1,6 +1,6 @@
 <?php
 
-class RostersHolder{
+class RostersHolder implements \JsonSerializable{
     
     private $lastUpdated;
     private $proRosters = array();
@@ -63,7 +63,7 @@ class RostersHolder{
             if(substr_count($val, 'A NAME=') && $b) {
                 $d = 0;
             }
-            if(substr_count($val, 'A NAME='.$searchTeam) && $d) {
+            if(substr_count(strtolower($val), strtolower('A NAME='.$searchTeam)) && $d) {
                 $pos = strpos($val, '</A>');
                 $pos = $pos - 23;
                 $curTeam = substr($val, 23, $pos);
@@ -297,4 +297,8 @@ class RostersHolder{
         return $this->proRosters;
     }
 
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
 }

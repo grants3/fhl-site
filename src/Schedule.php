@@ -62,7 +62,10 @@ if($seasonId || $round){
     $fileName = getCurrentLeagueFile($baseFileName);
 }
 
-
+if(!file_exists($fileName)) {
+    echo '<h5>'.$allFileNotFound.' - '.$baseFileName.'</h5>';
+    exit;
+}
 
 $scheduleHolder = new ScheduleHolder($fileName, '');
 

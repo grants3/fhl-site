@@ -1,6 +1,6 @@
 <?php
 
-class RosterAvgObj
+class RosterAvgObj implements \JsonSerializable
 {
     private $avgIt = 0;
     private $avgSp  = 0;
@@ -180,7 +180,10 @@ class RosterAvgObj
         return $this->avgOv;
     }
 
-    
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
     
 }
 

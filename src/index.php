@@ -18,14 +18,11 @@ include 'head.php';
 $playoffs = isPlayoffs2();
 ?>
 		
-<!-- 		<div class="mx-md-2 mx-lg-3"> -->
 		<div class="">
 			<?php include FS_ROOT.'component/TeamBanner.php'; ?>
 		</div>
 		
-<!-- 		<div class="mx-xs-1 mx-md-2 mx-lg-3"> -->
 		<div class="">
-			<?php //include 'ScoreCarousel.php'; ?>
 			<?php include FS_ROOT.'component/ScoreCarousel.php'; ?>
 		</div>
 		

@@ -1,5 +1,6 @@
 <?php
-class ProspectObj {
+class ProspectObj implements \JsonSerializable{
+    
     private $team;
     private $name;
     
@@ -35,6 +36,9 @@ class ProspectObj {
         $this->name = $name;
     }
 
-
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
     
 }

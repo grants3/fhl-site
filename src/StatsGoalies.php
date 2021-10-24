@@ -73,26 +73,7 @@ include 'head.php';
     	<div class="card-body p-2">
 			
 			<div class="row no-gutters" id="searchFields">
-<!-- 				<div class="col"> -->
-					<!-- position -->
-<!-- 					<div class="row no-gutters"> -->
-<!-- 						<div class="input-group mb-3 col-sm-6"> -->
-<!-- 							<div class="input-group-prepend"> -->
-<!-- 								<label class="input-group-text" for="positionInputField">Position</label> -->
-<!-- 							</div> -->
-<!-- 							<select class="custom-select" id="positionInputField"> -->
-<!-- 								<option value="">All Players</option> -->
-<!-- 								<option value="Skaters">All Skaters</option> -->
-<!-- 								<option value="Forwards">All Forwards</option> -->
-<!-- 								<option value="C">Center</option> -->
-<!-- 								<option value="RW">Right Wing</option> -->
-<!-- 								<option value="LW">Left Wing</option> -->
-<!-- 								<option value="D">Defense</option> -->
-<!-- 								<option value="G">Goalie</option> -->
-<!-- 							</select> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+
 			</div>
 			
 			<div>
@@ -151,7 +132,7 @@ $(function() {
 		"order": [[ "<?php echo $sort;?>", "<?php echo $sortOrder;?>" ]],
 		"ajax": {
 			//url : '<?php echo BASE_URL.'api/scoring'; ?>',
-			url : '<?php echo BASE_URL.'api?api=stats&type=goalie'; ?>',
+			url : '<?php echo BASE_URL.'api?api=stats&action=find&type=goalie'; ?>',
 				type: "GET"  
 			},
 			"columns": [
