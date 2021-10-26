@@ -9,6 +9,7 @@ class TransactionHolder implements \JsonSerializable{
     
     public static $typeInjury = 'INJ';
     public static $typeTransaction = 'TRA';
+    public static $typeTrade = 'TRD';
     
     public function __construct(string $file) {
 
@@ -130,6 +131,7 @@ class TransactionHolder implements \JsonSerializable{
                 
                 if(!isset($lastTrade)){
                     $lastTrade = new TransactionTradeObj();
+                    $lastTrade->setType(TransactionHolder::$typeTrade);
                     $lastTrade->setTeam1($transTeam);
                     $lastTrade->setToTeam1(trim($transStatus));
 

@@ -55,7 +55,7 @@ include 'head.php';
 
 if(file_exists($Fnm)) {
     
-    $gameHolder = new GameHolder($Fnm);
+    $gameHolder = new GameHolder($Fnm,$matchNumber);
 
 }
 else {

@@ -8,7 +8,7 @@ include_once FS_ROOT.'lang.php';
 /*
  * Parse schedule info from html file.
  */
-class ScheduleHolder{
+class ScheduleHolder implements \JsonSerializable{
     
     private $schedule = array();
     private $tradeDeadline;
@@ -24,7 +24,7 @@ class ScheduleHolder{
         $this->tradeDeadline = $tradeDeadline;
     }
 
-    public function __construct(string $file, string $filterTeam = '') {
+    public function __construct(string $file, string $filterTeam = null) {
         if(!file_exists($file)) {
             throw new InvalidArgumentException('File does not exist');
         }
@@ -143,8 +143,8 @@ class ScheduleHolder{
                 }
                 
                 //filter team
-                if(!empty($filterTeam)){
-                    if($team1 != $filterTeam && $team2 != $filterTeam) {
+                if(isset($filterTeam) && !empty($filterTeam)){
+                    if(strtolower($team1) != strtolower($filterTeam) && strtolower($team2) != strtolower($filterTeam)) {
                         continue;
                     }
                 }
@@ -313,6 +313,11 @@ class ScheduleHolder{
     
     public function getNextGames($amount){
         $filtered_array = array();
+    }
+    
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
     }
     
 }

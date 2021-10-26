@@ -1151,7 +1151,7 @@ if($leagueLang == 'EN') {
 	$salaryCopFloorUnder = 'Under Floor Salary Cap.';
 	
 	// Transact
-	$transactTitle = 'Transact';
+	$transactTitle = 'Transactions';
 	$transactNo = 'No transact';
 	$transactPlayers = 'PLAYER';
 	$transactTeam = 'TEAM';

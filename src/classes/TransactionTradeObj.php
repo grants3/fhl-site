@@ -1,10 +1,19 @@
 <?php
 class TransactionTradeObj implements \JsonSerializable{
+    private $type;
     private $team1;
     private $toTeam1;
     private $team2;
     private $toTeam2;
-  
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
     /**
      * @return mixed
      */
@@ -35,6 +44,14 @@ class TransactionTradeObj implements \JsonSerializable{
     public function getToTeam2()
     {
         return $this->toTeam2;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     /**

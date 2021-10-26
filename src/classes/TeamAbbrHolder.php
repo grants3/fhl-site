@@ -6,7 +6,11 @@ class TeamAbbrHolder {
     var $teamAbbrArray = array();
     
     public function __construct(string $teamScoringFile) {
-
+       
+        if(!file_exists($teamScoringFile)) {
+            throw new InvalidArgumentException('Scoring File does not exist');
+        }
+        
         $b = 0;
         $d = 0;
         $curTeam = null;

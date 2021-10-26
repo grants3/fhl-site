@@ -21,7 +21,7 @@ class PlayerStatsModel {//implements Model{
         
     }
     
-    function findBySeason($seasonId, $seasonType) : ScoringHolder{
+    function findBySeason($seasonId = null, $seasonType = null, $team = null) : ScoringHolder{
 
         //already processed. we want to use previous cached result
         if(isset($this->seasonStats[$seasonId])) return $this->seasonStats[$seasonId];
@@ -32,7 +32,7 @@ class PlayerStatsModel {//implements Model{
             throw new \Exception('Team scoring not found. seasonType='.$seasonType.' seasonId='.$seasonId);
         }
         
-        $scoringHolder = new ScoringHolder($fileName);
+        $scoringHolder = new ScoringHolder($fileName, $team);
         
         $this->seasonStats[$seasonId] = $scoringHolder;
 

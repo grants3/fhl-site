@@ -198,6 +198,11 @@ class RostersHolder implements \JsonSerializable{
     {
         return $this->farmRosters;
     }
+    
+    public function getRosters() : array
+    {
+        return array_merge($this->getProRosters(),$this->getFarmRosters());
+    }
 
     /**
      * @return mixed

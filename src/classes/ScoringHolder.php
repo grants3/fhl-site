@@ -8,7 +8,7 @@ require_once __DIR__.'/../baseConfig.php';
 require_once FS_ROOT.'classes/ScoringObj.php';
 require_once FS_ROOT.'classes/ScoringGoalieObj.php';
 
-class ScoringHolder{
+class ScoringHolder implements \JsonSerializable{
     
     private $lastUpdated;
     private $skaters = array();
@@ -400,6 +400,11 @@ class ScoringHolder{
     
     public function findGoalie(string $name){
         return array_search($name, $this->getGoalies());
+    }
+    
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
     }
 }
 

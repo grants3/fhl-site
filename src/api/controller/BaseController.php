@@ -61,10 +61,8 @@ class BaseController
             
             $_search = call_user_func(array($var, 'get'.ucfirst($columnData)));
             
-
             if($searchRegex)  return preg_match('/(?i)'.$searchValue.'/', $_search);
-            
-            //return (strpos(strtolower($var->getPosition()),strtolower($searchValue)) !== false);
+
             return $_search == $searchValue;
             
         });

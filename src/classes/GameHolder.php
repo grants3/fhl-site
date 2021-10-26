@@ -3,6 +3,9 @@
 
 class GameHolder implements \JsonSerializable
 {
+    
+    private $matchNumber, $seasonId, $round;
+    
     private $homeTeam;
     private $awayTeam;
     
@@ -64,22 +67,12 @@ class GameHolder implements \JsonSerializable
         return preg_replace($from, $to, $content, 1);
     }
     
-//     public function __construct(){
-//         $get_arguments       = func_get_args();
-//         $number_of_arguments = func_num_args();
+    public function __construct(string $file, $matchNumber, $seasonId = null, $round = null) {
         
-//         if (method_exists($this, $method_name = '__construct'.$number_of_arguments)) {
-//             call_user_func_array(array($this, $method_name), $get_arguments);
-//         }
-//         else{
-//              throw new Exception("constructor arguments required");
-//             //create empty instance 
-//             //$this->createInstance();
-//         }
-//     }
-    
-    public function __construct(string $file) {
-
+        $this->matchNumber = $matchNumber;
+        $this->seasonId = $seasonId;
+        $this->round = $round;
+        
         $gamesSavesOutOf = 'saves out of';
         $gamesGoalShots = 'shots';
         $gamesW = 'W';
@@ -588,6 +581,30 @@ class GameHolder implements \JsonSerializable
         
 
 
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getMatchNumber()
+    {
+        return $this->matchNumber;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getSeasonId()
+    {
+        return $this->seasonId;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getRound()
+    {
+        return $this->round;
     }
     
     

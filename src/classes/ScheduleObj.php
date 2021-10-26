@@ -1,6 +1,6 @@
 <?php
 
-class ScheduleObj{
+class ScheduleObj implements \JsonSerializable{
     
     var $isPlayed = false;
     var $isRequired = true;
@@ -173,8 +173,10 @@ class ScheduleObj{
         $this->gameTitle = $gameTitle;
     }
 
-    
-    
-    
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+       
 }
 

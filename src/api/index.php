@@ -39,13 +39,34 @@ try {
         $controller = new UnassignedController();
         $controller->{$apiAction}();
         
-    }else if('prospect' == $apiParam){
+    }else if('prospects' == $apiParam){
         include_once FS_ROOT.'api/controller/ProspectsController.php';
         $controller = new ProspectsController();
         $controller->{$apiAction}();
         
-    }else{
-        sendOutput(json_encode(array('error' => 'Invalid API Request')),
+    }else if('trans' == $apiParam){
+        include_once FS_ROOT.'api/controller/TransactionController.php';
+        $controller = new TransactionController();
+        $controller->{$apiAction}();
+        
+    }else if('game' == $apiParam){
+        include_once FS_ROOT.'api/controller/GameController.php';
+        $controller = new GameController();
+        $controller->{$apiAction}();
+        
+    }else if('waivers' == $apiParam){
+        include_once FS_ROOT.'api/controller/WaiversController.php';
+        $controller = new WaiversController();
+        $controller->{$apiAction}();
+        
+    }else if('sched' == $apiParam){
+        include_once FS_ROOT.'api/controller/ScheduleController.php';
+        $controller = new ScheduleController();
+        $controller->{$apiAction}();
+        
+    }
+    else{
+        sendOutput(json_encode(array('error' => 'Invalid API Request. Unable to route.')),
             array('Content-Type: application/json', 'HTTP/1.1 404 Not Found')
             );
     }

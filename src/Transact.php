@@ -158,7 +158,7 @@ $transactionHolder = new TransactionHolder($fileName);
 
 <script>
 
-//$(function() {
+$(function() {
 
 	var transTables = [
       "#trades-table",
@@ -191,18 +191,14 @@ $transactionHolder = new TransactionHolder($fileName);
 	});
 	}
 	
+	//need to adjust columns if datatable initialized while hidden.
+	$('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+        $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+    });
 
-	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-             // var target = $(e.target).attr("href") // activated tab
-              //alert(target);
-             
-              
-//               $(transTables[0]).columns.adjust().draw();
-//               $(transTables[1]).columns.adjust().draw();
-//               $(transTables[2]).columns.adjust().draw();
-          });
+
    
-//});
+});
 
 
 

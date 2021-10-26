@@ -1,7 +1,7 @@
 <?php
 class TransactionEventObj implements \JsonSerializable{
-    private $team;
     private $type;
+    private $team;
     private $action;
     private $value;
 
