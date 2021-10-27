@@ -5,6 +5,7 @@ require_once __DIR__.'/../config.php';
 include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'model/Model.php';
 include_once FS_ROOT.'classes/GameHolder.php';
+include_once FS_ROOT.'classes/SimFileNotFoundException.php';
 
 class GamesModel {//implements Model{
     
@@ -23,7 +24,7 @@ class GamesModel {//implements Model{
         $fileName = getGameFile($matchNumber, $seasonId, $round);
         
         if(!file_exists($fileName)) {
-            throw new \Exception('Game file not found. seasonId='.$seasonId.' round='.$round);
+            throw new SimFileNotFoundException('Game file not found. seasonId='.$seasonId.' round='.$round);
         }
         
         $holder = new GameHolder($fileName, $matchNumber, $seasonId, $round);

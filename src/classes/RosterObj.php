@@ -24,6 +24,10 @@ class RosterObj implements \JsonSerializable
     private $ld;
     private $ov;
     
+    function __get($name)
+    {
+        return$this->$name;
+    }  
 
     /**
      * @return mixed

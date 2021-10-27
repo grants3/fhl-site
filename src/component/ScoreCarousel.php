@@ -7,17 +7,13 @@ include_once FS_ROOT.'lang.php';
 include_once FS_ROOT.'classes/ScheduleHolder.php';
 include_once FS_ROOT.'classes/ScheduleObj.php';
 include_once FS_ROOT.'classes/TeamAbbrHolder.php';
+//load slick css/js assets
+$LOAD_BASE_SCRIPTS=true;
+$LOAD_SLICK_SCRIPTS=true;
+
+include FS_ROOT.'assets.php';
 
 ?>
-
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-	
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <style>
 
@@ -120,23 +116,6 @@ padding-right:30px;
 //$playoff = isPlayoffs($folder, $playoffMode);
 if (isPlayoffs2()) {
     //$playoff = 'PLF';
-    $round = 0;
-
-//     //if (file_exists($folder . 'cehlPLF-Round4-Schedule.html')) {
-//     if (file_exists($folder . 'cehlPLF-Round4-Schedule.html')) {
-//         // $fileName = $folder.'cehlPLF-Round4-Schedule.html';
-//         $round = 4;
-//     } else if (file_exists($folder . 'cehlPLF-Round3-Schedule.html')) {
-//         // $fileName = $folder.'cehlPLF-Round3-Schedule.html';
-//         $round = 3;
-//     } else if (file_exists($folder . 'cehlPLF-Round2-Schedule.html')) {
-//         // $fileName = $folder.'cehlPLF-Round2-Schedule.html';
-//         $round = 2;
-//     } else if (file_exists($folder . 'cehlPLF-Round1-Schedule.html')) {
-//         // $fileName = $folder.'cehlPLF-Round1-Schedule.html';
-//         $round = 1;
-//     }
-
     $round = getPlayoffRound();
 
     //$fileName = getLeagueFile($folder, $playoff, '-Round' . $round . '-Schedule.html', '-Round' . $round . '-Schedule');

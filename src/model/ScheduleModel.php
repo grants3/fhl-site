@@ -6,7 +6,7 @@ include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'model/Model.php';
 include_once FS_ROOT.'classes/ScheduleObj.php';
 include_once FS_ROOT.'classes/ScheduleHolder.php';
-
+include_once FS_ROOT.'classes/SimFileNotFoundException.php';
 
 class ScheduleModel {//implements Model{
     
@@ -25,7 +25,7 @@ class ScheduleModel {//implements Model{
         $fileName = _getLeagueFile('Schedule', $seasonType, $seasonId);
         
         if(!file_exists($fileName)) {
-            throw new \Exception('Schedule file not found. seasonType='.$seasonType.' seasonId='.$seasonId);
+            throw new SimFileNotFoundException('Schedule file not found. seasonType='.$seasonType.' seasonId='.$seasonId);
         }
         
         $holder = new ScheduleHolder($fileName, $team);

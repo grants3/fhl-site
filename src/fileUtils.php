@@ -3,8 +3,15 @@
 require_once __DIR__.'/config.php';
 include_once FS_ROOT.'common.php';
 
-function getTeamLogo(string $teamName) :string{
-    $matches = glob(FS_ROOT.LOGO_DIR . strtolower($teamName) . '.*');
+function getTeamLogo(string $teamName, bool $isFarm = false) :string{
+    
+    $searchPath = FS_ROOT.LOGO_DIR;
+    if($isFarm){
+        $searchPath .= LOGO_FARM_DIR;
+    }
+
+    //$matches = glob(FS_ROOT.LOGO_DIR . strtolower($teamName) . '.*');
+    $matches = glob($searchPath.strtolower($teamName) . '.*');
     $teamLogoFile = '';
     for ($j = 0; $j < count($matches); $j ++) {
         $teamLogoFile = $matches[$j];
@@ -14,11 +21,17 @@ function getTeamLogo(string $teamName) :string{
     return $teamLogoFile;
 }
 
-function getTeamLogoUrl(string $teamName) :string{    
+function getTeamLogoUrl(string $teamName, bool $isFarm = false) :string{    
     
-    $teamLogo = getTeamLogo($teamName);
+    $teamLogo = getTeamLogo($teamName,$isFarm);
+    
+    $searchPath = BASE_URL.LOGO_DIR;
+    if($isFarm){
+        $searchPath .= LOGO_FARM_DIR;
+    }
 
-    if($teamLogo) return BASE_URL.LOGO_DIR.basename(getTeamLogo($teamName));
+    if($teamLogo) return $searchPath.basename($teamLogo);
+    
     
     return BASE_URL.'assets/img/unknown-team.png';
     //return BASE_URL.LOGO_DIR.basename(getTeamLogo($teamName));
@@ -125,6 +138,10 @@ function getGameFile($gameNumber, $seasonId = null, $round = null) {
  */
 function getCurrentLeagueFile(string $baseName, string $exclude=null) {
     return getLeagueFile($baseName, null, $exclude);
+}
+
+function getCurrentRegSeasonFile(string $baseName, string $exclude=null) {
+    return getLeagueFile($baseName, 'REG', $exclude);
 }
 
 function getCurrentPlayoffLeagueFile(string $baseName, string $exclude=null) {

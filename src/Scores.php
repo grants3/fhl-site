@@ -529,39 +529,12 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 	
 				if($nbrBox == 1) $nbrBox = 2;
 				else $nbrBox = 1;
-				
-				$matches = glob($folderTeamLogos.strtolower($lastEquipe1).'.*');
-				$todayImage1 = '';
-				for($j=0;$j<count($matches);$j++) {
-					$todayImage1 = $matches[$j];
-					break 1;
-				}
-				$matches = glob($folderTeamLogos.strtolower($lastEquipe2).'.*');
-				$todayImage2 = '';
-				for($j=0;$j<count($matches);$j++) {
-					$todayImage2 = $matches[$j];
-					break 1;
-				}
+
+                //get team logos
+				$todayImage1 = getTeamLogoUrl($lastEquipe1);
+				$todayImage2 = getTeamLogoUrl($lastEquipe2);
 				
 // 				// Find Teams Abbr
-// 				$matches = glob($folder.'*TeamScoring.html');
-// 				$folderLeagueURL3 = '';
-// 				$matchesDate = array_map('filemtime', $matches);
-// 				arsort($matchesDate);
-// 				foreach ($matchesDate as $j => $val) {
-// 					if(!substr_count($matches[$j], 'PLF')) {
-// 						$folderLeagueURL3 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
-// 						break 1;
-// 					}
-// 				}
-	
-// 				$FnmAbbr = $folder.$folderLeagueURL3.'TeamScoring.html';
-// 				if(file_exists($FnmAbbr)) {
-// 					$lastEquipe1Abbr = search($FnmAbbr,$lastEquipe1);
-// 					$lastEquipe2Abbr = search($FnmAbbr,$lastEquipe2);
-// 				}
-// 				else echo $allFileNotFound.' - '.$FnmAbbr;
-
 				$lastEquipe1Abbr = $teamAbbrHolder->getAbbr($lastEquipe1);
 				$lastEquipe2Abbr = $teamAbbrHolder->getAbbr($lastEquipe2);
 

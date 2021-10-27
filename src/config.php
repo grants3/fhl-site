@@ -46,7 +46,11 @@ $folderCareerStats = "backup/season#/";
 // Supported Formats: JPEG, GIF, PNG, BMP, ICO (PNG Recommanded)
 // Logo names: the same as the name in your FHLsim but ALL the characters in lowercase Ex: RED WINGS = red wings
 // Enter where your team logos are located in your website. Same folder = '';, Previous directory = '../';
-$folderTeamLogos = "logos/";
+$folderTeamLogos = "logos/"; 
+
+#boxscore logo for farm teams. Follows same naming convention as above. enter here the subfolder of $folderTeamLogos.
+// If not using farm logos and just want to use NHL logos enter ''; 
+$folderTeamLogosFarm = "farm/";
 
 #GMO Location. 
 //Location of Online GM editor relative to the location of the config file. Leave blank if not used. If set, this will cause link to appear on nav
@@ -105,7 +109,7 @@ $footerText="FHL TableSim 2.0";
 
 //default color scheme.
 //blue,green,red,teal,custom
-$siteTheme="teal";
+$siteTheme="blue";
 
 //-----------------------------------------
 //DO NOT TOUCH ANYTHING BELOW HERE.
@@ -119,6 +123,7 @@ define("HOME",BASE_URL.$home);
 define("TRANSFER_DIR",FS_ROOT.$folder);
 define("GAMES_DIR",$folderGames);
 define("LOGO_DIR",$folderTeamLogos);
+define("LOGO_FARM_DIR",$folderTeamLogosFarm);
 define("GMO_DIR",$folderGmo);
 define("CAREER_STATS_DIR",FS_ROOT.$folderCareerStats);
 
@@ -148,7 +153,7 @@ unset($home);
 unset($folder);
 unset($folderGames);
 unset($folderCareerStats);
-//unset($folderTeamLogos);
+unset($folderTeamLogos);
 unset($folderGmo);
 //unset($leagueRostersLink);
 //unset($leagueFuturesLink);

@@ -8,6 +8,8 @@ ob_end_flush();
 
 require_once 'config.php';
 include 'lang.php';
+
+include FS_ROOT.'assets.php';
 ?>
 
 <div style="width:555px; margin-left:auto; margin-right:auto; border:solid 1px<?php echo $couleur_contour; ?>">
@@ -15,21 +17,9 @@ include 'lang.php';
 <table class="tableau">
 
 <?php
-include 'phpGetAbbr.php'; // Output $TSabbr
 
-if(!isset($playoff)) $playoff = '';
-if($playoff == 1) $playoff = 'PLF';
-$matches = glob($folder.'*'.$playoff.'Transact.html');
-$folderLeagueURL = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'Transact')-strrpos($matches[$j], '/')-1);
-		break 1;
-	}
-}
-$Fnm = $folder.$folderLeagueURL.'Transact.html';
+$Fnm = getCurrentLeagueFile('Transact');
+
 $b = 0;
 $c = 1;
 $d = 0;
@@ -114,14 +104,11 @@ if(file_exists($Fnm)) {
 			
 			if($c == 1) $c = 2;
 			else $c = 1;
-			
-			$bold = '';
-			if(isset($TSabbr) && ($transEquipe == $TSabbr || $transEquipe == $currentTeam)) $bold = 'font-weight:bold;';
-			
+
 			echo '<tr class="hover'.$c.'">';
-			echo '<td style="'.$bold.'">'.$transPlayer.'</td>';
-			echo '<td style="'.$bold.'">'.$transEquipe.'</td>';
-			echo '<td style="'.$bold.'">'.$transStatus.'</td>';
+			echo '<td>'.$transPlayer.'</td>';
+			echo '<td>'.$transEquipe.'</td>';
+			echo '<td>'.$transStatus.'</td>';
 			echo '</tr>';
 			
 			$d++;
@@ -142,13 +129,10 @@ if(file_exists($Fnm)) {
 			
 			if($c == 1) $c = 2;
 			else $c = 1;
-			
-			$bold = '';
-			if(isset($TSabbr) && ($transEquipe == $TSabbr || $transEquipe == $currentTeam)) $bold = 'font-weight:bold;';
-			
+		
 			echo '<tr class="hover'.$c.'">';
-			echo '<td colspan="2" style="'.$bold.'">'.$transEquipe.'</td>';
-			echo '<td style="'.$bold.'">'.$transStatus.'</td>';
+			echo '<td colspan="2">'.$transEquipe.'</td>';
+			echo '<td>'.$transStatus.'</td>';
 			echo '</tr>';
 			
 			$d++;

@@ -10,7 +10,7 @@ include_once FS_ROOT.'classes/ScoringPlayerObj.php';
 include_once FS_ROOT.'classes/ScoringGoalieObj.php';
 include_once FS_ROOT.'classes/ScoringObj.php';
 include_once FS_ROOT.'classes/ScoringAccumulator.php';
-
+include_once FS_ROOT.'classes/SimFileNotFoundException.php';
 
 class PlayerStatsModel {//implements Model{
     
@@ -29,7 +29,7 @@ class PlayerStatsModel {//implements Model{
         $fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
         
         if(!file_exists($fileName)) {
-            throw new \Exception('Team scoring not found. seasonType='.$seasonType.' seasonId='.$seasonId);
+            throw new SimFileNotFoundException('Team scoring not found. seasonType='.$seasonType.' seasonId='.$seasonId);
         }
         
         $scoringHolder = new ScoringHolder($fileName, $team);

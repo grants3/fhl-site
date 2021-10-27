@@ -6,6 +6,8 @@
 <?php
 require_once __DIR__.'/../config.php';
 
+include FS_ROOT.'assets.php';
+
 //default these so warnings are not throw. clean this up
 $playoff = '';
 $farm = '';

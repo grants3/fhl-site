@@ -6,6 +6,7 @@ include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'model/Model.php';
 include_once FS_ROOT.'classes/ProspectObj.php';
 include_once FS_ROOT.'classes/ProspectHolder.php';
+include_once FS_ROOT.'classes/SimFileNotFoundException.php';
 
 class ProspectsModel {//implements Model{
     
@@ -24,7 +25,7 @@ class ProspectsModel {//implements Model{
         $fileName = _getLeagueFile('Futures', $seasonType, $seasonId);
         
         if(!file_exists($fileName)) {
-            throw new \Exception('Futures not found. seasonType='.$seasonType.' seasonId='.$seasonId);
+            throw new SimFileNotFoundException('Futures not found. seasonType='.$seasonType.' seasonId='.$seasonId);
         }
         
         $holder = new ProspectHolder($fileName,$team);

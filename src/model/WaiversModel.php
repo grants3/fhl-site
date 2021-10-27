@@ -6,7 +6,7 @@ include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'model/Model.php';
 include_once FS_ROOT.'classes/WaiverObj.php';
 include_once FS_ROOT.'classes/WaiversHolder.php';
-
+include_once FS_ROOT.'classes/SimFileNotFoundException.php';
 
 class WaiversModel {//implements Model{
     
@@ -25,7 +25,7 @@ class WaiversModel {//implements Model{
         $fileName = _getLeagueFile('Waivers', $seasonType, $seasonId);
         
         if(!file_exists($fileName)) {
-            throw new \Exception('Waivers file not found. seasonType='.$seasonType.' seasonId='.$seasonId);
+            throw new SimFileNotFoundException('Waivers file not found. seasonType='.$seasonType.' seasonId='.$seasonId);
         }
         
         $holder = new WaiversHolder($fileName);

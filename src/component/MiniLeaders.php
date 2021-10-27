@@ -11,6 +11,7 @@ include_once FS_ROOT.'classes/ScoringAccumulator.php';
 include_once FS_ROOT.'classes/ScheduleHolder.php';
 include_once FS_ROOT.'classes/ScheduleObj.php';
 
+include FS_ROOT.'assets.php';
 
 if(!isset($teamList)){
     // // CREATE TEAM LIST

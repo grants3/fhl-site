@@ -2,6 +2,8 @@
 include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'classes/TeamHolder.php';
 
+include FS_ROOT.'assets.php';
+
 if(!isset($teamList)){
     include_once FS_ROOT.'fileUtils.php';
     

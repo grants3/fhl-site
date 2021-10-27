@@ -6,6 +6,8 @@ include_once FS_ROOT.'common.php';
 include_once FS_ROOT.'style.php';
 include_once FS_ROOT.'classes/ScheduleHolder.php';
 include_once FS_ROOT.'classes/ScheduleObj.php';
+
+include FS_ROOT.'assets.php';
 ?>
 
 <style>

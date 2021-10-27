@@ -7,6 +7,8 @@ include_once FS_ROOT.'common.php';
 include_once FS_ROOT.'classes/WaiversHolder.php';
 include_once FS_ROOT.'classes/WaiverObj.php';
 
+include FS_ROOT.'assets.php';
+
 // $playoff = isPlayoffs($folder, $playoffMode);
 
 // if ($playoff == 1)
@@ -27,7 +29,7 @@ if (file_exists($fileName)) {
 
 ?>
 
-<div class="container">
+<div class="container px-0">
 	<div class="card">
 		<div class="card-body">
 			<?php  if (isset($waivers) && !empty($waivers)) {?>
@@ -60,7 +62,7 @@ if (file_exists($fileName)) {
              	</table>
 			</div>
 			<?php }else{?>
-			<h6 class="text-center"><?php echo $waiversNothing;?></h6>
+			<h6 class="text-center mb-0"><?php echo $waiversNothing;?></h6>
 			<?php }?>
 		</div>
 	</div>

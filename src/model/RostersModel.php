@@ -7,7 +7,7 @@ include_once FS_ROOT.'model/Model.php';
 include_once FS_ROOT.'classes/RosterObj.php';
 include_once FS_ROOT.'classes/RosterAvgObj.php';
 include_once FS_ROOT.'classes/RostersHolder.php';
-
+include_once FS_ROOT.'classes/SimFileNotFoundException.php';
 
 class RostersModel {//implements Model{
     
@@ -26,7 +26,7 @@ class RostersModel {//implements Model{
         $fileName = _getLeagueFile('Rosters', $seasonType, $seasonId);
         
         if(!file_exists($fileName)) {
-            throw new \Exception('Rosters not found. seasonType='.$seasonType.' seasonId='.$seasonId);
+            throw new SimFileNotFoundException('Rosters not found. seasonType='.$seasonType.' seasonId='.$seasonId);
         }
         
         $rostersHolder = new RostersHolder($fileName,$team);

@@ -347,12 +347,14 @@ table.table-sm>thead>tr>th:first-of-type {
     						<div class="col-12 col-md-6 pr-md-1 pb-2 pb-md-0">
     							<div class="teamheader logo-gradient border">
                                 	<?php
-                                	$teamCardLogoSrc = glob($folderTeamLogos . strtolower($awayTeam) . '.*');
+                                	//$teamCardLogoSrc = glob($folderTeamLogos . strtolower($awayTeam) . '.*');
+                                	$teamCardLogoSrc = getTeamLogoUrl($awayTeam);
+                                	error_log($teamCardLogoSrc);
                                 ?>
                                  	<div class="team-logo gloss logo-gradient">
                                         <?php
-                                        if (isset($teamCardLogoSrc[0])) {
-                                            echo '<img src="' . $teamCardLogoSrc[0] . '" alt="' . $awayTeam . '">';
+                                        if (isset($teamCardLogoSrc)) {
+                                            echo '<img src="' . $teamCardLogoSrc . '" alt="' . $awayTeam . '">';
                                         }
                                         ?>
                                      </div>
@@ -376,13 +378,14 @@ table.table-sm>thead>tr>th:first-of-type {
     						<div id="awayHeader" class="col-12 col-md-6 pl-md-1">
     							<div class="teamheader logo-gradient border">
                                 	<?php
-                                	$teamCardLogoSrc = glob($folderTeamLogos . strtolower($homeTeam) . '.*');
+                                	//$teamCardLogoSrc = glob($folderTeamLogos . strtolower($homeTeam) . '.*');
+                                	$teamCardLogoSrc = getTeamLogoUrl($homeTeam);
                                 ?>
                                  	<div
     									class="team-logo gloss logo-gradient logo-home">
                                         <?php
-                                        if (isset($teamCardLogoSrc[0])) {
-                                            echo '<img src="' . $teamCardLogoSrc[0] . '" alt="' . $homeTeam . '">';
+                                        if (isset($teamCardLogoSrc)) {
+                                            echo '<img src="' . $teamCardLogoSrc . '" alt="' . $homeTeam . '">';
                                         }
                                         ?>
                                      </div>
@@ -1376,13 +1379,15 @@ table.table-sm>thead>tr>th:first-of-type {
 									<div class="col-12 col-md-6 pr-md-1 pb-2 pb-md-0">
 										<div class="teamheader logo-gradient border">
                                         	<?php
-                                        $teamCardLogoSrc = glob($folderTeamLogos . 'farm/' . strtolower($awayTeam) . '.*');
+                                        //$teamCardLogoSrc = glob($folderTeamLogos . 'farm/' . strtolower($awayTeam) . '.*');
+                                        	$teamCardLogoSrc = getTeamLogoUrl($awayTeam, true);
+                                        	
                                         ?>
                                          	<div
 												class="team-logo gloss logo-gradient">
                                                 <?php
-                                                if (isset($teamCardLogoSrc[0])) {
-                                                    echo '<img src="' . $teamCardLogoSrc[0] . '" alt="' . $awayTeam . '">';
+                                                if (isset($teamCardLogoSrc)) {
+                                                    echo '<img src="' . $teamCardLogoSrc . '" alt="' . $awayTeam . '">';
                                                 }
                                                 ?>
                                              </div>
@@ -1406,13 +1411,14 @@ table.table-sm>thead>tr>th:first-of-type {
 									<div id="awayHeader" class="col-12 col-md-6 pl-md-1">
 										<div class="teamheader logo-gradient border">
                                         	<?php
-                                        $teamCardLogoSrc = glob($folderTeamLogos . 'farm/' . strtolower($homeTeam) . '.*');
+                                        //$teamCardLogoSrc = glob($folderTeamLogos . 'farm/' . strtolower($homeTeam) . '.*');
+                                        	$teamCardLogoSrc = getTeamLogoUrl($homeTeam, true);
                                         ?>
                                          	<div
 												class="team-logo gloss logo-gradient logo-home">
                                                 <?php
-                                                if (isset($teamCardLogoSrc[0])) {
-                                                    echo '<img src="' . $teamCardLogoSrc[0] . '" alt="' . $homeTeam . '">';
+                                                if (isset($teamCardLogoSrc)) {
+                                                    echo '<img src="' . $teamCardLogoSrc . '" alt="' . $homeTeam . '">';
                                                 }
                                                 ?>
                                              </div>

@@ -58,7 +58,27 @@ abstract class BaseSearchController extends BaseController
                 $startIndex = isset($arrQueryStringParams['start']) ? $arrQueryStringParams['start'] : 0; //paging start
                 $length = isset($arrQueryStringParams['length']) ? $arrQueryStringParams['length'] : 25; //paging max records
                 
-                $data = $this->getData();
+               // $data = $this->getData();
+                //we want to return a blank dataset if the file is not found.
+                try{
+                    $data = $this->getData();
+                }catch (SimFileNotFoundException $e) {
+                    
+                    $output = array(
+                        "draw" 				=> $draw,
+                        "records"           => 0,
+                        "recordsTotal" 		=> 0,
+                        "recordsFiltered"	=> 0,
+                        "data" 				=> array(),
+                        "message"           => 'sim file not found'
+                    );
+                    
+                    $this->sendOutput(
+                        json_encode($output),
+                        array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                        );
+                }
+                
                 
                 //count unfiltered
                 $total = count($data);
@@ -132,10 +152,7 @@ abstract class BaseSearchController extends BaseController
             foreach($this->getSearchFields() as $searchField){
                 $searchData = array_merge($this->dynamicFiltering($data, $searchField, $searchValue, $searchRegex),$searchData);
             }
-            
-            error_log('-----------------------');
-            error_log(print_r($searchData,1));
-            
+
             $data = $searchData;
         }
         
@@ -174,13 +191,10 @@ abstract class BaseSearchController extends BaseController
             $orderColumnIndex = htmlspecialchars($this->getQueryStringParams()['order'][0]['column']);
             $orderDirection = htmlspecialchars($this->getQueryStringParams()['order'][0]['dir']);
             
-            $orderColumn = htmlspecialchars($this->getQueryStringParams()['columns'][$orderColumnIndex]['name']);
+            $orderColumn = htmlspecialchars($this->getQueryStringParams()['columns'][$orderColumnIndex]['data']);
             
             usort( $data,  function($a, $b) use($orderColumn,$orderDirection){
-                
-                // $a = (array) $a;
-                // $b = (array) $b;
-                
+
                 //multi sort with attribute and then secondary if equal.
                 if($orderDirection == 'asc'){
                     

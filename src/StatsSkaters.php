@@ -179,7 +179,6 @@ $(function() {
     
 		
 		"ajax": {
-			//url : '<?php echo BASE_URL.'api/scoring'; ?>',
 			url : '<?php echo BASE_URL.'api?api=stats&action=find'; ?>',
 				type: "GET"  
 			},

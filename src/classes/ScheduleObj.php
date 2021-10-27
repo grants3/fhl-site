@@ -13,6 +13,10 @@ class ScheduleObj implements \JsonSerializable{
     var $isOt;
     var $gameTitle;
     
+    function __get($name)
+    {
+        return$this->$name;
+    }  
     
     /**
      * @return boolean

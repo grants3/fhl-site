@@ -5,6 +5,11 @@ class WaiverObj {
     var $waivedBy;
     var $claimedBy;
     
+    function __get($name)
+    {
+        return$this->$name;
+    }  
+    
     function set_player($new_player) {
         $this->player = $new_player;
     }

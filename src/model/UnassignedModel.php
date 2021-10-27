@@ -6,7 +6,7 @@ include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'model/Model.php';
 include_once FS_ROOT.'classes/UnassignedObj.php';
 include_once FS_ROOT.'classes/UnassignedHolder.php';
-
+include_once FS_ROOT.'classes/SimFileNotFoundException.php';
 
 class UnassignedModel {//implements Model{
     
@@ -25,7 +25,7 @@ class UnassignedModel {//implements Model{
         $fileName = _getLeagueFile('Unassigned', $seasonType, $seasonId);
         
         if(!file_exists($fileName)) {
-            throw new \Exception('Unassigned file not found. seasonType='.$seasonType.' seasonId='.$seasonId);
+            throw new SimFileNotFoundException('Unassigned file not found. seasonType='.$seasonType.' seasonId='.$seasonId);
         }
         
         $holder = new UnassignedHolder($fileName);

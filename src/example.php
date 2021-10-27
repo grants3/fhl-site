@@ -2,7 +2,7 @@
 require_once __DIR__.'/config.php';
 ?>
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" >
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
@@ -11,21 +11,7 @@ require_once __DIR__.'/config.php';
     <title>Example League Website</title>
     <meta name="description" content="Free responsive website HTML theme with sticky sidebar for both desktop and mobile. ">
 
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
-	    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
-    
-    	<?php 
-	//cache bust css.(should evade caching same filename when contents changes)
-	$cssHash = hash_file('crc32',FS_ROOT.'assets/css/style-1.css');
-	$cssHashUrl= '?m='.$cssHash;
-	?>
-    
-   	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/style-1.css<?php echo $cssHashUrl;?>"/>
-	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/scripts-1.js"></script>
+	<?php include FS_ROOT.'assets.php';?>
 
 </head>
 <body>
@@ -50,7 +36,7 @@ require_once __DIR__.'/config.php';
 
 
 
-<div id="wrapall">
+<div id="wrapall2">
 	<div id="sidebar">
 		<div id="stickThis">
 			<div id="sidebarContent">
@@ -78,12 +64,12 @@ require_once __DIR__.'/config.php';
 					</div>			
 				</article>
 				<article>
-					<div>Waivers Mini
+					<div style="width:33%">Waivers Mini
 						<?php include FS_ROOT.'component/MiniWaivers.php'; ?>	
 					</div>					
 				</article>
 				<article>
-					<div style="width:65%">News
+					<div style="width:50%">News
 						<?php include FS_ROOT.'component/News.php'; ?>	
 					</div>		
 				</article>
@@ -93,17 +79,17 @@ require_once __DIR__.'/config.php';
 					</div>						
 				</article>
 				<article>
-					<div>Top 5 Mini
+					<div style="width:50%">Top 5 Mini
 						<?php include FS_ROOT.'component/MiniLeaders.php'; ?>	
 					</div>	
 				</article>
 				<article>
-					<div style="width:50%">Full Standings Mini
+					<div style="width:25%">Full Standings Mini
                         <?php include FS_ROOT.'component/MiniStandings.php';?>
 					</div>
 				</article>
 				<article>
-					<div style="width:50%">Playoff Tree Mini
+					<div style="width:25%">Playoff Tree Mini
 						<?php include FS_ROOT.'component/MiniStandingsTree.php';?>
 					</div>
 				</article>
@@ -121,7 +107,7 @@ require_once __DIR__.'/config.php';
 <style>
 	
 	html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
-body{line-height:1;font-family:arial}
+body{}
 h1{font-size:25px}
 h2{font-size:21px}
 h3{font-size:18px}

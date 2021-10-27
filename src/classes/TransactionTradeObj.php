@@ -5,6 +5,11 @@ class TransactionTradeObj implements \JsonSerializable{
     private $toTeam1;
     private $team2;
     private $toTeam2;
+    
+    function __get($name)
+    {
+        return$this->$name;
+    }  
 
     /**
      * @return mixed

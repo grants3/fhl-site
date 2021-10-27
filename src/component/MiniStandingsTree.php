@@ -12,6 +12,8 @@ require_once __DIR__.'/../config.php';
 include_once FS_ROOT.'lang.php';
 include_once FS_ROOT.'fileUtils.php';
 
+include FS_ROOT.'assets.php';
+
 //$Fnm = getCurrentPlayoffLeagueFile('-Round1-Schedule.html');
 $existRnd = getPlayoffRound();
 

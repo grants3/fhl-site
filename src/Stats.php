@@ -36,7 +36,7 @@ $scheduleFile = getCurrentLeagueFile('Schedule');
 $scheduleHolder = new ScheduleHolder($scheduleFile, '');
 
 //figure out how far season has progressed to get min gp amounts for stats
-$maxMinGoalieGames = 15;
+$maxMinGoalieGames = 24;
 $minGameCount = $scheduleHolder->isSeasonStarted() ? 2 : 0;
 
 if(!isPlayoffs2()){

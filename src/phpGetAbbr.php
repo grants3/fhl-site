@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__.'/config.php';
+require_once __DIR__.'/fileUtils.php';
+
 if(!function_exists('search')) {
 	function search($Fnm,$currentTeam) {
 		$b = 0;
@@ -41,22 +44,12 @@ if(!function_exists('search')) {
 }
 
 if(isset($currentTeam) && $currentTeam != '') {
-	$matches = glob($folder.'*TeamScoring.html');
-	$folderLeagueURL2 = '';
-	$matchesDate = array_map('filemtime', $matches);
-	arsort($matchesDate);
-	foreach ($matchesDate as $j => $val) {
-		if(!substr_count($matches[$j], 'PLF')) {
-			$folderLeagueURL2 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
-			break 1;
-		}
-	}
-	$TSabbr = '';
-	$Fnm = $folder.$folderLeagueURL2.'TeamScoring.html';
+    $Fnm = getCurrentRegSeasonFile('TeamScoring');
+    
 	if(file_exists($Fnm)) {
 		$TSabbr = search($Fnm,$currentTeam);
 	}
-	else echo $allFileNotFound.' - '.$Fnm;
+	//else echo $allFileNotFound.' - '.$Fnm;
 	
 	// Recherche des saisons antérieurs
 	if(CAREER_STATS_DIR != '0' && $TSabbr == '') {

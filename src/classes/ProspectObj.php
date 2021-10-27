@@ -4,6 +4,11 @@ class ProspectObj implements \JsonSerializable{
     private $team;
     private $name;
     
+    function __get($name)
+    {
+        return$this->$name;
+    }  
+    
     /**
      * @return mixed
      */

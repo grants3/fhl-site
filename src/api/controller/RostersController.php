@@ -28,11 +28,9 @@ class RostersController extends BaseSearchController
             throw new \Exception("Invalid request, team required.");
         }
         
-      
         if(isset($this->getQueryStringParams()['incAvg'])) {
             $incAvg = $this->getQueryStringParams()['incAvg'];
         }
-        
         
         $model = new RostersModel();
         $holder = $model->findBySeason($seasonId, $seasonType, $team, $incAvg );

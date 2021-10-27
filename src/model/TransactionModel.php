@@ -8,7 +8,7 @@ include_once FS_ROOT.'model/Model.php';
 include_once FS_ROOT.'classes/TransactionHolder.php';
 include_once FS_ROOT.'classes/TransactionTradeObj.php';
 include_once FS_ROOT.'classes/TransactionEventObj.php';
-
+include_once FS_ROOT.'classes/SimFileNotFoundException.php';
 
 class TransactionModel {//implements Model{
     
@@ -27,7 +27,7 @@ class TransactionModel {//implements Model{
         $fileName = _getLeagueFile('Transact', $seasonType, $seasonId);
         
         if(!file_exists($fileName)) {
-            throw new \Exception('Transact file not found. seasonType='.$seasonType.' seasonId='.$seasonId);
+            throw new SimFileNotFoundException('Transact file not found. seasonType='.$seasonType.' seasonId='.$seasonId);
         }
         
         $scoringHolder = new TransactionHolder($fileName);

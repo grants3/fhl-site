@@ -73,7 +73,6 @@ $teamCardInfo = new TeamInfo($standingsFile, $currentTeam);
 
 <div class= "teamheader logo-gradient">
 	<?php 
-	 //$teamCardLogoSrc = glob($folderTeamLogos.strtolower($currentTeam).'.*');
 	 $teamCardLogoSrc = getTeamLogoUrl($currentTeam);
 	?>
  	<div class="team-logo gloss logo-gradient">

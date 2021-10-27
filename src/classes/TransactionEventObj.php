@@ -4,6 +4,11 @@ class TransactionEventObj implements \JsonSerializable{
     private $team;
     private $action;
     private $value;
+    
+    function __get($name)
+    {
+        return$this->$name;
+    }  
 
     /**
      * @return mixed

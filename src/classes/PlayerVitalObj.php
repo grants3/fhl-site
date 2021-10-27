@@ -9,6 +9,12 @@ class PlayerVitalObj {
     private $weight;
     private $salary;
     private $contractLength;
+    
+    function __get($name)
+    {
+        return$this->$name;
+    }  
+    
     /**
      * @return mixed
      */

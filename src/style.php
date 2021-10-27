@@ -11,8 +11,6 @@ if(isset($_SESSION["theme"])){
 
 ?>
 
-
-
 <style type="text/css">
 
 <?php if(LEAGUE_LOGO){ ?>
@@ -76,8 +74,11 @@ else if($siteColorTheme == 'red') {
    --table-sort-desc:#BDD2B6; 
 }
 
-<?php } ?>
+<?php } else if($siteColorTheme == 'custom') {
+    
+    include FS_ROOT.'styleCustom.php'; 
 
+} ?>
 
 
 </style>

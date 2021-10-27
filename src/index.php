@@ -8,6 +8,8 @@ $CurrentHTML = 'index.php';
 $CurrentTitle = 'Home';
 $CurrentPage = 'Home';
 
+$LOAD_SLICK_SCRIPTS=true;
+
 include 'head.php';
 
 ?>

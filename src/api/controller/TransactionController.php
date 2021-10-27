@@ -53,12 +53,28 @@ class TransactionController extends BaseSearchController
     }
     
     protected function getSearchFields(): array {
+        
+        $type = null;
+        if(isset($this->getQueryStringParams()['type'])) {
+            $type = $this->getQueryStringParams()['type'];
+        }
+        
+        if(isset($type) && $type){
+            if('trade' == $type){
+                return array("team1","team2","toTeam1","toTeam2");
+            }else if('trans' == $type){
+                return array("team","action","value");
+            }else if('inj' == $type){
+                return array("team","action","value");
+            }
+        }
+        
         return array();
     }
     
     protected function getSecondarySort(): string
     {
-        return null;
+        return '';
     }
     
 }

@@ -25,21 +25,10 @@ function ordinalFrench($number) {
 	else return $number. 'e';
 }
 
-// Obtenir l'abbréviation de l'équipe
-//include 'phpGetAbbr.php'; // Output $TSabbr / $folderLeagueURL2
 
-// $matches = glob($folder.'*'.$playoff.'GMs.html');
-// $folderLeagueURL = '';
-// $matchesDate = array_map('filemtime', $matches);
-// arsort($matchesDate);
-// foreach ($matchesDate as $j => $val) {
-// 	$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'GMs')-strrpos($matches[$j], '/')-1);
-// 	break 1;
-// }
-
-// Nom du club-école
+// Nom du club-école - want latest reg season standings always.
 //$Fnm = $folder.$folderLeagueURL2.'FarmStandings.html';
-$Fnm = getLeagueFile('FarmStandings');
+$Fnm = getCurrentRegSeasonFile('FarmStandings');
 $farmName = '';
 $b = 0;
 $d = 0;
@@ -224,18 +213,6 @@ $recordAwayLos = 0;
 $recordAwayTie = 0;
 $recordAwayPts = 0;
 
-// if (file_exists($folder.$folderLeagueURL2.'PLF-Round1-Schedule.html')) {
-// 	$round = 1;
-// }
-// if (file_exists($folder.$folderLeagueURL2.'PLF-Round2-Schedule.html')) {
-// 	$round = 2;
-// }
-// if (file_exists($folder.$folderLeagueURL2.'PLF-Round3-Schedule.html')) {
-// 	$round = 3;
-// }
-// if (file_exists($folder.$folderLeagueURL2.'PLF-Round4-Schedule.html')) {
-// 	$round = 4;
-// }
 $round = getPlayoffRound();
 
 //$Fnm = $folder.$folderLeagueURL2.'Schedule.html';
@@ -1134,51 +1111,13 @@ echo '</div>';
 // BEST ALL TIME 10 PLAYERS SEASONS POINTS
 // Recherche des saisons antérieurs
 if(CAREER_STATS_DIR != '0') {
-// 	$hashFolder = '';
-// 	$tmpLong = 0;
-// 	for($i=0;$i<substr_count(CAREER_STATS_DIR, '/');$i++) {
-// 		if($hashFolder != '') $tmpLong = strlen($hashFolder)+1;
-// 		$hashFolder = substr(CAREER_STATS_DIR, 0+$tmpLong, strpos(CAREER_STATS_DIR, '/'));
-// 		if(substr_count($hashFolder, '#') > 0) break 1;
-// 	}
-// 	$Fnm = str_replace("#/","*",CAREER_STATS_DIR);
-// 	$NumberSeason = 0;
-// 	$dirs = glob($Fnm, GLOB_ONLYDIR);
-// 	for($j=0;$j<count($dirs);$j++) {
-// 		if(substr_count($dirs[$j], $hashFolder)) {
-// 			$tmpYear = substr($dirs[$j], strlen(CAREER_STATS_DIR)-2);
-// 			if($NumberSeason < $tmpYear) $NumberSeason = $tmpYear;
-// 		}
-// 	}
 	$NumberSeason = count(getPreviousSeasons(CAREER_STATS_DIR));
 
 	// Recherche Seasons TeamScoring - Current Season
-// 	$matches = glob($folder.'*TeamScoring.html');
-// 	$folderLeagueURL = '';
-// 	$matchesDate = array_map('filemtime', $matches);
-// 	arsort($matchesDate);
-// 	foreach ($matchesDate as $j => $val) {
-// 		if(!substr_count($matches[$j], 'PLF')) {
-// 			$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
-// 			$FnmCurrentSeason = $folder.$folderLeagueURL.'TeamScoring.html';
-// 			break 1;
-// 		}
-// 	}
 	$FnmCurrentSeason = _getLeagueFile('TeamScoring');
 	$teamAbbrHolder = new TeamAbbrHolder($FnmCurrentSeason);
 	$TSabbr = $teamAbbrHolder->getAbbr($currentTeam); //get current team abbreviation to be used to filter scoring later.
-	//get latest playoff season
-// 	$matches = glob($folder.'*PLFTeamScoring.html');
-// 		$folderLeagueURL = '';
-// 		$matchesDate = array_map('filemtime', $matches);
-// 		arsort($matchesDate);
-// 		foreach ($matchesDate as $j => $val) {
-// 			if(substr_count($matches[$j], 'PLF')) {
-// 				$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'PLFTeamScoring')-strrpos($matches[$j], '/')-1);
-// 				$FnmCurrentPlayoff = $folder.$folderLeagueURL.'PLFTeamScoring.html';
-// 				break 1;
-// 			}
-// 		}
+
 	$FnmCurrentPlayoff = _getLeagueFile('TeamScoring','PLF'); //not used?
 
 	

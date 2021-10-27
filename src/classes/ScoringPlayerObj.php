@@ -6,27 +6,27 @@ require_once FS_ROOT.'classes/ScoringObj.php';
 
 class ScoringPlayerObj implements \JsonSerializable, ScoringObj{
     
-    var $number;
-    var $team;
-    var $teamAbbr;
-    var $position;
-    var $rookieStatus = false;
-    var $name;
-    var $gamesPlayed;
-    var $goals;
-    var $assists;
-    var $points;
-    var $plusMinus;
-    var $pim;
-    var $ppg;
-    var $shg;
-    var $gwg;
-    var $gtg;
-    var $hits;
-    var $shots;
-    var $shotPct;
-    var $goalStreak;
-    var $pointStreak;
+    private $number;
+    private $team;
+    private $teamAbbr;
+    private $position;
+    private $rookieStatus = false;
+    private $name;
+    private $gamesPlayed;
+    private $goals;
+    private $assists;
+    private $points;
+    private $plusMinus;
+    private $pim;
+    private $ppg;
+    private $shg;
+    private $gwg;
+    private $gtg;
+    private $hits;
+    private $shots;
+    private $shotPct;
+    private $goalStreak;
+    private $pointStreak;
     
     function __get($name)
     {
