@@ -47,6 +47,16 @@ abstract class BaseSearchController extends BaseController
     }
 
     public function find(){
+        $this->_find();
+    }
+    
+    //placeholder want to split off normal search to have simple search/filter/order parameters for 'normal api'.
+    //will cutover to dt version on site.
+    public function findDt(){
+        $this->_find();
+    }
+    
+    protected function _find(){
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
         $arrQueryStringParams = $this->getQueryStringParams();
@@ -79,14 +89,11 @@ abstract class BaseSearchController extends BaseController
                         );
                 }
                 
-                
                 //count unfiltered
                 $total = count($data);
                 
                 //search support
-                if($this->getSearchFields()){
-                    $this->searchData($data);
-                }
+                $this->searchData($data);
 
                 //column filtering
                 $this->filterData($data);
@@ -149,9 +156,41 @@ abstract class BaseSearchController extends BaseController
             
             //$data = $this->dynamicFiltering($data, $this->getSearchField(), $searchValue, $searchRegex);
             $searchData = array();
-            foreach($this->getSearchFields() as $searchField){
-                $searchData = array_merge($this->dynamicFiltering($data, $searchField, $searchValue, $searchRegex),$searchData);
+            
+            //used defined search fields if set.
+            if($this->getSearchFields()){
+                foreach($this->getSearchFields() as $searchField){
+                    $searchData = array_merge($this->dynamicFiltering($data, $searchField, $searchValue, $searchRegex),$searchData);
+                }
+            }else{
+               // otherwise use column data.
+                if(isset($this->getQueryStringParams()['columns'])){
+                    foreach($this->getQueryStringParams()['columns'] as $column){
+                        if(isset($column['search'])){
+    
+                            $searchable =  htmlspecialchars($column['searchable']);
+                            if(isset($searchable) && !$searchable){
+                                continue; //skip if marked as non searchable.
+                            }
+                            $columnData =  htmlspecialchars($column['data']);
+  
+                            //override if set at column level
+                            if(isset($column['search']['regex'])) $searchRegex = htmlspecialchars($column['search']['regex']);
+    
+                            if(DEBUG_MODE){
+                                error_log('filtering column '.$columnData .' search value '. $searchValue);
+                            }
+
+                            //$data = $this->dynamicFiltering($data, $columnData, $searchValue, $searchRegex);
+                            $searchData = array_merge($this->dynamicFiltering($data, $columnData, $searchValue, $searchRegex),$searchData);
+                        }
+                    }
+                }
             }
+  
+
+            
+
 
             $data = $searchData;
         }

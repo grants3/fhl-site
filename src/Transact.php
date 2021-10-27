@@ -193,7 +193,8 @@ var tradesTable = $('#trades-table').DataTable({
     scrollCollapse: false,
 	"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
     language: {
-        "lengthMenu": "Display _MENU_ records"
+        emptyTable: "Sim data not found",
+        lengthMenu: "Display _MENU_ records",
     },   
     "order": [],
 	"ajax": {
@@ -230,7 +231,8 @@ var eventsTable = $('#events-table').DataTable({
     scrollCollapse: false,
 	"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
     language: {
-        "lengthMenu": "Display _MENU_ records"
+        emptyTable: "Sim data not found",
+        lengthMenu: "Display _MENU_ records",
     },   
     "order": [],
 	"ajax": {
@@ -264,7 +266,8 @@ var injuriesTable = $('#inj-table').DataTable({
     scrollCollapse: false,
 	"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
     language: {
-        "lengthMenu": "Display _MENU_ records"
+        emptyTable: "Sim data not found",
+        lengthMenu: "Display _MENU_ records",
     },   
     "order": [],
 	"ajax": {

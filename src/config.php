@@ -94,7 +94,7 @@ $leagueOvertimePoint = 1;
 //Min Active Players | Min required active players on roster. (Not injured or suspended) 0:Off
 $minActivePlayers = 20;
 
-# League mode (Auto mode will check if playoff files exist in transfer directory, otherwise mode is selected manualy)
+# League mode (Auto mode will check if playoff files exist in main transfer directory ($folder), otherwise mode is user selected)
 # Regular Season: 0 | Playoffs : 1 | Auto Detect : 2
 //$playoffMode = 1;
 $leagueMode = 0;

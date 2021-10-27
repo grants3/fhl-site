@@ -17,6 +17,7 @@ if(isset($_GET['api']) || isset($_POST['api'])) {
     $apiParam = ( isset($_GET['api']) ) ? $_GET['api'] : $_POST['api'];
 }
 
+//passing in blank action to controller will result in 404 as no method will be mapped to it. (will get picked up by base __call method)
 $apiAction = '';
 if(isset($_GET['action']) || isset($_POST['action'])) {
     $apiAction = ( isset($_GET['action']) ) ? $_GET['action'] : $_POST['action'];
