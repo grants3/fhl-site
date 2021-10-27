@@ -70,7 +70,7 @@ abstract class BaseSearchController extends BaseController
                         "recordsTotal" 		=> 0,
                         "recordsFiltered"	=> 0,
                         "data" 				=> array(),
-                        "message"           => 'sim file not found'
+                        "message"           => $e->getMessage()
                     );
                     
                     $this->sendOutput(
@@ -169,6 +169,10 @@ abstract class BaseSearchController extends BaseController
                 
                 if(isset($column['search']) && !empty($column['search']['value'])){
                     
+                    $searchable =  htmlspecialchars($column['searchable']);
+                    if(isset($searchable) && !$searchable){
+                        continue; //skip if marked as non searchable.
+                    }
                     $columnData =  htmlspecialchars($column['data']);
                     $searchValue = htmlspecialchars($column['search']['value']);
                     $searchRegex = isset($column['search']['regex']) ? htmlspecialchars($column['search']['regex']) : false;
@@ -176,7 +180,7 @@ abstract class BaseSearchController extends BaseController
                     if(DEBUG_MODE){
                         error_log('filtering column '.$columnData .' search value '. $searchValue);
                     }
-                    
+
                     $data = $this->dynamicFiltering($data, $columnData, $searchValue, $searchRegex);
                 }
             }
