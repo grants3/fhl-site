@@ -113,6 +113,13 @@ else {
 	border-bottom-left-radius: 5px;
 }
 
+.teamheader .team-logo-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 68px;
+}
+
 .teamheader .team-right {
 	float: right;
 	-moz-border-radius-bottomright: 5px;
@@ -354,7 +361,9 @@ table.table-sm>thead>tr>th:first-of-type {
                                  	<div class="team-logo gloss logo-gradient">
                                         <?php
                                         if (isset($teamCardLogoSrc)) {
+                                            echo '<div class="team-logo-img">';
                                             echo '<img src="' . $teamCardLogoSrc . '" alt="' . $awayTeam . '">';
+                                            echo '</div>';
                                         }
                                         ?>
                                      </div>
@@ -385,7 +394,9 @@ table.table-sm>thead>tr>th:first-of-type {
     									class="team-logo gloss logo-gradient logo-home">
                                         <?php
                                         if (isset($teamCardLogoSrc)) {
+                                            echo '<div class="team-logo-img">';
                                             echo '<img src="' . $teamCardLogoSrc . '" alt="' . $homeTeam . '">';
+                                            echo '</div>';
                                         }
                                         ?>
                                      </div>
@@ -1387,7 +1398,9 @@ table.table-sm>thead>tr>th:first-of-type {
 												class="team-logo gloss logo-gradient">
                                                 <?php
                                                 if (isset($teamCardLogoSrc)) {
+                                                    echo '<div class="team-logo-img">';
                                                     echo '<img src="' . $teamCardLogoSrc . '" alt="' . $awayTeam . '">';
+                                                    echo '</div>';
                                                 }
                                                 ?>
                                              </div>
@@ -1418,7 +1431,9 @@ table.table-sm>thead>tr>th:first-of-type {
 												class="team-logo gloss logo-gradient logo-home">
                                                 <?php
                                                 if (isset($teamCardLogoSrc)) {
+                                                    echo '<div class="team-logo-img">';
                                                     echo '<img src="' . $teamCardLogoSrc . '" alt="' . $homeTeam . '">';
+                                                    echo '</div>';
                                                 }
                                                 ?>
                                              </div>

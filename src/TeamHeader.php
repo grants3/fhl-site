@@ -46,8 +46,8 @@ border-bottom:1px solid blue;
 }
 
 .team-nav-img {
-    max-height: 50px;
-    width: 50px;
+    max-height: 52px;
+    width: 52px;
 
     display: inline-block;
     position:relative;

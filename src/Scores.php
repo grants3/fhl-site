@@ -311,16 +311,51 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
       margin-bottom: 0;
     }
     
-    #scores .logo {
-        float: left;
+/*     #scores .logo { */
+/*         float: left; */
+/*         vertical-align: middle; */
+/*         max-width: 45px; */
+/*         overflow:hidden; */
+/*         display: block; */
+/*     } */
+
+    .team-acronym2 {
+       /*  color: #323232; */
+        font-size: 25px;
+        font-weight: bold;
+        padding-left: 25px;
         vertical-align: middle;
-    /*     width: 40px; */
-    /*     height: 40px; */
-        max-width: 45px;
-        overflow:hidden;
-    /*     margin: 0 auto; */
-    /*     margin-left:3px; */
-        display: block;
+    }
+    
+    #scores .logo-container {
+        height: 50px;
+        width: 50px;
+
+        display: inline-block;
+        position:relative;
+        margin: 0 auto;
+        padding: 0px;
+        margin-left:5px;
+        border: 0px;
+        float:left;
+    }
+    #scores .logo {
+        width: 50px;
+        max-height:50px;
+    }
+    
+    #scores .team-acronym {
+        height: 100%;
+        font-size: 27px;
+
+        display: inline-block;
+        position:relative;
+        margin: 0 auto;
+        padding: 0px;
+        padding-left:5px;
+/*         margin-top:3px; */
+        border: 0px;
+        float:left;
     }
     
     #scores .table th{
@@ -337,7 +372,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
     /*    font-family: Arial,Helvetica,sans-serif; */
        vertical-align: middle;
        padding: .1rem;
-       line-height: 45px;
+       line-height: 50px;
       
     }
     
@@ -345,13 +380,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
        color: #323232;
     }
     
-    .team-acronym {
-        color: #323232;
-        font-size: 25px;
-        font-weight: bold;
-        padding-left: 25px;
-        vertical-align: middle;
-    }
+
     
     
     .box-score{
@@ -573,7 +602,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 //                                 <img class="logo" src="'.$todayImage1.'" alt="'.$lastEquipe1.'"</img>'.$lastEquipe1Abbr.'
 //                              </td>';
                         echo '<td class = "col-6 dark-text">
-                                <div><img class="logo" src="'.$todayImage1.'" alt="'.$lastEquipe1.'"</img></div>
+                                <div class ="logo-container"><img class="logo" src="'.$todayImage1.'" alt="'.$lastEquipe1.'"</img></div>
                                 <div class = "team-acronym">'.$lastEquipe1Abbr.'</div>
                              </td>';
 
@@ -593,7 +622,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
     //                                 <img class="logo" src="'.$todayImage2.'" alt="'.$lastEquipe2.'"</img>'.$lastEquipe2Abbr.'
     //                              </td>';
                         echo '<td class = "col-6 dark-text">
-                                    <div><img class="logo" src="'.$todayImage2.'" alt="'.$lastEquipe2.'"</img></div>
+                                    <div class ="logo-container"><img class="logo" src="'.$todayImage2.'" alt="'.$lastEquipe2.'"</img></div>
     				                <div class = "team-acronym">'.$lastEquipe2Abbr.'</div>
                                  </td>';
                         
