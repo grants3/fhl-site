@@ -22,25 +22,18 @@ if(!isset($teamList)){
     $teamList = $teamHolder->get_teams();
 }
 
-$scheduleFile = getCurrentLeagueFile('Schedule');
-$scheduleHolder = new ScheduleHolder($scheduleFile, '');
-
 //figure out how far season has progressed to get min gp amounts for stats
-$maxMinGoalieGames = 15;
-$minGameCount = $scheduleHolder->isSeasonStarted() ? 2 : 0;
+$maxMinGoalieGames = 24;
+$minGameCount = 2;
 
-if(!isPlayoffs2()){
-    
-    $standingsFile = getCurrentLeagueFile('Standings','Farm');
-    $maxGp = getMaxGp($standingsFile);
-    
-    if($maxGp >= $minGameCount){
-        $minGameCount = ceil(($maxGp/82) * $maxMinGoalieGames);
-        $minGameCount = max($minGameCount,$minGameCount);
-    }else{
-        $minGameCount = 2;
-    }
-    
+$standingsFile = getCurrentLeagueFile('Standings','Farm');
+$maxGp = getMaxGp($standingsFile);
+
+if($maxGp >= $minGameCount){
+    $minGameCount = ceil(($maxGp/82) * $maxMinGoalieGames);
+    $minGameCount = max($minGameCount,$minGameCount);
+}elseif($maxGp < $minGameCount){
+    $minGameCount = 1;
 }
 
 //$scoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');

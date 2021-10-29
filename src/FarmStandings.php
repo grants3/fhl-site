@@ -24,7 +24,7 @@ $CurrentTitle = 'Farm '.$CurrentTitle;
 
 <?php
 
-$Fnm = getCurrentLeagueFile('FarmStandings');
+$Fnm = getCurrentRegSeasonFile('FarmStandings');
 
 $c = 1;
 $d = 0;

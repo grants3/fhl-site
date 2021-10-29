@@ -44,7 +44,13 @@ $c = 1;
 $i = 0;
 $lastUpdated = '';
 
-$Fnm = getLeagueFile($farm.'Leaders');
+if($farm){
+    //hard code to regular season for farm.
+    $Fnm = getCurrentRegSeasonFile('FarmLeaders');
+}else{
+    $Fnm = getCurrentLeagueFile('Leaders','Farm');
+}
+
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	foreach ($tableau as $cle => $val) {

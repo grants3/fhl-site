@@ -13,52 +13,27 @@ include_once 'fileUtils.php';
 // 	}
 // }
 // $Fnm = $folder.$folderLeagueURL.'Schedule.html';
-$Fnm = getLeagueFile('Schedule');
+//$Fnm = getCurrentLeagueFile('Schedule');
 $linkSchedule = 'TeamSchedule';
+$baseFileName = 'Schedule';
 $rnd = 0;
 $existRnd = 0;
-if(isset($_GET['plf']) || isset($_POST['plf'])) {
-	$matches = glob($folder.'*PLF-Round1-Schedule.html');
-	$folderLeagueURL2 = '';
-	$matchesDate = array_map('filemtime', $matches);
-	arsort($matchesDate);
-	foreach ($matchesDate as $j => $val) {
-		if(substr_count($matches[$j], 'PLF')) {
-			$folderLeagueURL2 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'PLF-Round1-Schedule.html')-strrpos($matches[$j], '/')-1);
-			break 1;
-		}
-	}
-	if (file_exists($folder.$folderLeagueURL2.'PLF-Round1-Schedule.html')) {
-		$Fnm = $folder.$folderLeagueURL2.'PLF-Round1-Schedule.html';
-		$linkSchedule = '-Round1-Schedule';
-		$rnd = 1;
-		$existRnd = 1;
-	}
-	if (file_exists($folder.$folderLeagueURL2.'PLF-Round2-Schedule.html')) {
-		$Fnm = $folder.$folderLeagueURL2.'PLF-Round2-Schedule.html';
-		$linkSchedule = '-Round2-Schedule';
-		$rnd = 2;
-		$existRnd = 2;
-	}
-	if (file_exists($folder.$folderLeagueURL2.'PLF-Round3-Schedule.html')) {
-		$Fnm = $folder.$folderLeagueURL2.'PLF-Round3-Schedule.html';
-		$linkSchedule = '-Round3-Schedule';
-		$rnd = 3;
-		$existRnd = 3;
-	}
-	if (file_exists($folder.$folderLeagueURL2.'PLF-Round4-Schedule.html')) {
-		$Fnm = $folder.$folderLeagueURL2.'PLF-Round4-Schedule.html';
-		$linkSchedule = '-Round4-Schedule';
-		$rnd = 4;
-		$existRnd = 4;
-	}
-	if(isset($_GET['rnd']) || isset($_POST['rnd'])) {
-		$currentRND = ( isset($_GET['rnd']) ) ? $_GET['rnd'] : $_POST['rnd'];
-		$Fnm = $folder.$folderLeagueURL2.'PLF-Round'.$currentRND.'-Schedule.html';
-		$linkSchedule = '-Round'.$currentRND.'-Schedule';
-		$rnd = $currentRND;
-	}
+
+if(PLAYOFF_MODE){
+    $existRnd = getPlayoffRound(); //get latest
+  
+    if(isset($_GET['rnd']) || isset($_POST['rnd'])) {
+        $rnd = ( isset($_GET['rnd']) ) ? $_GET['rnd'] : $_POST['rnd'];
+    }else{
+        $rnd = $existRnd;
+    }
+
+    $baseFileName = '-Round'.$rnd.'-Schedule';
+
 }
+
+$Fnm = getCurrentLeagueFile($baseFileName);
+
 $schedTitlePlayoff = '';
 if($rnd) $schedTitlePlayoff = ' - '.$scheldRound.' '.$rnd;
 
@@ -96,9 +71,9 @@ include 'TeamHeader.php';
 		<div class="card-body">
 		
         	<?php 
-        	if($currentPLF == 1 && isset($existRnd)) {
+        	if(PLAYOFF_MODE && isset($existRnd)) {
         	    echo '<div class = "row">';
-        	    echo '<div class = "col">';
+        	    echo '<div class = "col text-center">';
         	    if($existRnd >= 4) echo '<a href="'.$CurrentPage.'.php?plf=1&rnd=4" class="lien-noir">'.$scheldRound.' 4</a>';
         	    if($existRnd >= 3) echo ' - <a href="'.$CurrentPage.'.php?plf=1&rnd=3" class="lien-noir">'.$scheldRound.' 3</a>';
         	    if($existRnd >= 2) echo ' - <a href="'.$CurrentPage.'.php?plf=1&rnd=2" class="lien-noir">'.$scheldRound.' 2</a>';
@@ -357,7 +332,7 @@ include 'TeamHeader.php';
 							}
 						}
 						else { 
-							echo '<tr><td>'.$allFileNotFound.' - '.$Fnm.'</td></tr>';
+						    echo '<tr><td>'.$allFileNotFound.' - '.$baseFileName.'</td></tr>';
 						}
 					}
 					?>

@@ -20,8 +20,8 @@ $skatersActive = 'active';
 
 include 'head.php';
 
-$seasonId = '';
-$seasonType = '';
+$seasonId = null;
+$seasonType = LEAGUE_MODE;
 $position = '';
 $rookie = '';
 
@@ -180,8 +180,13 @@ $(function() {
 		
 		"ajax": {
 			url : '<?php echo BASE_URL.'api?api=stats&action=find'; ?>',
-				type: "GET"  
+				type: "GET",
+				data: function ( d ) {
+					d.seasonId = '<?php echo $seasonId?>';
+               		d.seasonType = '<?php echo $seasonType?>';
+        		}
 			},
+
 			"columns": [
 				//{ name: "name" ,data: "name" },
 			    {"name": "name" ,data: "name",

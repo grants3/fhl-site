@@ -133,7 +133,11 @@ $(function() {
 		"ajax": {
 			//url : '<?php echo BASE_URL.'api/scoring'; ?>',
 			url : '<?php echo BASE_URL.'api?api=stats&action=find&type=goalie'; ?>',
-				type: "GET"  
+				type: "GET",
+				data: function ( d ) {
+					d.seasonId = '<?php echo $seasonId?>';
+               		d.seasonType = '<?php echo $seasonType?>';
+        		}
 			},
 			"columns": [
 				//{ name: "name" ,data: "name" },

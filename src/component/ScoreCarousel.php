@@ -30,6 +30,8 @@ padding-right:30px;
 	/*     width: 40px; */
 	/*     height: 40px; */
 	max-width: 25px;
+	height:25px;
+	width: 25px;
 	overflow: hidden;
 	/*     margin: 0 auto; */
 	margin-left: -2px;

@@ -45,9 +45,9 @@ function getProfilePhoto($csName){
     //SN requires extra parsing.
     if(PLAYER_IMG_SOURCE == 2){
         $csNametmpFirst = substr($csNametmp, 0, 1);
-        $imgUrl = 'http://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png';
+        $imgUrl = 'https://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png';
     }else{
-       $imgUrl = 'http://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId='.$csNametmp.'&width=200&height=180';
+       $imgUrl = 'https://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId='.$csNametmp.'&width=200&height=180';
     }
 
     return $imgUrl;
@@ -141,7 +141,7 @@ function getCurrentLeagueFile(string $baseName, string $exclude=null) {
 }
 
 function getCurrentRegSeasonFile(string $baseName, string $exclude=null) {
-    return getLeagueFile($baseName, 'REG', $exclude);
+    return _getLeagueFile($baseName, 'REG', null, $exclude);
 }
 
 function getCurrentPlayoffLeagueFile(string $baseName, string $exclude=null) {

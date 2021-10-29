@@ -16,7 +16,7 @@ if(DEBUG_MODE){
     error_log('---------------------------------');
 }
 
-function inferLeagueMode($leagueMode) :string{
+function inferLeagueMode($searchDir, $leagueMode) :string{
     
     //only run this logic once. cache result.
     if(isset($GLOBALS["GLOB_LEAGUE_MODE"])) return $GLOBALS["GLOB_LEAGUE_MODE"];
@@ -27,7 +27,9 @@ function inferLeagueMode($leagueMode) :string{
     if($leagueMode == 1){
         $result = 'PLF';
     }else if ($leagueMode == 2){ //auto
-        if(!empty(glob(FS_ROOT.'*PLFGMs.html'))){
+        $matches = glob($searchDir.'*PLFGMs.html',GLOB_NOSORT);
+        error_log(print_r($matches,1));
+        if($matches){
             $result = 'PLF';
         }
     }

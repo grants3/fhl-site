@@ -80,7 +80,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 
                                         <?php 
                                         //if(isPlayoffs($folder, $playoffMode)){
-                                        if(isPlayoffs2()){
+                                        if(PLAYOFF_MODE){
                                             echo '<option value=REG>Regular</option>';
                                             echo '<option selected value=PLF>Playoffs</option> ';
                                         }else{
@@ -99,7 +99,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 			
 			<div id="scoringInner">
      
-     		<?php include 'TeamScoringTemplate.php';?>
+     		<?php //include 'TeamScoringTemplate.php';?>
      
     		</div>
 
@@ -114,7 +114,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 
 
 var currentTeam = '<?php echo $currentTeam?>';
-var playoffMode = <?php echo $currentPLF?>;
+var playoffMode = <?php echo PLAYOFF_MODE?>;
 
 $(window).on('pageshow', function(){
 
@@ -122,7 +122,20 @@ $(window).on('pageshow', function(){
 	    var seasonSelection = $('#seasonMenu').find(":selected").val();
 	    var typeSelection = $('#typeMenu').find(":selected").val();
 		handleSelection(seasonSelection, typeSelection);
+	}else{
+// 		var seasonSelection = $('#seasonMenu').find(":selected").val();
+// 		var typeSelection = playoffMode ? 'PLF' : '';
+		
+// 		handleSelection(seasonSelection, typeSelection);
 	}
+});
+
+//init
+$(function() {
+    var seasonSelection = $('#seasonMenu').find(":selected").val();
+		var typeSelection = playoffMode ? 'PLF' : '';
+		
+		handleSelection(seasonSelection, typeSelection);
 });
 
 

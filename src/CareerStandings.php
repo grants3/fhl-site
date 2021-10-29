@@ -12,45 +12,21 @@ include 'head.php';
 <div class="col-sm-12 col-lg-8 offset-lg-2">
 <div class="card">
 <?php include 'SectionHeader.php';?>
-<div class="card-body px-1 px-md-2">
+<div class="card-body px-1 px-md-2 pt-1">
 <div class="table-responsive"> 
 <!-- <table class="table table-sm table-striped"> -->
 
 <?php
+$NumberSeason=0;
+
 // Recherche des saisons antérieurs
-if(CAREER_STATS_DIR != '0') {
-	$hashFolder = '';
-	$tmpLong = 0;
-	for($i=0;$i<substr_count(CAREER_STATS_DIR, '/');$i++) {
-		if($hashFolder != '') $tmpLong = strlen($hashFolder)+1;
-		$hashFolder = substr(CAREER_STATS_DIR, 0+$tmpLong, strpos(CAREER_STATS_DIR, '/'));
-		if(substr_count($hashFolder, '#') > 0) break 1;
-	}
-	$Fnm = str_replace("#/","*",CAREER_STATS_DIR);
-// 	$NumberSeason = 0;
-// 	$dirs = glob($Fnm, GLOB_ONLYDIR);
-// 	for($j=0;$j<count($dirs);$j++) {
-// 		if(substr_count($dirs[$j], $hashFolder)) {
-// 			$tmpYear = substr($dirs[$j], strlen(CAREER_STATS_DIR)-2);
-// 			if($NumberSeason < $tmpYear) $NumberSeason = $tmpYear;
-// 		}
-// 	}
+if(CAREER_STATS_DIR) {
 	$NumberSeason = count(getPreviousSeasons(CAREER_STATS_DIR));
 }
 
-// Recherche de la saison en cours
-$farm='farm'; //default, must have removed it from head.php.
-$matches = glob($folder.'*Standings.html');
-$FnmCurrentSeason = '';
-$matchesDate = array_map('filemtime', $matches);
-arsort($matchesDate);
-foreach ($matchesDate as $j => $val) {
-	if(!substr_count($matches[$j], 'Farm') && !substr_count($matches[$j], 'PLF') && !substr_count($matches[$j], 'Overall')) {
-		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], $farm.'Standings')-strrpos($matches[$j], '/')-1);
-		$FnmCurrentSeason = $folder.$folderLeagueURL.'Standings.html';
-		break 1;
-	}
-}
+
+// Recherche de la saison en cours (latest regular)
+$FnmCurrentSeason = getCurrentRegSeasonFile('Standings','Farm');
 
 //hardcode to current regular season
 //$FnmCurrentSeason = getLeagueFile2($folder, '', 'Standings.html', 'Standings','Farm');
@@ -62,16 +38,7 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
 		$Fnm = $FnmCurrentSeason;
 	}
 	else {
-		$Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
-		$matches = glob($Fnmtmp.'*Standings.html');
-		$folderLeagueURL = '';
-		for($k=0;$k<count($matches);$k++) {
-			if(!substr_count($matches[$k], 'Farm') && !substr_count($matches[$k], 'PLF') && !substr_count($matches[$k], 'Overall')) {
-				$folderLeagueURL = substr($matches[$k], strrpos($matches[$k], '/')+1,  strpos($matches[$k], 'Standings')-strrpos($matches[$k], '/')-1);
-				$Fnm = $Fnmtmp.$folderLeagueURL.'Standings.html';
-				break 1;
-			}
-		}
+	    $Fnm = _getLeagueFile('Standings','REG',$NumberSeason,'Farm');
 	}
 	if(file_exists($Fnm)) { 
 		$d = 0;

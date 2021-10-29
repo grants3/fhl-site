@@ -96,7 +96,6 @@ $minActivePlayers = 20;
 
 # League mode (Auto mode will check if playoff files exist in main transfer directory ($folder), otherwise mode is user selected)
 # Regular Season: 0 | Playoffs : 1 | Auto Detect : 2
-//$playoffMode = 1;
 $leagueMode = 0;
 
 # Whether or not main navbar should be displayed and the type of nav to be displayed.
@@ -114,6 +113,7 @@ $siteTheme="blue";
 //-----------------------------------------
 //DO NOT TOUCH ANYTHING BELOW HERE.
 //-----------------------------------------
+define("APP_VERSION",'2.0-alpha-1');
 define("SESSION_NAME",$sessionName);
 define("LEAGUE_NAME",$leagueName);
 define("LEAGUE_LOGO",$leagueLogo);
@@ -139,8 +139,8 @@ define("PLAYER_IMG_SOURCE",$leaguePlayerImages);
 define("FUTURES_LINK_MODE",$leagueFuturesLink);
 define("FUTURES_DRAFT_YEARS",$leagueFuturesDraftYears);
 //define("LEAGUE_MODE",$playoffMode);
-define("LEAGUE_MODE",inferLeagueMode($leagueMode));
-define("PLAYOFF_MODE",LEAGUE_MODE == 1);
+define("LEAGUE_MODE",inferLeagueMode(TRANSFER_DIR,$leagueMode));
+define("PLAYOFF_MODE",LEAGUE_MODE == 'PLF' ? 1 : 0);
 define("NAVBAR_MODE",$navbarMode);
 define("FOOTER_TEXT", $footerText);
 define("SITE_THEME", $siteTheme);

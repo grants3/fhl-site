@@ -82,7 +82,7 @@ if (file_exists($Fnm)) {
 
 // Classement en saison / Conférence / Division
 //$Fnm = $folder.$folderLeagueURL2.'Standings.html';
-$Fnm =  _getLeagueFile('Standings', null, null, 'Farm'); // want to hardcode to reg season.
+$Fnm =  getCurrentRegSeasonFile('Standings','Farm'); // want to hardcode to reg season.
 $b = 0;
 $d = 0;
 $standingFileOLDetect = 0;
@@ -142,9 +142,9 @@ if(file_exists($Fnm)) {
 			$reste = trim(substr($reste, strpos($reste, ' ')));
 			if($standingFileEquipe[$b] == $currentTeam) $standingFileFound = $b;
 			if($standingFileSerie[$b] != ''){
-				if($standingFileSerie[$b] == 'z') $standingFileSerie[$b] = '<a href="Standings.php" style="color:#000000">'.$standingZ.'<span>'.$standingZFull.'</span></a>';
-				if($standingFileSerie[$b] == 'y') $standingFileSerie[$b] = '<a href="Standings.php" style="color:#000000">'.$standingY.'<span>'.$standingYFull.'</span></a>';
-				if($standingFileSerie[$b] == 'x') $standingFileSerie[$b] = '<a href="Standings.php" style="color:#000000">'.$standingX.'<span>'.$standingXFull.'</span></a>';
+				if($standingFileSerie[$b] == 'z') $standingFileSerie[$b] = '<a href="'.FS_ROOT.'Standings.php" style="color:#000000">'.$standingZ.'<span>'.$standingZFull.'</span></a>';
+				if($standingFileSerie[$b] == 'y') $standingFileSerie[$b] = '<a href="'.FS_ROOT.'Standings.php" style="color:#000000">'.$standingY.'<span>'.$standingYFull.'</span></a>';
+				if($standingFileSerie[$b] == 'x') $standingFileSerie[$b] = '<a href="'.FS_ROOT.'Standings.php" style="color:#000000">'.$standingX.'<span>'.$standingXFull.'</span></a>';
 			}
 			$b++;
 		}
@@ -174,16 +174,16 @@ if(file_exists($Fnm)) {
 			$reste = trim(substr($reste, strpos($reste, ' ')));
 			if($standingFileDivisionEquipe[$b] == $currentTeam) $standingFileDivisionFound = $b;
 			if($standingFileDivisionSerie[$b] != ''){
-				if($standingFileDivisionSerie[$b] == 'z') $standingFileDivisionSerie[$b] = '<a href="Standings.php" style="color:#000000">'.$standingZ.'<span>'.$standingZFull.'</span></a>';
-				if($standingFileDivisionSerie[$b] == 'y') $standingFileDivisionSerie[$b] = '<a href="Standings.php" style="color:#000000">'.$standingY.'<span>'.$standingYFull.'</span></a>';
-				if($standingFileDivisionSerie[$b] == 'x') $standingFileDivisionSerie[$b] = '<a href="Standings.php" style="color:#000000">'.$standingX.'<span>'.$standingXFull.'</span></a>';
+				if($standingFileDivisionSerie[$b] == 'z') $standingFileDivisionSerie[$b] = '<a href="'.FS_ROOT.'Standings.php" style="color:#000000">'.$standingZ.'<span>'.$standingZFull.'</span></a>';
+				if($standingFileDivisionSerie[$b] == 'y') $standingFileDivisionSerie[$b] = '<a href="'.FS_ROOT.'Standings.php" style="color:#000000">'.$standingY.'<span>'.$standingYFull.'</span></a>';
+				if($standingFileDivisionSerie[$b] == 'x') $standingFileDivisionSerie[$b] = '<a href="'.FS_ROOT.'Standings.php" style="color:#000000">'.$standingX.'<span>'.$standingXFull.'</span></a>';
 			}
 			$b++;
 		}
 		
 	}
 }
-else echo $allFileNotFound.' - '.$Fnm.'<br>';
+else echo $allFileNotFound.' - Standings - Regular season - Current<br>';
 
 //$standingFileEquipe
 //$standingFileDivisionEquipe
@@ -342,7 +342,7 @@ for($j=0;$j<=$round;$j++) {
 			}
 		}
 	}
-	else echo $allFileNotFound.' - '.$Fnm.'<br>';
+	else echo $allFileNotFound.' - Schedule - Playoffs - round'.$j.'<br>';
 }
 $recordHomeGP = $recordHomeWin + $recordHomeLos + $recordHomeTie;
 $recordHomePts = ($recordHomeWin * 2) + $recordHomeTie;
@@ -1129,17 +1129,7 @@ if(CAREER_STATS_DIR != '0') {
 			$Fnm = $FnmCurrentSeason;
 		}
 		else {
-			$Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
-			$matches = glob($Fnmtmp.'*TeamScoring.html');
-			$folderLeagueURL = '';
-			for($k=0;$k<count($matches);$k++) {
-				if(!substr_count($matches[$k], 'PLF')) {
-					$folderLeagueURL = substr($matches[$k], strrpos($matches[$k], '/')+1,  strpos($matches[$k], 'TeamScoring')-strrpos($matches[$k], '/')-1);
-					$Fnm = $Fnmtmp.$folderLeagueURL.'TeamScoring.html';
-			
-					break 1;
-				}
-			}
+			$Fnm = _getLeagueFile('TeamScoring','REG',$workSeason);
 		}
 		$b = 0;
 		$e = 0;
@@ -1179,7 +1169,7 @@ if(CAREER_STATS_DIR != '0') {
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
 					$tmpFwdGS = trim(substr($reste, strrpos($reste, ' '))) * 1;
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdPCTG = trim(substr($reste, strrpos($reste, ' '))) * 1;
+					$tmpFwdPCTG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
 					$tmpFwdS = trim(substr($reste, strrpos($reste, ' '))) * 1;
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
@@ -1227,7 +1217,7 @@ if(CAREER_STATS_DIR != '0') {
 								if($statsFwdName[$v] == $tmpFwdName) {
 									$statsFwdPS[$v] += $tmpFwdPS;
 									$statsFwdGS[$v] += $tmpFwdGS;
-									//$statsFwdPCTG[$v] += $tmpFwdPCTG;
+									$statsFwdPCTG[$v] += $tmpFwdPCTG;
 									$statsFwdS[$v] += $tmpFwdS;
 									$statsFwdHT[$v] += $tmpFwdHT2;
 									$statsFwdGT[$v] += $tmpFwdGT;
@@ -1255,7 +1245,7 @@ if(CAREER_STATS_DIR != '0') {
 							$statsFwdRookie[$i] = $tmpFwdRookie;
 							$statsFwdPS[$i] = $tmpFwdPS;
 							$statsFwdGS[$i] = $tmpFwdGS;
-							//$statsFwdPCTG[$i] = $tmpFwdPCTG;
+							$statsFwdPCTG[$i] = $tmpFwdPCTG;
 							$statsFwdS[$i] = $tmpFwdS;
 							$statsFwdHT[$i] = $tmpFwdHT2;
 							$statsFwdGT[$i] = $tmpFwdGT;

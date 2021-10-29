@@ -46,7 +46,7 @@ include FS_ROOT.'assets.php';
       	<?php if(isset($news1Text) && $news1Text){?>
         <div class="carousel-item active">
            <div class="card">
-              <img class="card-img-top" src="<?php echo $news1Image;?>" alt="News Image">
+              <img class="card-img-top" style="height:100%;" src="<?php echo $news1Image;?>" alt="News Image">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $news1Title;?></h5>
                 
@@ -61,7 +61,7 @@ include FS_ROOT.'assets.php';
       	<?php if(isset($news2Text) && $news2Text){?>
         <div class="carousel-item">
            <div class="card">
-              <img class="card-img-top" src="<?php echo $news2Image;?>" alt="News Image">
+              <img class="card-img-top" style="height:100%;" src="<?php echo $news2Image;?>" alt="News Image">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $news2Title;?></h5>
                 
@@ -76,7 +76,7 @@ include FS_ROOT.'assets.php';
         <?php if(isset($news3Text) && $news3Text){?>
         <div class="carousel-item">
            <div class="card">
-              <img class="card-img-top" src="<?php echo $news3Image;?>" alt="News Image">
+              <img class="card-img-top" style="height:100%;" src="<?php echo $news3Image;?>" alt="News Image">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $news3Title;?></h5>
                 
@@ -102,40 +102,41 @@ include FS_ROOT.'assets.php';
 </div>
 <script>
 
-function carouselNormalization() {
-  var items = $('#news-carousel .carousel-item'), //grab all slides
-    heights = [], //create empty array to store height values
-    tallest; //create variable to make note of the tallest slide
+ function carouselNormalization() {
+        var items = $('#news-carousel .carousel-item'), //grab all slides
+        heights = [], //create empty array to store height values
+        tallest; //create variable to make note of the tallest slide
+        
+        if (items.length) {
+            function normalizeHeights() {
+                items.each(function() { //add heights to array
+                    heights.push($(this).height());
+                });
+                    tallest = Math.max.apply(null, heights); //cache largest value
+                    items.each(function() {
+                        $(this).css('min-height', tallest + 'px');
+                    });
+            };
+            normalizeHeights();
+            
+            $(window).on('resize orientationchange', function() {
+                tallest = 0, heights.length = 0; //reset vars
+                items.each(function() {
+                    $(this).css('min-height', '0'); //reset min-height
+                });
+                    normalizeHeights(); //run it again
+            });
+        }
+    }
+    
+    /**
+     * Wait until all the assets have been loaded so a maximum height
+     * can be calculated correctly.
+     */
+    window.onload = function() {
+        carouselNormalization();
+    }
 
-  if (items.length) {
-    function normalizeHeights() {
-      items.each(function() { //add heights to array
-        heights.push($(this).height());
-      });
-      tallest = Math.max.apply(null, heights); //cache largest value
-      items.each(function() {
-        $(this).css('min-height', tallest + 'px');
-      });
-    };
-    normalizeHeights();
-
-    $(window).on('resize orientationchange', function() {
-      tallest = 0, heights.length = 0; //reset vars
-      items.each(function() {
-        $(this).css('min-height', '0'); //reset min-height
-      });
-      normalizeHeights(); //run it again 
-    });
-  }
-}
-
-/**
- * Wait until all the assets have been loaded so a maximum height 
- * can be calculated correctly.
- */
-window.onload = function() {
-  carouselNormalization();
-}
 
 </script>
 

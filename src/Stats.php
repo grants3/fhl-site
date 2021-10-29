@@ -32,25 +32,18 @@ $scoringFile = getCurrentLeagueFile('TeamScoring');
 $scoringHolder = new ScoringHolder($scoringFile);
 $scoringAccumulator = new ScoringAccumulator($scoringHolder);
 
-$scheduleFile = getCurrentLeagueFile('Schedule');
-$scheduleHolder = new ScheduleHolder($scheduleFile, '');
-
 //figure out how far season has progressed to get min gp amounts for stats
 $maxMinGoalieGames = 24;
-$minGameCount = $scheduleHolder->isSeasonStarted() ? 2 : 0;
+$minGameCount = 2;
 
-if(!isPlayoffs2()){
-    
-    $standingsFile = getCurrentLeagueFile('Standings','Farm');
-    $maxGp = getMaxGp($standingsFile);
-    
-    if($maxGp >= $minGameCount){
-        $minGameCount = ceil(($maxGp/82) * $maxMinGoalieGames);
-        $minGameCount = max($minGameCount,$minGameCount);
-    }else{
-        $minGameCount = 2;
-    }
+$standingsFile = getCurrentLeagueFile('Standings','Farm');
+$maxGp = getMaxGp($standingsFile);
 
+if($maxGp >= $minGameCount){
+    $minGameCount = ceil(($maxGp/82) * $maxMinGoalieGames);
+    $minGameCount = max($minGameCount,$minGameCount);
+}elseif($maxGp < $minGameCount){
+    $minGameCount = 1;
 }
 
 $pointsArray = $scoringAccumulator->getTopScorers('points',10);

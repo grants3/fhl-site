@@ -11,9 +11,9 @@ include_once 'classes/ScoringObj.php';
 include_once 'classes/TeamAbbrHolder.php';
 //include_once 'classes/ScoringAccumulator.php';
 
-$seasonId = '';
+$seasonId = null;
 //$playoff = '';
-$seasonType='';
+$seasonType= null;
 
 if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
     $seasonId = ( isset($_GET['seasonId']) ) ? $_GET['seasonId'] : $_POST['seasonId'];
@@ -35,15 +35,15 @@ if(isset($_GET['team']) || isset($_POST['team'])) {
 
 <?php
 
-
-if(trim($seasonId) == false){
-    //$fileName = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
-    $fileName = getCurrentLeagueFile('TeamScoring');
-}else{
-    //$seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
-    //$fileName = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
-    $fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
-}
+// if(trim($seasonId) == false){
+//     //$fileName = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
+//     $fileName = getCurrentLeagueFile('TeamScoring');
+// }else{
+//     //$seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
+//     //$fileName = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
+//     $fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
+// }
+$fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
 
 if(!file_exists($fileName) && $seasonType == "PLF") {
     echo

@@ -26,20 +26,35 @@ include 'head.php';
 
 <?php
 
-$round = 1;
-// collect PPG PPO PKGA PKO
-if(!isPlayoffs2()) {
-    $Fnm = getLeagueFile('Schedule');
-}else{
+// $round = 1;
+// // collect PPG PPO PKGA PKO
+
+// if(!PLAYOFF_MODE) {
+//     $Fnm = getLeagueFile('Schedule');
+//     $baseFileName = 'Schedule';
+// }else{
+//     $round = getPlayoffRound();
+// }
+
+
+$baseFileName='';
+$round=1;
+if(PLAYOFF_MODE) {
     $round = getPlayoffRound();
+}else{
+    $baseFileName = 'Schedule';
+    $Fnm = getCurrentRegSeasonFile($baseFileName);
 }
 
 
+
 for($j=1;$j<=$round;$j++) {
-	if(isPlayoffs2()) {
+    if(PLAYOFF_MODE) {
 		//$Fnm = $folder.$folderLeagueURL2.'PLF-Round'.$j.'-Schedule.html';
-	    $Fnm = _getLeagueFile('PLF-Round'.$j.'-Schedule.html','PLF');
+        $baseFileName = '-Round'.$j.'-Schedule';
+        $Fnm = getCurrentPlayoffLeagueFile($baseFileName);
 	}
+
 	if(file_exists($Fnm)) {
 		// DÉTECTER LES PARTIES JOUÉES
 		$i = 0;
@@ -62,7 +77,7 @@ for($j=1;$j<=$round;$j++) {
 				//if($playoff == '') $Fnm = $folder.$folderGames.$folderLeagueURL.$matchNumber.'.html';
 				//if($playoff == 'PLF') $Fnm = $folder.$folderGames.$folderLeagueURL2.'PLF-R'.$j.'-'.$matchNumber.'.html';
 				
-				if(isPlayoffs2()){
+				if(PLAYOFF_MODE){
 				    $Fnm = getGameFile($matchNumber, null, $j);
 				}else{
 				    $Fnm = getGameFile($matchNumber);
@@ -135,11 +150,11 @@ for($j=1;$j<=$round;$j++) {
 						}
 					}
 				}
-				else echo $allFileNotFound.' - '.$Fnm.'<br>';
+				else echo $allFileNotFound.' - Game file missing <br>';
 			}
 		}
 	}
-	else echo $allFileNotFound.' - '.$Fnm.'<br>';
+	else echo $allFileNotFound.' - '.$baseFileName.'<br>';
 }
 
 // Team Stats

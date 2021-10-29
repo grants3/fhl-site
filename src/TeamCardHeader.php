@@ -32,6 +32,18 @@ $teamCardInfo = new TeamInfo($standingsFile, $currentTeam);
 	background: var(--header-gradient);
 }
 
+/*CENTER NOT STRETCH*/
+.teamheader .team-logo-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 68px;
+}
+
+.teamheader .team-logo img{
+  width: 68px;	
+}
+
 .teamheader .gloss {
 	height: 34px;
 	background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%,
@@ -78,14 +90,14 @@ $teamCardInfo = new TeamInfo($standingsFile, $currentTeam);
  	<div class="team-logo gloss logo-gradient">
         <?php 
             if(isset($teamCardLogoSrc)) {
-                echo'<img src="'.$teamCardLogoSrc.'" alt="'.$currentTeam.'">';
+                echo'<div class="team-logo-img"><img src="'.$teamCardLogoSrc.'" alt="'.$currentTeam.'"></div>';
             }
         ?>
      </div>
      <div class="team-logo gloss logo-gradient team-logo-right">
         <?php 
             if(isset($teamCardLogoSrc)) {
-                echo'<img src="'.$teamCardLogoSrc.'" alt="'.$currentTeam.'">';
+                echo'<div class="team-logo-img"><img src="'.$teamCardLogoSrc.'" alt="'.$currentTeam.'"></div>';
             }
         ?>
      </div>

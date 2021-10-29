@@ -45,6 +45,21 @@ border-bottom:1px solid blue;
     text-transform: uppercase;
 }
 
+.team-nav-img {
+    max-height: 50px;
+    width: 50px;
+
+    display: inline-block;
+    position:relative;
+    margin: 0 auto;
+    padding: 0px;
+    margin-top:2px;
+    margin-bottom:2px;
+    margin-left:2px;
+    margin-right:2px;
+    border: 0px;
+    float:center;
+}
 
 </style>
 
@@ -59,19 +74,22 @@ border-bottom:1px solid blue;
 
 if($navbarMode != 3){ ?>
    
-	<div class="row">
+	<div class="row pt-1">
     	
-    		<div class="col text-center p-0">
+    		<div class="col p-0 center-block text-center">
+    			
                 <?php
                 sort($teamList); // sort
                 for ($i = 0; $i < count($teamList); $i ++) {
                     ?>
-        			
-        			<a href="<?php echo BASE_URL.$CurrentPage;?>.php?team=<?php echo urlencode($teamList[$i]) ?>">
-        				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" width=55 alt="<?php echo $teamList[$i] ?>" title="<?php echo $teamList[$i] ?>">
-        			</a>
+        			<div class="team-nav-img">
+            			<a href="<?php echo BASE_URL.$CurrentPage;?>.php?team=<?php echo urlencode($teamList[$i]) ?>">
+            				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" alt="<?php echo $teamList[$i] ?>" title="<?php echo $teamList[$i] ?>">
+            			</a>
+        			</div>
         
         		<?php } ?>
+        		
         	</div>
     
     </div>
