@@ -44,9 +44,9 @@ if(!isset($navbarEnabled)){
 if(isset($_GET['theme'])) {
     $_SESSION["theme"] = $_GET['theme'];
 }
-else if(!isset($_SESSION['theme'])){
-    $_SESSION["theme"] = 'DEFAULT';
-}
+// else if(!isset($_SESSION['theme'])){
+//     $_SESSION["theme"] = SITE_THEME;
+// }
 
 //set nav type
 $navbarMode = NAVBAR_MODE;
@@ -75,7 +75,7 @@ $folderGames = GAMES_DIR;
 //TRACK PLAYOFF STATE
 $playoff = '';
 $currentPLF = 0;
-if(isPlayoffs2()){
+if(PLAYOFF_MODE){
     $playoff = 'PLF';
     $currentPLF = 1;
 }
@@ -159,7 +159,7 @@ if(isset($navbarMode) && $navbarMode != 0){
     }else if($navbarMode == 4){
         include FS_ROOT.'navCustom.php';
     }else{
-        error_log("unsupported nav mode: ".$navbarMode);
+        echo '<h5>Unsupported Nav</h5>';
     }
 }
 

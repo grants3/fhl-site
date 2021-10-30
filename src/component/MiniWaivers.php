@@ -30,8 +30,8 @@ if (file_exists($fileName)) {
 ?>
 
 <div class="container px-0">
-	<div class="card">
-		<div class="card-body">
+	<div class="card px-0">
+		<div class="card-body px-0">
 			<?php  if (isset($waivers) && !empty($waivers)) {?>
 			<div class="table-responsive">
 				<table class="table table-sm table-striped">

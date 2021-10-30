@@ -24,16 +24,16 @@ if(isset($_SESSION["theme"])){
 /* site color overrides. blue is default*/
 
 <?php 
-if($siteColorTheme == 'green') {
+if($siteColorTheme === 'green') {
 
 ?>
 
 :root {
    --color-primary-1: #18A558; 
-   --color-primary-2: #116530; 
+   --color-primary-2: #0a4520; 
    --color-primary-3: #A3EBB1; 
-   --color-alternate-1:#D4FFE7; 
-   --color-alternate-2:#BCFFC7; 
+   --color-alternate-1:#edfff5; 
+   --color-alternate-2:#caedce; 
    --color-alternate-3:#E9FFF3;
 
    --table-sort-asc:#0a4323; 

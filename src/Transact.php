@@ -71,7 +71,7 @@ include 'head.php';
 								<select class="custom-select" id="typeMenu">
                                         <?php 
                                         //if(isPlayoffs($folder, $playoffMode)){
-                                        if(isPlayoffs2()){
+                                        if(PLAYOFF_MODE){
                                             echo '<option value=REG>Regular</option>';
                                             echo '<option selected value=PLF>Playoffs</option> ';
                                         }else{

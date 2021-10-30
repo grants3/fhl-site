@@ -11,7 +11,7 @@ include 'head.php';
 
 $playoffActive = '';
 $seasonActive = '';
-if(isPlayoffs2()){
+if(PLAYOFF_MODE){
     //$playoffActive = 'active';
    // $seasonActive = '';
 }else{

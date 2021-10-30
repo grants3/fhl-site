@@ -49,7 +49,7 @@ if($seasonId || $round){
     $fileName = _getLeagueFile($baseFileName, $seasonType, $seasonId);
     
 }else{
-    if(isPlayoffs2()){
+    if(PLAYOFF_MODE){
         //current playoffs
         $round = getPlayoffRound();
         $baseFileName = '-Round'.$round.'-Schedule';
@@ -81,13 +81,13 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
     
 </style>
 
-<div class = "container px-2">
+<div class = "container px-0">
 
 
 	<div class="card">
 				
 		<?php include 'SectionHeader.php';?>
-		<div class="card-body">
+		<div class="card-body p-1">
 			<div class="card">
 			    <?php 
 			    if($round) {

@@ -10,13 +10,13 @@ include 'head.php';
 ?>
 
 
-<div class="container">
+<div class="container px-0">
 
 <div class="card">
 
 	<?php include 'SectionHeader.php';?>
 	
-	<div class="card-body">
+	<div class="card-body p-1">
 
 <?php
 function firstNumber($string) {

@@ -17,7 +17,7 @@ if(trim($seasonId) == false){
    //$seasonFolder = str_replace("#",$seasonId,CAREER_STATS_DIR);
     //$Fnm = getLeagueFile2($seasonFolder, '', 'Standings.html', 'Standings', 'Farm'); // exclude farm
     $Fnm = _getLeagueFile('Standings', null, $seasonId, 'Farm'); // exclude farm
-    error_log($Fnm);
+
 }
 
 

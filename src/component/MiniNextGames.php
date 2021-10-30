@@ -55,7 +55,7 @@ include FS_ROOT.'assets.php';
 </style>
 <?php
 //if(isPlayoffs($folder, $playoffMode)){
-if(isPlayoffs2()){
+if(PLAYOFF_MODE){
     
     $round = getPlayoffRound();
     $fileName = getCurrentPlayoffLeagueFile('-Round'.$round.'-Schedule');
@@ -79,7 +79,11 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
 <?php
 
 if($scheduleHolder->isScheduleComplete()){
-    echo '<h6 class="text-center">No Games Scheduled</h6>';
+    echo '<div class="card px-0">';
+        echo '<div class="card-body px-0">';
+            echo '<h6 class="text-center mb-0">No Games Scheduled</h6>';
+        echo '</div>';
+    echo '</div>';
 
 }else{
     //only display one day for playoffs, 2 for reg season

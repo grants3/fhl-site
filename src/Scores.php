@@ -26,7 +26,7 @@ $j = 0;
 $round = 0;
 $playoffLink = '';
 
-if(isPlayoffs2()){
+if(PLAYOFF_MODE){
 
     $round = getPlayoffRound(); //need to pass in seasonId once supported.
     $baseFileName = '-Round'.$round.'-Schedule';

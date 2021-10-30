@@ -16,7 +16,7 @@ if(isset($_GET['team'])) {
     $teamFilter = $_GET['team'];
     $ctlOneTeams == 1;
     $scoringFile = getCurrentLeagueFile('TeamScoring');
-    error_log('???????'.$scoringFile);
+
     $teamAbbrHolder = new TeamAbbrHolder($scoringFile);
     $TSabbr = $teamAbbrHolder->getAbbr($teamFilter);
 
@@ -1626,11 +1626,11 @@ document.addEventListener("DOMContentLoaded", function() {
 //-->
 </script>
 
-<div class = "container-fluid">
+<div class = "container px-0">
 
     <div class = "card">
 		<?php include 'SectionHeader.php';?>
-		<div class = "card-body p-2">
+		<div class = "card-body p-1">
 			<div class="container">
 			
 				<div id="windowSearch" class = "row">

@@ -91,8 +91,7 @@ class GameHolder implements \JsonSerializable
             $tableau = file($file);
             while(list($cle,$val) = myEach($tableau)) {
                 $val = utf8_encode($val);
-                //error_log($val);
-                
+                     
                 if(substr_count($val, ' at ') && $a == 0){
                     $pos = strpos($val, ' at ');
                     $pos_apres = strpos($val, '</H3>');
@@ -261,8 +260,7 @@ class GameHolder implements \JsonSerializable
                 if($a == 13) {
                     str_replace('<BR>', '', $val);
                     $long = strlen($val);
-                    //error_log($val.' is of length'.$long);
-
+                
                     if(substr_count($val, 'Shootout Results')){
                         //shoutout support. skip to processing
                         $a = 99;
@@ -546,9 +544,7 @@ class GameHolder implements \JsonSerializable
                     $punition2[$d] = $e;
                     
                     //$this->penaltySummary[''.$e.''] = array(explode(",", $val));
-                    //error_log($e);
-                   // error_log($val);
-  
+                 
                     $d++;
                 }
                 if($a == 6 && (substr_count($val, '<B>Period') || substr_count($val, '<B>Overtime'))) {

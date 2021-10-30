@@ -124,7 +124,7 @@ class ScheduleHolder2  implements \JsonSerializable{
     
     public function playsInDays($teamId, int $days) : bool{
         $searchDay = $this->getLastDayPlayed() + $days;
-        //error_log('search day:'.$searchDay.' for teamid='.$teamId);
+
         foreach($this->schedule as $sched){
             if($sched['DAY'] == $searchDay){
                 if($sched['HOME'] == $teamId || $sched['AWAY'] == $teamId){
@@ -138,7 +138,6 @@ class ScheduleHolder2  implements \JsonSerializable{
     
     public function getGameByTeamAndDay($teamId, int $searchDay){
 
-        //error_log('search day:'.$searchDay.' for teamid='.$teamId);
         foreach($this->schedule as $sched){
             if($sched['DAY'] == $searchDay){
                 if($sched['HOME'] == $teamId || $sched['AWAY'] == $teamId){

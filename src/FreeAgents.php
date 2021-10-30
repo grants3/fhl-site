@@ -19,11 +19,11 @@ include 'head.php';
 
 </style>
 
-	<div class = "container">
+	<div class = "container px-0">
 	
 		<div class = "card">
     		<?php include 'SectionHeader.php';?>
-    		<div class = "card-body p-2">
+    		<div class = "card-body p-1">
     			<div class="container">
 					<div class="row py-2" id="searchFields">
     					<div class="col px-0 px-md-2 px-lg-3">

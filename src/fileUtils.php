@@ -151,7 +151,7 @@ function getCurrentPlayoffLeagueFile(string $baseName, string $exclude=null) {
 function getLeagueFile(string $baseName, $seasonId = null, string $exclude=null) {
     $seasonType = '';
     
-    if(isPlayoffs2()){
+    if(PLAYOFF_MODE){
         $seasonType = 'PLF';
     }
     

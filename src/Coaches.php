@@ -8,10 +8,10 @@ include 'head.php';
 
 ?>
 
-<div class="container">	
+<div class="container px-0">	
 <div class="card">
 	<?php include 'SectionHeader.php';?>
-	<div class="card-body p-2 px-lg-4">
+	<div class="card-body p-1 px-lg-4">
 
 <?php
 

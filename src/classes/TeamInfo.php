@@ -270,13 +270,10 @@ class TeamInfo
     
     public function getConferenceSafeString()
     {
-        if (substr_count($this->conference, 'EAST')) {
-            return 'EAST';
-        }else if(substr_count($this->conference, 'WEST')) {
-            return 'WEST';
-        }
-        
-        return $this->conference;
+        //get first word (exclude conference or trailing words)
+        $arr = explode(' ',trim($this->conference));
+
+        return $arr ? $arr[0] : $this->conference;
     }
 
     /**

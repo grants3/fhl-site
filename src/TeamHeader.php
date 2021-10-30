@@ -45,21 +45,33 @@ border-bottom:1px solid blue;
     text-transform: uppercase;
 }
 
-.team-nav-img {
-    max-height: 52px;
-    width: 52px;
+.team-nav-logo-container {
+    max-height: 49px;
+    width: 49px;
+    min-height:30px;
 
     display: inline-block;
     position:relative;
     margin: 0 auto;
     padding: 0px;
-    margin-top:2px;
-    margin-bottom:2px;
-    margin-left:2px;
-    margin-right:2px;
+    margin-top:1px;
+    margin-bottom:1px;
+    margin-left:1px;
+    margin-right:1px;
     border: 0px;
     float:center;
 }
+
+
+/*CENTER NOT STRETCH*/
+.team-nav-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 49px;
+  min-height:30px;
+}
+
 
 </style>
 
@@ -74,18 +86,20 @@ border-bottom:1px solid blue;
 
 if($navbarMode != 3){ ?>
    
-	<div class="row pt-1">
+	<div class="row py-1">
     	
-    		<div class="col p-0 center-block text-center">
+    		<div class="col px-0 center-block text-center">
     			
                 <?php
                 sort($teamList); // sort
                 for ($i = 0; $i < count($teamList); $i ++) {
                     ?>
-        			<div class="team-nav-img">
-            			<a href="<?php echo BASE_URL.$CurrentPage;?>.php?team=<?php echo urlencode($teamList[$i]) ?>">
-            				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" alt="<?php echo $teamList[$i] ?>" title="<?php echo $teamList[$i] ?>">
-            			</a>
+        			<div class="team-nav-logo-container">
+        				<div class="team-nav-logo">
+                			<a href="<?php echo BASE_URL.$CurrentPage;?>.php?team=<?php echo urlencode($teamList[$i]) ?>">
+                				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" alt="<?php echo $teamList[$i] ?>" title="<?php echo $teamList[$i] ?>">
+                			</a>
+            			</div>
         			</div>
         
         		<?php } ?>

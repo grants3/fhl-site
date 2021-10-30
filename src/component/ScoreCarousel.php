@@ -116,7 +116,7 @@ padding-right:30px;
 
 <?php
 //$playoff = isPlayoffs($folder, $playoffMode);
-if (isPlayoffs2()) {
+if (PLAYOFF_MODE) {
     //$playoff = 'PLF';
     $round = getPlayoffRound();
 

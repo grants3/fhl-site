@@ -21,12 +21,12 @@ if(isset($_GET['s']) || isset($_POST['s'])) {
 include 'head.php';
 ?>
 
-<div class="container">
+<div class="container px-0">
 <div class="row no-gutters">
 <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2"> 	
 <div class="card p-1">
 	<?php include 'SectionHeader.php';?>
-	<div class="card-body p-2 px-lg-4">
+	<div class="card-body p-1 px-lg-4">
 
 
 <?php

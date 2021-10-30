@@ -8,7 +8,8 @@ $CurrentPage = 'CareerStandings';
 include 'head.php';
 ?>
 
-<div class="container">
+<div class="container px-0">
+<div class="row no-gutters">
 <div class="col-sm-12 col-lg-8 offset-lg-2">
 <div class="card">
 <?php include 'SectionHeader.php';?>
@@ -524,6 +525,6 @@ document.addEventListener('DOMContentLoaded', result('PTS'), false);
 //-->
 </script>
 
-</div></div></div></div></div>
+</div></div></div></div></div></div>
 
 <?php include 'footer.php'; ?>

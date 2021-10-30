@@ -28,7 +28,7 @@ function inferLeagueMode($searchDir, $leagueMode) :string{
         $result = 'PLF';
     }else if ($leagueMode == 2){ //auto
         $matches = glob($searchDir.'*PLFGMs.html',GLOB_NOSORT);
-        error_log(print_r($matches,1));
+
         if($matches){
             $result = 'PLF';
         }

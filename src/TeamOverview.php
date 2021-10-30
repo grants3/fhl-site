@@ -213,14 +213,16 @@ $recordAwayLos = 0;
 $recordAwayTie = 0;
 $recordAwayPts = 0;
 
-$round = getPlayoffRound();
-
+if(PLAYOFF_MODE){
+    $round = getPlayoffRound();
+}
+$round = 0;
 //$Fnm = $folder.$folderLeagueURL2.'Schedule.html';
-$Fnm = getLeagueFile('Schedule');
+$Fnm = getCurrentRegSeasonFile('Schedule');
 for($j=0;$j<=$round;$j++) {
 	if($j != 0) {
 		//$Fnm = $folder.$folderLeagueURL2.'PLF-Round'.$j.'-Schedule.html';
-	    $Fnm = _getLeagueFile('PLF-Round'.$j.'-Schedule.html','PLF');
+	    $Fnm = getCurrentPlayoffLeagueFile('-Round'.$j.'-Schedule');
 	}
 	if(file_exists($Fnm)) {
 		// DÉTECTER LA DERNIÈRE PARTIE ET LA PROCHAINE
@@ -961,7 +963,7 @@ if(isset($standingFileDivisionSerie)) {
 		echo '<tr>';
 		echo '<td style="'.$bold.'">'.($i+1).'</td>';
 		echo '<td style="'.$bold.'">'.$standingFileDivisionSerie[$i].'</td>';
-		echo '<td class"text-left" style="'.$bold.'">'.$standingFileDivisionEquipe[$i].'</td>';
+		echo '<td class="text-left" style="'.$bold.'">'.$standingFileDivisionEquipe[$i].'</td>';
 		echo '<td style="'.$bold.'">'.$standingFileDivisionPJ[$i].'</td>';
 		echo '<td style="'.$bold.'">'.$standingFileDivisionW[$i].'</td>';
 		echo '<td style="'.$bold.'">'.$standingFileDivisionL[$i].'</td>';
@@ -1008,7 +1010,7 @@ if(isset($standingFarmFilePJ)) {
 		if($i == $standingFarmFileFound) $bold = 'font-weight:bold;';
 		echo '<tr >';
 		echo '<td style="'.$bold.'">'.($i+1).'</td>';
-		echo '<td class"text-left" style="'.$bold.'">'.$standingFarmFileEquipe[$i].'</td>';
+		echo '<td class="text-left" style="'.$bold.'">'.$standingFarmFileEquipe[$i].'</td>';
 		echo '<td style="'.$bold.'">'.$standingFarmFilePJ[$i].'</td>';
 		echo '<td style="'.$bold.'">'.$standingFarmFileW[$i].'</td>';
 		echo '<td style="'.$bold.'">'.$standingFarmFileL[$i].'</td>';

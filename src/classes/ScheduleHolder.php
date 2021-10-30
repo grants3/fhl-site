@@ -165,9 +165,7 @@ class ScheduleHolder implements \JsonSerializable{
      
                     $scheduleDay->setGameTitle('(OT)');
                     $scheduleDay->setIsOt(true);
-                    
-                   // error_log("WHAT?");
-                   // error_log($scheduleDay->getGameTitle());
+           
                 }else if(substr_count($val, 'SO)')){
                     
                     $shootOutNum = (int) $team2Score;
@@ -175,9 +173,7 @@ class ScheduleHolder implements \JsonSerializable{
                     
                     $scheduleDay->setGameTitle('(OT '.$shootOutNum.'SO)');
                     $scheduleDay->setIsOt(true);
-                    
-                    //error_log("WHAT?2");
-                   // error_log($scheduleDay->getGameTitle());
+                
                 }
 
                 $scheduleDay->setIsPlayed($isPlayed);

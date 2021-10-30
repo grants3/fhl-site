@@ -108,7 +108,7 @@ $footerText="FHL TableSim 2.0";
 
 //default color scheme.
 //blue,green,red,teal,custom
-$siteTheme="blue";
+$siteTheme="green";
 
 //-----------------------------------------
 //DO NOT TOUCH ANYTHING BELOW HERE.
