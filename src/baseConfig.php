@@ -2,24 +2,27 @@
 /* DO NOT TOUCH ANYTHING IN HERE!! */
 
 define("BASE_URL",getBaseUrl());
-define("FS_ROOT",__DIR__.'/');
+//define("FS_ROOT",__DIR__.'/');
+define("FS_ROOT",relativePath(getcwd(),__DIR__));
+;
 define("IS_IE",isIE());
 
 #Debug Mode. 1 = ON, 0 = OFF
-define("DEBUG_MODE",0);
+define("DEBUG_MODE",1);
 
 if(DEBUG_MODE){
     error_log('-------config path info ---------');
     error_log('FS_ROOT='.FS_ROOT);
     error_log('BASE_URL='.BASE_URL);
     error_log('DOCUMENT_ROOT='.$_SERVER['DOCUMENT_ROOT']);
+    error_log(substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])));
     error_log('---------------------------------');
 }
 
 function inferLeagueMode($searchDir, $leagueMode) :string{
     
     //only run this logic once. cache result.
-    if(isset($GLOBALS["GLOB_LEAGUE_MODE"])) return $GLOBALS["GLOB_LEAGUE_MODE"];
+    //if(isset($GLOBALS["GLOB_LEAGUE_MODE"])) return $GLOBALS["GLOB_LEAGUE_MODE"];
     
     //regular season
     $result = 'REG';
@@ -34,19 +37,20 @@ function inferLeagueMode($searchDir, $leagueMode) :string{
         }
     }
     
-    $GLOBALS["GLOB_LEAGUE_MODE"] = $result;
+    //$GLOBALS["GLOB_LEAGUE_MODE"] = $result;
 
     return $result;
 }
 
 function getBaseUrl(){
-    $protocol = getProtocol();
-    $url = str_replace("\\",'/',$protocol.'://'.$_SERVER['HTTP_HOST'].substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])));
+    //$protocol = getProtocol();
+    //$url = str_replace("\\",'/',$protocol.'://'.$_SERVER['HTTP_HOST'].substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])));
     
-    $url = rtrim($url, '/') . '/';
+    //$url = rtrim($url, '/') . '/';
     
     //check relativepath
-    $url = $url.str_replace(array('\\', '/'), '/', relativePath(getcwd(),__DIR__));
+    //$url = $url.str_replace(array('\\', '/'), '/', relativePath(getcwd(),__DIR__));
+    $url = str_replace(array('\\', '/'), '/', relativePath(getcwd(),__DIR__));
     
     return $url;
 }

@@ -84,7 +84,7 @@
 		<div class="container px-0">
 			<div class = "row no-gutters">
     			<div class="col">
-    				<a class="nav-item nav-link pl-0 pr-2 pl-1" href="<?php echo BASE_URL?>">HOME</a>
+    				<a class="nav-item nav-link pl-0 pr-2 pl-1" href="<?php echo (HOME ? HOME : '.');?>">HOME</a>
     				<!-- <a class="navbar-brand" href="<?php //echo BASE_URL?>index.php">Navbar</a>-->
     			</div>
     			<?php if(!empty(GMO_DIR)){?>

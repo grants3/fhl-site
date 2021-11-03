@@ -6,6 +6,7 @@
 
 require_once 'config.php';
 include 'lang.php';
+include_once 'fileUtils.php';
 
 $CurrentHTML = 'TeamScoring.php';
 $CurrentTitle = $scoringTitle;

@@ -1,6 +1,7 @@
 <?php
 require_once 'config.php';
 include_once 'common.php';
+include_once 'fileUtils.php';
 include_once 'lang.php';
 $CurrentHTML = 'CareerStandings.php';
 $CurrentTitle = $careerStandingsTitle;

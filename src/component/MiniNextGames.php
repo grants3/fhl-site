@@ -89,7 +89,7 @@ if($scheduleHolder->isScheduleComplete()){
     //only display one day for playoffs, 2 for reg season
     $miniNextGame = $scheduleHolder->getLastDayPlayed() + 1;
     //$miniNextToProcess = !isPlayoffs($folder, $playoffMode) ? $miniNextGame + 1 : $miniNextGame;
-    $miniNextToProcess = !isPlayoffs2() ? $miniNextGame + 1 : $miniNextGame;
+    $miniNextToProcess = !PLAYOFF_MODE ? $miniNextGame + 1 : $miniNextGame;
     
     for ($i = $miniNextGame; $i <= $miniNextToProcess; $i ++) {
     

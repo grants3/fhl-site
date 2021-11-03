@@ -218,8 +218,10 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
                     			</div><!-- last col -->
                     			</div><!-- last row -->
                     			<?php }else{?>
-                    			    <div>
+                    			    <div class="card">
+                    			   	 <div class="card-body text-center">
                     			    	<h5>No Games Remaining</h5>
+                    			     </div>
                     			    </div>
                     		
                     			<?php }?>
@@ -313,8 +315,11 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
                     			</div><!-- last col -->
                     			</div><!-- last row -->
                     			<?php }else{?>
-                    			    <div>
+              
+                    			    <div class="card">
+                    			   	 <div class="card-body text-center">
                     			    	<h5>No Games Completed</h5>
+                    			     </div>
                     			    </div>
                     		
                     			<?php }?>

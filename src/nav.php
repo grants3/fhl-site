@@ -33,7 +33,7 @@
 
 
 		<div class="container px-0">
-			<a class="navbar-brand" href="<?php echo HOME?>">Home</a>
+			<a class="navbar-brand" href="<?php echo (HOME ? HOME : '.');?>">Home</a>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>

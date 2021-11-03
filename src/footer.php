@@ -3,17 +3,26 @@
 
 <?php require_once 'config.php'?>
 
+<style>
+
+.block2 {
+    position:absolute;
+    right:0;
+}
+
+</style>
+
 <footer class="footer" id = "page-footer">
 	<div class="container">
 		<div class="row no-gutters">
 			
 			<div class="col text-center">
-				<p><?php echo FOOTER_TEXT?></p>
+				<span><?php echo FOOTER_TEXT?></span>
+				<a style="float:right" class="text-white" href="#">Top&nbsp;⮝</a>
+	
 			</div>
 			
-			<div>
-				<a class="text-white" href="#">⮝&nbsp;Back to&nbsp;top&nbsp;⮝</a>
-			</div>
+			
 			
 		</div>
 	</div>

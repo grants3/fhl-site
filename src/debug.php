@@ -19,10 +19,7 @@ if(file_exists(__DIR__.'/config.php')) {
     else {
         echo "Configuration files: OK";
     }
-    
 
-    
-    
     //LEAGUE SETTINGS
     echo '<br><h3 style="margin-bottom:0">League Settings</h3>';
     if(LEAGUE_MODE == 'REG'){
@@ -62,7 +59,7 @@ if(file_exists(__DIR__.'/config.php')) {
 //         break 1;
 //     }
     $leaguePrefix = getLeaguePrefix(TRANSFER_DIR);
-    if($leaguePrefix != '') echo '<br>File Name Extra: '.$leaguePrefix;
+    if($leaguePrefix != '') echo '<br>League File Prefix: '.$leaguePrefix;
     else echo '<br><span style="color:red; font-weight:bold;">No Extra Name on your HTML files!</span>';
     
     echo '<br><h3 style="margin-bottom:0">Cap Settings</h3>';

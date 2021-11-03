@@ -171,7 +171,7 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
 // last games played scores
 if ($scheduleHolder->isSeasonStarted()) {
     
-    if (!isPlayoffs2()) {
+    if (!PLAYOFF_MODE) {
         if ($scheduleHolder->getLastDayPlayed() > 1) {
             $startDay = $scheduleHolder->getLastDayPlayed() - 1;
         } else {
@@ -188,7 +188,7 @@ if ($scheduleHolder->isSeasonStarted()) {
     for ($x = $startDay; $x <= $endGame; $x ++) {
         echo '<div class="dayPlayed text-center">';
         //echo '<div style ="padding-top:50%">';
-        if (!isPlayoffs2()) {
+        if (!PLAYOFF_MODE) {
             echo '<span><strong>Day ' . ($x) . '</strong></span>';
         } else {
             echo '<span><strong>Rnd ' . ($playedGamesRound) . '</strong></span>';
@@ -259,7 +259,7 @@ if ($scheduleHolder->isSeasonStarted()) {
 
 // next games
 $nextGame = $nextGameScheduleHolder->getLastDayPlayed() + 1;
-$nextGamesToProcess = ! isPlayoffs2() ? $nextGame + 1 : $nextGame;
+$nextGamesToProcess = !PLAYOFF_MODE ? $nextGame + 1 : $nextGame;
 
 // only display one day for playoffs
 for ($x = $nextGame; $x <= $nextGamesToProcess; $x ++) {
@@ -281,7 +281,7 @@ for ($x = $nextGame; $x <= $nextGamesToProcess; $x ++) {
         continue;
 
     echo '<div class="dayPlayed text-center">';
-    if (!isPlayoffs2()) {
+    if (!PLAYOFF_MODE) {
         echo '<span><strong>Day ' . ($x) . '</strong></span>';
     } else {
         echo '<span><strong>Rnd ' . ($nextGamesRound) . '</strong></span>';

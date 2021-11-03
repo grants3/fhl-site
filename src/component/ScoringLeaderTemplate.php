@@ -108,7 +108,7 @@
 	</div>
 <script>
 
-
+var baseCareerUrl = '<?php echo getBaseUrl().'CareerStatsPlayer.php?csName=';?>';
 
 $(function() {
 	//init
@@ -138,6 +138,8 @@ $(function() {
         var playerPosition = $(this).attr("data-img-list-pos");
         var playerNumber = $(this).attr("data-img-list-number");
         var playerStatValue = $(this).attr("data-img-list-value");
+        
+
 
     	if (playerImgLink != null){
             $("#top-player-img-<?php echo $attribute.$positionType?>").attr("src", playerImgLink);
@@ -147,6 +149,12 @@ $(function() {
     		var playerNameArray = playerName.split(/(\s+)/);
             $("#top-player-info-<?php echo $attribute.$positionType?> .statPlayerName span:first-child").text(playerNameArray[0]);
             $("#top-player-info-<?php echo $attribute.$positionType?> .statPlayerName span:last-child").text(playerNameArray[2]);
+            
+            //change link. need player name
+            $("#top-player-info-<?php echo $attribute.$positionType?> a").each(
+        	  function(){ 
+              this.href = encodeURI(baseCareerUrl + playerName);
+        	});
     	}
     	
     	if (playerNumber != null){

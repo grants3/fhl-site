@@ -39,7 +39,6 @@ $folderGames = "";
 // This folder MUST have the same name and at the end, the number of the season. Ex: Season 1, Season 2, Season 3. Put # to replace the number!
 // Full example: ../backup/Season #/
 // The current season/playoff folder shouldn't be here,  it will duplicates stats.
-//$folderCarrerStats = "backup/season#/";
 $folderCareerStats = "backup/season#/";
 
 # BOXSCORE LOGO
@@ -119,7 +118,8 @@ define("LEAGUE_NAME",$leagueName);
 define("LEAGUE_LOGO",$leagueLogo);
 define("CDN_SUPPORT", $cdnSupport);
 define("LEAGUE_LANG",$leagueLang);
-define("HOME",BASE_URL.$home);
+define("HOME",$home);
+//define("HOME",BASE_URL.$home);
 define("TRANSFER_DIR",FS_ROOT.$folder);
 define("GAMES_DIR",$folderGames);
 define("LOGO_DIR",$folderTeamLogos);

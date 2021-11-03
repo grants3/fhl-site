@@ -2,6 +2,7 @@
 require_once 'config.php';
 include 'lang.php';
 include_once 'common.php';
+include_once 'fileUtils.php';
 
 $CurrentHTML = 'Standings.php';
 $CurrentTitle = $standingTitle;
@@ -108,7 +109,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
     	    type: "GET",
     	    cache:false,
     	    dataType: "html",
-    	    url: '<?php echo BASE_URL?>StandingsTemplate.php',
+    	    url: 'StandingsTemplate.php',
     	    data: {seasonId: selection},
     	    success: function(data){
     	    	$('#SeasonInner').html(data.trim());
@@ -119,7 +120,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
     	    type: "GET",
     	    cache:false,
     	    dataType: "html",
-    	    url: '<?php echo BASE_URL?>StandingsTreeTemplate.php',
+    	    url: 'StandingsTreeTemplate.php',
     	    data: {seasonId: selection},
     	    success: function(data){
     	    	$('#PlayoffsInner').html(data.trim());
@@ -139,7 +140,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 
 $(document).ready(function() {
 
-	var isPlayoffs = <?php echo isPlayoffs2() ? 'true' : 'false';?>;
+	var isPlayoffs = <?php echo PLAYOFF_MODE ? 'true' : 'false';?>;
 
 	//handle active tab.
     var url = document.location.toString();

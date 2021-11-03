@@ -259,6 +259,25 @@ function filterMatches($matches, $exclude = null){
     return $result;
 }
 
+function getPreviousSeasons($careerStatsFolder):array{
+    $seasons = array();
+    
+    if(isset($careerStatsFolder) && $careerStatsFolder) {
+        
+        $dirs = array_filter(glob(str_replace("#/","*",$careerStatsFolder)), 'is_dir');
+        
+        foreach($dirs as $dir) {
+            $tmpYear = substr($dir, strlen($careerStatsFolder)-2);
+            array_push($seasons, $tmpYear);
+        }
+        
+    }
+    
+    rsort($seasons);
+    
+    return $seasons;
+}
+
 function getPlayoffRound($seasonId = null) : int{
     
     $round = 0;

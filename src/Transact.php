@@ -1,8 +1,10 @@
 <?php
 
 require_once 'config.php';
-require_once 'common.php';
 require_once 'lang.php';
+require_once 'common.php';
+include_once 'fileUtils.php';
+
 $dataTablesRequired = 1;
 
 $CurrentHTML = 'Transact.php';
