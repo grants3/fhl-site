@@ -117,6 +117,7 @@ $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
                         	            $skaterName = 'TOTAL';
                         	        }else{
                         	            //just leave abbreviation as is
+                        	            $skaterName = $skater->getTeamAbbr();
                         	        }
                            	        
                         	    }
@@ -198,6 +199,7 @@ $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
                                 if($skater->getTeamAbbr() == 'TOT'){
                                     $goalieName = 'TOTAL';
                                 }else{
+                                    $goalieName = $goalie->getTeamAbbr();
                                     //just leave abbreviation as is
                                 }
                             }

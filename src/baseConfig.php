@@ -1,7 +1,7 @@
 <?php
 /* DO NOT TOUCH ANYTHING IN HERE!! */
 
-define("BASE_URL",getBaseUrl());
+define("BASE_URL",getBaseContext());
 //define("FS_ROOT",__DIR__.'/');
 define("FS_ROOT",relativePath(getcwd(),__DIR__));
 ;
@@ -41,18 +41,22 @@ function inferLeagueMode($searchDir, $leagueMode) :string{
     return $result;
 }
 
+//retrieves base url relative to document root.
 function getBaseUrl(){
-    //$protocol = getProtocol();
-    //$url = str_replace("\\",'/',$protocol.'://'.$_SERVER['HTTP_HOST'].substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])));
+    $protocol = getProtocol();
+    $url = str_replace("\\",'/',$protocol.'://'.$_SERVER['HTTP_HOST'].substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])));
     
-    //$url = rtrim($url, '/') . '/';
+    $url = rtrim($url, '/') . '/';
     
     //append relativepath from doc root if appliable.
-    //$url = $url.str_replace(array('\\', '/'), '/', relativePath(getcwd(),__DIR__));
-
-    $url = str_replace(array('\\', '/'), '/', substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])).'/'.relativePath(getcwd(),__DIR__));
+    $url = $url.str_replace(array('\\', '/'), '/', relativePath(getcwd(),__DIR__));
     
     return $url;
+}
+
+//retrieves base context relative to document root.
+function getBaseContext(){
+    return str_replace(array('\\', '/'), '/', substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])).'/'.relativePath(getcwd(),__DIR__));
 }
 
 function getProtocol(){

@@ -150,7 +150,12 @@ for($j=1;$j<=$round;$j++) {
 						}
 					}
 				}
-				else echo $allFileNotFound.' - Game file missing <br>';
+				//else echo $allFileNotFound.' - Game file missing <br>';
+				else{
+				    if(DEBUG_MODE){
+				        error_log('Game file missing match number: '.$matchNumber);
+				    }
+				}
 			}
 		}
 	}

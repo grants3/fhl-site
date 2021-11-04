@@ -148,46 +148,46 @@ header{padding:3px 10px}
 		<section id="page">
 			<main>
 				<article>
-				<?php echo 'include \'../component/ScoreCarousel.php\';'?>
+				<?php echo 'include \'component/ScoreCarousel.php\';'?>
 					<div style="width:75%">Score Carousel
 						<?php //include FS_ROOT.'component/ScoreCarousel.php'; ?>	
-						<?php include '../component/ScoreCarousel.php'; ?>	
+						<?php include 'component/ScoreCarousel.php'; ?>	
 					</div>			
 				</article>
 				<article>
-					<?php echo 'include \'../component/MiniWaivers.php\';'?>
+					<?php echo 'include \'component/MiniWaivers.php\';'?>
 					<div style="width:33%">Waivers Mini
-						<?php include '../component/MiniWaivers.php'; ?>	
+						<?php include 'component/MiniWaivers.php'; ?>	
 					</div>					
 				</article>
 				<article>
-				<?php echo 'include \'../component/News.php\';'?>
+				<?php echo 'include \'component/News.php\';'?>
 					<div style="width:50%">News
-						<?php include '../component/News.php'; ?>	
+						<?php include 'component/News.php'; ?>	
 					</div>		
 				</article>
 				<article>
-					<?php echo 'include \'../component/MiniNextGames.php\';'?>
+					<?php echo 'include \'component/MiniNextGames.php\';'?>
 					<div style="width:25%">Next Games Mini 
-						<?php include '../component/MiniNextGames.php'; ?>	
+						<?php include 'component/MiniNextGames.php'; ?>	
 					</div>						
 				</article>
 				<article>
-				<?php echo 'include \'../component/MiniLeaders.php\';'?>
+				<?php echo 'include \'component/MiniLeaders.php\';'?>
 					<div style="width:50%">Scoring Leaders Mini
-						<?php include '../component/MiniLeaders.php'; ?>	
+						<?php include 'component/MiniLeaders.php'; ?>	
 					</div>	
 				</article>
 				<article>
-				<?php echo 'include \'../component/MiniStandings.php\';'?>
+				<?php echo 'include \'component/MiniStandings.php\';'?>
 					<div style="width:25%">Full Standings Mini
-                        <?php include '../component/MiniStandings.php';?>
+                        <?php include 'component/MiniStandings.php';?>
 					</div>
 				</article>
 				<article>
-				<?php echo 'include \'../component/MiniStandingsTree.php\';'?>
+				<?php echo 'include \'component/MiniStandingsTree.php\';'?>
 					<div style="width:25%">Playoff Tree Mini
-						<?php include '../component/MiniStandingsTree.php';?>
+						<?php include 'component/MiniStandingsTree.php';?>
 					</div>
 				</article>
 				
