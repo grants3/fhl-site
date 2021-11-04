@@ -107,26 +107,26 @@ padding-right:30px;
     margin-top:10px;
 }
 
-.slick-dots li.slick-active button:before { 
-    opacity: .75; 
-     color: var(--color-alternate-1); 
- } 
+/* .slick-dots li.slick-active button:before {  */
+/*     opacity: .75;  */
+/*      color: var(--color-alternate-1);  */
+/*  }  */
 
- .slick-dots li button:before { 
-     opacity: .25; 
-     color: var(--color-alternate-2); 
+/*  .slick-dots li button:before {  */
+/*      opacity: .25;  */
+/*      color: var(--color-alternate-2);  */
 
- } 
+/*  }  */
  
- .slick-dots {
-    bottom: -20px;
+/*  .slick-dots { */
+/*     bottom: -20px; */
 
-}
+/* } */
 
-#scoringBanner {
- padding-bottom:1px;
+/* #scoringBanner { */
+/*  padding-bottom:1px; */
     
-}
+/* } */
 
 </style>
 

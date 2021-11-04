@@ -94,7 +94,7 @@ $leagueSalaryClose = 52000000;
 $leagueSalaryCapFloor = 0;
 
 //cap injury mode 0 = injuries count toward caphit no LTIR. | 1 =  don't count injuries, enable LTIR.
-$leagueSalaryCapInjuryMode = 1;
+$leagueSalaryCapInjuryMode = 0;
 
 // Overtime Point | 0:Off | 1:On (One Point)
 $leagueOvertimePoint = 1;

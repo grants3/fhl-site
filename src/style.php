@@ -16,7 +16,7 @@ if(isset($_SESSION["theme"])){
 <?php if(LEAGUE_LOGO){ ?>
 
 :root {
-	--nav-logo-url:url(<?php echo BASE_URL.LEAGUE_LOGO;?>) left center no-repeat;
+	--nav-logo-url:url(<?php echo LEAGUE_LOGO;?>) left center no-repeat;
 }
 
 <?php } ?>

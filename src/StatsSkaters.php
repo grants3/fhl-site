@@ -179,7 +179,7 @@ $(function() {
     
 		
 		"ajax": {
-			url : '<?php echo BASE_URL.'api?api=stats&action=find'; ?>',
+			url : '<?php echo 'api?api=stats&action=find'; ?>',
 				type: "GET",
 				data: function ( d ) {
 					d.seasonId = '<?php echo $seasonId?>';
@@ -191,7 +191,7 @@ $(function() {
 				//{ name: "name" ,data: "name" },
 			    {"name": "name" ,data: "name",
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html("<a href='<?php echo BASE_URL?>CareerStatsPlayer.php?csName="+ encodeURIComponent(oData.name)+"'>"+oData.name+"</a>");
+                        $(nTd).html("<a href='CareerStatsPlayer.php?csName="+ encodeURIComponent(oData.name)+"'>"+oData.name+"</a>");
                     }
                 },
 				{ name: "team" ,data: "team" },

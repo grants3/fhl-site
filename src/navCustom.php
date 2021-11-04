@@ -55,7 +55,7 @@
 <!--       <div class="text-center"> -->
 <!--       	<a class="nav-link" href="#">Brand Name</a> -->
 <!--       </div> -->
-    	<li class="nav-item"><a class="nav-link navbar-brand" href="<?php echo BASE_URL?>index.php">Home</a></li>
+    	<li class="nav-item"><a class="nav-link navbar-brand" href="index.php">Home</a></li>
       <ul class="navbar-nav changing-nav"> 
         <!--  -->
 <!--         <li class="nav-item active"> -->
@@ -64,48 +64,48 @@
 <!--           </a> -->
 <!--         </li> -->
 
-					  <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>Scores.php">Scores</a></li>
-					  <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>Standings.php">Standings</a></li>
-					  <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL?>TeamRosters.php">Teams</a></li>
+					  <li class="nav-item"><a class="nav-link" href="Scores.php">Scores</a></li>
+					  <li class="nav-item"><a class="nav-link" href="Standings.php">Standings</a></li>
+					  <li class="nav-item"><a class="nav-link" href="TeamRosters.php">Teams</a></li>
 					  <li class="dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stats&nbsp;<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>PlayerScoring.php">Player Stats</a></li>
-						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>TeamStats.php">Team Stats</a></li>
-						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Individual.php">Individual</a></li>
-						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Leaders.php">Leaders</a></li>
-						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Leaders.php?s=1">Farm&nbsp;Leaders</a></li>
-						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>CareerLeaders.php">Career&nbsp;Leaders</a></li>
-						  <li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>CareerStandings.php">Career&nbsp;Standings</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="PlayerScoring.php">Player Stats</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="TeamStats.php">Team Stats</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="Individual.php">Individual</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="Leaders.php">Leaders</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="Leaders.php?s=1">Farm&nbsp;Leaders</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="CareerLeaders.php">Career&nbsp;Leaders</a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="CareerStandings.php">Career&nbsp;Standings</a></li>
 						</ul>
 					  </li>
 					  <li class="dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">League&nbsp;<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Coaches.php">Coaches</a></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Injury.php">Injuries</a></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Schedule.php">Schedule</a></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Transact.php">Transactions</a></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Waivers.php">Waivers</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="Coaches.php">Coaches</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="Injury.php">Injuries</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="Schedule.php">Schedule</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="Transact.php">Transactions</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="Waivers.php">Waivers</a></li>
 							<li class="dropdown-divider"></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>FarmStandings.php?s=1">Farm&nbsp;Standings</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="FarmStandings.php?s=1">Farm&nbsp;Standings</a></li>
 							<li class="dropdown-divider"></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>FreeAgents.php">Free&nbsp;Agents</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="FreeAgents.php">Free&nbsp;Agents</a></li>
 							<li class="dropdown-divider"></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Unassigned.php">Unassigned</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="Unassigned.php">Unassigned</a></li>
 							
 						</ul>
 					  </li>
 					  <li class="dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other&nbsp;<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>GMs.php">General&nbsp;Managers</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="GMs.php">General&nbsp;Managers</a></li>
 							<li class="dropdown-divider"></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>PlayerSearch.php">Player Search</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="PlayerSearch.php">Player Search</a></li>
 							<li class="dropdown-divider"></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>ComparePlayers.php">Player Compare</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="ComparePlayers.php">Player Compare</a></li>
 							<li class="dropdown-divider"></li>
-							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>SalaryCop.php">Salary&nbsp;Cop</a></li>
+							<li class="nav-item"><a class="nav-link-inner" href="SalaryCop.php">Salary&nbsp;Cop</a></li>
 						</ul>
 					  </li>
         

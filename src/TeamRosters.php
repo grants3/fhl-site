@@ -141,7 +141,7 @@ include 'TeamHeader.php';
                                         
                                         https://www.tsn.ca/nhl/player-bio/sidney-crosby
                                         
-                                        $playerCareersLink = BASE_URL.'CareerStatsPlayer.php?csName='.htmlspecialchars_decode($roster->getName());
+                                        $playerCareersLink = 'CareerStatsPlayer.php?csName='.htmlspecialchars_decode($roster->getName());
                                      //   $playerSalary = toMoney($vitals->getSalary());
                                         
                                        // $fmt = new NumberFormatter( 'en_US', NumberFormatter::CURRENCY );

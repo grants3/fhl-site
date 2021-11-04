@@ -113,7 +113,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
         function load(seasonId){
             
           	 $.ajax({
-        	    url: '<?php echo BASE_URL?>TeamTransactionsTemplate.php',
+        	    url: 'TeamTransactionsTemplate.php',
         	    data: {seasonId: seasonId, team: currentTeam},
       		    cache: false,
       		    dataType: "html",

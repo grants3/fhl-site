@@ -34,7 +34,6 @@ function getTeamLogoUrl(string $teamName, bool $isFarm = false) :string{
     
     
     return BASE_URL.'assets/img/unknown-team.png';
-    //return BASE_URL.LOGO_DIR.basename(getTeamLogo($teamName));
 }
 
 function getProfilePhoto($csName){

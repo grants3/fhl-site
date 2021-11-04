@@ -40,20 +40,20 @@ if(DEMO_MODE){
     </button>
     <nav class="floating-menu collapse" id="demo-nav">
         <h3 class="text-left font-weight-bold">Theme</h3>
-        <a href="<?php echo BASE_URL.$CurrentHTML?>?theme=blue">Blue</a>
-        <a href="<?php echo BASE_URL.$CurrentHTML?>?theme=green">Green</a>
-        <a href="<?php echo BASE_URL.$CurrentHTML?>?theme=red">Red</a>
-         <a href="<?php echo BASE_URL.$CurrentHTML?>?theme=teal">Teal</a>
+        <a href="<?php echo $CurrentHTML?>?theme=blue">Blue</a>
+        <a href="<?php echo $CurrentHTML?>?theme=green">Green</a>
+        <a href="<?php echo $CurrentHTML?>?theme=red">Red</a>
+         <a href="<?php echo $CurrentHTML?>?theme=teal">Teal</a>
         
         <h3 class="text-left font-weight-bold">Nav Mode</h3>
-        <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=1">Full</a>
-        <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=0">None</a>
-        <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=2">Simple</a>
-        <a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=3">Simple Min</a>
-    	<a href="<?php echo BASE_URL.$CurrentHTML?>?navbarMode=4">Custom</a>
+        <a href="<?php echo $CurrentHTML?>?navbarMode=1">Full</a>
+        <a href="<?php echo $CurrentHTML?>?navbarMode=0">None</a>
+        <a href="<?php echo $CurrentHTML?>?navbarMode=2">Simple</a>
+        <a href="<?php echo $CurrentHTML?>?navbarMode=3">Simple Min</a>
+    	<a href="<?php echo $CurrentHTML?>?navbarMode=4">Custom</a>
     	<h3 class="text-left font-weight-bold">Language</h3>
-    	<a href="<?php echo BASE_URL.$CurrentHTML?>?lang=EN">English</a>
-    	<a href="<?php echo BASE_URL.$CurrentHTML?>?lang=FR">French</a>
+    	<a href="<?php echo $CurrentHTML?>?lang=EN">English</a>
+    	<a href="<?php echo $CurrentHTML?>?lang=FR">French</a>
     </nav>
 </div>
 

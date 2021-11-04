@@ -96,7 +96,7 @@ if($navbarMode != 3){ ?>
                     ?>
         			<div class="team-nav-logo-container">
         				<div class="team-nav-logo">
-                			<a href="<?php echo BASE_URL.$CurrentPage;?>.php?team=<?php echo urlencode($teamList[$i]) ?>">
+                			<a href="<?php echo $CurrentPage;?>.php?team=<?php echo urlencode($teamList[$i]) ?>">
                 				<img src="<?php echo getTeamLogoUrl($teamList[$i])?>" alt="<?php echo $teamList[$i] ?>" title="<?php echo $teamList[$i] ?>">
                 			</a>
             			</div>

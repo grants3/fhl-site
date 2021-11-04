@@ -181,7 +181,7 @@ function handleSelection(season, type){
 
 	$.ajax({
 	    type: "GET",
-	    url: '<?php echo BASE_URL?>TeamScoringTemplate.php',
+	    url: 'TeamScoringTemplate.php',
 	    data: {seasonId: season, seasonType: type, team:currentTeam},
 	    success: function(data){
 	    	$('#scoringInner').html(data);

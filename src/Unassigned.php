@@ -137,7 +137,7 @@ $(function() {
     
 		
 		"ajax": {
-			url : '<?php echo BASE_URL.'api?api=unassigned&action=find&seasonType='.LEAGUE_MODE; ?>',
+			url : '<?php echo 'api?api=unassigned&action=find&seasonType='.LEAGUE_MODE; ?>',
 				type: "GET"  
 			},
             "columns": [

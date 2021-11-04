@@ -310,12 +310,12 @@ $teams = new TeamHolder($gmFile);
                 fixedColumns:   {
                     leftColumns: 1
                 },
-                "ajax": "<?php echo BASE_URL.'PlayerSearchAjax.php?seasonType='.LEAGUE_MODE?>",
+                "ajax": "<?php echo 'PlayerSearchAjax.php?seasonType='.LEAGUE_MODE?>",
                 "columns": [
                     //{ "data": "name" },
                     { "data": "name",
                         "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                            $(nTd).html("<a href='<?php echo BASE_URL?>CareerStatsPlayer.php?csName="+ encodeURIComponent(oData.name)+"'>"+oData.name+"</a>");
+                            $(nTd).html("<a href='CareerStatsPlayer.php?csName="+ encodeURIComponent(oData.name)+"'>"+oData.name+"</a>");
                         }
                     },
                 	{ "data": "team" },

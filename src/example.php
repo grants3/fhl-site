@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__.'/config.php';
+
 ?>
 <!doctype html>
 <html lang="en" >
@@ -11,98 +11,8 @@ require_once __DIR__.'/config.php';
     <title>Example League Website</title>
     <meta name="description" content="Free responsive website HTML theme with sticky sidebar for both desktop and mobile. ">
 
-	<?php include FS_ROOT.'assets.php';?>
-
 </head>
 <body>
-<header>
-	<div id="header">
-		<div id="mobileMenuToggle" title="Menu">M</div>
-		<a href="<?php echo BASE_URL;?>" id="mobileLogo">Example League Website</a>
-		<div id="headerLeft">
-			<div id="menuToggle">&equiv;</div>
-		</div>
-		<div id="headerRight">
-			<nav>  
-				<ul>
-					<li><a href="<?php echo BASE_URL;?>">Home</a>
-				</ul>
-			</nav>
-		</div>
-	</div>
-	
-	
-</header>
-
-
-
-<div id="wrapall2">
-	<div id="sidebar">
-		<div id="stickThis">
-			<div id="sidebarContent">
-				<a id="logo" href="https://html5-templates.com/">Example League Website</a>
-				<aside>
-					<div>Sidebar 1</div>
-					<div>Sidebar 2</div>
-					<div>Sidebar 3</div>
-					<div>Sidebar 4</div>
-					<div>Sidebar 5</div>
-					<div>Sidebar 6</div>
-					<div>Sidebar 7</div>
-					<a class="back2Top" href="#">⮝&nbsp;Back to&nbsp;top&nbsp;⮝</a>
-				</aside>
-			</div>
-		</div>
-		<div id="stick-here"></div>
-	</div>
-	<div id="main">
-		<section id="page">
-			<main>
-				<article>
-					<div style="width:75%">Score Carousel
-						<?php include FS_ROOT.'component/ScoreCarousel.php'; ?>	
-					</div>			
-				</article>
-				<article>
-					<div style="width:33%">Waivers Mini
-						<?php include FS_ROOT.'component/MiniWaivers.php'; ?>	
-					</div>					
-				</article>
-				<article>
-					<div style="width:50%">News
-						<?php include FS_ROOT.'component/News.php'; ?>	
-					</div>		
-				</article>
-				<article>
-					<div style="width:75%">Next Games Mini
-						<?php //include FS_ROOT.'MiniNextGames.php'; ?>	
-					</div>						
-				</article>
-				<article>
-					<div style="width:50%">Top 5 Mini
-						<?php include FS_ROOT.'component/MiniLeaders.php'; ?>	
-					</div>	
-				</article>
-				<article>
-					<div style="width:25%">Full Standings Mini
-                        <?php include FS_ROOT.'component/MiniStandings.php';?>
-					</div>
-				</article>
-				<article>
-					<div style="width:25%">Playoff Tree Mini
-						<?php include FS_ROOT.'component/MiniStandingsTree.php';?>
-					</div>
-				</article>
-				
-			</main>			
-			<footer>
-				<p>&copy; You can copy, edit and publish this template but please leave a visible link to&nbsp;our&nbsp;website. <a rel="nofollow" href="https://html5-templates.com/" target="_blank" rel="nofollow">HTML5&nbsp;Templates</a></p>
-			</footer>
-		</section>
-	</div>
-</div>
-</body>
-</html>
 
 <style>
 	
@@ -193,6 +103,105 @@ header{padding:3px 10px}
 }
 	
 	</style>
+
+<header>
+	<div id="header">
+		<div id="mobileMenuToggle" title="Menu">M</div>
+		<a href="#" id="mobileLogo">Example League Website</a>
+		<div id="headerLeft">
+			<div id="menuToggle">&equiv;</div>
+		</div>
+		<div id="headerRight">
+			<nav>  
+				<ul>
+					<li><a href="#">Home</a>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	
+	
+</header>
+
+
+
+<div id="wrapall2">
+	<div id="sidebar">
+		<div id="stickThis">
+			<div id="sidebarContent">
+				<a id="logo" href="https://html5-templates.com/">Example League Website</a>
+				<aside>
+					<div>Sidebar 1</div>
+					<div>Sidebar 2</div>
+					<div>Sidebar 3</div>
+					<div>Sidebar 4</div>
+					<div>Sidebar 5</div>
+					<div>Sidebar 6</div>
+					<div>Sidebar 7</div>
+					<a class="back2Top" href="#">⮝&nbsp;Back to&nbsp;top&nbsp;⮝</a>
+				</aside>
+			</div>
+		</div>
+		<div id="stick-here"></div>
+	</div>
+	<div id="main">
+		<section id="page">
+			<main>
+				<article>
+				<?php echo 'include \'../component/ScoreCarousel.php\';'?>
+					<div style="width:75%">Score Carousel
+						<?php //include FS_ROOT.'component/ScoreCarousel.php'; ?>	
+						<?php include '../component/ScoreCarousel.php'; ?>	
+					</div>			
+				</article>
+				<article>
+					<?php echo 'include \'../component/MiniWaivers.php\';'?>
+					<div style="width:33%">Waivers Mini
+						<?php include '../component/MiniWaivers.php'; ?>	
+					</div>					
+				</article>
+				<article>
+				<?php echo 'include \'../component/News.php\';'?>
+					<div style="width:50%">News
+						<?php include '../component/News.php'; ?>	
+					</div>		
+				</article>
+				<article>
+					<?php echo 'include \'../component/MiniNextGames.php\';'?>
+					<div style="width:25%">Next Games Mini 
+						<?php include '../component/MiniNextGames.php'; ?>	
+					</div>						
+				</article>
+				<article>
+				<?php echo 'include \'../component/MiniLeaders.php\';'?>
+					<div style="width:50%">Scoring Leaders Mini
+						<?php include '../component/MiniLeaders.php'; ?>	
+					</div>	
+				</article>
+				<article>
+				<?php echo 'include \'../component/MiniStandings.php\';'?>
+					<div style="width:25%">Full Standings Mini
+                        <?php include '../component/MiniStandings.php';?>
+					</div>
+				</article>
+				<article>
+				<?php echo 'include \'../component/MiniStandingsTree.php\';'?>
+					<div style="width:25%">Playoff Tree Mini
+						<?php include '../component/MiniStandingsTree.php';?>
+					</div>
+				</article>
+				
+			</main>			
+			<footer>
+				<p>&copy; You can copy, edit and publish this template but please leave a visible link to&nbsp;our&nbsp;website. <a rel="nofollow" href="https://html5-templates.com/" target="_blank" rel="nofollow">HTML5&nbsp;Templates</a></p>
+			</footer>
+		</section>
+	</div>
+</div>
+</body>
+</html>
+
+
 
 <script>
 $(document).ready(function () {
