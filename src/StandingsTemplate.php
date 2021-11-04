@@ -11,11 +11,8 @@ if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
 }
 
 if(trim($seasonId) == false){
-   // $Fnm = getLeagueFile2($folder, '', 'Standings.html', 'Standings', 'Farm'); // exclude farm
     $Fnm =  _getLeagueFile('Standings', null, null, 'Farm'); // exclude farm
 }else{
-   //$seasonFolder = str_replace("#",$seasonId,CAREER_STATS_DIR);
-    //$Fnm = getLeagueFile2($seasonFolder, '', 'Standings.html', 'Standings', 'Farm'); // exclude farm
     $Fnm = _getLeagueFile('Standings', null, $seasonId, 'Farm'); // exclude farm
 
 }
@@ -37,15 +34,6 @@ if (file_exists($Fnm)) {
     
     //check playoff mode first if in shootoutmode
     //still need to be able to support the old style if seasons are mixed between both types so don't look based on mode..
-//     if(SHOOTOUT_MODE){
-//         foreach($tableau as $line)
-//         {
-//             if(strpos($line, 'W  L OT') !== false){
-//                 $otMode = true;
-//             }
-            
-//         }
-//     }
     foreach($tableau as $line)
     {
         if(strpos($line, 'W  L OT') !== false){
@@ -66,7 +54,7 @@ if (file_exists($Fnm)) {
 
             echo '<div class="col-sm-12 col-lg-8 offset-lg-2 px-0">';
             
-            echo '<div class="accordion" id="accordionExample">';
+            echo '<div>';
 
           
         }
@@ -74,20 +62,17 @@ if (file_exists($Fnm)) {
   
             //start conference
             echo '<div class="card">';
-            echo '<div class="card-header p-1" id="headingOne">
-                 
-                    <button class="btn btn-link btn-block p-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <div class= "section-header logo-gradient">
-                        <div class="header-container">
-                        
-                        <div class="gloss"></div>
-                        <span class="header">'.$teamCardConference.'</span>
-                        
-                        </div>
-                    </button>
-       
+            echo '<div class="card-header p-1">
+                
+                        <div class= "section-header square-bottom-border logo-gradient">
+                            <div class="header-container">
+                                <div class="gloss"></div>
+                                <span class="header">'.$teamCardConference.'</span>
+                    	    </div>
+                    	</div>
+                                    
                   </div>';
-            echo '<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">';
+         //   echo '<div>';
             echo '<div class="card-body p-1">';
 
         }
@@ -98,23 +83,20 @@ if (file_exists($Fnm)) {
             echo '</table>';
             echo '</div>'; //end table-responsive;
             echo '</div>'; //end card body
-            echo '</div>'; //end card collapse;
             echo '</div>'; //end card
             
-            echo '<div class="card">';
-            echo '<div class="card-header p-1" id="divHeader">
+            echo '<div class="card mt-2">';
+            echo '<div class="card-header p-1">
                 
-                    <button class="btn btn-link btn-block collapsed p-0" type="button" data-toggle="collapse" data-target="#divCollapse" aria-expanded="true" aria-controls="divCollapse">
-                        <div class= "section-header logo-gradient">
+                        <div class= "section-header square-bottom-border logo-gradient">
                             <div class="header-container">
                                 <div class="gloss"></div>
                                 <span class="header">'.$teamCardDivision.'</span>
                     	    </div>
-                    	</div>';
-            echo '  </button>
+                    	</div>
                 
                   </div>';
-            echo '<div id="divCollapse" class="collapse" aria-labelledby="divHeader" data-parent="#accordionExample">';
+
             echo '<div class="card-body p-1">';
 
 
@@ -295,7 +277,6 @@ if (file_exists($Fnm)) {
     echo '</table>';
     echo '</div>'; //end last div table responsive
     echo '</div>'; //end card body
-    echo '</div>'; //end card collapse;
     echo '</div>'; //end card
     echo '</div>'; //end accordian
     echo '</div>'; //end col
@@ -305,8 +286,7 @@ if (file_exists($Fnm)) {
     
     
 } else {
-    //echo  $allFileNotFound . ' - ' . $Fnm ;
-    echo '<h6>No season data found</h6>';
+    echo '<div class="card"><div class="card-body"><h6>No season data found</h6></div></div>';
 }
 
 

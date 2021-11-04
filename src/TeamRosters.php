@@ -108,6 +108,7 @@ include 'TeamHeader.php';
                                             <th data-toggle="tooltip" data-placement="top" title="'.$linkedYearF.'">CT</th>
                                             <th data-toggle="tooltip" data-placement="top" title="'.$joueursHeightF.'">HT</th>
                                             <th data-toggle="tooltip" data-placement="top" title="'.$joueursWeight.'">WT</th>
+                                            <th data-toggle="tooltip" data-placement="top" class="text-left" title="Link">LINK</th>
                             			</tr>    
                                     </thead>';
                                     
@@ -126,12 +127,30 @@ include 'TeamHeader.php';
                                         $vitals = $playerVitals->findVital($roster->getNumber(), $roster->getName());
                                         //var_dump($vitals);
                                         
-                                        $scoringNameSearch = htmlspecialchars($roster->getName());
-                                        //$scoringNameLink = 'http://www.google.com/search?q='.$scoringNameSearch.'%nhl.com&btnI';
-                                        $scoringNameLink ='http://www.hockeydb.com/ihdb/stats/findplayer.php?full_name='.$scoringNameSearch;
+//                                         $scoringNameSearch = htmlspecialchars($roster->getName());
+//                                         //$scoringNameLink = 'http://www.google.com/search?q='.$scoringNameSearch.'%nhl.com&btnI';
+//                                         $scoringNameLink ='http://www.hockeydb.com/ihdb/stats/findplayer.php?full_name='.$scoringNameSearch;
+                                        
+                                        // Choose between hockeyDB : 1 or EliteProspect : 2 | $leagueFuturesLink
+                                        if(ROSTERS_LINK_MODE == 1) $tmpLink = strtolower(str_replace(' ', '+', $roster->getName()));
+                                        if(ROSTERS_LINK_MODE == 2) $tmpLink = strtolower(str_replace(' ', '+', $roster->getName()));
+                                        if(ROSTERS_LINK_MODE == 3) $tmpLink = strtolower(str_replace(' ', '-', $roster->getName()));
+                                        if(ROSTERS_LINK_MODE == 1) $hockeyFutureLink = 'https://www.hockeydb.com/ihdb/stats/findplayer.php?full_name='.$tmpLink;
+                                        if(ROSTERS_LINK_MODE == 2) $hockeyFutureLink = 'https://www.eliteprospects.com/search/player?q='.$tmpLink;
+                                        if(ROSTERS_LINK_MODE == 3) $hockeyFutureLink = 'https://www.tsn.ca/nhl/player-bio/'.$tmpLink;
+                                        
+                                        https://www.tsn.ca/nhl/player-bio/sidney-crosby
+                                        
+                                        $playerCareersLink = BASE_URL.'CareerStatsPlayer.php?csName='.htmlspecialchars_decode($roster->getName());
+                                     //   $playerSalary = toMoney($vitals->getSalary());
+                                        
+                                       // $fmt = new NumberFormatter( 'en_US', NumberFormatter::CURRENCY );
+                                        if(LEAGUE_LANG == 'FR') $playerSalary = number_format($vitals->getSalary(), 0)."$";
+                                        else $playerSalary = "$".number_format($vitals->getSalary(), 0);
+                                        
 
                                         echo '<tr>';
-                                            echo '<td class="text-left"><a href="'.$scoringNameLink.'">'.$roster->getName().'</a></td>';
+                                        echo '<td class="text-left"><a href="'.$playerCareersLink.'">'.$roster->getName().'</a></td>';
                                             echo '<td>'.$roster->getPosition().'</td>';
                                             echo '<td>'.$roster->getHand().'</td>';
                                             echo '<td>'.$roster->getCondition().'</td>';
@@ -151,14 +170,17 @@ include 'TeamHeader.php';
                                             echo '<td>'.$roster->getLd().'</td>';
                                             echo '<td style="font-weight:bold; font-size: 13px;">'.$roster->getOv().'</td>';
                                             echo '<td>'.$vitals->getAge().'</td>';
-                                            echo '<td class="text-right">$'.number_format($vitals->getSalary()).'</td>';
+                                            echo '<td class="text-right">'.$playerSalary.'</td>';
                                             echo '<td class="text-center">'.$vitals->getContractLength().'</td>';
                                             echo '<td>'.$vitals->getHeight().'</td>';
                                             echo '<td>'.$vitals->getWeight().'</td>';
+                                            echo '<td class="text-left"><a href="'.$hockeyFutureLink.'">LINK</a></td>';
                                         echo '</tr>';             
                                     }
                                     echo '</tbody>';
                                     
+                                    if(LEAGUE_LANG == 'FR') $avgPlayerSalary = $playerVitals->getAvgSalary()."$";
+                                    else $avgPlayerSalary = "$".$playerVitals->getAvgSalary();
                                     //display averages in table footer
                                     echo ' <tfoot>
                                         <tr>
@@ -182,11 +204,11 @@ include 'TeamHeader.php';
                                             <td>'.$rosterAvgs->getAvgLd().'</td>
                                             <td>'.$rosterAvgs->getAvgOv().'</td>
                                             <td>'.$playerVitals->getAvgAge().'</td>
-                                            <td class="text-right">$'.$playerVitals->getAvgSalary().'</td>
+                                            <td class="text-right">'.$avgPlayerSalary.'</td>
                                             <td></td>
                                             <td>'.$playerVitals->getAvgHeight().'</td>
                                             <td>'.$playerVitals->getAvgWeight().'</td>
-                                                
+                                            <td></td> 
                             			</tr>
                                     </tfoot>'; 
  

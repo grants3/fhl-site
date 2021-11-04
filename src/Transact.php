@@ -93,14 +93,19 @@ include 'head.php';
             <div class="card">
             	<div id="transactTabs" class="card-header px-2 px-lg-4 pb-1 pt-2">
             		<ul class="nav nav-tabs nav-fill">
-            			<li class="nav-item"><a	class="nav-link" href="#TransactTrades"	data-toggle="tab">Trades</a></li>
-            			<li class="nav-item"><a	class="nav-link active" href="#TransactEvents"	data-toggle="tab">Transactions</a></li>
+            			<?php
+            			$eventsActive = '';
+            			if(TRANSACTIONS_TRADES_ENABLED){?>
+            			<li class="nav-item"><a	class="nav-link active" href="#TransactTrades"	data-toggle="tab">Trades</a></li>
+            			<?php }else{ $eventsActive = 'active';}?>
+            			<li class="nav-item"><a	class="nav-link <?php echo $eventsActive;?>" href="#TransactEvents"	data-toggle="tab">Transactions</a></li>
             			<li class="nav-item"><a	class="nav-link" href="#TransactInjuries" data-toggle="tab">Injuries</a></li>
             		</ul>
             	</div>
             	<div class="card-body tab-content m-0 p-0 pt-2">
             		
-            		<div class="tab-pane" id="TransactTrades">
+            		<?php if(TRANSACTIONS_TRADES_ENABLED){?>
+            		<div class="tab-pane active" id="TransactTrades">
 						<div id="TransactTradesInner">
 							<div class="row no-gutters">
 								<div class="col">
@@ -123,8 +128,9 @@ include 'head.php';
 							</div>
 						</div>
 					</div>
+					<?php }?>
 					
-					<div class="tab-pane active" id="TransactEvents">
+					<div class="tab-pane <?php echo $eventsActive;?>" id="TransactEvents">
 						<div id="TransactEventsInner">
 							<div class="row no-gutters">
 								<div class="col">
@@ -183,7 +189,7 @@ include 'head.php';
 
 $(function() {
 
-
+<?php if(TRANSACTIONS_TRADES_ENABLED){?>
 var tradesTable = $('#trades-table').DataTable({
 	dom:'<"row no-gutters"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-8"f>><ti><"row no-gutters"<"col-sm-12 col-md-8"p><"col-sm-12 col-md-4"B>>',
 	"processing":false,
@@ -200,7 +206,7 @@ var tradesTable = $('#trades-table').DataTable({
     },   
     "order": [],
 	"ajax": {
-		url : '<?php echo BASE_URL.'api?api=trans&action=find&type=trade'; ?>',
+		url : '<?php echo 'api?api=trans&action=find&type=trade'; ?>',
 			type: "GET",
             "data": function ( d ) {
                d.seasonId = getSeasonSelection();
@@ -221,6 +227,8 @@ var tradesTable = $('#trades-table').DataTable({
 			]
     
 		}); 
+<?php }?>
+
 
 var eventsTable = $('#events-table').DataTable({
 	dom:'<"row no-gutters"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-8"f>><ti><"row no-gutters"<"col-sm-12 col-md-8"p><"col-sm-12 col-md-4"B>>',
@@ -238,7 +246,7 @@ var eventsTable = $('#events-table').DataTable({
     },   
     "order": [],
 	"ajax": {
-		url : '<?php echo BASE_URL.'api?api=trans&action=find&type=trans'; ?>',
+		url : '<?php echo 'api?api=trans&action=find&type=trans'; ?>',
 		type: "GET",
         "data": function ( d ) {
            d.seasonId = getSeasonSelection();
@@ -273,7 +281,7 @@ var injuriesTable = $('#inj-table').DataTable({
     },   
     "order": [],
 	"ajax": {
-		url : '<?php echo BASE_URL.'api?api=trans&action=find&type=inj'; ?>',
+		url : '<?php echo 'api?api=trans&action=find&type=inj'; ?>',
 			type: "GET",
         	"data": function ( d ) {
            		d.seasonId = getSeasonSelection();

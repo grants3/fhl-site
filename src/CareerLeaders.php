@@ -82,411 +82,437 @@ $i = 0;
 $j = 0;
 $iPLF = 0;
 $jPLF = 0;
+
 for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
-	for($z=0;$z<2;$z++) {
-		$Fnm = '';
-		if($NumberSeason < $workSeason) {
-			//echo "IN - Current Season/Playoff ".$workSeason."!<br>";
-			if($z == 0) $Fnm = $FnmCurrentSeason;
-			if(isset($FnmCurrentPlayoff) && $z == 1) $Fnm = $FnmCurrentPlayoff;
-			if(!isset($FnmCurrentPlayoff) && $z == 1) break 1;
-		}
-		else {
-			if($z == 0) {
-				$Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
-				$matches = glob($Fnmtmp.'*TeamScoring.html');
-				$folderLeagueURL = '';
-				for($k=0;$k<count($matches);$k++) {
-					if(!substr_count($matches[$k], 'PLF')) {
-						$folderLeagueURL = substr($matches[$k], strrpos($matches[$k], '/')+1,  strpos($matches[$k], 'TeamScoring')-strrpos($matches[$k], '/')-1);
-						$Fnm = $Fnmtmp.$folderLeagueURL.'TeamScoring.html';
-						break 1;
-					}
-				}
-			}
-			if($z == 1) {
-				$Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
-				$matches = glob($Fnmtmp.'*PLFTeamScoring.html');
-				$folderLeagueURL = '';
-				for($k=0;$k<count($matches);$k++) {
-					$folderLeagueURL = substr($matches[$k], strrpos($matches[$k], '/')+1,  strpos($matches[$k], 'PLFTeamScoring')-strrpos($matches[$k], '/')-1);
-					$Fnm = $Fnmtmp.$folderLeagueURL.'PLFTeamScoring.html';
-					break 1;
-				}
-				
-			}
-		}
-		$b = 0;
-		$e = 0;
-		$f = 0;
-		//echo "File: ".$Fnm."<br>";
-		if(file_exists($Fnm)) {
-			//if($z == 0) echo 'Season #'.$workSeason.'<br>';
-			//if($z == 1) echo 'Playoff #'.$workSeason.'<br>';
-			$tableau = file($Fnm);
-			while(list($cle,$val) = myEach($tableau)) {
-				$val = utf8_encode($val);
-				if(substr_count($val, 'A NAME=')) {
-					//$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
-					//$lastTeam = trim(substr($reste, strpos($reste, '>')+1));
-					$b = 1;
-				}
-				if($b && substr_count($val, '------------')) {
-					$e = 0;
-					if($f == 1) {
-						$b = 0;
-						$f = 0;
-					}
-				}
-				if($b && $e) {
-					$reste = trim($val);
-					if(!substr_count($val, '                         ')) {
-						$tmpFwdPosition = trim(substr($reste, 0, strpos($reste, ' ')));
-						$reste = trim(substr($reste, strpos($reste, ' ')));
-						$tmpFwdNumber = trim(substr($reste, 0, strpos($reste, ' ')));
-						$reste = trim(substr($reste, strpos($reste, ' ')));
-						if(substr($reste, 0, 1) == '*') {
-							$tmpFwdRookie = trim(substr($reste, 0, 1));
-							$reste = trim(substr($reste, 1));
-						}
-						else $tmpFwdRookie = '';
-						$tmpFwdHT2 = 0;
-					}
-					$tmpFwdPS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdGS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdPCTG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdHT = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdGT = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdGW = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdSHG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdPPG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdPIM = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdDiff = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdP = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdA = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdGP = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdTeam = trim(substr($reste, strrpos($reste, ' ')));
-					if(!substr_count($val, '                         ')) {
-						$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-						$tmpFwdName = $reste;
-						if(substr_count($tmpFwdName, 'xtrastats.html')) {
-							$tmpFwdName = trim(substr($tmpFwdName, strpos($tmpFwdName, '"')+1, strpos($tmpFwdName, '>')-1-strpos($tmpFwdName, '"')-1));
-						}
-					}
-					
-					if((isset($TSabbr) && $TSabbr == $tmpFwdTeam) || ($ctlOneTeams == '' && $tmpFwdTeam != 'TOT')) {
-						//if($ctlOneTeams != '' && $z == 1 && $tmpFwdName == "Jason Spezza") echo 'Key:'.$cle.' - Season #'.$workSeason.' - Team Abbr:'.$TSabbr.' - Team Found:'.$tmpFwdTeam.' - Player:'.$tmpFwdName.' - Hits:'.$tmpFwdHT.'<br>';
-						/*
-						$tmpVal = $tableau[$cle+1];
-						if(substr_count($tmpVal, '                         ') || (!substr_count($val, '                         ') && !substr_count($tmpVal, '                         '))) {
-							$tmpFwdHT2 += $tmpFwdHT;
-						}
-						*/
-						
-						$tmpFound = 0;
-						if($z == 0) {
-							if(isset($statsFwdName)) {
-								for($v=0;$v<count($statsFwdName);$v++) {
-									if($statsFwdName[$v] == $tmpFwdName) {
-										//if($tmpFwdName == "Jason Spezza") echo $workSeason.". ".$tmpFwdHT."<br>";
-										$statsFwdPS[$v] += $tmpFwdPS;
-										$statsFwdGS[$v] += $tmpFwdGS;
-										//$statsFwdPCTG[$v] += $tmpFwdPCTG;
-										$statsFwdS[$v] += $tmpFwdS;
-										$statsFwdHT[$v] += $tmpFwdHT;
-										$statsFwdGT[$v] += $tmpFwdGT;
-										$statsFwdGW[$v] += $tmpFwdGW;
-										$statsFwdSHG[$v] += $tmpFwdSHG;
-										$statsFwdPPG[$v] += $tmpFwdPPG;
-										$statsFwdPIM[$v] += $tmpFwdPIM;
-										$statsFwdDiff[$v] += $tmpFwdDiff;
-										$statsFwdP[$v] += $tmpFwdP;
-										$statsFwdA[$v] += $tmpFwdA;
-										$statsFwdG[$v] += $tmpFwdG;
-										$statsFwdGP[$v] += $tmpFwdGP;
-										$statsFwdPCTG[$v] = 0;
-										if($statsFwdS[$v] != 0) {
-											$statsFwdPCTG[$v] = round(($statsFwdG[$v] / $statsFwdS[$v] * 100), 1);
-										}
-										$tmpFound = 1;
-										break 1;
-									}
-								}
-							}
-							if($tmpFound == 0) {
-								//if($tmpFwdName == "Jason Spezza") echo $workSeason.". ".$tmpFwdHT."<br>";
-								$statsFwdPosition[$i] = $tmpFwdPosition;
-								$statsFwdNumber[$i] = $tmpFwdNumber;
-								$statsFwdRookie[$i] = $tmpFwdRookie;
-								$statsFwdPS[$i] = $tmpFwdPS;
-								$statsFwdGS[$i] = $tmpFwdGS;
-								//$statsFwdPCTG[$i] = $tmpFwdPCTG;
-								$statsFwdS[$i] = $tmpFwdS;
-								$statsFwdHT[$i] = $tmpFwdHT;
-								$statsFwdGT[$i] = $tmpFwdGT;
-								$statsFwdGW[$i] = $tmpFwdGW;
-								$statsFwdSHG[$i] = $tmpFwdSHG;
-								$statsFwdPPG[$i] = $tmpFwdPPG;
-								$statsFwdPIM[$i] = $tmpFwdPIM;
-								$statsFwdDiff[$i] = $tmpFwdDiff;
-								$statsFwdP[$i] = $tmpFwdP;
-								$statsFwdA[$i] = $tmpFwdA;
-								$statsFwdG[$i] = $tmpFwdG;
-								$statsFwdGP[$i] = $tmpFwdGP;
-								$statsFwdTeam[$i] = $tmpFwdTeam;
-								$statsFwdName[$i] = $tmpFwdName;
-								$statsFwdPCTG[$i] = 0;
-								if($statsFwdS[$i] != 0) {
-									$statsFwdPCTG[$i] = round(($statsFwdG[$i] / $statsFwdS[$i] * 100), 1);
-								}
-								$statsFwdSeason[$i] = $workSeason;
-								$i++;
-							}
-						}
-						if($z == 1) {
-							if(isset($statsFwdPLFName)) {
-								for($v=0;$v<count($statsFwdPLFName);$v++) {
-									if($statsFwdPLFName[$v] == $tmpFwdName) {
-										$statsFwdPLFPS[$v] += $tmpFwdPS;
-										$statsFwdPLFGS[$v] += $tmpFwdGS;
-										//$statsFwdPLFPCTG[$v] += $tmpFwdPCTG;
-										$statsFwdPLFS[$v] += $tmpFwdS;
-										$statsFwdPLFHT[$v] += $tmpFwdHT;
-										$statsFwdPLFGT[$v] += $tmpFwdGT;
-										$statsFwdPLFGW[$v] += $tmpFwdGW;
-										$statsFwdPLFSHG[$v] += $tmpFwdSHG;
-										$statsFwdPLFPPG[$v] += $tmpFwdPPG;
-										$statsFwdPLFPIM[$v] += $tmpFwdPIM;
-										$statsFwdPLFDiff[$v] += $tmpFwdDiff;
-										$statsFwdPLFP[$v] += $tmpFwdP;
-										$statsFwdPLFA[$v] += $tmpFwdA;
-										$statsFwdPLFG[$v] += $tmpFwdG;
-										$statsFwdPLFGP[$v] += $tmpFwdGP;
-										$statsFwdPLFPCTG[$v] = 0;
-										if($statsFwdPLFS[$v] != 0) {
-											$statsFwdPLFPCTG[$v] = round(($statsFwdPLFG[$v] / $statsFwdPLFS[$v] * 100), 1);
-										}
-										$tmpFound = 1;
-										break 1;
-									}
-								}
-							}
-							if($tmpFound == 0) {
-								$statsFwdPLFPosition[$iPLF] = $tmpFwdPosition;
-								$statsFwdPLFNumber[$iPLF] = $tmpFwdNumber;
-								$statsFwdPLFRookie[$iPLF] = $tmpFwdRookie;
-								$statsFwdPLFPS[$iPLF] = $tmpFwdPS;
-								$statsFwdPLFGS[$iPLF] = $tmpFwdGS;
-								//$statsFwdPLFPCTG[$iPLF] = $tmpFwdPCTG;
-								$statsFwdPLFS[$iPLF] = $tmpFwdS;
-								$statsFwdPLFHT[$iPLF] = $tmpFwdHT;
-								$statsFwdPLFGT[$iPLF] = $tmpFwdGT;
-								$statsFwdPLFGW[$iPLF] = $tmpFwdGW;
-								$statsFwdPLFSHG[$iPLF] = $tmpFwdSHG;
-								$statsFwdPLFPPG[$iPLF] = $tmpFwdPPG;
-								$statsFwdPLFPIM[$iPLF] = $tmpFwdPIM;
-								$statsFwdPLFDiff[$iPLF] = $tmpFwdDiff;
-								$statsFwdPLFP[$iPLF] = $tmpFwdP;
-								$statsFwdPLFA[$iPLF] = $tmpFwdA;
-								$statsFwdPLFG[$iPLF] = $tmpFwdG;
-								$statsFwdPLFGP[$iPLF] = $tmpFwdGP;
-								$statsFwdPLFTeam[$iPLF] = $tmpFwdTeam;
-								$statsFwdPLFName[$iPLF] = $tmpFwdName;
-								$statsFwdPLFSeason[$iPLF] = $workSeason;
-								$statsFwdPLFPCTG[$iPLF] = 0;
-								if($statsFwdPLFS[$iPLF] != 0) {
-									$statsFwdPLFPCTG[$iPLF] = round(($statsFwdPLFG[$iPLF] / $statsFwdPLFS[$iPLF] * 100), 1);
-								}
-								$iPLF++;
-							}
-						}
-						
-					}
-				}
-				if($b && $f) {
-					$reste = trim($val);
-					if(!substr_count($val, '                         ')) {
-						$tmpGoalPosition = 'G';
-						$tmpGoalNumber = trim(substr($reste, 0, strpos($reste, ' ')));
-						$reste = trim(substr($reste, strpos($reste, ' ')));
-						if(substr($reste, 0, 1) == '*') {
-							$tmpGoalRookie = trim(substr($reste, 0, 1));
-							$reste = trim(substr($reste, 1));
-						}
-						else $tmpGoalRookie = '';
-					}
-					$tmpGoalAS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalPIM = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalPCT = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalSA = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalGA = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalSO = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalT = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalL = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalW = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalAVG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalMin = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalGP = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpGoalTeam = trim(substr($reste, strrpos($reste, ' ')));
-					if(!substr_count($val, '                         ')) {
-						$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-						$tmpGoalName = $reste;
-						if(substr_count($tmpGoalName, 'xtrastats.html')) {
-							$tmpGoalName = trim(substr($tmpGoalName, strpos($tmpGoalName, '"')+1, strpos($tmpGoalName, '>')-1-strpos($tmpGoalName, '"')-1));
-						}
-					}
-					
-					if((isset($TSabbr) && $TSabbr == $tmpGoalTeam) || ($ctlOneTeams == '' && $tmpFwdTeam != 'TOT')) {
-						//if($ctlOneTeams != '') echo 'Key:'.$cle.' - Season #'.$workSeason.' - Team Abbr:'.$TSabbr.' - Team Found:'.$tmpGoalTeam.' - Player:'.$tmpGoalName.'<br>';
-						$tmpCle = $cle + 1;
-						$tmpVal = $tableau[$tmpCle];
-						$tmpFound = 0;
-						if($z == 0) {
-							if(isset($statsGoalName) && $NumberSeason >= $workSeason) {
-								for($v=0;$v<count($statsGoalName);$v++) {
-									if($statsGoalName[$v] == $tmpGoalName) {
-										$statsGoalAS[$v] += $tmpGoalAS;
-										$statsGoalPIM[$v] += $tmpGoalPIM;
-										//$statsGoalPCT[$v] += $tmpGoalPCT;
-										$statsGoalSA[$v] += $tmpGoalSA;
-										$statsGoalGA[$v] += $tmpGoalGA;
-										$statsGoalSO[$v] += $tmpGoalSO;
-										$statsGoalT[$v] += $tmpGoalT;
-										$statsGoalL[$v] += $tmpGoalL;
-										$statsGoalW[$v] += $tmpGoalW;
-										//$statsGoalAVG[$v] += $tmpGoalAVG;
-										$statsGoalMin[$v] += $tmpGoalMin;
-										$statsGoalGP[$v] += $tmpGoalGP;
-										$statsGoalAVG[$v] = 0;
-										if($statsGoalMin[$v] != 0) $statsGoalAVG[$v] = round($statsGoalGA[$v] * 60 / $statsGoalMin[$v], 2);
-										$statsGoalPCT[$v] = 0;
-										if($statsGoalSA[$v] != 0) $statsGoalPCT[$v] = round(($statsGoalSA[$v] - $statsGoalGA[$v]) / $statsGoalSA[$v], 3);
-										$tmpFound = 1;
-										break 1;
-									}
-								}
-							}
-							if($tmpFound == 0) {
-								$statsGoalPosition[$j] = $tmpGoalPosition;
-								$statsGoalNumber[$j] = $tmpGoalNumber;
-								$statsGoalRookie[$j] = $tmpGoalRookie;
-								$statsGoalAS[$j] = $tmpGoalAS;
-								$statsGoalPIM[$j] = $tmpGoalPIM;
-								//$statsGoalPCT[$j] = $tmpGoalPCT;
-								$statsGoalSA[$j] = $tmpGoalSA;
-								$statsGoalGA[$j] = $tmpGoalGA;
-								$statsGoalSO[$j] = $tmpGoalSO;
-								$statsGoalT[$j] = $tmpGoalT;
-								$statsGoalL[$j] = $tmpGoalL;
-								$statsGoalW[$j] = $tmpGoalW;
-								//$statsGoalAVG[$j] = $tmpGoalAVG;
-								$statsGoalMin[$j] = $tmpGoalMin;
-								$statsGoalGP[$j] = $tmpGoalGP;
-								$statsGoalTeam[$j] = $tmpGoalTeam;
-								$statsGoalName[$j] = $tmpGoalName;
-								$statsGoalSeason[$j] = $workSeason;
-								$statsGoalAVG[$j] = 0;
-								if($statsGoalMin[$j] != 0) $statsGoalAVG[$j] = round($statsGoalGA[$j] * 60 / $statsGoalMin[$j], 2);
-								$statsGoalPCT[$j] = 0;
-								if($statsGoalSA[$j] != 0) $statsGoalPCT[$j] = round(($statsGoalSA[$j] - $statsGoalGA[$j]) / $statsGoalSA[$j], 3);
-								$j++;
-							}
-						}
-						if($z == 1) {
-							if(isset($statsGoalPLFName) && $NumberSeason >= $workSeason) {
-								for($v=0;$v<count($statsGoalPLFName);$v++) {
-									if($statsGoalPLFName[$v] == $tmpGoalName) {
-										$statsGoalPLFAS[$v] += $tmpGoalAS;
-										$statsGoalPLFPIM[$v] += $tmpGoalPIM;
-										//$statsGoalPLFPCT[$v] += $tmpGoalPCT;
-										$statsGoalPLFSA[$v] += $tmpGoalSA;
-										$statsGoalPLFGA[$v] += $tmpGoalGA;
-										$statsGoalPLFSO[$v] += $tmpGoalSO;
-										$statsGoalPLFT[$v] += $tmpGoalT;
-										$statsGoalPLFL[$v] += $tmpGoalL;
-										$statsGoalPLFW[$v] += $tmpGoalW;
-										//$statsGoalPLFAVG[$v] += $tmpGoalAVG;
-										$statsGoalPLFMin[$v] += $tmpGoalMin;
-										$statsGoalPLFGP[$v] += $tmpGoalGP;
-										$statsGoalPLFAVG[$v] = 0;
-										if($statsGoalPLFMin[$v] != 0) $statsGoalPLFAVG[$v] = round($statsGoalPLFGA[$v] * 60 / $statsGoalPLFMin[$v], 2);
-										$statsGoalPLFPCT[$v] = 0;
-										if($statsGoalPLFSA[$v] != 0) $statsGoalPLFPCT[$v] = round(($statsGoalPLFSA[$v] - $statsGoalPLFGA[$v]) / $statsGoalPLFSA[$v], 3);
-										$tmpFound = 1;
-										break 1;
-									}
-								}
-							}
-							if($tmpFound == 0) {
-								$statsGoalPLFPosition[$jPLF] = $tmpGoalPosition;
-								$statsGoalPLFNumber[$jPLF] = $tmpGoalNumber;
-								$statsGoalPLFRookie[$jPLF] = $tmpGoalRookie;
-								$statsGoalPLFAS[$jPLF] = $tmpGoalAS;
-								$statsGoalPLFPIM[$jPLF] = $tmpGoalPIM;
-								//$statsGoalPLFPCT[$jPLF] = $tmpGoalPCT;
-								$statsGoalPLFSA[$jPLF] = $tmpGoalSA;
-								$statsGoalPLFGA[$jPLF] = $tmpGoalGA;
-								$statsGoalPLFSO[$jPLF] = $tmpGoalSO;
-								$statsGoalPLFT[$jPLF] = $tmpGoalT;
-								$statsGoalPLFL[$jPLF] = $tmpGoalL;
-								$statsGoalPLFW[$jPLF] = $tmpGoalW;
-								//$statsGoalPLFAVG[$jPLF] = $tmpGoalAVG;
-								$statsGoalPLFMin[$jPLF] = $tmpGoalMin;
-								$statsGoalPLFGP[$jPLF] = $tmpGoalGP;
-								$statsGoalPLFTeam[$jPLF] = $tmpGoalTeam;
-								$statsGoalPLFName[$jPLF] = $tmpGoalName;
-								$statsGoalPLFSeason[$jPLF] = $workSeason;
-								$statsGoalPLFAVG[$jPLF] = 0;
-								if($statsGoalPLFMin[$jPLF] != 0) $statsGoalPLFAVG[$jPLF] = round($statsGoalPLFGA[$jPLF] * 60 / $statsGoalPLFMin[$jPLF], 2);
-								$statsGoalPLFPCT[$jPLF] = 0;
-								if($statsGoalPLFSA[$jPLF] != 0) $statsGoalPLFPCT[$jPLF] = round(($statsGoalPLFSA[$jPLF] - $statsGoalPLFGA[$jPLF]) / $statsGoalPLFSA[$jPLF], 3);
-								$jPLF++;
-							}
-						}
-						
-					}
-				}
-				if($b && substr_count($val, 'PCTG') ) {
-					$e = 1;
-				}
-				if($b && substr_count($val, 'AVG') ) {
-					$f = 1;
-				}
-			}
-		}
-		//else echo $allFileNotFound.' - '.$Fnm;
-	}
+    for($z=0;$z<2;$z++) {
+        $Fnm = '';
+        if($NumberSeason < $workSeason) {
+            //echo "IN - Current Season/Playoff ".$workSeason."!<br>";
+            if($z == 0) $Fnm = $FnmCurrentSeason;
+            if(isset($FnmCurrentPlayoff) && $z == 1) $Fnm = $FnmCurrentPlayoff;
+            if(!isset($FnmCurrentPlayoff) && $z == 1) break 1;
+        }
+        else {
+            if($z == 0) {
+                $Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
+                $matches = glob($Fnmtmp.'*TeamScoring.html');
+                $folderLeagueURL = '';
+                for($k=0;$k<count($matches);$k++) {
+                    if(!substr_count($matches[$k], 'PLF')) {
+                        $folderLeagueURL = substr($matches[$k], strrpos($matches[$k], '/')+1,  strpos($matches[$k], 'TeamScoring')-strrpos($matches[$k], '/')-1);
+                        $Fnm = $Fnmtmp.$folderLeagueURL.'TeamScoring.html';
+                        break 1;
+                    }
+                }
+            }
+            if($z == 1) {
+                $Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
+                $matches = glob($Fnmtmp.'*PLFTeamScoring.html');
+                $folderLeagueURL = '';
+                for($k=0;$k<count($matches);$k++) {
+                    $folderLeagueURL = substr($matches[$k], strrpos($matches[$k], '/')+1,  strpos($matches[$k], 'PLFTeamScoring')-strrpos($matches[$k], '/')-1);
+                    $Fnm = $Fnmtmp.$folderLeagueURL.'PLFTeamScoring.html';
+                    break 1;
+                }
+                
+            }
+        }
+        $b = 0;
+        $e = 0;
+        $f = 0;
+        if(file_exists($Fnm)) {
+            //echo "File: ".$Fnm."<br>";
+            //if($z == 0) echo 'Season #'.$workSeason.'<br>';
+            //if($z == 1) echo 'Playoff #'.$workSeason.'<br>';
+            $tableau = file($Fnm);
+            foreach ($tableau as $cle => $val) {
+                //while(list($cle,$val) = each($tableau)) {
+                $val = utf8_encode($val);
+                if(substr_count($val, 'A NAME=') || substr_count($val, 'a name=')) {
+                    //$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
+                    //$lastTeam = trim(substr($reste, strpos($reste, '>')+1));
+                    $b = 1;
+                }
+                if($b && substr_count($val, '------------')) {
+                    $e = 0;
+                    if($f == 1) {
+                        $b = 0;
+                        $f = 0;
+                    }
+                }
+                if($b && $e) {
+                    $reste = trim($val);
+                    if(!substr_count($val, '                         ')) {
+                        $tmpFwdPosition = trim(substr($reste, 0, strpos($reste, ' ')));
+                        $reste = trim(substr($reste, strpos($reste, ' ')));
+                        $tmpFwdNumber = trim(substr($reste, 0, strpos($reste, ' ')));
+                        $reste = trim(substr($reste, strpos($reste, ' ')));
+                        if(substr($reste, 0, 1) == '*') {
+                            $tmpFwdRookie = trim(substr($reste, 0, 1));
+                            $reste = trim(substr($reste, 1));
+                        }
+                        else $tmpFwdRookie = '';
+                        $tmpFwdHT2 = 0;
+                    }
+                    $tmpFwdPS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdGS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdPCTG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdHT = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdGT = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdGW = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdSHG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdPPG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdPIM = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdDiff = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdP = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdA = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdGP = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpFwdTeam = trim(substr($reste, strrpos($reste, ' ')));
+                    if(!substr_count($val, '                         ')) {
+                        $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                        $tmpFwdName = $reste;
+                        if(substr_count($tmpFwdName, 'xtrastats.html')) {
+                            $tmpFwdName = trim(substr($tmpFwdName, strpos($tmpFwdName, '"')+1, strpos($tmpFwdName, '>')-1-strpos($tmpFwdName, '"')-1));
+                        }
+                    }
+                    
+                    if((isset($TSabbr) && $TSabbr == $tmpFwdTeam) || ($ctlOneTeams == '' && $tmpFwdTeam != 'TOT')) {
+                        $tmpVal = $tableau[$cle+1];
+                        if(!substr_count($val, '                         ') && substr_count($tmpVal, '                         ')) {
+                            $keyNumber = 0;
+                            $tmpVal = '';
+                            do {
+                                if($tmpVal != '') {
+                                    $reste2 = trim($tmpVal);
+                                    $reste2 = trim(substr($reste2, 0, strrpos($reste2, ' ')));
+                                    $reste2 = trim(substr($reste2, 0, strrpos($reste2, ' ')));
+                                    $reste2 = trim(substr($reste2, 0, strrpos($reste2, ' ')));
+                                    $reste2 = trim(substr($reste2, 0, strrpos($reste2, ' ')));
+                                    $tmpFwdHTNext = substr($reste2, strrpos($reste2, ' '));
+                                    $tmpFwdHTArray[] = $tmpFwdHTNext;
+                                }
+                                $keyNumber++;
+                                $tmpVal = $tableau[$cle+$keyNumber];
+                            }
+                            while(substr_count($tmpVal, '                         '));
+                            if(isset($tmpFwdHTArray)) {
+                                $totHit = end($tmpFwdHTArray);
+                                for($y=0;$y<count($tmpFwdHTArray)-1;$y++) {
+                                    $totHit -= $tmpFwdHTArray[$y];
+                                }
+                                $tmpFwdHT = $totHit;
+                                unset($tmpFwdHTArray);
+                            }
+                        }
+                        
+                        $tmpFound = 0;
+                        if($z == 0) {
+                            if(isset($statsFwdName)) {
+                                for($v=0;$v<count($statsFwdName);$v++) {
+                                    if($statsFwdName[$v] == $tmpFwdName) {
+                                        //if($tmpFwdName == "Jarome Iginla") echo $workSeason.". ".$tmpFwdHT."<br>";
+                                        $statsFwdPS[$v] += $tmpFwdPS;
+                                        $statsFwdGS[$v] += $tmpFwdGS;
+                                        //$statsFwdPCTG[$v] += $tmpFwdPCTG;
+                                        $statsFwdS[$v] += $tmpFwdS;
+                                        $statsFwdHT[$v] += $tmpFwdHT;
+                                        $statsFwdGT[$v] += $tmpFwdGT;
+                                        $statsFwdGW[$v] += $tmpFwdGW;
+                                        $statsFwdSHG[$v] += $tmpFwdSHG;
+                                        $statsFwdPPG[$v] += $tmpFwdPPG;
+                                        $statsFwdPIM[$v] += $tmpFwdPIM;
+                                        $statsFwdDiff[$v] += $tmpFwdDiff;
+                                        $statsFwdP[$v] += $tmpFwdP;
+                                        $statsFwdA[$v] += $tmpFwdA;
+                                        $statsFwdG[$v] += $tmpFwdG;
+                                        $statsFwdGP[$v] += $tmpFwdGP;
+                                        $statsFwdPCTG[$v] = 0;
+                                        if($statsFwdS[$v] != 0) {
+                                            $statsFwdPCTG[$v] = round(($statsFwdG[$v] / $statsFwdS[$v] * 100), 1);
+                                        }
+                                        $tmpFound = 1;
+                                        break 1;
+                                    }
+                                }
+                            }
+                            if($tmpFound == 0) {
+                                //if($tmpFwdName == "Jarome Iginla") echo $workSeason.". ".$tmpFwdHT."<br>";
+                                $statsFwdPosition[$i] = $tmpFwdPosition;
+                                $statsFwdNumber[$i] = $tmpFwdNumber;
+                                $statsFwdRookie[$i] = $tmpFwdRookie;
+                                $statsFwdPS[$i] = $tmpFwdPS;
+                                $statsFwdGS[$i] = $tmpFwdGS;
+                                //$statsFwdPCTG[$i] = $tmpFwdPCTG;
+                                $statsFwdS[$i] = $tmpFwdS;
+                                $statsFwdHT[$i] = $tmpFwdHT;
+                                $statsFwdGT[$i] = $tmpFwdGT;
+                                $statsFwdGW[$i] = $tmpFwdGW;
+                                $statsFwdSHG[$i] = $tmpFwdSHG;
+                                $statsFwdPPG[$i] = $tmpFwdPPG;
+                                $statsFwdPIM[$i] = $tmpFwdPIM;
+                                $statsFwdDiff[$i] = $tmpFwdDiff;
+                                $statsFwdP[$i] = $tmpFwdP;
+                                $statsFwdA[$i] = $tmpFwdA;
+                                $statsFwdG[$i] = $tmpFwdG;
+                                $statsFwdGP[$i] = $tmpFwdGP;
+                                $statsFwdTeam[$i] = $tmpFwdTeam;
+                                $statsFwdName[$i] = $tmpFwdName;
+                                $statsFwdPCTG[$i] = 0;
+                                if($statsFwdS[$i] != 0) {
+                                    $statsFwdPCTG[$i] = round(($statsFwdG[$i] / $statsFwdS[$i] * 100), 1);
+                                }
+                                $statsFwdSeason[$i] = $workSeason;
+                                $i++;
+                            }
+                        }
+                        if($z == 1) {
+                            if(isset($statsFwdPLFName)) {
+                                for($v=0;$v<count($statsFwdPLFName);$v++) {
+                                    if($statsFwdPLFName[$v] == $tmpFwdName) {
+                                        $statsFwdPLFPS[$v] += $tmpFwdPS;
+                                        $statsFwdPLFGS[$v] += $tmpFwdGS;
+                                        //$statsFwdPLFPCTG[$v] += $tmpFwdPCTG;
+                                        $statsFwdPLFS[$v] += $tmpFwdS;
+                                        $statsFwdPLFHT[$v] += $tmpFwdHT;
+                                        $statsFwdPLFGT[$v] += $tmpFwdGT;
+                                        $statsFwdPLFGW[$v] += $tmpFwdGW;
+                                        $statsFwdPLFSHG[$v] += $tmpFwdSHG;
+                                        $statsFwdPLFPPG[$v] += $tmpFwdPPG;
+                                        $statsFwdPLFPIM[$v] += $tmpFwdPIM;
+                                        $statsFwdPLFDiff[$v] += $tmpFwdDiff;
+                                        $statsFwdPLFP[$v] += $tmpFwdP;
+                                        $statsFwdPLFA[$v] += $tmpFwdA;
+                                        $statsFwdPLFG[$v] += $tmpFwdG;
+                                        $statsFwdPLFGP[$v] += $tmpFwdGP;
+                                        $statsFwdPLFPCTG[$v] = 0;
+                                        if($statsFwdPLFS[$v] != 0) {
+                                            $statsFwdPLFPCTG[$v] = round(($statsFwdPLFG[$v] / $statsFwdPLFS[$v] * 100), 1);
+                                        }
+                                        $tmpFound = 1;
+                                        break 1;
+                                    }
+                                }
+                            }
+                            if($tmpFound == 0) {
+                                $statsFwdPLFPosition[$iPLF] = $tmpFwdPosition;
+                                $statsFwdPLFNumber[$iPLF] = $tmpFwdNumber;
+                                $statsFwdPLFRookie[$iPLF] = $tmpFwdRookie;
+                                $statsFwdPLFPS[$iPLF] = $tmpFwdPS;
+                                $statsFwdPLFGS[$iPLF] = $tmpFwdGS;
+                                //$statsFwdPLFPCTG[$iPLF] = $tmpFwdPCTG;
+                                $statsFwdPLFS[$iPLF] = $tmpFwdS;
+                                $statsFwdPLFHT[$iPLF] = $tmpFwdHT;
+                                $statsFwdPLFGT[$iPLF] = $tmpFwdGT;
+                                $statsFwdPLFGW[$iPLF] = $tmpFwdGW;
+                                $statsFwdPLFSHG[$iPLF] = $tmpFwdSHG;
+                                $statsFwdPLFPPG[$iPLF] = $tmpFwdPPG;
+                                $statsFwdPLFPIM[$iPLF] = $tmpFwdPIM;
+                                $statsFwdPLFDiff[$iPLF] = $tmpFwdDiff;
+                                $statsFwdPLFP[$iPLF] = $tmpFwdP;
+                                $statsFwdPLFA[$iPLF] = $tmpFwdA;
+                                $statsFwdPLFG[$iPLF] = $tmpFwdG;
+                                $statsFwdPLFGP[$iPLF] = $tmpFwdGP;
+                                $statsFwdPLFTeam[$iPLF] = $tmpFwdTeam;
+                                $statsFwdPLFName[$iPLF] = $tmpFwdName;
+                                $statsFwdPLFSeason[$iPLF] = $workSeason;
+                                $statsFwdPLFPCTG[$iPLF] = 0;
+                                if($statsFwdPLFS[$iPLF] != 0) {
+                                    $statsFwdPLFPCTG[$iPLF] = round(($statsFwdPLFG[$iPLF] / $statsFwdPLFS[$iPLF] * 100), 1);
+                                }
+                                $iPLF++;
+                            }
+                        }
+                        
+                    }
+                }
+                if($b && $f) {
+                    $reste = trim($val);
+                    if(!substr_count($val, '                         ')) {
+                        $tmpGoalPosition = 'G';
+                        $tmpGoalNumber = trim(substr($reste, 0, strpos($reste, ' ')));
+                        $reste = trim(substr($reste, strpos($reste, ' ')));
+                        if(substr($reste, 0, 1) == '*') {
+                            $tmpGoalRookie = trim(substr($reste, 0, 1));
+                            $reste = trim(substr($reste, 1));
+                        }
+                        else $tmpGoalRookie = '';
+                    }
+                    $tmpGoalAS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalPIM = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalPCT = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalSA = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalGA = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalSO = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalT = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalL = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalW = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalAVG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalMin = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalGP = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+                    $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                    $tmpGoalTeam = trim(substr($reste, strrpos($reste, ' ')));
+                    if(!substr_count($val, '                         ')) {
+                        $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+                        $tmpGoalName = $reste;
+                        if(substr_count($tmpGoalName, 'xtrastats.html')) {
+                            $tmpGoalName = trim(substr($tmpGoalName, strpos($tmpGoalName, '"')+1, strpos($tmpGoalName, '>')-1-strpos($tmpGoalName, '"')-1));
+                        }
+                    }
+                    
+                    if((isset($TSabbr) && $TSabbr == $tmpGoalTeam) || ($ctlOneTeams == '' && $tmpFwdTeam != 'TOT')) {
+                        //if($ctlOneTeams != '') echo 'Key:'.$cle.' - Season #'.$workSeason.' - Team Abbr:'.$TSabbr.' - Team Found:'.$tmpGoalTeam.' - Player:'.$tmpGoalName.'<br>';
+                        $tmpCle = $cle + 1;
+                        $tmpVal = $tableau[$tmpCle];
+                        $tmpFound = 0;
+                        if($z == 0) {
+                            if(isset($statsGoalName) && $NumberSeason >= $workSeason) {
+                                for($v=0;$v<count($statsGoalName);$v++) {
+                                    if($statsGoalName[$v] == $tmpGoalName) {
+                                        $statsGoalAS[$v] += $tmpGoalAS;
+                                        $statsGoalPIM[$v] += $tmpGoalPIM;
+                                        //$statsGoalPCT[$v] += $tmpGoalPCT;
+                                        $statsGoalSA[$v] += $tmpGoalSA;
+                                        $statsGoalGA[$v] += $tmpGoalGA;
+                                        $statsGoalSO[$v] += $tmpGoalSO;
+                                        $statsGoalT[$v] += $tmpGoalT;
+                                        $statsGoalL[$v] += $tmpGoalL;
+                                        $statsGoalW[$v] += $tmpGoalW;
+                                        //$statsGoalAVG[$v] += $tmpGoalAVG;
+                                        $statsGoalMin[$v] += $tmpGoalMin;
+                                        $statsGoalGP[$v] += $tmpGoalGP;
+                                        $statsGoalAVG[$v] = 0;
+                                        if($statsGoalMin[$v] != 0) $statsGoalAVG[$v] = round($statsGoalGA[$v] * 60 / $statsGoalMin[$v], 2);
+                                        $statsGoalPCT[$v] = 0;
+                                        if($statsGoalSA[$v] != 0) $statsGoalPCT[$v] = round(($statsGoalSA[$v] - $statsGoalGA[$v]) / $statsGoalSA[$v], 3);
+                                        $tmpFound = 1;
+                                        break 1;
+                                    }
+                                }
+                            }
+                            if($tmpFound == 0) {
+                                $statsGoalPosition[$j] = $tmpGoalPosition;
+                                $statsGoalNumber[$j] = $tmpGoalNumber;
+                                $statsGoalRookie[$j] = $tmpGoalRookie;
+                                $statsGoalAS[$j] = $tmpGoalAS;
+                                $statsGoalPIM[$j] = $tmpGoalPIM;
+                                //$statsGoalPCT[$j] = $tmpGoalPCT;
+                                $statsGoalSA[$j] = $tmpGoalSA;
+                                $statsGoalGA[$j] = $tmpGoalGA;
+                                $statsGoalSO[$j] = $tmpGoalSO;
+                                $statsGoalT[$j] = $tmpGoalT;
+                                $statsGoalL[$j] = $tmpGoalL;
+                                $statsGoalW[$j] = $tmpGoalW;
+                                //$statsGoalAVG[$j] = $tmpGoalAVG;
+                                $statsGoalMin[$j] = $tmpGoalMin;
+                                $statsGoalGP[$j] = $tmpGoalGP;
+                                $statsGoalTeam[$j] = $tmpGoalTeam;
+                                $statsGoalName[$j] = $tmpGoalName;
+                                $statsGoalSeason[$j] = $workSeason;
+                                $statsGoalAVG[$j] = 0;
+                                if($statsGoalMin[$j] != 0) $statsGoalAVG[$j] = round($statsGoalGA[$j] * 60 / $statsGoalMin[$j], 2);
+                                $statsGoalPCT[$j] = 0;
+                                if($statsGoalSA[$j] != 0) $statsGoalPCT[$j] = round(($statsGoalSA[$j] - $statsGoalGA[$j]) / $statsGoalSA[$j], 3);
+                                $j++;
+                            }
+                        }
+                        if($z == 1) {
+                            if(isset($statsGoalPLFName) && $NumberSeason >= $workSeason) {
+                                for($v=0;$v<count($statsGoalPLFName);$v++) {
+                                    if($statsGoalPLFName[$v] == $tmpGoalName) {
+                                        $statsGoalPLFAS[$v] += $tmpGoalAS;
+                                        $statsGoalPLFPIM[$v] += $tmpGoalPIM;
+                                        //$statsGoalPLFPCT[$v] += $tmpGoalPCT;
+                                        $statsGoalPLFSA[$v] += $tmpGoalSA;
+                                        $statsGoalPLFGA[$v] += $tmpGoalGA;
+                                        $statsGoalPLFSO[$v] += $tmpGoalSO;
+                                        $statsGoalPLFT[$v] += $tmpGoalT;
+                                        $statsGoalPLFL[$v] += $tmpGoalL;
+                                        $statsGoalPLFW[$v] += $tmpGoalW;
+                                        //$statsGoalPLFAVG[$v] += $tmpGoalAVG;
+                                        $statsGoalPLFMin[$v] += $tmpGoalMin;
+                                        $statsGoalPLFGP[$v] += $tmpGoalGP;
+                                        $statsGoalPLFAVG[$v] = 0;
+                                        if($statsGoalPLFMin[$v] != 0) $statsGoalPLFAVG[$v] = round($statsGoalPLFGA[$v] * 60 / $statsGoalPLFMin[$v], 2);
+                                        $statsGoalPLFPCT[$v] = 0;
+                                        if($statsGoalPLFSA[$v] != 0) $statsGoalPLFPCT[$v] = round(($statsGoalPLFSA[$v] - $statsGoalPLFGA[$v]) / $statsGoalPLFSA[$v], 3);
+                                        $tmpFound = 1;
+                                        break 1;
+                                    }
+                                }
+                            }
+                            if($tmpFound == 0) {
+                                $statsGoalPLFPosition[$jPLF] = $tmpGoalPosition;
+                                $statsGoalPLFNumber[$jPLF] = $tmpGoalNumber;
+                                $statsGoalPLFRookie[$jPLF] = $tmpGoalRookie;
+                                $statsGoalPLFAS[$jPLF] = $tmpGoalAS;
+                                $statsGoalPLFPIM[$jPLF] = $tmpGoalPIM;
+                                //$statsGoalPLFPCT[$jPLF] = $tmpGoalPCT;
+                                $statsGoalPLFSA[$jPLF] = $tmpGoalSA;
+                                $statsGoalPLFGA[$jPLF] = $tmpGoalGA;
+                                $statsGoalPLFSO[$jPLF] = $tmpGoalSO;
+                                $statsGoalPLFT[$jPLF] = $tmpGoalT;
+                                $statsGoalPLFL[$jPLF] = $tmpGoalL;
+                                $statsGoalPLFW[$jPLF] = $tmpGoalW;
+                                //$statsGoalPLFAVG[$jPLF] = $tmpGoalAVG;
+                                $statsGoalPLFMin[$jPLF] = $tmpGoalMin;
+                                $statsGoalPLFGP[$jPLF] = $tmpGoalGP;
+                                $statsGoalPLFTeam[$jPLF] = $tmpGoalTeam;
+                                $statsGoalPLFName[$jPLF] = $tmpGoalName;
+                                $statsGoalPLFSeason[$jPLF] = $workSeason;
+                                $statsGoalPLFAVG[$jPLF] = 0;
+                                if($statsGoalPLFMin[$jPLF] != 0) $statsGoalPLFAVG[$jPLF] = round($statsGoalPLFGA[$jPLF] * 60 / $statsGoalPLFMin[$jPLF], 2);
+                                $statsGoalPLFPCT[$jPLF] = 0;
+                                if($statsGoalPLFSA[$jPLF] != 0) $statsGoalPLFPCT[$jPLF] = round(($statsGoalPLFSA[$jPLF] - $statsGoalPLFGA[$jPLF]) / $statsGoalPLFSA[$jPLF], 3);
+                                $jPLF++;
+                            }
+                        }
+                        
+                    }
+                }
+                if($b && substr_count($val, 'PCTG') ) {
+                    $e = 1;
+                }
+                if($b && substr_count($val, 'AVG') ) {
+                    $f = 1;
+                }
+            }
+        }
+        else {
+            if($z == 0) echo $allFileNotFound.' - Season #'.$workSeason."<br>";
+            if($z == 1) echo $allFileNotFound.' - Playoff #'.$workSeason."<br>";
+        }
+    }
 }
+
 if(isset($statsFwdName)) {
 	for($i=0;$i<count($statsFwdName);$i++) {
 		$statsFwdCount[$i] = $i;

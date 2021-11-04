@@ -19,7 +19,8 @@ include FS_ROOT.'assets.php';
 
 #scoringBanner{
 display: none;
-background:#444; 
+/* background:#444;  */
+background:var(--color-primary-2);
 padding-left:30px; 
 padding-right:30px;
 }
@@ -106,6 +107,26 @@ padding-right:30px;
     margin-top:10px;
 }
 
+.slick-dots li.slick-active button:before { 
+    opacity: .75; 
+     color: var(--color-alternate-1); 
+ } 
+
+ .slick-dots li button:before { 
+     opacity: .25; 
+     color: var(--color-alternate-2); 
+
+ } 
+ 
+ .slick-dots {
+    bottom: -20px;
+
+}
+
+#scoringBanner {
+ padding-bottom:1px;
+    
+}
 
 </style>
 

@@ -60,12 +60,20 @@ $teamAbbr = $teamAbbrHolder->getAbbr($team);
 <div class="card">
 	<div id="standingsTabs" class="card-header p-1">
 		<ul class="nav nav-tabs nav-fill">
+        	<?php
+			$eventsActive = '';
+			if(TRANSACTIONS_TRADES_ENABLED){?>
 			<li class="nav-item"><a	class="nav-link active" href="#TeamTrades"	data-toggle="tab">Trades</a></li>
-			<li class="nav-item"><a	class="nav-link" href="#TeamEvents" data-toggle="tab">Transactions</a></li>
+			<?php }else{ $eventsActive = 'active';}?>
+			
+			<li class="nav-item"><a	class="nav-link <?php echo $eventsActive;?>" href="#TeamEvents" data-toggle="tab">Transactions</a></li>
 			<li class="nav-item"><a	class="nav-link" href="#TransactInjuries" data-toggle="tab">Injuries</a></li>
 		</ul>
 	</div>
+	
+	
 	<div class="card-body tab-content p-1">
+		<?php if(TRANSACTIONS_TRADES_ENABLED){?>
 		<div class="tab-pane active" id="TeamTrades">
 			<div id="ExtensionsInner">
 				<div class="row no-gutters">
@@ -111,8 +119,9 @@ $teamAbbr = $teamAbbrHolder->getAbbr($team);
                 </div> <!-- end table -->
 			</div>
 		</div> <!-- end tab pane -->
+		<?php }?>
 		
-		<div class="tab-pane" id="TeamEvents">
+		<div class="tab-pane <?php echo $eventsActive;?>" id="TeamEvents">
 			<div id="SigningsInner">
 				<div class="row no-gutters">
                 	<div class="col">

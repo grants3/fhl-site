@@ -427,7 +427,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 	
 	<?php 
 	if(!$scheduleHolder->isSeasonStarted()){
-	    echo '<h3>The season has not started</h3>';
+	    echo '<div class="card"><div class="card-body"><h6>The season has not started</h6></div></div>';
 	}
 	?>
 	

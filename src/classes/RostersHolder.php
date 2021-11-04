@@ -78,14 +78,17 @@ class RostersHolder implements \JsonSerializable{
                 $reste = trim($val);
                 $number = substr($reste, 0, strpos($reste, ' '));
                 $reste = trim(substr($reste, strpos($reste, ' ')));
-                $tmpPos = '';
-                if(substr_count($reste, ' C ')) $tmpPos = ' C ';
-                if(substr_count($reste, ' LW ')) $tmpPos = ' LW ';
-                if(substr_count($reste, ' RW ')) $tmpPos = ' RW ';
-                if(substr_count($reste, ' D ')) $tmpPos = ' D ';
-                if(substr_count($reste, ' G ')) $tmpPos = ' G ';
-                $name = trim(substr($reste, 0,  strpos($reste, $tmpPos)));
-                $reste = trim(substr($reste, strpos($reste, $tmpPos)));
+//                 $tmpPos = '';
+//                 if(substr_count($reste, ' C ')) $tmpPos = ' C ';
+//                 if(substr_count($reste, ' LW ')) $tmpPos = ' LW ';
+//                 if(substr_count($reste, ' RW ')) $tmpPos = ' RW ';
+//                 if(substr_count($reste, ' D ')) $tmpPos = ' D ';
+//                 if(substr_count($reste, ' G ')) $tmpPos = ' G ';
+//                 $name = trim(substr($reste, 0,  strpos($reste, $tmpPos)));
+//                 $reste = trim(substr($reste, strpos($reste, $tmpPos)));
+                $name = trim(mb_substr($reste, 0, 22, 'UTF-8'));
+                $reste = trim(mb_substr($reste, 22, mb_strlen($reste)-22, 'UTF-8'));
+                
                 $position = substr($reste, 0, strpos($reste, ' '));
                 $reste = trim(substr($reste, strpos($reste, ' ')));
                 $hand = substr($reste, 0, strpos($reste, '  '));

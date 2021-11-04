@@ -51,7 +51,7 @@ if(file_exists($Fnm)) {
             else $c = 1;
             
             $yearCount++;
-            if($yearCount <= $leagueFuturesDraftYears){
+            if($yearCount <= FUTURES_DRAFT_YEARS){
                 $year = trim(substr($val, strpos($val, ':')+1, strpos($val, '</B>')-1-strpos($val, ':')-1));
                 $draft = trim(substr($val, strpos($val, '</B>')+4, strpos($val, '<BR>')-strpos($val, '</B>')-4));
                 
@@ -115,24 +115,22 @@ if(file_exists($Fnm)) {
 							<?php 
 							$i = 0;
 							foreach ($propects as $prospect) {
-
-							    $scoringNameSearch = htmlspecialchars($prospect);
-							    $scoringNameLink = 'http://www.google.com/search?q='.$scoringNameSearch.'%20eliteprospects.com&btnI';
 							    
 							    // Choose between hockeyDB : 1 or EliteProspect : 2 | $leagueFuturesLink
-							    if($leagueFuturesLink == 1) $tmpLink = strtolower(str_replace(' ', '+', $tmp));
-							    if($leagueFuturesLink == 1) $hockeyFutureLink = 'http://www.hockeydb.com/ihdb/stats/findplayer.php?full_name='.$prospect;
-							    if($leagueFuturesLink == 2) $hockeyFutureLink = $scoringNameLink;
+							    if(FUTURES_LINK_MODE == 1) $tmpLink = strtolower(str_replace(' ', '+', $tmp));
+							    if(FUTURES_LINK_MODE == 2) $tmpLink = strtolower(str_replace(' ', '+', $tmp));
+							    if(FUTURES_LINK_MODE == 1) $hockeyFutureLink = 'http://www.hockeydb.com/ihdb/stats/findplayer.php?full_name='.$tmpLink;
+							    if(FUTURES_LINK_MODE == 2) $hockeyFutureLink = 'http://www.eliteprospects.com/search/player?q='.$tmpLink;
 							    
 							    if($i == 0){
 							        echo '<tr>';
 							        //echo '<td class="text-center">'.$prospect.'</td>';
-							        echo '<td class="text-center"> <a style="display:block; width:100%;" href="'.$hockeyFutureLink.'" >'.$prospect.'</a></td>';
+							        echo '<td class="text-left"> <a style="display:block; width:100%;" href="'.$hockeyFutureLink.'" >'.$prospect.'</a></td>';
 						
 							        $i++;
 							    }else{
 							        //echo '<td class="text-center">'.$prospect.'</td>';
-							        echo '<td class="text-center"> <a style="display:block; width:100%;" href="'.$hockeyFutureLink.'" >'.$prospect.'</a></td>';
+							        echo '<td class="text-left"> <a style="display:block; width:100%;" href="'.$hockeyFutureLink.'" >'.$prospect.'</a></td>';
 							        
 							        
 							        echo '</tr>';

@@ -118,8 +118,13 @@ if($navbarMode != 3){ ?>
                 <a class="nav-item nav-link" href="TeamFinance.php"><?php echo $allFinances ?></a>
                 <a class="nav-item nav-link" href="TeamRosters.php"><?php echo $allRosters ?></a>
                 <a class="nav-item nav-link" href="TeamLines.php"><?php echo $allLines ?></a>
-                <a class="nav-item nav-link" href="TeamFutures.php"><?php echo $allProspects ?></a>
-                <a class="nav-item nav-link" href="TeamTransactions.php">Transactions</a>
+               
+                <?php if(FUTURES_ENABLED){?>
+				 <a class="nav-item nav-link" href="TeamFutures.php"><?php echo $allProspects ?></a>
+				<?php }?>
+    			<?php if(TRANSACTIONS_ENABLED){?>
+				<a class="nav-item nav-link" href="TeamTransactions.php">Transactions</a>
+				<?php }?>
                 <a class="nav-item nav-link" href="TeamOverview.php"><?php echo $allTeamCard ?></a>
                 <a class="nav-item nav-link" href="TeamSchedule.php"><?php echo $schedTitle ?></a>
             </nav>

@@ -1123,7 +1123,7 @@ if($csName != '') {
 // 	$csNametmpFirst = substr($csNametmp, 0, 1);
 
     $imageLink = getProfilePhoto($csName);
-    $unknownImageLink = getBaseUrl().'assets/img/unknown-player.png';
+    $unknownImageLink = 'assets/img/unknown-player.png';
 	
 	echo '<div class="container">';
 	
@@ -1132,9 +1132,6 @@ if($csName != '') {
  	echo '<div class="card-header heading-footer text-center">';
 			//echo '<div class="card-block text-center">';
 
-// 			if(URL_exists('https://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png')) echo '<img src="http://assets1.sportsnet.ca/wp-content/uploads/players/nhl/'.$csNametmpFirst.'/'.$csNametmp.'.png" style="height:180px;" alt="'.$csName.'">';
-// 			//else echo '<img class="panel-profile-img rounded-circle" src="https://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId='.$csNametmp.'&width=200&height=180" " alt="'.$csName.'">';
-// 			else echo '<img class="panel-profile-img rounded-circle" src="'.getBaseUrl().'assets/img/unknown-player.png" alt="'.$csName.'">';
 			echo '<img style="height:180px; width:200px; object-fit: cover;" class="panel-profile-img rounded-circle"';
 			echo ' src="'.$imageLink.'"';
 			echo ' onerror="if(this.src='.$unknownImageLink.'); this.src='.$unknownImageLink.';"';
@@ -1739,7 +1736,7 @@ if($csName != '' && (isset($statsNumber) || isset($statsPLFNumber))) {
 // 	echo '</div>';
 }
 else {
-	echo '<div style="display:block; clear:both; margin-left:auto; margin-right:auto; width:555px; text-align:center;">'.$careerStatsNoStatsFoundFor.' '.$csName.'</div>';
+	echo '<div class="card"><div class="card-body text-center"><h5>'.$careerStatsNoStatsFoundFor.' '.$csName.'</h5></div</div>';
 }
 
 echo '</div>';

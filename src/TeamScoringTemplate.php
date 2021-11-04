@@ -57,7 +57,7 @@ if(!file_exists($fileName) && $seasonType == "PLF") {
 }
 
 $scoringHolder = new ScoringHolder($fileName, $currentTeam);
-$teamAbbrHolder = new TeamAbbrHolder($fileName);
+//$teamAbbrHolder = new TeamAbbrHolder($fileName);
 
 $shootoutMode = $scoringHolder->isShootoutMode();
 $tieLabel = $shootoutMode ? $scoringOTLm : $scoringTm;
@@ -98,28 +98,32 @@ $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
                         	<?php foreach ($scoringHolder->getSkaters() as $skater) {
                         	
                         	    //want to add other teams and total.
-                        	    $goalieName = ''; 
-                        	    $goalieNameAlign = 'text-left';
+                        	    $skaterName = ''; 
+                        	    $skaterNameAlign = 'text-left';
                         	    if(!empty($skater->getName())){
-                        	        $goalieName = '<a href="CareerStatsPlayer.php?csName='.urlencode($skater->getName()).'">'.$skater->getName().'</a>';
+                        	        $skaterName = '<a href="CareerStatsPlayer.php?csName='.urlencode($skater->getName()).'">'.$skater->getName().'</a>';
                         	    }else{
                         	        
-                        	        $goalieName = '';
+//                        	        $goalieName = '';
+//                         	        if($skater->getTeamAbbr() == 'TOT'){
+//                         	            $goalieName = 'Total';
+//                         	        }else{
+//                         	            $skaterTeamAbbr = $teamAbbrHolder->getTeamName($skater->getTeamAbbr());
+//                         	            $goalieName = !empty($skaterTeamAbbr) ? $skaterTeamAbbr : $skater->getTeamAbbr();
+//                         	            //$skaterName =  ucwords(strtolower($skaterName));
+//                         	        }
+
                         	        if($skater->getTeamAbbr() == 'TOT'){
-                        	            $goalieName = 'Total';
+                        	            $skaterName = 'TOTAL';
                         	        }else{
-                        	            $skaterTeamAbbr = $teamAbbrHolder->getTeamName($skater->getTeamAbbr());
-                        	            $goalieName = !empty($skaterTeamAbbr) ? $skaterTeamAbbr : $skater->getTeamAbbr();
-                        	            //$skaterName =  ucwords(strtolower($skaterName));
+                        	            //just leave abbreviation as is
                         	        }
-                        	        
-                        	        $goalieNameAlign = 'text-left';
-                        	        
+                           	        
                         	    }
                         	    
                         	   // echo '<tr class="hover'.$c.'">
                         	    echo '<tr>
-                    			<td class="'.$goalieNameAlign.'">'.$goalieName.'</td>
+                    			<td class="'.$skaterNameAlign.'">'.$skaterName.'</td>
                     			<td>'.$skater->getPosition().'</td>
                     			<td>'.($skater->getRookieStatus() ? '*' : '').'</td>
                     			<td>'.$skater->getGamesPlayed().'</td>
@@ -182,17 +186,20 @@ $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
                                 $goalieName = '<a href="CareerStatsPlayer.php?csName='.urlencode($goalie->getName()).'">'.$goalie->getName().'</a>';
                             }else{
                                 
-                                $goalieName = '';
-                                if($goalie->getTeamAbbr() == 'TOT'){
-                                    $goalieName = 'Total';
+//                                 $goalieName = '';
+//                                 if($goalie->getTeamAbbr() == 'TOT'){
+//                                     $goalieName = 'Total';
+//                                 }else{
+//                                     $skaterTeamAbbr = $teamAbbrHolder->getTeamName($goalie->getTeamAbbr());
+//                                     $goalieName = !empty($skaterTeamAbbr) ? $skaterTeamAbbr : $goalie->getTeamAbbr();
+//                                     //$skaterName =  ucwords(strtolower($skaterName));
+//                                 }
+
+                                if($skater->getTeamAbbr() == 'TOT'){
+                                    $goalieName = 'TOTAL';
                                 }else{
-                                    $skaterTeamAbbr = $teamAbbrHolder->getTeamName($goalie->getTeamAbbr());
-                                    $goalieName = !empty($skaterTeamAbbr) ? $skaterTeamAbbr : $goalie->getTeamAbbr();
-                                    //$skaterName =  ucwords(strtolower($skaterName));
+                                    //just leave abbreviation as is
                                 }
-                                
-                                $goalieNameAlign = 'text-left';
-                                
                             }
                             
                             	echo '<tr>

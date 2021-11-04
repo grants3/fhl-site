@@ -176,6 +176,15 @@ a:hover {
 	border-bottom-left-radius: 5px;
 }
 
+.square-bottom-border{
+	-moz-border-radius-bottom-right: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
 .section-header .header-container{ 
 	background: var(--header-gradient-webkit);
     background: var(--header-gradient);
@@ -311,7 +320,7 @@ body{
 
 .tooltip-arrow,
 .tooltip > .tooltip-inner {
-	background-color: rgba(17, 106, 149, 1.0);
+	background-color: var(--color-primary-2);
 	color: white;
 	opacity: 1;
   filter:alpha(opacity=100);
@@ -423,7 +432,7 @@ div .tableau-top{
 
 .table>tbody a { 
 	color: var(--table-link-color); 
-/* 	font-weight: 550; */
+ 	font-weight: 500; 
 }
 
 

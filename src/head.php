@@ -2,7 +2,15 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+mb_internal_encoding('UTF-8');
+mb_http_output('UTF-8');
+mb_http_input('UTF-8');
+mb_language('uni');
+mb_regex_encoding('UTF-8');
+
 require_once 'config.php';
+
+setlocale(LC_MONETARY, LEAGUE_LANG == 'FR' ? 'fr-CA' : 'en-US');
 
 if (session_status() == PHP_SESSION_NONE) {
     session_name(SESSION_NAME);
@@ -65,13 +73,13 @@ if ($CurrentPage !== ''){
     setcookie('currentPage',$CurrentPage);
 }
 
-if(isset($_SESSION['teamId'])){
-    $teamID = $_SESSION['teamId'];
-}
+// if(isset($_SESSION['teamId'])){
+//     $teamID = $_SESSION['teamId'];
+// }
 
 //backwards compatibility
-$folder = FS_ROOT;
-$folderGames = GAMES_DIR;
+//$folder = FS_ROOT;
+//$folderGames = GAMES_DIR;
 //TRACK PLAYOFF STATE
 $playoff = '';
 $currentPLF = 0;

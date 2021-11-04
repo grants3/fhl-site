@@ -87,7 +87,8 @@ class PlayerVitalsHolder {
                 }
                 else $rookie = '';
                 
-                $name = substr($reste, 0, strpos($reste, '  '));
+                //$name = substr($reste, 0, strpos($reste, '  '));
+                $name = trim(mb_substr($reste, 0, 22, 'UTF-8'));
                 $reste = trim(substr($reste, strpos($reste, '  ')));
                 $position = substr($reste, 0, strpos($reste, '  '));
                 $reste = trim(substr($reste, strpos($reste, '  ')));

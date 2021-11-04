@@ -37,8 +37,8 @@
 	
 	//$attribute = strtolower($attribute);
 	$imageLink = getProfilePhoto($scoringArray[0]->getName());
-	$unknownImageLink = getBaseUrl().'assets/img/unknown-player.png';
-	$playerCareersLink = getBaseUrl().'CareerStatsPlayer.php?csName='.htmlspecialchars_decode($scoringArray[0]->getName());
+	$unknownImageLink = BASE_URL.'assets/img/unknown-player.png';
+	$playerCareersLink = BASE_URL.'CareerStatsPlayer.php?csName='.htmlspecialchars_decode($scoringArray[0]->getName());
 	?>
 	
 	<div style="display: flex;">
@@ -101,14 +101,14 @@
         		
         		
         		?>
-        		<a class="styles__LeadersNavLink-owf6ne-8 bvgUsd" href="<?php echo getBaseUrl().$link?>">All Leaders</a>
+        		<a class="styles__LeadersNavLink-owf6ne-8 bvgUsd" href="<?php echo BASE_URL.$link?>">All Leaders</a>
 	
 			</div>
 		</div>
 	</div>
 <script>
 
-var baseCareerUrl = '<?php echo getBaseUrl().'CareerStatsPlayer.php?csName=';?>';
+var baseCareerUrl = '<?php echo BASE_URL.'CareerStatsPlayer.php?csName=';?>';
 
 $(function() {
 	//init

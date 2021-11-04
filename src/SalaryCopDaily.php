@@ -19,7 +19,7 @@ $dr = 'background-color:#8B0000;'; // Under Floor Salary Cap
 
 <?php
 $i = 0;
-$matches = glob($folder.'*Schedule.html');
+$matches = glob(TRANSFER_DIR.'*Schedule.html');
 $folderLeagueURL = '';
 $matchesDate = array_map('filemtime', $matches);
 arsort($matchesDate);
@@ -31,7 +31,7 @@ foreach ($matchesDate as $j => $val) {
 // Number of Days detection and Trade Deadline
 $leagueDays = 0;
 $leagueCurrentDays = 0;
-$Fnm = $folder.$folderLeagueURL.'Schedule.html';
+$Fnm = TRANSFER_DIR.$folderLeagueURL.'Schedule.html';
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = each($tableau)) {
@@ -49,7 +49,7 @@ if (file_exists($Fnm)) {
 else echo $allFileNotFound.' - '.$Fnm;
 
 // Financial
-$Fnm = $folder.$folderLeagueURL.'Finance.html';
+$Fnm = TRANSFER_DIR.$folderLeagueURL.'Finance.html';
 if(file_exists($Fnm)) {
 	$i = 0;
 	$tableau = file($Fnm);
@@ -61,10 +61,10 @@ if(file_exists($Fnm)) {
 			$val = substr($val, 10, $pos);
 			
 			// Affichage du plafond salariale
-			$leagueSalaryClose2 = $leagueSalaryCap - $leagueSalaryClose;
-			$leagueSalaryCap_ca = number_format($leagueSalaryCap, 0, ' ', ',');
-			$leagueSalaryCap_ca2 = number_format($leagueSalaryCapFloor, 0, ' ', ',');
-			$leagueSalaryClose_ca = number_format($leagueSalaryClose, 0, ' ', ',');
+			$leagueSalaryClose2 = SALARY_CAP - SALARY_CAP_WARN;
+			$leagueSalaryCap_ca = number_format(SALARY_CAP, 0, ' ', ',');
+			$leagueSalaryCap_ca2 = number_format(SALARY_CAP_FLOOR, 0, ' ', ',');
+			$leagueSalaryClose_ca = number_format(SALARY_CAP_WARN, 0, ' ', ',');
 			echo '<tr><td colspan="6" style="padding-bottom:20px;">'.$allLastUpdate.' '.$val.'<br><br>';
 			echo $langSalaryCopDailySeasonLength.': '.$leagueDays.'<br>';
 			echo $langSalaryCopDailyCurrentDay.': '.$leagueCurrentDays.'<br>';
@@ -100,11 +100,11 @@ if(file_exists($Fnm)) {
 			$farmpayroll = substr($val, 30, $pos);
 			$farmpayroll2 = preg_replace('/\D/', '', $farmpayroll);
 			
-			if($leagueSalaryIncFarm == 0) {
+			if(CAP_MODE == 0) {
 				$salaryCap[$i] = $propayroll2;
 			}
-			if($leagueSalaryIncFarm == 1) {
-				$salaryCap[$i] = $farmpayroll2 + $propayroll2;
+			if(CAP_MODE == 1) {
+				$salaryCap[$i] = $propayroll2;
 			}
 			
 			$z[$i] = '';
@@ -180,21 +180,21 @@ if(file_exists($Fnm)) {
 			if($leagueCurrentDays != 0) $salaryCapAvgPerDay = $salaryCapSpent[$i] / $leagueCurrentDays;
 			else $salaryCapAvgPerDay = 0;
 			$salarySeasonCapPace = $salaryCapSpent[$i] + ($salaryCap[$i]/$leagueDays*($leagueDays-$leagueCurrentDays));
-			if($leagueDays-$leagueCurrentDays > 0) $salaryMaxSpendableCap = ($leagueSalaryCap - $salaryCapSpent[$i]) * $leagueDays / ($leagueDays-$leagueCurrentDays);
+			if($leagueDays-$leagueCurrentDays > 0) $salaryMaxSpendableCap = (SALARY_CAP - $salaryCapSpent[$i]) * $leagueDays / ($leagueDays-$leagueCurrentDays);
 			else $salaryMaxSpendableCap = 0;
-			if($leagueTradeDeadline-$leagueCurrentDays > 0) $salaryMaxSpendableCapTrade = ($leagueSalaryCap - ($salaryCapSpent[$i] + (($leagueTradeDeadline - $leagueCurrentDays) * ($salaryCap[$i] / $leagueDays)))) / ($leagueDays - $leagueTradeDeadline) * $leagueDays;
+			if($leagueTradeDeadline-$leagueCurrentDays > 0) $salaryMaxSpendableCapTrade = (SALARY_CAP - ($salaryCapSpent[$i] + (($leagueTradeDeadline - $leagueCurrentDays) * ($salaryCap[$i] / $leagueDays)))) / ($leagueDays - $leagueTradeDeadline) * $leagueDays;
 			else $salaryMaxSpendableCapTrade = 0;
 			
-			if($salarySeasonCapPace < $leagueSalaryCapFloor && $leagueSalaryCapFloor != 0) {
+			if($salarySeasonCapPace < SALARY_CAP_FLOOR && SALARY_CAP_FLOOR != 0) {
 				$b = $dr;
 			}
-			if($salarySeasonCapPace <= $leagueSalaryClose && ($salarySeasonCapPace >= $leagueSalaryCapFloor || $leagueSalaryCapFloor == 0)) {
+			if($salarySeasonCapPace <= SALARY_CAP_WARN && ($salarySeasonCapPace >= SALARY_CAP_FLOOR || SALARY_CAP_FLOOR == 0)) {
 				$b = $v;
 			}
-			if($salarySeasonCapPace >= $leagueSalaryClose && $salarySeasonCapPace <= $leagueSalaryCap) {
+			if($salarySeasonCapPace >= SALARY_CAP_WARN && $salarySeasonCapPace <= SALARY_CAP) {
 				$b = $o;
 			}
-			if($salarySeasonCapPace > $leagueSalaryCap) {
+			if($salarySeasonCapPace > SALARY_CAP) {
 				$b = $r;
 			}
 			

@@ -78,8 +78,10 @@
 						<ul class="dropdown-menu">
 							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Schedule.php">Schedule</a></li>
 							<li class="dropdown-divider"></li>
+							<?php if(TRANSACTIONS_ENABLED){?>
 							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Transact.php">Transactions</a></li>
 							<li class="dropdown-divider"></li>
+							<?php }?>
 							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>FreeAgents.php">Free&nbsp;Agents</a></li>
 							<li class="dropdown-divider"></li>
 							<li class="nav-item"><a class="nav-link-inner" href="<?php echo BASE_URL?>Unassigned.php">Unassigned</a></li>

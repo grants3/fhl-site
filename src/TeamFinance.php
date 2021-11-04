@@ -261,7 +261,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
             </thead>
             <tbody>
             <tr><td class="text-left">'.$financeProPayroll.'</td><td class="text-right"">$'.number_format($propayroll).'</td></tr>';
-		    if($leagueSalaryCapInjuryMode == 0){
+		    if(CAP_INJ_MODE){
 		        echo'<tr><td class="text-left">Injury Reserve</td><td class="text-right"">$'.number_format($injurySalary).'</td></tr>
               <tr><td class="text-left">Effective Caphit</td><td class="text-right"">$'.number_format($totalSalaryAdjusted).'</td></tr>';
 		    }

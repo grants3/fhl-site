@@ -292,12 +292,12 @@ for($j=0;$j<=$round;$j++) {
 								break 1;
 							}
 						}
-						if($lastScore1 < $lastScore2 && (!substr_count($tempOT, '(OT)') || $leagueOvertimePoint == 0)) {
-							$recordAwayLos++; // Perdu
-							if($tmpRecordConference == 1) $recordConferenceLos++;
-							if($tmpRecordDivision == 1) $recordDivisionLos++;
+						if($lastScore1 < $lastScore2 && (!substr_count($tempOT, 'OT)') || OVERTIME_POINT_MODE == 0)) {
+						    $recordAwayLos++; // Perdu
+						    if($tmpRecordConference == 1) $recordConferenceLos++;
+						    if($tmpRecordDivision == 1) $recordDivisionLos++;
 						}
-						if($lastScore1 == $lastScore2 || (substr_count($tempOT, '(OT)') && $lastScore1 < $lastScore2 && $leagueOvertimePoint == 1)) {
+						if($lastScore1 == $lastScore2 || (substr_count($tempOT, 'OT)') && $lastScore1 < $lastScore2 && OVERTIME_POINT_MODE == 1)) {
 							$recordAwayTie++; // Nulle
 							if($tmpRecordConference == 1) $recordConferenceTie++;
 							if($tmpRecordDivision == 1) $recordDivisionTie++;
@@ -324,12 +324,13 @@ for($j=0;$j<=$round;$j++) {
 								break 1;
 							}
 						}
-						if($lastScore2 < $lastScore1 && (!substr_count($tempOT, '(OT)') || $leagueOvertimePoint == 0)) {
-							$recordHomeLos++; // Perdu
-							if($tmpRecordConference == 1) $recordConferenceLos++;
-							if($tmpRecordDivision == 1) $recordDivisionLos++;
+						if($lastScore2 < $lastScore1 && (!substr_count($tempOT, 'OT)') || OVERTIME_POINT_MODE == 0)) {
+						    $recordHomeLos++; // Perdu
+						    if($tmpRecordConference == 1) $recordConferenceLos++;
+						    if($tmpRecordDivision == 1) $recordDivisionLos++;
 						}
-						if($lastScore2 == $lastScore1 || (substr_count($tempOT, '(OT)') && $lastScore2 < $lastScore1 && $leagueOvertimePoint == 1)) {
+						if($lastScore2 == $lastScore1 || (substr_count($tempOT, 'OT)') && $lastScore2 < $lastScore1 && OVERTIME_POINT_MODE == 1)) {
+						    
 							$recordHomeTie++; // Nulle
 							if($tmpRecordConference == 1) $recordConferenceTie++;
 							if($tmpRecordDivision == 1) $recordDivisionTie++;
@@ -782,11 +783,11 @@ if(isset($propayroll)) {
 	echo '<tr><td>'.$teamCardFarmPayroll.'</td><td class="text-right">'.$farmpayroll.'</td></tr>';
 	$propayroll2 = preg_replace('/\D/', '', $propayroll);
 	$farmpayroll2 = preg_replace('/\D/', '', $farmpayroll);
-	if($leagueSalaryIncFarm == 0) {
-		$restant = $leagueSalaryCap - $propayroll2;
+	if(CAP_MODE == 0) {
+	    $restant = SALARY_CAP - $propayroll2;
 	}
-	if($leagueSalaryIncFarm == 1) {
-		$restant = $leagueSalaryCap - $propayroll2 - $farmpayroll2;
+	if(CAP_MODE == 1) {
+	    $restant = SALARY_CAP - ($propayroll2 + $farmpayroll2);
 	}
 	$restant = number_format($restant, 0, ' ', ',');
 	echo '<tr><td>'.$teamCardPayrollRemaining.'</td><td class="text-right">'.$restant.'</td></tr>';
@@ -921,8 +922,14 @@ if(isset($standingFileSerie)) {
 		$tmpStart = $tmpNbr-5;
 		$tmpEnd = $tmpNbr;
 	}
+	
+	if($tmpStart < 0 || $tmpStart > 5) {
+	    $tmpStart = 0;
+	    $tmpEnd = 5;
+	}
 
 	for($i=$tmpStart;$i<$tmpEnd;$i++) {
+	    if(!isset($standingFileSerie[$i])) break 1;
 		echo '<tr>';
 		echo '<td>'.($i+1).'</td>';
 		echo '<td>'.$standingFileSerie[$i].'</td>';
@@ -1005,7 +1012,13 @@ if(isset($standingFarmFilePJ)) {
 		$tmpStart = $tmpNbr-5;
 		$tmpEnd = $tmpNbr;
 	}
+	if($tmpStart < 0 || $tmpStart > 5) {
+	    $tmpStart = 0;
+	    $tmpEnd = 5;
+	}
+	
 	for($i=$tmpStart;$i<$tmpEnd;$i++) {
+	    if(!isset($standingFarmFilePJ[$i])) break 1;
 		$bold = '';
 		if($i == $standingFarmFileFound) $bold = 'font-weight:bold;';
 		echo '<tr >';
@@ -1167,36 +1180,40 @@ if(CAREER_STATS_DIR != '0') {
 						else $tmpFwdRookie = '';
 						$tmpFwdHT2 = 0;
 					}
-					$tmpFwdPS = trim(substr($reste, strrpos($reste, ' '))) * 1;
+					$tmpFwdPS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdGS = trim(substr($reste, strrpos($reste, ' '))) * 1;
+					$tmpFwdGS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdPCTG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdS = trim(substr($reste, strrpos($reste, ' '))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdHT = trim(substr($reste, strrpos($reste, ' '))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdGT = trim(substr($reste, strrpos($reste, ' '))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdGW = trim(substr($reste, strrpos($reste, ' '))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdSHG = trim(substr($reste, strrpos($reste, ' '))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdPPG = trim(substr($reste, strrpos($reste, ' '))) * 1;
-					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdPIM = trim(substr($reste, strrpos($reste, ' '))) * 1;
+					
+					$tmpFwdPCTGTest = trim(substr($reste, strrpos($reste, ' ')));
+					if(strpos($tmpFwdPCTGTest, ',') !== false) $tmpFwdPCTGTest = str_replace(",",".",$tmpFwdPCTGTest);
+					$tmpFwdPCTG = floatval($tmpFwdPCTGTest) * 1;
 					
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdDiff = trim(substr($reste, strrpos($reste, ' '))) * 1;
+					$tmpFwdS = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdP = trim(substr($reste, strrpos($reste, ' '))) * 1;
+					$tmpFwdHT = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdA = trim(substr($reste, strrpos($reste, ' '))) * 1;
+					$tmpFwdGT = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdG = trim(substr($reste, strrpos($reste, ' '))) * 1;
+					$tmpFwdGW = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					$tmpFwdGP = trim(substr($reste, strrpos($reste, ' '))) * 1;
+					$tmpFwdSHG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+					$tmpFwdPPG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+					$tmpFwdPIM = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+					
+					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+					$tmpFwdDiff = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+					$tmpFwdP = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+					$tmpFwdA = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+					$tmpFwdG = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
+					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
+					$tmpFwdGP = floatval(trim(substr($reste, strrpos($reste, ' ')))) * 1;
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
 					$tmpFwdTeam = trim(substr($reste, strrpos($reste, ' ')));
 					if(!substr_count($val, '                         ')) {

@@ -55,12 +55,21 @@ $folderTeamLogosFarm = "farm/";
 //Location of Online GM editor relative to the location of the config file. Leave blank if not used. If set, this will cause link to appear on nav
 $folderGmo = "gmo/";
 
+#Transaction support: 1 Show transaction pages or 0 : Hide transaction pages (if your league does not use)
+$enableTransactions = 1;
+
+#Transaction trades support: 1 Show transaction trades pages or 0 : Hide transaction trades pages (if your league does not use)
+$enableTrades = 0;
+
+#Features Support: 1 Show Team Futures page or 0 : Hide Team Futures page (if your league does not use)
+$enableFeatures = 1;
+
 # Rosters PAGE (neither of these work yet)
-// Choose between hockeyDB : 1 or EliteProspect : 2
+// Choose between hockeyDB : 1 or EliteProspect : 2 or TSN : 3
 $leagueRostersLink = 1;
 
 # FUTURES PAGE
-// Choose between hockeyDB : 1 or EliteProspect : 2
+// Choose between hockeyDB : 1 or EliteProspect : 2 
 $leagueFuturesLink = 1;
 
 # Player images (stats and player profiles)
@@ -73,7 +82,7 @@ $leagueFuturesDraftYears = 4;
 # SALARY COP
 // 0 : Calculate Salary Cap with only Pro Payroll
 // 1 : Calculate Salary Cap with Pro + Farm Payroll
-$leagueSalaryIncFarm = 0;
+$leagueSalaryIncFarm = 1;
 
 // Plafond salariale | Salary Cap | Ex: 56000000 for 56M$
 $leagueSalaryCap = 53000000;
@@ -84,13 +93,13 @@ $leagueSalaryClose = 52000000;
 // Floor Salary Cap | Ex: 45000000 for 45M$ | 0 : Inactivated
 $leagueSalaryCapFloor = 0;
 
-//cap injury mode 0 = don't count injuries, enable LTIR. | 1 = injuries count toward caphit no LTIR. (TODO should switch these around)
-$leagueSalaryCapInjuryMode = 0;
+//cap injury mode 0 = injuries count toward caphit no LTIR. | 1 =  don't count injuries, enable LTIR.
+$leagueSalaryCapInjuryMode = 1;
 
 // Overtime Point | 0:Off | 1:On (One Point)
 $leagueOvertimePoint = 1;
 
-//Min Active Players | Min required active players on roster. (Not injured or suspended) 0:Off
+//Min Active Players | Min required active players on roster. (Signed, not injured or suspended) 0:Off
 $minActivePlayers = 20;
 
 # League mode (Auto mode will check if playoff files exist in main transfer directory ($folder), otherwise mode is user selected)
@@ -119,7 +128,6 @@ define("LEAGUE_LOGO",$leagueLogo);
 define("CDN_SUPPORT", $cdnSupport);
 define("LEAGUE_LANG",$leagueLang);
 define("HOME",$home);
-//define("HOME",BASE_URL.$home);
 define("TRANSFER_DIR",FS_ROOT.$folder);
 define("GAMES_DIR",$folderGames);
 define("LOGO_DIR",$folderTeamLogos);
@@ -127,6 +135,9 @@ define("LOGO_FARM_DIR",$folderTeamLogosFarm);
 define("GMO_DIR",$folderGmo);
 define("CAREER_STATS_DIR",FS_ROOT.$folderCareerStats);
 
+define("TRANSACTIONS_ENABLED",$enableTransactions);
+define("TRANSACTIONS_TRADES_ENABLED",$enableTrades);
+define("FUTURES_ENABLED",$enableFeatures);
 define("CAP_MODE",$leagueSalaryIncFarm);
 define("SALARY_CAP",$leagueSalaryCap);
 define("SALARY_CAP_WARN",$leagueSalaryClose);
@@ -136,9 +147,9 @@ define("OVERTIME_POINT_MODE",$leagueOvertimePoint);
 define("MIN_ACTIVE_PLAYERS",$minActivePlayers);
 define("PLAYER_IMG_SOURCE",$leaguePlayerImages);
 
+define("ROSTERS_LINK_MODE",$leagueRostersLink);
 define("FUTURES_LINK_MODE",$leagueFuturesLink);
 define("FUTURES_DRAFT_YEARS",$leagueFuturesDraftYears);
-//define("LEAGUE_MODE",$playoffMode);
 define("LEAGUE_MODE",inferLeagueMode(TRANSFER_DIR,$leagueMode));
 define("PLAYOFF_MODE",LEAGUE_MODE == 'PLF' ? 1 : 0);
 define("NAVBAR_MODE",$navbarMode);
@@ -148,27 +159,29 @@ define("SITE_THEME", $siteTheme);
 unset($sessionName);
 unset($leagueLogo);
 unset($cdnSupport);
-//unset($leagueLang);
+//unset($leagueLang); //leave as overrideable.
 unset($home);
 unset($folder);
 unset($folderGames);
 unset($folderCareerStats);
 unset($folderTeamLogos);
 unset($folderGmo);
-//unset($leagueRostersLink);
-//unset($leagueFuturesLink);
-//unset($leagueFuturesDraftYears );
-// unset($leagueSalaryIncFarm);
-// unset($leagueSalaryCap);
-// unset($leagueSalaryClose);
-// unset($leagueSalaryCapFloor);
-// unset($leagueSalaryCapInjuryMode);
+unset($leagueRostersLink);
+unset($leagueFuturesLink);
+unset($leagueFuturesDraftYears );
+unset($leagueSalaryIncFarm);
+unset($leagueSalaryCap);
+unset($leagueSalaryClose);
+unset($leagueSalaryCapFloor);
+unset($leagueSalaryCapInjuryMode);
 unset($minActivePlayers);
-// unset($leagueOvertimePoint);
+unset($leagueOvertimePoint);
 
-// unset($playoffMode);
- unset($navbarMode);
- unset($footerText);
- unset($siteTheme);
+unset($navbarMode);
+unset($footerText);
+unset($siteTheme);
+unset($enableTransactions);
+unset($enableFeatures);
+
 
 ?>

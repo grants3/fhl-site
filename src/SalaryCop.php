@@ -17,16 +17,13 @@ include_once 'classes/RosterAvgObj.php';
 
 $v = 'background-color:green;'; // Good Salary Cap
 $o = 'background-color:orange;'; // Close Salary Cap
-$r = 'background-color:red;'; // Over Salary Cap
+$r = 'background-color:red;color:white'; // Over Salary Cap
 $dr = 'background-color:#8B0000;'; // Under Floor Salary Cap
 ?>
 
-<!--<div style="clear:both; width:555px; margin-left:auto; margin-right:auto; border:solid 1px<?php echo $couleur_contour; ?>">-->
 <div class = "container">
-<!--<div class="titre"><span class="bold-blanc"><?php echo $salaryCopTitle; ?></span></div>
-<h3 class = "text-center"><?php echo $salaryCopTitle; ?></h3>-->
 <div class="row no-gutters">
-<div class = "col-sm-12 col-lg-8 offset-lg-2">
+<div class = "col-sm-12 col-lg-10 offset-lg-1">
 
 <div class="card">
 	<?php include 'SectionHeader.php'?>
@@ -39,7 +36,7 @@ $dr = 'background-color:#8B0000;'; // Under Floor Salary Cap
 
 $gmFile = getLeagueFile('GMs');
 
-function isValidRoster(RostersHolder $rosters, PlayerVitalsHolder $vitals): bool{
+function isValidRoster(RostersHolder $rosters, PlayerVitalsHolder $vitals, int $rosterMin = 20): bool{
     
     $center = 0;
     $lw = 0;
@@ -64,7 +61,7 @@ function isValidRoster(RostersHolder $rosters, PlayerVitalsHolder $vitals): bool
     }
     
     
-    return $total >= 20 && $center >= 3 && $rw >= 3 && $lw >= 3 && $defense >= 4 && $goalie >= 2 ;
+    return $total >= $rosterMin && $center >= 3 && $rw >= 3 && $lw >= 3 && $defense >= 4 && $goalie >= 2 ;
     
     //return $center >= 3 && $rw >= 3 && $lw >= 3 && $defense >= 4 && $goalie >= 2 ;
 }
@@ -110,7 +107,7 @@ if (file_exists($gmFile)) {
         //$activePro[$i+1] = $rosters->getActivePro();
         $activePro[$i+1] = $activeProCount;
         //$rosterValid[$i+1] = $rosters->isValidRoster() ? 'YES' : 'NO';
-        $rosterValid[$i+1] = isValidRoster($rosters,$vitals ) ? 'YES' : 'NO';
+        $rosterValid[$i+1] = isValidRoster($rosters,$vitals,MIN_ACTIVE_PLAYERS) ? 'YES' : 'NO';
         $teamSalary[$i+1] = $totalSalary;
         $teamInjurySalary[$i+1] = $injurySalary;
         $teamOvAvg[$i+1] = $rosters->getProAverages()->getAvgOv();
@@ -163,9 +160,9 @@ $nrFloor = 0;
 
 $Fnm = getLeagueFile('Finance');
 //$colspan = 8;
-//if($leagueSalaryIncFarm == 1) $colspan = 7;
-$colspan = ($leagueSalaryCapInjuryMode == 0) ? 10: 9;
-if($leagueSalaryIncFarm == 1) $colspan = ($leagueSalaryCapInjuryMode == 0) ? 9 : 8;
+//if(CAP_MODE == 1) $colspan = 7;
+$colspan = (CAP_INJ_MODE == 1) ? 10: 9;
+if(CAP_MODE == 1) $colspan = (CAP_INJ_MODE == 1) ? 11 : 10;
 
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
@@ -175,10 +172,10 @@ if(file_exists($Fnm)) {
 			$pos = strpos($val, ')');
 			$pos = $pos - 10;
 			$val = substr($val, 10, $pos);
-			$leagueSalaryClose2 = $leagueSalaryCap - $leagueSalaryClose;
-			$leagueSalaryCap_ca = number_format($leagueSalaryCap, 0, ' ', ',');
-			$leagueSalaryCap_ca2 = number_format($leagueSalaryCapFloor, 0, ' ', ',');
-			$leagueSalaryClose_ca = number_format($leagueSalaryClose, 0, ' ', ',');
+			$leagueSalaryClose2 = SALARY_CAP - SALARY_CAP_WARN;
+			$leagueSalaryCap_ca = number_format(SALARY_CAP, 0, ' ', ',');
+			$leagueSalaryCap_ca2 = number_format(SALARY_CAP_FLOOR, 0, ' ', ',');
+			$leagueSalaryClose_ca = number_format(SALARY_CAP_WARN, 0, ' ', ',');
 			
 			
 			
@@ -187,15 +184,15 @@ if(file_exists($Fnm)) {
 			echo $salaryCopSalaryCap.' '.$leagueSalaryCap_ca.'$<br>';
 			echo $salaryCopFloor.' '.$leagueSalaryCap_ca2.'$<br>';
 			echo $salaryCopNear.' '.$leagueSalaryClose_ca.'$ '.$salaryCopNearTo.' '.$leagueSalaryCap_ca.'$<br>';
-			echo 'Minimum Active Players: '.MIN_ACTIVE_PLAYERS.'';
+			echo 'Minimum Active Pro Players: '.MIN_ACTIVE_PLAYERS.'';
             echo '</th></tr>';
 			echo '<tr>
             <th class="text-left">'.$salaryCopTeam.'</th>
 			<th class="text-right">'.$salaryCopProPayroll.'</th>';
-			if($leagueSalaryIncFarm == 1) echo '<td class="text-right">'.$salaryCopFarmPayroll.'</th>';
+			if(CAP_MODE == 1) echo '<th class="text-right">'.$salaryCopFarmPayroll.'</th>';
 			echo '<th class="text-right">'.$salaryCopRemaining.'</th>';
        
-            if($leagueSalaryCapInjuryMode == 0)
+			if(CAP_INJ_MODE == 1)
             echo '<th class="text-center">IR $</th>';
             
 			echo '<th class="text-center">'.$salaryCopStatus.'</th>
@@ -218,7 +215,7 @@ if(file_exists($Fnm)) {
 			//$propayroll = substr($val, 69, $pos);
 			//$propayroll2 = preg_replace('/\D/', '', $propayroll);
 	
-			if($leagueSalaryCapInjuryMode == 0){
+			if(CAP_INJ_MODE == 1){
 			    $propayroll = $teamSalary[$i] - $teamInjurySalary[$i];
 			    $propayroll2 = $propayroll;
 			    $ltirSalary = $teamInjurySalary[$i];
@@ -233,41 +230,46 @@ if(file_exists($Fnm)) {
 			$farmpayroll = substr($val, 30, $pos);
 			$farmpayroll2 = preg_replace('/\D/', '', $farmpayroll);
 
-			if($leagueSalaryIncFarm == 0) {
-				$restant = $leagueSalaryCap - $propayroll2;
+			if(CAP_MODE == 0) {
+			    $restant = SALARY_CAP - $propayroll2;
 				$salaryCap = $propayroll2;
 			}
-			if($leagueSalaryIncFarm == 1) {
-				$restant = $leagueSalaryCap - $propayroll2 - $farmpayroll2;
-				$salaryCap = $farmpayroll2 + $propayroll2;
+			if(CAP_MODE == 1) {
+			    $restant = SALARY_CAP - ($propayroll2 + $farmpayroll2);
+				$salaryCap = $farmpayroll2;
+			}
+			if(CAP_INJ_MODE == 1){
+			    $restant = ($restant + $ltirSalary);
 			}
 			
-			if($salaryCap < $leagueSalaryCapFloor && $leagueSalaryCapFloor != 0) {
+			if($salaryCap < SALARY_CAP_FLOOR && SALARY_CAP_FLOOR != 0) {
 				$nrFloor++;
 				$b = $dr;
 				$rougeFloor = $rougeFloor + $restant;
 			}
-			if($salaryCap <= $leagueSalaryClose && ($salaryCap >= $leagueSalaryCapFloor || $leagueSalaryCapFloor == 0)) {
+			if($salaryCap <= SALARY_CAP_WARN && ($salaryCap >= SALARY_CAP_FLOOR || SALARY_CAP_FLOOR == 0)) {
 				$nv++;
 				$b = $v;
 				$vert = $vert + $restant;
 			}
-			if($salaryCap >= $leagueSalaryClose && $salaryCap <= $leagueSalaryCap) {
+			if($salaryCap >= SALARY_CAP_WARN && $salaryCap <= SALARY_CAP) {
 				$no++;
 				$b = $o;
 				$jaune = $jaune + $restant;
 			}
-			if($salaryCap > $leagueSalaryCap) {
+			if($salaryCap > SALARY_CAP) {
 				$nr++;
 				$b = $r;
 				$rouge = $rouge + $restant;
 			}
+
 			$restant = number_format($restant, 0, ' ', ',');
 			
 			$z = '';
 			//if(substr_count($equipe, $currentTeam)) $z = ' font-weight:bold;';
 			
-			$activeStyle = (MIN_ACTIVE_PLAYERS > 0 && $activePro[$i] < MIN_ACTIVE_PLAYERS ) ? $r : '';
+			//$activeStyle = (MIN_ACTIVE_PLAYERS > 0 && $activePro[$i] < MIN_ACTIVE_PLAYERS ) ? $r : '';
+			$activeStyle = ''; 
 			$rosterValidStyle = $rosterValid[$i] == 'NO' ? $r : '';
 			
 			if($c == 1) $c = 2;
@@ -275,17 +277,17 @@ if(file_exists($Fnm)) {
 			echo '
 			<tr><td class="text-left">'.$equipe.'</td>
 			<td class="text-right">$'.number_format($propayroll2).'</td>';
-			if($leagueSalaryIncFarm == 1) echo '<td class="text-right">'.$farmpayroll.'$</td>';
+			if(CAP_MODE == 1) echo '<td class="text-right">$'.$farmpayroll.'</td>';
 			echo '<td class="text-right">$'.$restant.'</td>';
 			
-			if($leagueSalaryCapInjuryMode == 0) echo '<td><div class="text-right">$'.number_format($ltirSalary).'</td>';
+			if(CAP_INJ_MODE == 1) echo '<td><div class="text-right">$'.number_format($ltirSalary).'</td>';
 	
 	        echo '<td><div style="'.$b.'"><br></div></td>
 			<td class="text-center">'.$blessure[$i].'</td>
 			<td class="text-center">'.$suspension[$i].'</td>
-		    <td class="text-center" '.$activeStyle.'">'.$activePro[$i].'</td>
-		    <td class="text-center" '.$rosterValidStyle.'">'.$rosterValid[$i].'</td>
-            <td class="text-center" '.$rosterValidStyle.'">'.$teamOvAvg[$i].'</td></tr>';
+		    <td class="text-center" style = "'.$activeStyle.'">'.$activePro[$i].'</td>
+		    <td class="text-center" style = "'.$rosterValidStyle.'">'.$rosterValid[$i].'</td>
+            <td class="text-center" style = "">'.$teamOvAvg[$i].'</td></tr>';
 		}
 	}
 	$vert = number_format($vert, 0, '', ',');
@@ -305,7 +307,7 @@ if(file_exists($Fnm)) {
 	<tr><td><div style="'.$v.'"><br></div></td><td class="text-left">'.$salaryCopGoodSalaryCap.'</td><td>'.$nv.'</td><td class="text-right">'.$vert.'$</td></tr>
 	<tr><td><div style="'.$o.'"><br></div></td><td class="text-left">'.$salaryCapNearSalaryCap.'</td><td>'.$no.'</td><td class="text-right">'.$jaune.'$</td></tr>
 	<tr><td><div style="'.$r.'"><br></div></td><td class="text-left">'.$salaryCapOverSalaryCap.'</td><td>'.$nr.'</td><td class="text-right">'.$rouge.'$</td></tr>';
-	if($leagueSalaryCapFloor != 0) echo '<tr class="hover1"><td><div style="'.$dr.'"><br></div></td><td class="text-left">'.$salaryCopFloorUnder.'</td><td>'.$nrFloor.'</td><td class="text-right">'.$rougeFloor.'$</td></tr>';
+	if(SALARY_CAP_FLOOR != 0) echo '<tr class="hover1"><td><div style="'.$dr.'"><br></div></td><td class="text-left">'.$salaryCopFloorUnder.'</td><td>'.$nrFloor.'</td><td class="text-right">'.$rougeFloor.'$</td></tr>';
 	echo '</table>';
 }
 else echo '</table>'.$allFileNotFound.' - '.$Fnm;

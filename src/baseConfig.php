@@ -15,7 +15,6 @@ if(DEBUG_MODE){
     error_log('FS_ROOT='.FS_ROOT);
     error_log('BASE_URL='.BASE_URL);
     error_log('DOCUMENT_ROOT='.$_SERVER['DOCUMENT_ROOT']);
-    error_log(substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])));
     error_log('---------------------------------');
 }
 
@@ -48,9 +47,10 @@ function getBaseUrl(){
     
     //$url = rtrim($url, '/') . '/';
     
-    //check relativepath
+    //append relativepath from doc root if appliable.
     //$url = $url.str_replace(array('\\', '/'), '/', relativePath(getcwd(),__DIR__));
-    $url = str_replace(array('\\', '/'), '/', relativePath(getcwd(),__DIR__));
+
+    $url = str_replace(array('\\', '/'), '/', substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])).'/'.relativePath(getcwd(),__DIR__));
     
     return $url;
 }
