@@ -10,7 +10,17 @@ mb_regex_encoding('UTF-8');
 
 require_once 'config.php';
 
-setlocale(LC_MONETARY, LEAGUE_LANG == 'FR' ? 'fr-CA' : 'en-US');
+//set possible local formats if they exist. 
+$locale = LEAGUE_LANG == 'FR' ? 'fr_CA' : 'en_CA';
+$localeUTF = $locale.'.utf-8';
+$locale2 = LEAGUE_LANG == 'FR' ? 'fr-CA' : 'en-CA';
+$locale2UTF = $locale2.'.utf-8';
+if (false !== setlocale(LC_NUMERIC, $locale, $localeUTF, $locale2, $locale2UTF)) {
+
+    setlocale(LC_MONETARY, $locale, $localeUTF, $locale2, $locale2UTF);
+    
+}
+
 
 if (session_status() == PHP_SESSION_NONE) {
     session_name(SESSION_NAME);

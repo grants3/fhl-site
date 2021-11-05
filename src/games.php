@@ -3,6 +3,7 @@ require_once 'config.php';
 include 'lang.php';
 include_once 'common.php';
 include_once 'fileUtils.php';
+include_once 'numberUtils.php';
 include_once 'classes/GameHolder.php';
 include_once 'classes/RosterObj.php';
 include_once 'classes/RostersHolder.php';
@@ -650,6 +651,9 @@ table.table-sm>thead>tr>th:first-of-type {
                 $profitTemp = $gameHolder->getTeamProfit();
                 $profitTemp = substr($profitTemp, 0, - 3);
 
+                //format with lang support
+                $profitTemp = format_money_clean_no_dec($profitTemp);
+
                 ?>
                    
                    <div class="col-6 col-md-4 pl-1 pr-1 pl-md-1">
@@ -1075,8 +1079,7 @@ table.table-sm>thead>tr>th:first-of-type {
                                     	    if($goalieTemp['TEAM'] != $awayTeamAbbr) continue;
                                     	    
                                     	    $savePctTemp = $goalieTemp['SA'] ? round($goalieTemp['SAVES'] / $goalieTemp['SA'], 3) : 0.000;
-                                    	 
-                
+
                                             echo '<tr >
                                                     <td class="text-left">' . $goalieTemp['PLAYER'] . '</td>
                                                     <td>' . $goalieTemp['SAVES'] . '</td>

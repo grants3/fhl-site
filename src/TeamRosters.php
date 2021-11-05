@@ -6,6 +6,7 @@ require_once 'config.php';
 include 'lang.php';
 include_once 'common.php';
 include_once 'fileUtils.php';
+include_once 'numberUtils.php';
 include_once 'classes/RosterObj.php';
 include_once 'classes/RosterAvgObj.php';
 include_once 'classes/RostersHolder.php';
@@ -145,10 +146,10 @@ include 'TeamHeader.php';
                                      //   $playerSalary = toMoney($vitals->getSalary());
                                         
                                        // $fmt = new NumberFormatter( 'en_US', NumberFormatter::CURRENCY );
-                                        if(LEAGUE_LANG == 'FR') $playerSalary = number_format($vitals->getSalary(), 0)."$";
-                                        else $playerSalary = "$".number_format($vitals->getSalary(), 0);
+//                                         if(LEAGUE_LANG == 'FR') $playerSalary = number_format($vitals->getSalary(), 0)."$";
+//                                         else $playerSalary = "$".number_format($vitals->getSalary(), 0);
+                                        $playerSalary = format_money_clean($vitals->getSalary(),'%(.0n');
                                         
-
                                         echo '<tr>';
                                         echo '<td class="text-left"><a href="'.$playerCareersLink.'">'.$roster->getName().'</a></td>';
                                             echo '<td>'.$roster->getPosition().'</td>';
@@ -178,9 +179,8 @@ include 'TeamHeader.php';
                                         echo '</tr>';             
                                     }
                                     echo '</tbody>';
-                                    
-                                    if(LEAGUE_LANG == 'FR') $avgPlayerSalary = $playerVitals->getAvgSalary()."$";
-                                    else $avgPlayerSalary = "$".$playerVitals->getAvgSalary();
+      
+                                     $avgPlayerSalary = format_money_clean($playerVitals->getAvgSalary(),'%.0n');
                                     //display averages in table footer
                                     echo ' <tfoot>
                                         <tr>
