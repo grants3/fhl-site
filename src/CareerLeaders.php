@@ -26,10 +26,6 @@ include 'head.php';
 
 //if($ctlOneTeams == 1) $ctlOneLink = "window.location.href.split('?')[0]";
 
-// Obtenir l'abbréviation de l'équipe
-//if($ctlOneTeams == 1) include 'phpGetAbbr.php'; // Output $TSabbr / $folderLeagueURL2
-
-
 // Recherche des saisons antérieurs
 if(CAREER_STATS_DIR != '0') {
 	$hashFolder = '';

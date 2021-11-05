@@ -49,7 +49,7 @@ $folderTeamLogos = "logos/";
 
 #boxscore logo for farm teams. Follows same naming convention as above. enter here the subfolder of $folderTeamLogos.
 // If not using farm logos and just want to use NHL logos enter ''; 
-$folderTeamLogosFarm = "farm/";
+$folderTeamLogosFarm = "";
 
 #GMO Location. 
 //Location of Online GM editor relative to the location of the config file. Leave blank if not used. If set, this will cause link to appear on nav
@@ -59,7 +59,7 @@ $folderGmo = "gmo/";
 $enableTransactions = 1;
 
 #Transaction trades support: 1 Show transaction trades pages or 0 : Hide transaction trades pages (if your league does not use)
-$enableTrades = 0;
+$enableTrades = 01;
 
 #Features Support: 1 Show Team Futures page or 0 : Hide Team Futures page (if your league does not use)
 $enableFeatures = 1;

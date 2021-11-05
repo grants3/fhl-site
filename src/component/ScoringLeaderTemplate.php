@@ -43,7 +43,7 @@
 	
 	<div style="display: flex;">
 
-      	<div class="top-player-details">
+      	<div class="top-player-details mt-3">
       		<div class="card border-0" style="width: 13rem;">
       		  <div class="row no-gutters text-center mx-auto d-block">
               	<img id= "top-player-img-<?php echo $attribute.$positionType?>" data-img-url="<?php echo $imageLink;?>"
@@ -69,7 +69,7 @@
         			</a>
                     <div id= "top-player-value-<?php echo $attribute.$positionType?>" class="styles__StatDetails-sc-16cx6ic-9 glDXkE">
             			<p style="margin-bottom:5px" class="styles__StatCategoryName-sc-16cx6ic-10 KRrDV text-uppercase"><?php echo ucwords($attribute);?></p>
-            			<p  style="font-size:4em; font-weight:800; line-height:45px" 
+            			<p  style="font-size:3rem; font-weight:500; line-height:45px" 
             				class="statCategoryValue m-0 "><?php echo $scoringArray[0]->__get($attribute) ?></p>
             		</div>
         		</div>

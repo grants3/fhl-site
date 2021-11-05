@@ -3,7 +3,7 @@
 
 define("BASE_URL",getBaseContext());
 //define("FS_ROOT",__DIR__.'/');
-define("FS_ROOT",relativePath(getcwd(),__DIR__));
+define("FS_ROOT",getFsRoot());
 ;
 define("IS_IE",isIE());
 
@@ -56,7 +56,19 @@ function getBaseUrl(){
 
 //retrieves base context relative to document root.
 function getBaseContext(){
-    return str_replace(array('\\', '/'), '/', substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])).'/'.relativePath(getcwd(),__DIR__));
+    
+    $context = str_replace(array('\\', '/'), '/', substr(getcwd(),strlen($_SERVER['DOCUMENT_ROOT'])).'/'.relativePath(getcwd(),__DIR__));
+    $context = rtrim($context, '/') . '/';
+    
+    return $context;
+}
+
+function getFsRoot(){
+    
+    $root = relativePath(getcwd(),__DIR__);
+    if($root) $root = rtrim($root, '/') . '/';
+    
+    return $root;
 }
 
 function getProtocol(){

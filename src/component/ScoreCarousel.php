@@ -226,20 +226,23 @@ if ($scheduleHolder->isSeasonStarted()) {
                 continue;
             }
             
-            $matches = glob(FS_ROOT.LOGO_DIR . strtolower($games->team1) . '.*');
-            $todayImage1 = '';
-            for ($j = 0; $j < count($matches); $j ++) {
-                $todayImage1 = $matches[$j];
-                $todayImage1 = basename($todayImage1);
-                break 1;
-            }
-            $matches = glob(FS_ROOT.LOGO_DIR . strtolower($games->team2) . '.*');
-            $todayImage2 = '';
-            for ($j = 0; $j < count($matches); $j ++) {
-                $todayImage2 = $matches[$j];
-                $todayImage2 = basename($todayImage2);
-                break 1;
-            }
+//             $matches = glob(FS_ROOT.LOGO_DIR . strtolower($games->team1) . '.*');
+//             $todayImage1 = '';
+//             for ($j = 0; $j < count($matches); $j ++) {
+//                 $todayImage1 = $matches[$j];
+//                 $todayImage1 = basename($todayImage1);
+//                 break 1;
+//             }
+//             $matches = glob(FS_ROOT.LOGO_DIR . strtolower($games->team2) . '.*');
+//             $todayImage2 = '';
+//             for ($j = 0; $j < count($matches); $j ++) {
+//                 $todayImage2 = $matches[$j];
+//                 $todayImage2 = basename($todayImage2);
+//                 break 1;
+//             }
+            
+            $todayImage1 = getTeamLogoUrl($games->team1);
+            $todayImage2 = getTeamLogoUrl($games->team2);
             
             $team1Abbr = $teamAbbrHolder->getAbbr($games->team1);
             $team2Abbr = $teamAbbrHolder->getAbbr($games->team2);
@@ -255,7 +258,7 @@ if ($scheduleHolder->isSeasonStarted()) {
             
             echo '<tr class="d-flex">'; // score 1
             echo '<td class="col-9 ">
-                <div><img class="logo" src="'. BASE_URL.LOGO_DIR. $todayImage1 . '" alt="' . $games->team1 . '"</img></div>
+                <div><img class="logo" src="'. $todayImage1 . '" alt="' . $games->team1 . '"</img></div>
                 <div class = "team-acronym">' . $team1Abbr . '</div>
              </td>';
             
@@ -264,7 +267,7 @@ if ($scheduleHolder->isSeasonStarted()) {
             
             echo '<tr class="d-flex">'; // score 2
             echo '<td class="col-9">
-                <div><img class="logo" src="' . BASE_URL.LOGO_DIR.$todayImage2 . '" alt="' . $games->team2 . '"</img></div>
+                <div><img class="logo" src="' . $todayImage2 . '" alt="' . $games->team2 . '"</img></div>
                 <div class = "team-acronym">' . $team2Abbr . '</div>
              </td>';
             echo '<td class = "team-score col-3 dark-text text-center"><strong>' . $games->team2Score . '</strong></td>';

@@ -117,8 +117,8 @@ if(file_exists($Fnm)) {
 							foreach ($propects as $prospect) {
 							    
 							    // Choose between hockeyDB : 1 or EliteProspect : 2 | $leagueFuturesLink
-							    if(FUTURES_LINK_MODE == 1) $tmpLink = strtolower(str_replace(' ', '+', $tmp));
-							    if(FUTURES_LINK_MODE == 2) $tmpLink = strtolower(str_replace(' ', '+', $tmp));
+							    if(FUTURES_LINK_MODE == 1) $tmpLink = strtolower(str_replace(' ', '+', $prospect));
+							    if(FUTURES_LINK_MODE == 2) $tmpLink = strtolower(str_replace(' ', '+', $prospect));
 							    if(FUTURES_LINK_MODE == 1) $hockeyFutureLink = 'http://www.hockeydb.com/ihdb/stats/findplayer.php?full_name='.$tmpLink;
 							    if(FUTURES_LINK_MODE == 2) $hockeyFutureLink = 'http://www.eliteprospects.com/search/player?q='.$tmpLink;
 							    

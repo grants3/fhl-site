@@ -1129,10 +1129,10 @@ if(CAREER_STATS_DIR != '0') {
 	$NumberSeason = count(getPreviousSeasons(CAREER_STATS_DIR));
 
 	// Recherche Seasons TeamScoring - Current Season
-	$FnmCurrentSeason = _getLeagueFile('TeamScoring');
+	$FnmCurrentSeason = getCurrentRegSeasonFile('TeamScoring');
 	$teamAbbrHolder = new TeamAbbrHolder($FnmCurrentSeason);
 	$TSabbr = $teamAbbrHolder->getAbbr($currentTeam); //get current team abbreviation to be used to filter scoring later.
-
+	$TSabbr = 'WAS';
 	$FnmCurrentPlayoff = _getLeagueFile('TeamScoring','PLF'); //not used?
 
 	
