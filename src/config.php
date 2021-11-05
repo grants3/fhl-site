@@ -17,7 +17,7 @@ $leagueLogo = '';
 $cdnSupport = true;
 
 // Language | Français: 'FR' | English: 'EN'
-$leagueLang = "EN";
+$leagueLang = "FR";
 
 //enter where you site home address (your main index.html/php) is located in comparison to the TablePage addon. 
 //Will be used on nav home button/league logo. Same folder "";

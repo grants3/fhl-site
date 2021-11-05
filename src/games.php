@@ -1078,7 +1078,8 @@ table.table-sm>thead>tr>th:first-of-type {
                                     	    
                                     	    if($goalieTemp['TEAM'] != $awayTeamAbbr) continue;
                                     	    
-                                    	    $savePctTemp = $goalieTemp['SA'] ? round($goalieTemp['SAVES'] / $goalieTemp['SA'], 3) : 0.000;
+                                    	    $savePctTemp = $goalieTemp['SA'] ? $goalieTemp['SAVES'] / $goalieTemp['SA'] : 0;
+                                    	    $savePctTemp = format_number($savePctTemp,3);
 
                                             echo '<tr >
                                                     <td class="text-left">' . $goalieTemp['PLAYER'] . '</td>

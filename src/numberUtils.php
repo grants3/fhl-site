@@ -1,4 +1,63 @@
 <?php
+require_once __DIR__.'/config.php';
+
+define('DEFAULT_EN_FORMAT',array(    
+        "decimal_point" => '.',
+        "thousands_sep" => ',',
+        "int_curr_symbol" => '',
+        "currency_symbol" => '$',
+        "mon_decimal_point" => '.',
+        "mon_thousands_sep" => ',',
+        "positive_sign" => '',
+        "negative_sign" => '-',
+        "int_frac_digits" => 2,
+        "frac_digits" => 2,
+        "p_cs_precedes" => 1,
+        "p_sep_by_space" => 0,
+        "n_cs_precedes" => 1,
+        "n_sep_by_space" => 0,
+        "p_sign_posn" => 3,
+        "n_sign_posn" => 3,
+        "grouping" => array
+        (
+            "0" => 3
+        ),
+        
+        "mon_grouping" => array
+        (
+            "0" => 3
+        )
+        
+    ));
+
+define('DEFAULT_FR_FORMAT',array(
+    "decimal_point" => ',',
+    "thousands_sep" => ' ',
+    "int_curr_symbol" => '',
+    "currency_symbol" => '$',
+    "mon_decimal_point" => ',',
+    "mon_thousands_sep" => '  ',
+    "positive_sign" => '',
+    "negative_sign" => '-',
+    "int_frac_digits" => 2,
+    "frac_digits" => 2,
+    "p_cs_precedes" => 0,
+    "p_sep_by_space" => 1,
+    "n_cs_precedes" => 0,
+    "n_sep_by_space" => 1,
+    "p_sign_posn" => 1,
+    "n_sign_posn" => 0,
+    "grouping" => array
+    (
+        "0" => 3
+    ),
+    
+    "mon_grouping" => array
+    (
+        "0" => 3
+    )
+    
+));
 
 function format_money_clean($value, $format = '%n'){
     
@@ -21,11 +80,21 @@ function format_number_clean($value, $decimals=2){
     return number_format_locale($cleanedValue,$decimals);
 }
 
+function format_number($value, $decimals=2){
+    return number_format_locale($value,$decimals);
+}
+
 function number_format_locale($number,$decimals=2) {
-    $locale = localeconv();
+    $locale = localeconv2();
     return utf8_encode(number_format($number,$decimals,
         $locale['decimal_point'],
         $locale['thousands_sep']));
+}
+
+function localeconv2(){
+    if(LEAGUE_LANG == 'FR') return DEFAULT_FR_FORMAT;
+        
+    return DEFAULT_EN_FORMAT;
 }
 
 //need to figure out what we want to do here. int module is not neccesarily loaded by default so we can't always use new numberoformatter and money_format is deprecated.
@@ -33,11 +102,11 @@ function number_format_locale($number,$decimals=2) {
 function format_money($format, $value) {
     
     //shortcircut of not set.(Default to basic formatting)
-    if (setlocale(LC_MONETARY, 0) == 'C') {
-        return '$'.number_format($value, 2);
-    }
+//     if (setlocale(LC_MONETARY, 0) == 'C') {
+//         return '$'.number_format($value, 2);
+//     }
     
-    $locale = localeconv();
+    $locale = localeconv2();
     
     $regex = '/^'.             // Inicio da Expressao
         '%'.              // Caractere %
@@ -76,8 +145,6 @@ function format_money($format, $value) {
         'fraction_digits' => ($matches[8] !== '') ? (int)$matches[8] : $locale['int_frac_digits'],
         'conversao'       => $matches[9]
     );
-    
-    error_log($opcoes['fraction_digits']);
     
     if ($opcoes['usar_sinal'] && $locale['n_sign_posn'] == 0) {
         $locale['n_sign_posn'] = 1;

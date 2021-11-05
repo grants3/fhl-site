@@ -11,15 +11,15 @@ mb_regex_encoding('UTF-8');
 require_once 'config.php';
 
 //set possible local formats if they exist. 
-$locale = LEAGUE_LANG == 'FR' ? 'fr_CA' : 'en_CA';
-$localeUTF = $locale.'.utf-8';
-$locale2 = LEAGUE_LANG == 'FR' ? 'fr-CA' : 'en-CA';
-$locale2UTF = $locale2.'.utf-8';
-if (false !== setlocale(LC_NUMERIC, $locale, $localeUTF, $locale2, $locale2UTF)) {
-
-    setlocale(LC_MONETARY, $locale, $localeUTF, $locale2, $locale2UTF);
-    
-}
+// if(LEAGUE_LANG == 'FR'){
+//     if (false !== setlocale(LC_NUMERIC, 'fr_CA', 'fr_CA.UTF-8', 'fr','fr.UTF-8')) {
+//         setlocale(LC_MONETARY, 'fr_CA', 'fr_CA.UTF-8', 'fr','fr.UTF-8');
+//     }
+// }else{
+//     if (false !== setlocale(LC_NUMERIC, 'en_CA', 'en_CA.UTF-8', 'en-US','en_US.UTF-8', 'en')) {
+//         setlocale(LC_MONETARY, 'en_CA', 'en_CA.UTF-8', 'en_US','en_US.UTF-8', 'en');
+//     }
+// }
 
 
 if (session_status() == PHP_SESSION_NONE) {
