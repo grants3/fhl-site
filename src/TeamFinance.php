@@ -105,11 +105,11 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 			if(substr_count($val, 'Capacity') && $b && $d) {
 				$pos = strpos($val, '</TD>', strpos($val, '</TD>')+5);
 				$valCapacity = substr($val, 25, $pos-25);
-				$valCapacity = format_number_clean($valCapacity,0);
+				$valCapacity = format_number($valCapacity,0, true);
 			}
 			if(substr_count($val, 'Ticket Price') && $b && $d) {
 				$valTicket = substr($val, 30, 5);
-				$valTicket = format_money_clean_no_dec($valTicket);
+				$valTicket = format_money_no_dec($valTicket);
 			}
 			if(substr_count($val, 'Current Funds') && $b && $d) {
 				$pos = strpos($val, '$');
@@ -117,7 +117,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 				$tmpNeg = '';
 				if(substr_count($val, '-')) $tmpNeg = '-';
 				$currentfunds = $tmpNeg.substr($reste, 0, strpos($reste, '</B>'));
-				$currentfunds = format_money_clean_no_dec($currentfunds);
+				$currentfunds = format_number($currentfunds, 0, true);
 			}
 			if(substr_count($val, 'Home Games Remaining') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');
@@ -126,17 +126,17 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 			if(substr_count($val, 'Avg. Attendance') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');
 				$avgAttendance = substr($val, 32, $pos-32);
-				$avgAttendance = format_number_clean($avgAttendance,0);
+				$avgAttendance = format_number($avgAttendance,0, true);
 			}
 			if(substr_count($val, 'Avg. Revenue/Game') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');
 				$avgRevenueGame = substr($val, 35, $pos-35);
-				$avgRevenueGame = format_money_clean_no_dec($avgRevenueGame);
+				$avgRevenueGame = format_money_no_dec($avgRevenueGame);
 			}
 			if(substr_count($val, 'Projected Revenue') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');
 				$projectedRevenue = substr($val, 35, $pos-35);
-				$projectedRevenue = format_money_clean_no_dec($projectedRevenue);
+				$projectedRevenue = format_money_no_dec($projectedRevenue);
 			}
 			if(substr_count($val, '<TD>Pro Payroll</TD>') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');
@@ -145,7 +145,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 				//changed so that we don't include 0 contract and holdouts.
 				//count from roster/vitals instead.
 				$propayroll = $totalSalary;
-				$propayroll = format_money_clean_no_dec($propayroll);
+				$propayroll = format_money_no_dec($propayroll);
 			}
 			if(substr_count($val, '<TD>Farm Payroll</TD>') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');
@@ -153,13 +153,13 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 				//$farmpayroll = substr($val, 30, $pos);
 				//count from roster/vitals instead. Will not remove if injured.
 				$farmpayroll = $farmSalary;
-				$farmpayroll = format_money_clean_no_dec($farmpayroll);
+				$farmpayroll = format_money_no_dec($farmpayroll);
 			}
 			if(substr_count($val, 'Prospect Fees') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');
 				$pos = $pos - 31;
 				$prospectfees = substr($val, 31, $pos);
-				$prospectfees = format_money_clean_no_dec($prospectfees);
+				$prospectfees = format_money_no_dec($prospectfees);
 			}
 			if(substr_count($val, 'Coach') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');
@@ -175,13 +175,13 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 				$pos = strpos($val, '</TD></TR>');
 				$pos = $pos - 37;
 				$totalgameexpenses = substr($val, 37, $pos);
-				$totalgameexpenses = format_money_clean_no_dec($totalgameexpenses);
+				$totalgameexpenses = format_money_no_dec($totalgameexpenses);
 			}
 			if(substr_count($val, 'Projected Expenses') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');
 				$pos = $pos - 36;
 				$projectedexpenses = substr($val, 36, $pos);
-				$projectedexpenses = format_money_clean_no_dec($projectedexpenses);
+				$projectedexpenses = format_money_no_dec($projectedexpenses);
 			}
 			if(substr_count($val, 'Projected Balance') && $b && $d) {
 				$pos = strpos($val, '$');
@@ -189,14 +189,14 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 				$tmpNeg = '';
 				if(substr_count($val, '-')) $tmpNeg = '-';
 				$projectedbalance = $tmpNeg.substr($reste, 0, strpos($reste, '</B>'));
-				$projectedbalance = format_money_clean_no_dec($projectedbalance);
+				$projectedbalance = format_money_no_dec($projectedbalance);
 			}
 			if(substr_count($val, 'Year:') && $b && $d) {
 				$year[$i] = substr($val, strpos($val, ' ')+1, strpos($val, '</TD>')-strpos($val, ' ')-1);
 				$reste = substr($val, strpos($val, '$')+1);
 				$i++;
 				$year[$i] = substr($reste, 0, strpos($reste, '</TD>'));
-				$year[$i] = format_money_clean_no_dec($year[$i]);
+				$year[$i] = format_money_no_dec($year[$i]);
 				$i++;
 			}
 			if(substr_count($val, '<B>Pro Payroll</B>') && $b && $d) {
@@ -213,7 +213,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 				$salaires[$j] = str_replace(",", " ", $salaires[$j]);
 				//$salaires2[$j] = preg_replace("/\\s+/iu","",$salaires[$j]);
 				$salaires[$j] = preg_replace("/\\s+/iu",",",$salaires[$j]);
-				$salaires[$j] = format_money_clean_no_dec($salaires[$j]);
+				$salaires[$j] = format_money_no_dec($salaires[$j]);
 				$joueurs[$j] = substr($val, 8, 22);
 				$annee[$j] = substr($val, $pos2, 1);
 				$j++;
@@ -232,7 +232,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 				$salairesf[$k] = str_replace(",", " ", $salairesf[$k]);
 				//$salaires3[$k] = preg_replace("/\\s+/iu","",$salairesf[$k]);
 				$salairesf[$k] = preg_replace("/\\s+/iu",",",$salairesf[$k]);
-				$salairesf[$k] = format_money_clean_no_dec($salairesf[$k]);
+				$salairesf[$k] = format_money_no_dec($salairesf[$k]);
 				$joueursf[$k] = substr($val, 8, 22);
 				$anneef[$k] = substr($val, $pos2, 1);
 				$k++;

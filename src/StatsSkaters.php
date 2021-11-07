@@ -41,6 +41,8 @@ if(isset($_GET['rookie']) || isset($_POST['rookie'])) {
     $rookie = ( isset($_GET['rookie']) ) ? $_GET['rookie'] : $_POST['rookie'];
 }
 
+$statsUrlParams='seasonId='.$seasonId.'&seasonType='.$seasonType;
+
 //points is column7. handles this better
 $sort = 7;
 if(isset($_GET['sort']) || isset($_POST['sort'])) {
@@ -60,8 +62,8 @@ if(isset($_GET['sort']) || isset($_POST['sort'])) {
 		 <div class="card-header pt-0">
           <?php include 'StatsHeader.php';?>
         </div>
-    	<div class="card-body p-2">
-			
+    	<div class="card-body p-1">
+			<?php include 'component/SeasonSelect.php';?>
 			<div class="row no-gutters" id="searchFields">
 				<div class="col">
 					<!-- position -->
@@ -72,7 +74,6 @@ if(isset($_GET['sort']) || isset($_POST['sort'])) {
 							</div>
 							<select class="custom-select" id="positionInputField">
 								<option value="">All Players</option>
-								<option value="Skaters">All Skaters</option>
 								<option value="Forwards">All Forwards</option>
 								<option value="C">Center</option>
 								<option value="RW">Right Wing</option>
@@ -277,6 +278,32 @@ $(function() {
 	});
 	
 
+$("#seasonMenu").on('change', function() {  
+    var seasonSelection = $(this).val();
+    var typeSelection = $('#typeMenu').find(":selected").val();
+
+	if(seasonSelection == 'Current'){
+	  seasonSelection = '';
+	}
+
+	window.location.href = "StatsSkaters.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+    
+} );
+
+$("#typeMenu").on('change', function() {  
+    var typeSelection = $(this).val();
+    var seasonSelection = $('#seasonMenu').find(":selected").val();
+
+	if(seasonSelection == 'Current'){
+	  seasonSelection = '';
+	}
+
+	window.location.href = "StatsSkaters.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+    
+} );
+
+//$('#seasonMenu option[value="<?php echo ($seasonId ? $seasonId : 'Current');?>"]').attr("selected", "selected");
+//$('#typeMenu option[value="<?php echo ($seasonType ? $seasonType : 'REG');?>"]').attr("selected", "selected");
 </script>
 
 

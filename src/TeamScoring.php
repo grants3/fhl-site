@@ -141,12 +141,11 @@ $(function() {
 
 
 $("#seasonMenu").on('change', function() {  
-    var selection = $(this).val();
+    var seasonSelection = $(this).val();
     var typeSelection = $('#typeMenu').find(":selected").val();
 
-	handleSelection(selection, typeSelection);
+	handleSelection(seasonSelection, typeSelection);
 
-	var seasonSelection = $('#seasonMenu').find(":selected").val();
 	if(seasonSelection == 'Current'){
 		if(!playoffMode){
 			$("#typeMenu option[value=PLF").attr("disabled", true);

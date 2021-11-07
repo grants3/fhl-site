@@ -10,23 +10,10 @@ mb_regex_encoding('UTF-8');
 
 require_once 'config.php';
 
-//set possible local formats if they exist. 
-// if(LEAGUE_LANG == 'FR'){
-//     if (false !== setlocale(LC_NUMERIC, 'fr_CA', 'fr_CA.UTF-8', 'fr','fr.UTF-8')) {
-//         setlocale(LC_MONETARY, 'fr_CA', 'fr_CA.UTF-8', 'fr','fr.UTF-8');
-//     }
-// }else{
-//     if (false !== setlocale(LC_NUMERIC, 'en_CA', 'en_CA.UTF-8', 'en-US','en_US.UTF-8', 'en')) {
-//         setlocale(LC_MONETARY, 'en_CA', 'en_CA.UTF-8', 'en_US','en_US.UTF-8', 'en');
-//     }
-// }
-
-
 if (session_status() == PHP_SESSION_NONE) {
     session_name(SESSION_NAME);
     session_start();
 }
-
 
 //override lang
 if(isset($_GET['lang'])) {

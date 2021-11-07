@@ -25,13 +25,10 @@ include 'TeamHeader.php';
 
 
 <div class="container px-0">
-	<div class="row2">
-	<div class="col2"> 
 	<div class="card">
 	<div class="card-header p-1">
 		<?php include 'TeamCardHeader.php'?>
 	</div>
-<!--     	<div class="card-body px-2 px-lg-4 pt-3"> -->
 		<div class="card-body p-1">
     
                     <?php
@@ -148,7 +145,7 @@ include 'TeamHeader.php';
                                        // $fmt = new NumberFormatter( 'en_US', NumberFormatter::CURRENCY );
 //                                         if(LEAGUE_LANG == 'FR') $playerSalary = number_format($vitals->getSalary(), 0)."$";
 //                                         else $playerSalary = "$".number_format($vitals->getSalary(), 0);
-                                        $playerSalary = format_money_clean($vitals->getSalary(),'%(.0n');
+                                        $playerSalary = format_money($vitals->getSalary(),'%(.0n');
                                         
                                         echo '<tr>';
                                         echo '<td class="text-left"><a href="'.$playerCareersLink.'">'.$roster->getName().'</a></td>';
@@ -180,7 +177,7 @@ include 'TeamHeader.php';
                                     }
                                     echo '</tbody>';
       
-                                     $avgPlayerSalary = format_money_clean($playerVitals->getAvgSalary(),'%.0n');
+                                    $avgPlayerSalary = format_money($playerVitals->getAvgSalary(),'%.0n');
                                     //display averages in table footer
                                     echo ' <tfoot>
                                         <tr>
@@ -240,9 +237,7 @@ include 'TeamHeader.php';
             		</div> 
                 </div>   
     		</div>
-    	</div>
-    </div>
- 
+
 </div>
 <script>
 

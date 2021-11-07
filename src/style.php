@@ -46,7 +46,7 @@ else if($siteColorTheme == 'red') {
 ?>
 
 :root {
-   --color-primary-1: #7d1e26; 
+   --color-primary-1: #ad2430; 
    --color-primary-2: #6C1E1E; 
    --color-primary-3: #A75B5B; 
    --color-alternate-1:#FFF5F6; 
@@ -58,7 +58,24 @@ else if($siteColorTheme == 'red') {
 }
 
 <?php 
-} else if($siteColorTheme == 'teal') {
+} else if($siteColorTheme == 'dark') {
+    
+    ?>
+
+:root {
+   --color-primary-1: #26203B; 
+   --color-primary-2: #221F2C; 
+   --color-primary-3: #19181B; 
+   --color-alternate-1:#ebebed; 
+   --color-alternate-2:#cdcadb;
+   --color-alternate-3:#EBE5FC;
+
+   --table-sort-asc:#443E59; 
+   --table-sort-desc:#332F3C; 
+}
+
+<?php 
+}else if($siteColorTheme == 'teal') {
     
     ?>
 
@@ -74,7 +91,8 @@ else if($siteColorTheme == 'red') {
    --table-sort-desc:#BDD2B6; 
 }
 
-<?php } else if($siteColorTheme == 'custom') {
+<?php 
+}else if($siteColorTheme == 'custom') {
     
     include FS_ROOT.'styleCustom.php'; 
 

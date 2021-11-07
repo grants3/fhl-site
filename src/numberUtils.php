@@ -59,96 +59,83 @@ define('DEFAULT_FR_FORMAT',array(
     
 ));
 
-function format_money_clean($value, $format = '%n'){
+function getLocale(){
+    if($GLOBALS['leagueLang'] == 'FR') return DEFAULT_FR_FORMAT;
     
-    $cleanedValue = preg_replace("/[^0-9.]/", "", $value);
-
-    return format_money($format, $cleanedValue);
+    return DEFAULT_EN_FORMAT;
 }
 
-function format_money_clean_no_dec($value, $format = '%.0n'){
+//format_money_clean
+function format_money($value, $format = '%n', bool $clean = false){
     
-    $cleanedValue = preg_replace("/[^0-9.]/", "", $value);
-    
-    return format_money($format, $cleanedValue);
+    if($clean) $value = preg_replace("/[^0-9.]/", "", $value);
+
+    return _format_money($format, $value);
+}
+//format_money_clean_no_dec
+function format_money_no_dec($value, bool $clean = false){
+    return format_money($value, '%.0n', $clean);
 }
 
-function format_number_clean($value, $decimals=2){
-    
-    $cleanedValue = preg_replace("/[^0-9.]/", "", $value);
+function format_number($value, $decimals=2, bool $clean = false){
 
-    return number_format_locale($cleanedValue,$decimals);
+    if($clean) $value = preg_replace("/[^0-9.]/", "", $value);
+
+    return _format_number($value,$decimals);
 }
 
-function format_number($value, $decimals=2){
-    return number_format_locale($value,$decimals);
-}
-
-function number_format_locale($number,$decimals=2) {
-    $locale = localeconv2();
-    return utf8_encode(number_format($number,$decimals,
+function _format_number($value, $decimals=2){
+    $locale = getLocale();
+    return utf8_encode(number_format($value,$decimals,
         $locale['decimal_point'],
         $locale['thousands_sep']));
 }
 
-function localeconv2(){
-    if(LEAGUE_LANG == 'FR') return DEFAULT_FR_FORMAT;
-        
-    return DEFAULT_EN_FORMAT;
-}
-
-//need to figure out what we want to do here. int module is not neccesarily loaded by default so we can't always use new numberoformatter and money_format is deprecated.
-//only supports basic formatting but should be good enough to perform basic currency formatting.
-function format_money($format, $value) {
+function _format_money($format, $value) {
     
-    //shortcircut of not set.(Default to basic formatting)
-//     if (setlocale(LC_MONETARY, 0) == 'C') {
-//         return '$'.number_format($value, 2);
-//     }
+    $locale = getLocale();
     
-    $locale = localeconv2();
-    
-    $regex = '/^'.             // Inicio da Expressao
-        '%'.              // Caractere %
-        '(?:'.            // Inicio das Flags opcionais
+    $regex = '/^'.             // start of expression
+        '%'.              // % char
+        '(?:'.            // start of optional flags
         '\=([\w\040])'.   // Flag =f
         '|'.
         '([\^])'.         // Flag ^
         '|'.
-        '(\+|\()'.        // Flag + ou (
+        '(\+|\()'.        // Flag + or (
         '|'.
         '(!)'.            // Flag !
         '|'.
         '(-)'.            // Flag -
-        ')*'.             // Fim das flags opcionais
-        '(?:([\d]+)?)'.   // W  Largura de campos
-        '(?:#([\d]+))?'.  // #n Precisao esquerda
-        '(?:\.([\d]+))?'. // .p Precisao direita
-        '([in%])'.        // Caractere de conversao
-        '$/';             // Fim da Expressao
+        ')*'.             // End of optional flags
+        '(?:([\d]+)?)'.   // W field width
+        '(?:#([\d]+))?'.  // #n Precision accuracy
+        '(?:\.([\d]+))?'. // .p Precision digits
+        '([in%])'.        //conversion character
+        '$/';             // Expression end
     
     if (!preg_match($regex, $format, $matches)) {
-        trigger_error('Formato invalido: '.$format, E_USER_WARNING);
+        trigger_error('Invalid format: '.$format, E_USER_WARNING);
         return $value;
     }
     
 
     $opcoes = array(
-        'preenchimento'   => ($matches[1] !== '') ? $matches[1] : ' ',
-        'nao_agrupar'     => ($matches[2] == '^'),
-        'usar_sinal'      => ($matches[3] == '+'),
-        'usar_parenteses' => ($matches[3] == '('),
+        'filler'   => ($matches[1] !== '') ? $matches[1] : ' ',
+        'not_grouped'     => ($matches[2] == '^'),
+        'plus_sign'      => ($matches[3] == '+'), 
+        'parenteses_sign' => ($matches[3] == '('),
         'ignore_symbol' => ($matches[4] == '!'),
-        'alinhamento_esq' => ($matches[5] == '-'),
-        'largura_campo'   => ($matches[6] !== '') ? (int)$matches[6] : 0,
-        'precisao_esq'    => ($matches[7] !== '') ? (int)$matches[7] : false,
+        'minus_sign' => ($matches[5] == '-'),
+        'field_width'   => ($matches[6] !== '') ? (int)$matches[6] : 0,
+        'precision_left'    => ($matches[7] !== '') ? (int)$matches[7] : false,
         'fraction_digits' => ($matches[8] !== '') ? (int)$matches[8] : $locale['int_frac_digits'],
-        'conversao'       => $matches[9]
+        'conversion'       => $matches[9]
     );
     
-    if ($opcoes['usar_sinal'] && $locale['n_sign_posn'] == 0) {
+    if ($opcoes['plus_sign'] && $locale['n_sign_posn'] == 0) {
         $locale['n_sign_posn'] = 1;
-    } elseif ($opcoes['usar_parenteses']) {
+    } elseif ($opcoes['parenteses_sign']) {
         $locale['n_sign_posn'] = 0;
     }
     
@@ -156,72 +143,72 @@ function format_money($format, $value) {
         $locale['frac_digits'] = (int) $opcoes['fraction_digits'];
     }
 
-    if ($opcoes['nao_agrupar']) {
+    if ($opcoes['not_grouped']) {
         $locale['mon_thousands_sep'] = '';
     }
     
     $tipo_sinal = $value >= 0 ? 'p' : 'n';
     if ($opcoes['ignore_symbol']) {
-        $simbolo = '';
+        $currency_symbol = '';
     } else {
-        $simbolo = $opcoes['conversao'] == 'n' ? $locale['currency_symbol']
+        $currency_symbol = $opcoes['conversion'] == 'n' ? $locale['currency_symbol']
         : $locale['int_curr_symbol'];
     }
-    $numero = number_format(abs($value), $locale['frac_digits'], $locale['mon_decimal_point'], $locale['mon_thousands_sep']);
+    $number = number_format(abs($value), $locale['frac_digits'], $locale['mon_decimal_point'], $locale['mon_thousands_sep']);
     
     
-    $sinal = $value >= 0 ? $locale['positive_sign'] : $locale['negative_sign'];
-    $simbolo_antes = $locale[$tipo_sinal.'_cs_precedes'];
+    $sign = $value >= 0 ? $locale['positive_sign'] : $locale['negative_sign'];
+    $symbol_before = $locale[$tipo_sinal.'_cs_precedes'];
     
-    $espaco1 = $locale[$tipo_sinal.'_sep_by_space'] == 1 ? ' ' : '';
+    $space1 = $locale[$tipo_sinal.'_sep_by_space'] == 1 ? ' ' : '';
     
-    $espaco2 = $locale[$tipo_sinal.'_sep_by_space'] == 2 ? ' ' : '';
+    $space2 = $locale[$tipo_sinal.'_sep_by_space'] == 2 ? ' ' : '';
     
-    $formatado = '';
+    $formatted = '';
     switch ($locale[$tipo_sinal.'_sign_posn']) {
         case 0:
-            if ($simbolo_antes) {
-                $formatado = '('.$simbolo.$espaco1.$numero.')';
+            if ($symbol_before) {
+                $formatted = '('.$currency_symbol.$space1.$number.')';
             } else {
-                $formatado = '('.$numero.$espaco1.$simbolo.')';
+                $formatted = '('.$number.$space1.$currency_symbol.')';
             }
             break;
         case 1:
-            if ($simbolo_antes) {
-                $formatado = $sinal.$espaco2.$simbolo.$espaco1.$numero;
+            if ($symbol_before) {
+                $formatted = $sign.$space2.$currency_symbol.$space1.$number;
             } else {
-                $formatado = $sinal.$numero.$espaco1.$simbolo;
+                $formatted = $sign.$number.$space1.$currency_symbol;
             }
             break;
         case 2:
-            if ($simbolo_antes) {
-                $formatado = $simbolo.$espaco1.$numero.$sinal;
+            if ($symbol_before) {
+                $formatted = $currency_symbol.$space1.$number.$sign;
             } else {
-                $formatado = $numero.$espaco1.$simbolo.$espaco2.$sinal;
+                $formatted = $number.$space1.$currency_symbol.$space2.$sign;
             }
             break;
         case 3:
-            if ($simbolo_antes) {
-                $formatado = $sinal.$espaco2.$simbolo.$espaco1.$numero;
+            if ($symbol_before) {
+                $formatted = $sign.$space2.$currency_symbol.$space1.$number;
             } else {
-                $formatado = $numero.$espaco1.$sinal.$espaco2.$simbolo;
+                $formatted = $number.$space1.$sign.$space2.$currency_symbol;
             }
             break;
         case 4:
-            if ($simbolo_antes) {
-                $formatado = $simbolo.$espaco2.$sinal.$espaco1.$numero;
+            if ($symbol_before) {
+                $formatted = $currency_symbol.$space2.$sign.$space1.$number;
             } else {
-                $formatado = $numero.$espaco1.$simbolo.$espaco2.$sinal;
+                $formatted = $number.$space1.$currency_symbol.$space2.$sign;
             }
             break;
     }
     
-    if ($opcoes['largura_campo'] > 0 && strlen($formatado) < $opcoes['largura_campo']) {
-        $alinhamento = $opcoes['alinhamento_esq'] ? STR_PAD_RIGHT : STR_PAD_LEFT;
-        $formatado = str_pad($formatado, $opcoes['largura_campo'], $opcoes['preenchimento'], $alinhamento);
+    if ($opcoes['field_width'] > 0 && strlen($formatted) < $opcoes['field_width']) {
+        $alinhamento = $opcoes['minus_sign'] ? STR_PAD_RIGHT : STR_PAD_LEFT;
+        $formatted = str_pad($formatted, $opcoes['field_width'], $opcoes['filler'], $alinhamento);
     }
     
-    return utf8_encode($formatado);
+    return utf8_encode($formatted);
 } 
 
 

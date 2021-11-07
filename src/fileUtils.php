@@ -147,6 +147,10 @@ function getCurrentPlayoffLeagueFile(string $baseName, string $exclude=null) {
     return _getLeagueFile($baseName, 'PLF', null, $exclude);
 }
 
+
+/*
+ * to be removed. dont use this
+ */
 function getLeagueFile(string $baseName, $seasonId = null, string $exclude=null) {
     $seasonType = '';
     

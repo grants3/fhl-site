@@ -21,13 +21,13 @@ $r = 'background-color:red;color:white'; // Over Salary Cap
 $dr = 'background-color:#8B0000;'; // Under Floor Salary Cap
 ?>
 
-<div class = "container">
+<div class = "container px-0">
 <div class="row no-gutters">
 <div class = "col-sm-12 col-lg-10 offset-lg-1">
 
 <div class="card">
 	<?php include 'SectionHeader.php'?>
-	<div class="card-body p-2 px-lg-4">
+	<div class="card-body p-1">
 
 <div class="table-responsive">
 <table class="table table-sm table-striped table-hover table-rounded">
@@ -236,7 +236,7 @@ if(file_exists($Fnm)) {
 			}
 			if(CAP_MODE == 1) {
 			    $restant = SALARY_CAP - ($propayroll2 + $farmpayroll2);
-				$salaryCap = $farmpayroll2;
+			    $salaryCap = ($propayroll2 + $farmpayroll2);
 			}
 			if(CAP_INJ_MODE == 1){
 			    $restant = ($restant + $ltirSalary);

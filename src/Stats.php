@@ -19,25 +19,41 @@ $CurrentHTML = 'Stats.php';
 $CurrentTitle = 'Statistics';
 $CurrentPage = 'Statistics';
 
+$seasonId='';
+$seasonType='';
+if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
+    $seasonId = htmlspecialchars(( isset($_GET['seasonId']) ) ? $_GET['seasonId'] : $_POST['seasonId']);
+}
+
+if(isset($_GET['seasonType']) || isset($_POST['seasonType'])) {
+    $seasonType = ( isset($_GET['seasonType']) ) ? $_GET['seasonType'] : $_POST['seasonType'];
+}else{
+    if(PLAYOFF_MODE) $seasonType='PLF';
+}
+
+$statsUrlParams='seasonId='.$seasonId.'&seasonType='.$seasonType;
+
 include 'head.php';
 
 //tab activation
 $leadersActive = 'active';
 
-//$seasonFolder =  str_replace("#",2,CAREER_STATS_DIR);
-////$scoringFile = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
-
-//$scoringFile = getLeagueFile(TRANSFER_DIR, $playoff, 'TeamScoring.html', 'TeamScoring');
-$scoringFile = getCurrentLeagueFile('TeamScoring');
+//$scoringFile = getCurrentLeagueFile('TeamScoring');
+$scoringFile = _getLeagueFile('TeamScoring',$seasonType,$seasonId);
 $scoringHolder = new ScoringHolder($scoringFile);
 $scoringAccumulator = new ScoringAccumulator($scoringHolder);
 
 //figure out how far season has progressed to get min gp amounts for stats
-$maxMinGoalieGames = 24;
+$maxMinGoalieGames = 33;
 $minGameCount = 2;
 
-$standingsFile = getCurrentLeagueFile('Standings','Farm');
-$maxGp = getMaxGp($standingsFile);
+//$standingsFile = getCurrentLeagueFile('Standings','Farm');
+$maxGp = 1;
+$standingsFile = _getLeagueFile('Standings',$seasonType,$seasonId,'Farm');
+if(file_exists($standingsFile)){
+    $maxGp = getMaxGp($standingsFile);
+}
+
 
 if($maxGp >= $minGameCount){
     $minGameCount = ceil(($maxGp/82) * $maxMinGoalieGames);
@@ -188,13 +204,14 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
 </style>
 
 <div class="container px-0">
-
+			
 	<div class="card">
 		<?php include 'SectionHeader.php';?>
 		 <div class="card-header pt-0">
           <?php include 'StatsHeader.php';?>
         </div>
-    	<div class="card-body p-2">
+    	<div class="card-body p-1">
+    		<?php include 'component/SeasonSelect.php';?>
 			<div class="row no-gutters">
 				<div class="col-sm-12 col-md-12 col-lg-6 p-1">
 					<h5 class="tableau-top">Skaters</h5>
@@ -220,19 +237,19 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
                                <div class="tab-content mt-1">
                                 <div class="tab-pane active" id="top-scoring-points" role="tabpanel">
                                     <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                      array('scoringArray' => $pointsArray, 'attribute' => 'points', 'sort' => 7)); ?>
+                                        array('scoringArray' => $pointsArray, 'attribute' => 'points', 'sort' => 7, 'statsUrlParams' => $statsUrlParams)); ?>
                                   
                                 </div><!-- end points -->
                                  
                                 <div class="tab-pane" id="top-scoring-goals" role="tabpanel" aria-labelledby="top-scoring-goals-tab">  
                                 	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                      array('scoringArray' => $goalsArray, 'attribute' => 'goals', 'sort' => 5)); ?>
+                                	    array('scoringArray' => $goalsArray, 'attribute' => 'goals', 'sort' => 5, 'statsUrlParams' => $statsUrlParams)); ?>
                                   
                                 </div> <!-- end goals -->
                                  
                                 <div class="tab-pane" id="top-scoring-assists" role="tabpanel" aria-labelledby="top-scoring-assists-tab">
                                   <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                      array('scoringArray' => $assistsArray, 'attribute' => 'assists', 'sort' => 6)); ?>
+                                      array('scoringArray' => $assistsArray, 'attribute' => 'assists', 'sort' => 6, 'statsUrlParams' => $statsUrlParams)); ?>
                                   
                                 </div> <!-- end assists -->
                                 
@@ -265,19 +282,19 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
                                    <div class="tab-content mt-1">
                                     <div class="tab-pane active" id="top-scoring-defense-points" role="tabpanel">
                                         <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                          array('scoringArray' => $pointsArrayD, 'attribute' => 'points', 'sort' => 7, 'positionType' => 'D')); ?>
+                                            array('scoringArray' => $pointsArrayD, 'attribute' => 'points', 'sort' => 7, 'positionType' => 'D', 'statsUrlParams' => $statsUrlParams)); ?>
                                       
                                     </div><!-- end points -->
                                      
                                     <div class="tab-pane" id="top-scoring-defense-goals" role="tabpanel" aria-labelledby="top-scoring-defense-goals-tab">  
                                     	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                    	    array('scoringArray' => $goalsArrayD, 'attribute' => 'goals', 'sort' => 5, 'positionType' => 'D')); ?>
+                                    	    array('scoringArray' => $goalsArrayD, 'attribute' => 'goals', 'sort' => 5, 'positionType' => 'D', 'statsUrlParams' => $statsUrlParams)); ?>
                                       
                                     </div> <!-- end goals -->
                                      
                                     <div class="tab-pane" id="top-scoring-defense-assists" role="tabpanel" aria-labelledby="top-scoring-defense-assists-tab">
                                       <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                          array('scoringArray' => $assistsArrayD, 'attribute' => 'assists', 'sort' => 6, 'positionType' => 'D')); ?>
+                                          array('scoringArray' => $assistsArrayD, 'attribute' => 'assists', 'sort' => 6, 'positionType' => 'D', 'statsUrlParams' => $statsUrlParams)); ?>
                                       
                                     </div> <!-- end assists -->
                                     
@@ -312,19 +329,19 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
                                <div class="tab-content mt-1">
                                 <div class="tab-pane active" id="top-scoring-goalies-points" role="tabpanel">
                                     <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                        array('scoringArray' => $goaliesGaaArray, 'attribute' => 'gaa', 'sort' => 6, 'positionType' => 'G', 'sortOrder' => 'asc')); ?>
+                                        array('scoringArray' => $goaliesGaaArray, 'attribute' => 'gaa', 'sort' => 6, 'positionType' => 'G', 'sortOrder' => 'asc', 'statsUrlParams' => $statsUrlParams)); ?>
                                   
                                 </div><!-- end points -->
                                  
                                 <div class="tab-pane" id="top-scoring-goalies-goals" role="tabpanel" aria-labelledby="top-scoring-goalies-goals-tab">  
                                 	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                	    array('scoringArray' => $goaliesSvPctArray, 'attribute' => 'savePct', 'sort' => 13, 'positionType' => 'G')); ?>
+                                	    array('scoringArray' => $goaliesSvPctArray, 'attribute' => 'savePct', 'sort' => 13, 'positionType' => 'G', 'statsUrlParams' => $statsUrlParams)); ?>
                                   
                                 </div> <!-- end goals -->
                                  
                                 <div class="tab-pane" id="top-scoring-goalies-assists" role="tabpanel" aria-labelledby="top-scoring-goalies-assists-tab">
                                   <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                      array('scoringArray' => $goaliesShutoutArray, 'attribute' => 'shutouts', 'sort' => 10, 'positionType' => 'G')); ?>
+                                      array('scoringArray' => $goaliesShutoutArray, 'attribute' => 'shutouts', 'sort' => 10, 'positionType' => 'G', 'statsUrlParams' => $statsUrlParams)); ?>
                                   
                                 </div> <!-- end assists -->
                                 
@@ -359,19 +376,19 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
                                <div class="tab-content mt-1">
                                 <div class="tab-pane active" id="top-scoring-rookies-points" role="tabpanel">
                                     <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                        array('scoringArray' => $pointsArrayR, 'attribute' => 'points', 'sort' => 7, 'rookie' => '1', 'sortOrder' => 'asc', 'positionType' => 'R')); ?>
+                                        array('scoringArray' => $pointsArrayR, 'attribute' => 'points', 'sort' => 7, 'rookie' => '1', 'sortOrder' => 'asc', 'positionType' => 'R', 'statsUrlParams' => $statsUrlParams)); ?>
                                   
                                 </div><!-- end points -->
                                  
                                 <div class="tab-pane" id="top-scoring-rookies-goals" role="tabpanel" aria-labelledby="top-scoring-rookies-goals-tab">  
                                 	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                	    array('scoringArray' => $goalsArrayR, 'attribute' => 'goals', 'sort' => 5, 'rookie' => '1', 'positionType' => 'R')); ?>
+                                	    array('scoringArray' => $goalsArrayR, 'attribute' => 'goals', 'sort' => 5, 'rookie' => '1', 'positionType' => 'R', 'statsUrlParams' => $statsUrlParams)); ?>
                                   
                                 </div> <!-- end goals -->
                                  
                                 <div class="tab-pane" id="top-scoring-rookies-assists" role="tabpanel" aria-labelledby="top-scoring-rookies-assists-tab">
                                   <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                                      array('scoringArray' => $assistsArrayR, 'attribute' => 'assists', 'sort' => 6, 'rookie' => '1', 'positionType' => 'R')); ?>
+                                      array('scoringArray' => $assistsArrayR, 'attribute' => 'assists', 'sort' => 6, 'rookie' => '1', 'positionType' => 'R', 'statsUrlParams' => $statsUrlParams)); ?>
                                   
                                 </div> <!-- end assists -->
                                 
@@ -413,6 +430,32 @@ $('#top-rookies-list a').on('click', function (e) {
   $(this).tab('show')
 })
 
+$("#seasonMenu").on('change', function() {  
+    var seasonSelection = $(this).val();
+    var typeSelection = $('#typeMenu').find(":selected").val();
+
+	if(seasonSelection == 'Current'){
+	  seasonSelection = '';
+	}
+
+	window.location.href = "Stats.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+    
+} );
+
+$("#typeMenu").on('change', function() {  
+    var typeSelection = $(this).val();
+    var seasonSelection = $('#seasonMenu').find(":selected").val();
+
+	if(seasonSelection == 'Current'){
+	  seasonSelection = '';
+	}
+
+	window.location.href = "Stats.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+    
+} );
+
+//$('#seasonMenu option[value="<?php echo ($seasonId ? $seasonId : 'Current');?>"]').attr("selected", "selected");
+//$('#typeMenu option[value="<?php echo ($seasonType ? $seasonType : 'REG');?>"]').attr("selected", "selected");
 
 </script>
 

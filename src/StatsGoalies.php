@@ -24,8 +24,6 @@ if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
 
 if(isset($_GET['seasonType']) || isset($_POST['seasonType'])) {
     $seasonType = ( isset($_GET['seasonType']) ) ? $_GET['seasonType'] : $_POST['seasonType'];
-    
-    //$playoff = htmlspecialchars($seasonType);
 }
 
 //gaa is column6. handles this better
@@ -40,16 +38,11 @@ if(isset($_GET['sortOrder']) || isset($_POST['sortOrder'])) {
     $sortOrder = strtolower($sortOrder);
 }
 
+$statsUrlParams='seasonId='.$seasonId.'&seasonType='.$seasonType;
 
 //tab activation
 $goaliesActive = 'active';
 
-// if(trim($seasonId) == false){
-//     $fileName = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
-// }else{
-//     $seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
-//     $fileName = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
-// }
 
 $fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
 
@@ -70,12 +63,8 @@ include 'head.php';
 		 <div class="card-header pt-0">
           <?php include 'StatsHeader.php';?>
         </div>
-    	<div class="card-body p-2">
-			
-			<div class="row no-gutters" id="searchFields">
-
-			</div>
-			
+    	<div class="card-body p-1">
+			<?php include 'component/SeasonSelect.php';?>
 			<div>
 				<table id="goalie-stats-table" class="table table-sm table-sm-px table-striped dt-responsive nowrap w-100">
 					<thead>
@@ -212,7 +201,34 @@ $(function() {
 
 
 	});
+	
+	
+	$("#seasonMenu").on('change', function() {  
+    var seasonSelection = $(this).val();
+    var typeSelection = $('#typeMenu').find(":selected").val();
 
+	if(seasonSelection == 'Current'){
+	  seasonSelection = '';
+	}
+
+	window.location.href = "StatsGoalies.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+    
+	} );
+
+    $("#typeMenu").on('change', function() {  
+        var typeSelection = $(this).val();
+        var seasonSelection = $('#seasonMenu').find(":selected").val();
+    
+    	if(seasonSelection == 'Current'){
+    	  seasonSelection = '';
+    	}
+    
+    	window.location.href = "StatsGoalies.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+        
+    } );
+    
+//$('#seasonMenu option[value="<?php echo ($seasonId ? $seasonId : 'Current');?>"]').attr("selected", "selected");
+//$('#typeMenu option[value="<?php echo ($seasonType ? $seasonType : 'REG');?>"]').attr("selected", "selected");
 
 </script>
 

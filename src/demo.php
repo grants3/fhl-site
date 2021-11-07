@@ -44,7 +44,7 @@ if(DEMO_MODE){
         <a href="<?php echo $CurrentHTML?>?theme=green">Green</a>
         <a href="<?php echo $CurrentHTML?>?theme=red">Red</a>
          <a href="<?php echo $CurrentHTML?>?theme=teal">Teal</a>
-        
+        <a href="<?php echo $CurrentHTML?>?theme=dark">Dark</a>
         <h3 class="text-left font-weight-bold">Nav Mode</h3>
         <a href="<?php echo $CurrentHTML?>?navbarMode=1">Full</a>
         <a href="<?php echo $CurrentHTML?>?navbarMode=0">None</a>

@@ -1125,11 +1125,11 @@ if($csName != '') {
     $imageLink = getProfilePhoto($csName);
     $unknownImageLink = 'assets/img/unknown-player.png';
 	
-	echo '<div class="container">';
+	echo '<div class="container px-0">';
 	
 	echo '<div class="card">';
 
- 	echo '<div class="card-header heading-footer text-center">';
+ 	echo '<div class="card-header heading-footer text-center p-1">';
 			//echo '<div class="card-block text-center">';
 
 			echo '<img style="height:180px; width:200px; object-fit: cover;" class="panel-profile-img rounded-circle"';
@@ -1147,9 +1147,9 @@ if($csName != '' && (isset($statsNumber) || isset($statsPLFNumber))) {
 	if(isset($statsPLFNumber) || isset($statsNumber)){
 
 		echo '
-		<div class="card-body">';
+		<div class="card-body p-1">';
 		
-		echo '<div class="row">';
+		echo '<div class="row no-gutters">';
 		echo '<div class ="col text-center">';
 		echo '<span style="font-size:30px;">'.$csName.'</span><br>';
 		if(isset($statsNumber) && isset($playerVitalsNumero)) echo '<span style="font-size:18px;">#'.$playerVitalsNumero.', '.$playerVitalsPosition.', '.$lastTeam.'</span><br>';
@@ -1162,7 +1162,7 @@ if($csName != '' && (isset($statsNumber) || isset($statsPLFNumber))) {
 		echo '</div>';
 		echo '</div>';
 		
-		echo '<div class = "row">
+		echo '<div class = "row no-gutters">
 		<div class = "col-sm-12 col-md-12 col-lg-8 offset-lg-2">
         <h3 class = "tableau-top text-center">'.$careerStatsTitle.'</h3>
 		<div class="table-responsive">

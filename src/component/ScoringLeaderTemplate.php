@@ -12,7 +12,8 @@
 	if(!isset($sortOrder)) $sortOrder = 'desc';
 	if(!isset($positionType)) $positionType = null; //dont filter
 	if(!isset($rookie)) $rookie = false;
-	
+	$statsUrlParams= !isset($statsUrlParams) ? '' : '&'.$statsUrlParams;
+		
 	$link = 'StatsSkaters.php?sort='.$sort.'&sortOrder='.$sortOrder;
 	if(isset($positionType)&& $positionType){
 	    if('G' == $positionType){
@@ -101,7 +102,7 @@
         		
         		
         		?>
-        		<a class="styles__LeadersNavLink-owf6ne-8 bvgUsd" href="<?php echo BASE_URL.$link?>">All Leaders</a>
+        		<a class="styles__LeadersNavLink-owf6ne-8 bvgUsd" href="<?php echo BASE_URL.$link.$statsUrlParams?>">All Leaders</a>
 	
 			</div>
 		</div>

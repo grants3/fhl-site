@@ -652,7 +652,7 @@ table.table-sm>thead>tr>th:first-of-type {
                 $profitTemp = substr($profitTemp, 0, - 3);
 
                 //format with lang support
-                $profitTemp = format_money_clean_no_dec($profitTemp);
+                $profitTemp = format_money_no_dec($profitTemp,true);
 
                 ?>
                    

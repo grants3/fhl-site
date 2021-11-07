@@ -407,23 +407,23 @@ if (file_exists($Fnm)) {
 		if(substr_count($val, 'Capacity') && $b && $d) {
 			$pos = strpos($val, '</TD>', strpos($val, '</TD>')+5);
 			$sieges = substr($val, 25, $pos-25);
-			$sieges = format_number_clean($sieges,0);
+			$sieges = format_number($sieges,0,true);
 		}
 		if(substr_count($val, 'Ticket Price') && $b && $d) {
 			$billets = substr($val, 30, 5);
-			$billets = format_money_clean_no_dec($billets);
+			$billets = format_money_no_dec($billets);
 		}
 		if(substr_count($val, '<TD>Pro Payroll</TD>') && $b && $d) {
 			$pos = strpos($val, '</TD></TR>');
 			$pos = $pos - 69;
 			$propayroll = substr($val, 69, $pos);
-			$propayroll = format_money_clean_no_dec($propayroll);
+			$propayroll = format_money_no_dec($propayroll,true);
 		}
 		if(substr_count($val, '<TD>Farm Payroll</TD>') && $b && $d) {
 			$pos = strpos($val, '</TD></TR>');
 			$pos = $pos - 30;
 			$farmpayroll = substr($val, 30, $pos);
-			$farmpayroll = format_money_clean_no_dec($farmpayroll);
+			$farmpayroll = format_money_no_dec($farmpayroll,true);
 			break 1;
 		}
 	}
@@ -490,7 +490,7 @@ if (file_exists($Fnm)) {
 			$vitalsPoids = substr($reste, 0, strpos($reste, '  '));
 			$reste = trim(substr($reste, strpos($reste, '  ')));
 			$vitalsSalaire = substr($reste, 0);
-			$vitalsSalaire = format_money_clean_no_dec($vitalsSalaire);
+			$vitalsSalaire = format_money_no_dec($vitalsSalaire,true);
 			$a++;
 		}
 		if(substr_count($val, '------------------') && $b && $d) {
@@ -795,7 +795,7 @@ if(isset($propayroll)) {
 	if(CAP_MODE == 1) {
 	    $restant = SALARY_CAP - ($propayroll2 + $farmpayroll2);
 	}
-	$restant = format_money_clean_no_dec($restant);
+	$restant = format_money_no_dec($restant);
 	echo '<tr><td>'.$teamCardPayrollRemaining.'</td><td class="text-right">'.$restant.'</td></tr>';
 	echo '</tbody>';
 	echo '</table>';

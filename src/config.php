@@ -99,12 +99,12 @@ $leagueSalaryCapInjuryMode = 0;
 // Overtime Point | 0:Off | 1:On (One Point)
 $leagueOvertimePoint = 1;
 
-//Min Active Players | Min required active players on roster. (Signed, not injured or suspended) 0:Off
+//Min Active Players | 1 : Min required active players on roster. (Signed, not injured or suspended) | 0 : Inactivated
 $minActivePlayers = 20;
 
 # League mode (Auto mode will check if playoff files exist in main transfer directory ($folder), otherwise mode is user selected)
 # Regular Season: 0 | Playoffs : 1 | Auto Detect : 2
-$leagueMode = 0;
+$leagueMode = 1;
 
 # Whether or not main navbar should be displayed and the type of nav to be displayed.
 # Default navbar includes all site links, simple nav only contains home button and team links.
@@ -116,7 +116,7 @@ $footerText="FHL TableSim 2.0";
 
 //default color scheme.
 //blue,green,red,teal,custom
-$siteTheme="green";
+$siteTheme="dark";
 
 //-----------------------------------------
 //DO NOT TOUCH ANYTHING BELOW HERE.
