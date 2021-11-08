@@ -497,24 +497,20 @@ class GameHolder implements \JsonSerializable
                 }
                 if($a == 6 && $e && (substr_count($val, $equipe1c) || substr_count($val, $equipe2c)) ) {
                     //SCORING BY PERIOD
-                    
+                    $val = trim($val);
                     $long = strlen($val);
-                    $pos = $long - 10;
-                    $temps = substr($val, $pos-1, 6);
-                    if(substr_count($temps, '<')) $temps = substr($temps, 0, 5);
+                    $pos = $long - 9;
+                    $temps = substr($val, $pos-1, 5);
                     $pos_avant = strpos($val, '.') + 1;
                     $pos_apres = strpos($val, ',');
                     $pos_apres2 = $pos_apres - $pos_avant;
                     $team = substr($val, $pos_avant, $pos_apres2);
                     $pos_apres = $pos_apres + 2;
-                    //$pos = $pos - 2;
-                    $pos = $pos - 3; //remove last comma
+                    $pos = $pos - 2;
                     $pos = $pos - $pos_apres;
                     $score = substr($val, $pos_apres, $pos);
-                    
                
-                    $scoreArray = array();
-                    
+                    $scoreArray = array();    
                     $scoreArray['TEAM'] = trim($team);
                     $scoreArray['TIME'] = trim($temps);
                     $scoreArray['SCORE'] = trim($score);

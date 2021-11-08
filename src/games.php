@@ -1307,7 +1307,8 @@ table.table-sm>thead>tr>th:first-of-type {
 	</div><!-- end card -->
 			
 
-	<!-- start farm -->
+	<!-- start farm. only display during reg season -->
+	<?php if(!$round){ ?>
 	<div class="card border-0 mt-1">
 		<div class="card-header p-1 text-center text-white"
 			style="background-color: rgb(50, 52, 54);">
@@ -1444,7 +1445,7 @@ table.table-sm>thead>tr>th:first-of-type {
 		</div>
 
 	</div> <!--farm card end -->
-
+	<?php }?>
 
 </div>
 <!-- end container -->

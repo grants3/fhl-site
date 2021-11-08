@@ -18,12 +18,8 @@
 			
 			<div class="col text-center">
 				<span><?php echo FOOTER_TEXT?></span>
-				<a style="float:right" class="text-white" href="#">Top&nbsp;⮝</a>
-	
 			</div>
-			
-			
-			
+	
 		</div>
 	</div>
 </footer>	
