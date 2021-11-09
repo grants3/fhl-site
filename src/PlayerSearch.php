@@ -33,13 +33,12 @@ $teams = new TeamHolder($gmFile);
 
 </style>
 
-<div class="container px-2" >
+<div class="container px-0" >
 	
 	<div class="card">
     		<?php include 'SectionHeader.php';?>
-    		<div class="card-body p-2">
-			<div class="container">
-				<div class="row py-2" id="searchFields">
+    		<div class="card-body p-1">
+				<div class="row no-gutters py-2" id="searchFields">
 					<div class="col px-0 px-md-2 px-lg-3">
 
 						<!-- position -->
@@ -49,7 +48,7 @@ $teams = new TeamHolder($gmFile);
 									<label class="input-group-text" for="positionInputField">Position</label>
 								</div>
 								<select class="custom-select" id="positionInputField">
-									<option value="">All Players</option>
+									<option value="" selected>All Players</option>
 									<option value="Skaters">All Skaters</option>
 									<option value="Forwards">All Forwards</option>
 									<option value="C">Center</option>
@@ -66,7 +65,7 @@ $teams = new TeamHolder($gmFile);
 									<label class="input-group-text" for="teamInputField">Team</label>
 								</div>
 								<select class="custom-select" id="teamInputField">
-									<option value="">All Teams</option>
+									<option value="" selected>All Teams</option>
 									<option value="Unassigned">Unassigned</option>
                       				<?php
                                         foreach ($teams->get_teams() as $team) {
@@ -86,11 +85,11 @@ $teams = new TeamHolder($gmFile);
 									<label class="input-group-text" for="typeInputField">Type</label>
 								</div>
 								<select class="custom-select" id="typeInputField">
-									<option value="">All Types</option>
-									<option value="ProFarm" selected="selected">Pro/Farm</option>
-									<option value="Pro">Pro</option>
-									<option value="Farm">Farm</option>
-									<option value="Prospect">Prospect</option>			
+									<option value="ALL">All Types</option>
+									<option value="PROFRM" selected>Pro/Farm</option>
+									<option value="PRO">Pro</option>
+									<option value="FRM">Farm</option>
+									<option value="PCT">Prospect</option>			
                     		   </select>
 							</div>
 						</div>
@@ -258,94 +257,126 @@ $teams = new TeamHolder($gmFile);
 					</div>
 				</div>
 
-				<div class="row ">
-					<div class="col px-0 px-md-2 px-lg-3">
-	
-						<table id="tblPlayerSearch" class="table table-sm table-striped display text-center" style="width:100%">
-                            <thead>
-                                <tr>
-                                	<th class="text-left"><?php echo $rostersName ?></th>
-                               	    <th>Team</th>
-                               	    <th>Type</th>
-									<th>PO</th>
-									<th><?php echo $rostersIT ?> </th>
-									<th><?php echo $rostersSP ?> </th>
-									<th><?php echo $rostersST ?> </th>
-									<th><?php echo $rostersEN ?> </th>
-									<th><?php echo $rostersDU ?> </th>
-									<th><?php echo $rostersDI ?> </th>
-									<th><?php echo $rostersSK ?> </th>
-									<th><?php echo $rostersPA ?> </th>
-									<th><?php echo $rostersPC ?> </th>
-									<th><?php echo $rostersDF ?> </th>
-									<th><?php echo $rostersOF ?> </th>
-									<th><?php echo $rostersEX ?> </th>
-									<th><?php echo $rostersLD ?> </th>
-									<th><?php echo $rostersOV ?> </th>	 	
-									<th>#</th>
-									<th>CT</th>
-									<th>Salary</th>
-                                </tr>
-                            </thead>             
-                        </table>
-
-					 </div>	
+				<div>
+					<table id="tblPlayerSearch" class="table table-sm table-sm-px table-striped dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                            	<th class="text-left"><?php echo $rostersName ?></th>
+                           	    <th>Team</th>
+                           	    <th>Type</th>
+								<th>PO</th>
+								<th><?php echo $rostersIT ?> </th>
+								<th><?php echo $rostersSP ?> </th>
+								<th><?php echo $rostersST ?> </th>
+								<th><?php echo $rostersEN ?> </th>
+								<th><?php echo $rostersDU ?> </th>
+								<th><?php echo $rostersDI ?> </th>
+								<th><?php echo $rostersSK ?> </th>
+								<th><?php echo $rostersPA ?> </th>
+								<th><?php echo $rostersPC ?> </th>
+								<th><?php echo $rostersDF ?> </th>
+								<th><?php echo $rostersOF ?> </th>
+								<th><?php echo $rostersEX ?> </th>
+								<th><?php echo $rostersLD ?> </th>
+								<th><?php echo $rostersOV ?> </th>	 	
+								<th>#</th>
+								<th>CT</th>
+								<th>Salary</th>
+                            </tr>
+                        </thead>             
+                    </table>
 				 </div>
-			</div>
+			
 		</div>
 	</div>
 </div>
 
 
 	<script>
-
+		
+		let advancedEnabled = false;
+		
         $(document).ready(function() {
         	var table = $('#tblPlayerSearch').DataTable( {
-        		//dom: 'lftBip',
-        		dom:'<"row"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-8"f>><ti><"row"<"col-sm-12 col-md-8"p><"col-sm-12 col-md-4"B>>',
+        		dom:'<"row no-gutters"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-8"f>><ti><"row no-gutters"<"col-sm-12 col-md-8"p><"col-sm-12 col-md-4"B>>',
+        		"processing":false,
+        		"serverSide":true,  
+        		"responsive": true,
+        		searchDelay: 500,
         		scrollY:        true,
                 scrollX:        true,
-                scrollCollapse: true,
-                order: [[ 17, "desc" ]],
+                scrollCollapse: false,
+				"order": [[ "17", "DESC" ]],
                 fixedColumns:   {
                     leftColumns: 1
                 },
-                "ajax": "<?php echo 'PlayerSearchAjax.php?seasonType='.LEAGUE_MODE?>",
-                "columns": [
-                    //{ "data": "name" },
-                    { "data": "name",
-                        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                            $(nTd).html("<a href='CareerStatsPlayer.php?csName="+ encodeURIComponent(oData.name)+"'>"+oData.name+"</a>");
-                        }
-                    },
-                	{ "data": "team" },
-                	{ "data": "type" },
-                    { "data": "position" },
-                    { "data": "it" },
-                    { "data": "sp" },
-                    { "data": "st" },
-                    { "data": "en" },
-                    { "data": "du" },
-                    { "data": "di" },
-                    { "data": "sk" },
-                    { "data": "pa" },
-                    { "data": "pc" },
-                    { "data": "df" },
-                    { "data": "sc" },
-                    { "data": "ex" },
-                    { "data": "ld" },
-                    { "data": "ov" },
-                    { "data": "number" },
-                    { "data": "ct" },
-                    { "data": "salary" },
-                ],
-                "columnDefs": [
-                    { className: "text-left", "targets": [ 0,1,2 ] }
-                  ],
+                
                 lengthMenu: [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
                 language: {
                     "lengthMenu": "Display _MENU_ records"
                 }, 
+                "ajax": {
+                	url : '<?php echo 'api?api=search&action=find'; ?>',
+    				type: "GET",
+    				data: function ( d ) {
+    					d.position = $('#positionInputField').find(":selected").val();
+                   		d.team = $('#teamInputField').find(":selected").val();
+                   		d.type = $('#typeInputField').find(":selected").val();
+                   		
+                   		if (advancedEnabled) {
+
+							d.advFilter = [
+								{data:"it", "min":getMinValue('it'), "max":getMaxValue('it')},
+								{data:"sp", "min":getMinValue('sp'), "max":getMaxValue('sp')},
+								{data:"st", "min":getMinValue('st'), "max":getMaxValue('st')},
+								{data:"en", "min":getMinValue('en'), "max":getMaxValue('en')},
+								{data:"du", "min":getMinValue('du'), "max":getMaxValue('du')},
+								{data:"di", "min":getMinValue('di'), "max":getMaxValue('di')},
+								{data:"sk", "min":getMinValue('sk'), "max":getMaxValue('sk')},
+								{data:"pa", "min":getMinValue('pa'), "max":getMaxValue('pa')},
+								{data:"pc", "min":getMinValue('pc'), "max":getMaxValue('pc')},
+								{data:"df", "min":getMinValue('df'), "max":getMaxValue('df')},
+								{data:"sc", "min":getMinValue('sc'), "max":getMaxValue('sc')},
+								{data:"en", "min":getMinValue('en'), "max":getMaxValue('en')},
+								{data:"ld", "min":getMinValue('ld'), "max":getMaxValue('ld')},
+								{data:"ov", "min":getMinValue('ov'), "max":getMaxValue('ov')},
+								{data:"ct", "min":getMinValue('ct'), "max":getMaxValue('ct',5)},
+								{data:"salary", "min":getMinValue('salary',400000), "max":getMaxValue('salary',15000000)},
+							];
+                        }
+            		}
+    			},
+    			"columns": [
+                        //{ "data": "name" },
+                        { "data": "name",
+                            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                $(nTd).html("<a href='CareerStatsPlayer.php?csName="+ encodeURIComponent(oData.name)+"'>"+oData.name+"</a>");
+                            }
+                        },
+                    	{ "name": "team", "data": "team" },
+                    	{ "name": "type", "data": "type" },
+                        { "name": "position", "data": "position" },
+                        { "name": "it", "data": "it", "orderSequence": [ "desc","asc" ] },
+                        { "name": "sp", "data": "sp", "orderSequence": [ "desc","asc" ] },
+                        { "name": "st", "data": "st", "orderSequence": [ "desc","asc" ] },
+                        { "name": "en", "data": "en", "orderSequence": [ "desc","asc" ] },
+                        { "name": "du", "data": "du", "orderSequence": [ "desc","asc" ] },
+                        { "name": "di", "data": "di", "orderSequence": [ "desc","asc" ] },
+                        { "name": "sk", "data": "sk", "orderSequence": [ "desc","asc" ] },
+                        { "name": "pa", "data": "pa", "orderSequence": [ "desc","asc" ] },
+                        { "name": "pc", "data": "pc", "orderSequence": [ "desc","asc" ] },
+                        { "name": "df", "data": "df", "orderSequence": [ "desc","asc" ] },
+                        { "name": "sc", "data": "sc", "orderSequence": [ "desc","asc" ] },
+                        { "name": "ex", "data": "ex", "orderSequence": [ "desc","asc" ] },
+                        { "name": "ld", "data": "ld", "orderSequence": [ "desc","asc" ]},
+                        { "name": "ov", "data": "ov", "orderSequence": [ "desc","asc" ] },
+                        { "data": "number", "orderSequence": [ "desc","asc" ] },
+                        { "data": "ct", "orderSequence": [ "desc","asc" ] },
+                        { "name": "salary", "data": "salary", "orderSequence": [ "desc","asc" ] }
+                	],
+                "columnDefs": [
+                    { className: "text-left", "targets": [ 0,1,2 ] }
+                  ],
                 buttons: [
                 	'copyHtml5',
                     {
@@ -366,6 +397,10 @@ $teams = new TeamHolder($gmFile);
             $( "#btnSearch" ).click(function() {
             	 table.draw();
             	});
+            	
+            $("#collapseSearch").on("shown.bs.collapse", function(){
+            	advancedEnabled = true;
+            });
 
             $("#collapseSearch").on("hide.bs.collapse", function(){
 
@@ -383,125 +418,49 @@ $teams = new TeamHolder($gmFile);
             	resetSimAttrib('en');
             	resetSimAttrib('ld');
             	resetSimAttrib('ov');
-            	resetSimAttrib('ct');
-            	resetSimAttrib('salary');
+            	resetSimAttrib('ct', 0, 5);
+            	resetSimAttrib('salary', 400000,15000000);
+            	
+            	advancedEnabled = false;
             	
             	table.draw();
               });
+              
+            $("#positionInputField").on('change', function() {  
+                var pos = $(this).val();
+                if(pos == 'Skaters'){
+                	table.column('position:name').search('[C]|[RW]|[LW]|[D]', true, false).draw();
+                }else if(pos == 'Forwards'){
+                	table.column( 'position:name' ).search('[C]|[RW]|[LW]', true, false).draw();
+                }else{
+                	table.column('position:name').search(pos).draw() ; 
+                }    
+                
+            } );
 
-            
+
 
             
         } );
 
-        $.fn.dataTable.ext.search.push(
-        	    function( settings, data, dataIndex ) {
-        	    	// Don't filter on anything other than "myTable"
-        	        if ( settings.nTable.id !== 'tblPlayerSearch' ) {
-        	            return true;
-        	        }
-
-        	        var display = false;
-
-            	    //position filter
-        	    	var posSelection = $('#positionInputField').val();
-        	    	var pos = data[3]; 
-        	    	
-        	    	if(posSelection === ''){
-        	    		display = true;
-        	    	}else if(posSelection == 'Skaters'){
-    
-                    	if (pos.match('^(?=.*?(C|RW|LW|D)).*?')) {
-                    		display = true;
-                    	}
-                    	
-                    }
-                    else if(posSelection == 'Forwards'){
-                       	if (pos.match('^(?=.*?(C|RW|LW)).*?')) {
-                       		display = true;
-                    	}
-                    }else{
-                    	display = posSelection === pos;
-                    }   
-
-                    if(!display) return false;
-                   
-
- 					//team filter
- 					var teamSelection = $('#teamInputField').val();
- 					var team = data[1]; 
- 					if(teamSelection === ''){
-        	    		display = true;
-        	    	}else if(teamSelection === team){
-        	    		display = true;
-                    }else{
-                        return false; 
-                    }
-
-                    //type filter
-                    var typeSelection = $('#typeInputField').val();
-                    var type = data[2]; 
-            		if(typeSelection === ''){
-        	    		display = true;
-        	    	}else if(typeSelection === type){
-        	    		display = true;
-                    }else if(typeSelection === 'ProFarm' && ('Pro' === type || 'Farm' === type)){
-        	    		display = true;
-                    }else{
-                        return false; 
-                    }
-            		
-                    //attribs
-                    
-                    if ( $( '#collapseSearch' ).hasClass( "show" ) ) {
-                    	if(!attribBetween('it', data[4])) return false;
-                        if(!attribBetween('sp', data[5])) return false;
-                        if(!attribBetween('st', data[6])) return false;
-                        if(!attribBetween('en', data[7])) return false;
-                        if(!attribBetween('du', data[8])) return false;
-                        if(!attribBetween('di', data[9])) return false;
-                        if(!attribBetween('sk', data[10])) return false;
-                        if(!attribBetween('pa', data[11])) return false;
-                        if(!attribBetween('pc', data[12])) return false;
-                        if(!attribBetween('df', data[13])) return false;
-                        if(!attribBetween('sc', data[14])) return false;
-                        if(!attribBetween('en', data[15])) return false;
-                        if(!attribBetween('ld', data[16])) return false;
-                        if(!attribBetween('ov', data[17])) return false;
-                        if(!attribBetween('ct', data[19])) return false;
-                        if(!attribBetween('salary', data[20])) return false;
-                    }
-                    
-                   
-
-        	       return display;
-        	    }
-        	);
-
-        function resetSimAttrib(attrib){
-        	$('#' + attrib + 'Min').val(0);
-			$('#' + attrib + 'Max').val(99);
-        }
-
-    	function attribBetween(attrib, val){
-
-			var min = $('#' + attrib + 'Min');
-			var max =  $('#' + attrib + 'Max');
-
-			if(attrib == 'ct'){
-				if(min.val() == 0 && max.val() == 5) return true;
-			}else{
-			   	if(min.val() == 0 && max.val() == 99) return true;
-	        	if(min.val() == 0 && max.val() == 0) return true;
-			}
-
-    		if (Number(val) >= Number(min.val()) && Number(val) <= Number(max.val())) {
-        		 return true;
-    		}
-
-    		return false;
-    	}
+        function resetSimAttrib(attrib, defaultMin, defaultMax){
+        	defaultMin = defaultMin || 0;
+        	defaultMax = defaultMax || 99;
         
+        	$('#' + attrib + 'Min').val(defaultMin);
+			$('#' + attrib + 'Max').val(defaultMax);
+        }
+        
+        function getMinValue(attrib, defaultValue){
+        	defaultValue = defaultValue || 0;
+        	value = $('#' + attrib + 'Min').val();
+        	return value ? value : defaultValue;
+        }
+        function getMaxValue(attrib, defaultValue){
+        	defaultValue = defaultValue || 99;
+        	value = $('#' + attrib + 'Max').val();
+        	return value ? value : defaultValue;
+        }
 	</script>
 
 <?php include 'footer.php'; ?>

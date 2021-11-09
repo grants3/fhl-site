@@ -19,6 +19,7 @@ include FS_ROOT.'assets.php';
     border-width: 1px;
     margin:5px;
     border-color:var(--color-primary-2);
+    width:60px !important;
 
 }
  .latest-image { max-width: 50%; height: auto; }
@@ -114,14 +115,14 @@ if($scheduleHolder->isScheduleComplete()){
             $todayImage1 = getTeamLogoUrl($games->team1);
             $todayImage2 = getTeamLogoUrl($games->team2);
     
-            echo '<div class="col-2 latest-game ">';
-            echo '<div class="row latest-score">';
-            echo '<div class="latest-image"><img src="' . $todayImage1 . '" alt="' . $games->team1 . ' "></div>';
-            echo '</div>';
-    
-            echo '<div class="row latest-score ">';
-            echo '<div class="latest-image"><img src="' . $todayImage2 . '" alt="' . $games->team2 . ' "></div>';
-            echo '</div>';
+            echo '<div class="latest-game ">';
+                echo '<div class="row latest-score">';
+                    echo '<div class="latest-image"><img src="' . $todayImage1 . '" alt="' . $games->team1 . ' "></div>';
+                echo '</div>';
+        
+                echo '<div class="row latest-score ">';
+                    echo '<div class="latest-image"><img src="' . $todayImage2 . '" alt="' . $games->team2 . ' "></div>';
+                echo '</div>';
             echo '</div>';
         }
     

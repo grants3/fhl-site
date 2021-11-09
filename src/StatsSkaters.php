@@ -188,7 +188,7 @@ $(function() {
         		}
 			},
 
-			"columns": [
+		"columns": [
 				//{ name: "name" ,data: "name" },
 			    {"name": "name" ,data: "name",
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
@@ -219,7 +219,7 @@ $(function() {
                 { name: "goalStreak" , data: "goalStreak", "orderSequence": [ "desc","asc" ] },
                 { name: "pointStreak" , data: "pointStreak", "orderSequence": [ "desc","asc" ] },
             ],
-			"columnDefs":[  
+		"columnDefs":[  
 				{  
 // 					"targets":[0],  
 // 					"orderable":false,
@@ -229,10 +229,10 @@ $(function() {
                 	"visible": true
             	},
 			],
-			"initComplete": function () {
+		"initComplete": function () {
 		        	//$("#table-news").show(); 
 		        },
-		    "buttons": [
+		"buttons": [
 		        	'copy',
 		            {
 		                extend: 'excel',

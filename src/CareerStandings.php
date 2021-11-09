@@ -109,6 +109,9 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
 		}
 	}
 	else { 
+	    if(DEBUG_MODE){
+	        echo '<tr><td>'.$allFileNotFound.' Standings Season - '.$NumberSeason.'</td></tr>'; 
+	    }
 		//echo '<tr><td>'.$allFileNotFound.' - '.$Fnm.'</td></tr>'; 
 	}
 }

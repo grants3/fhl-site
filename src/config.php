@@ -17,7 +17,7 @@ $leagueLogo = '';
 $cdnSupport = true;
 
 // Language | Français: 'FR' | English: 'EN'
-$leagueLang = "FR";
+$leagueLang = "EN";
 
 //enter where you site home address (your main index.html/php) is located in comparison to the TablePage addon. 
 //Will be used on nav home button/league logo. Same folder "";
@@ -104,7 +104,7 @@ $minActivePlayers = 20;
 
 # League mode (Auto mode will check if playoff files exist in main transfer directory ($folder), otherwise mode is user selected)
 # Regular Season: 0 | Playoffs : 1 | Auto Detect : 2
-$leagueMode = 1;
+$leagueMode = 0;
 
 # Whether or not main navbar should be displayed and the type of nav to be displayed.
 # Default navbar includes all site links, simple nav only contains home button and team links.

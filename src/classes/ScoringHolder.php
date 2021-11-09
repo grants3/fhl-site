@@ -56,7 +56,7 @@ class ScoringHolder implements \JsonSerializable{
             }
             //if (substr_count($val, 'A NAME=' . $searchTeam) && $d) {
           //  if (substr_count($val, 'A NAME=') && $d && !isset($curTeam)) {
-            if (substr_count($val, $teamSearchHtml) && $d && !isset($curTeam)) {
+            if (substr_count(strtolower($val), strtolower($teamSearchHtml)) && $d && !isset($curTeam)) {
                 
 
    
@@ -65,7 +65,7 @@ class ScoringHolder implements \JsonSerializable{
                 $curTeam = substr($val, 23, $pos);
                 $b = 1;
                 
-                if(isset($searchTeam) && $curTeam != $searchTeam) continue;
+                if(isset($searchTeam) && (strcasecmp($curTeam,$searchTeam) != 0)) continue;
                 
             }
             

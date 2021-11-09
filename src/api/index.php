@@ -65,6 +65,11 @@ try {
         $controller = new ScheduleController();
         $controller->{$apiAction}();
         
+    }else if('search' == $apiParam){
+        include_once FS_ROOT.'api/controller/PlayerSearchController.php';
+        $controller = new PlayerSearchController();
+        $controller->{$apiAction}();
+        
     }
     else{
         sendOutput(json_encode(array('error' => 'Invalid API Request. Unable to route.')),

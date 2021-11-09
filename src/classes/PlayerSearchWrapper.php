@@ -27,7 +27,10 @@ class PlayerSearchWrapper implements \JsonSerializable{
     private $ct;
     private $salary;
    
-    
+    function __get($prop)
+    {
+        return $this->$prop;
+    }  
     
     /**
      * @return mixed

@@ -23,7 +23,7 @@ if(!isset($teamList)){
 }
 
 //figure out how far season has progressed to get min gp amounts for stats
-$maxMinGoalieGames = 24;
+$maxMinGoalieGames = 33;
 $minGameCount = 2;
 
 $standingsFile = getCurrentLeagueFile('Standings','Farm');

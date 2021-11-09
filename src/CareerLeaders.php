@@ -47,32 +47,12 @@ if(CAREER_STATS_DIR != '0') {
 	$NumberSeason = count(getPreviousSeasons(CAREER_STATS_DIR));
 }
 //echo "Total Seasons: ".$NumberSeason."<br>";
+if(DEBUG_MODE){
+   // echo "Total Seasons: ".$NumberSeason."<br>";
+}
 
-// Recherche Seasons TeamScoring - Current Season
-// $matches = glob($folder.'*TeamScoring.html');
-// $folderLeagueURL = '';
-// $matchesDate = array_map('filemtime', $matches);
-// arsort($matchesDate);
-// foreach ($matchesDate as $j => $val) {
-// 	if(!substr_count($matches[$j], 'PLF')) {
-// 		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamScoring')-strrpos($matches[$j], '/')-1);
-// 		$FnmCurrentSeason = $folder.$folderLeagueURL.'TeamScoring.html';
-// 		break 1;
-// 	}
-// }
-// $matches = glob($folder.'*PLFTeamScoring.html');
-// $folderLeagueURL = '';
-// $matchesDate = array_map('filemtime', $matches);
-// arsort($matchesDate);
-// foreach ($matchesDate as $j => $val) {
-// 	if(substr_count($matches[$j], 'PLF')) {
-// 		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'PLFTeamScoring')-strrpos($matches[$j], '/')-1);
-// 		$FnmCurrentPlayoff = $folder.$folderLeagueURL.'PLFTeamScoring.html';
-// 		break 1;
-// 	}
-// }
-$FnmCurrentSeason = _getLeagueFile('TeamScoring');
-$FnmCurrentPlayoff = _getLeagueFile('TeamScoring', 'PLF');
+$FnmCurrentSeason = getCurrentRegSeasonFile('TeamScoring');
+$FnmCurrentPlayoff = getCurrentPlayoffLeagueFile('TeamScoring');
 
 $i = 0;
 $j = 0;
@@ -90,27 +70,10 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
         }
         else {
             if($z == 0) {
-                $Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
-                $matches = glob($Fnmtmp.'*TeamScoring.html');
-                $folderLeagueURL = '';
-                for($k=0;$k<count($matches);$k++) {
-                    if(!substr_count($matches[$k], 'PLF')) {
-                        $folderLeagueURL = substr($matches[$k], strrpos($matches[$k], '/')+1,  strpos($matches[$k], 'TeamScoring')-strrpos($matches[$k], '/')-1);
-                        $Fnm = $Fnmtmp.$folderLeagueURL.'TeamScoring.html';
-                        break 1;
-                    }
-                }
+                $Fnm = _getLeagueFile('TeamScoring', 'REG', $workSeason);
             }
             if($z == 1) {
-                $Fnmtmp = str_replace("#",$workSeason,CAREER_STATS_DIR);
-                $matches = glob($Fnmtmp.'*PLFTeamScoring.html');
-                $folderLeagueURL = '';
-                for($k=0;$k<count($matches);$k++) {
-                    $folderLeagueURL = substr($matches[$k], strrpos($matches[$k], '/')+1,  strpos($matches[$k], 'PLFTeamScoring')-strrpos($matches[$k], '/')-1);
-                    $Fnm = $Fnmtmp.$folderLeagueURL.'PLFTeamScoring.html';
-                    break 1;
-                }
-                
+                _getLeagueFile('TeamScoring', 'PLF', $workSeason);
             }
         }
         $b = 0;
@@ -503,8 +466,12 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
             }
         }
         else {
-            if($z == 0) echo $allFileNotFound.' - Season #'.$workSeason."<br>";
-            if($z == 1) echo $allFileNotFound.' - Playoff #'.$workSeason."<br>";
+           // if($z == 0) echo $allFileNotFound.' - Season #'.$workSeason."<br>"; 
+           // if($z == 1) echo $allFileNotFound.' - Playoff #'.$workSeason."<br>";
+            if(DEBUG_MODE){
+                if($z == 0) echo $allFileNotFound.' - Season #'.$workSeason."<br>";
+                if($z == 1) echo $allFileNotFound.' - Playoff #'.$workSeason."<br>";
+            }
         }
     }
 }

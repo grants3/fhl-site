@@ -28,7 +28,7 @@ class ScoringPlayerObj implements \JsonSerializable, ScoringObj{
     private $goalStreak;
     private $pointStreak;
     
-    function __get($name)
+    public function __get($name)
     {
         return$this->$name;
     }  

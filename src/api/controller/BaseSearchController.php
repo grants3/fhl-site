@@ -235,7 +235,7 @@ abstract class BaseSearchController extends BaseController
             $orderDirection = htmlspecialchars($this->getQueryStringParams()['order'][0]['dir']);
             
             $orderColumn = htmlspecialchars($this->getQueryStringParams()['columns'][$orderColumnIndex]['data']);
-            
+
             usort( $data,  function($a, $b) use($orderColumn,$orderDirection){
 
                 //multi sort with attribute and then secondary if equal.

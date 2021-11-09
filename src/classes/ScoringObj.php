@@ -2,7 +2,6 @@
 //namespace classes;
 
 interface ScoringObj {
-    
    // public function getCurrentTeam();
     public function getNumber();
     public function getTeam();
