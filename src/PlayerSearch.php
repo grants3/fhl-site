@@ -372,7 +372,8 @@ $teams = new TeamHolder($gmFile);
                         { "name": "ov", "data": "ov", "orderSequence": [ "desc","asc" ] },
                         { "data": "number", "orderSequence": [ "desc","asc" ] },
                         { "data": "ct", "orderSequence": [ "desc","asc" ] },
-                        { "name": "salary", "data": "salary", "orderSequence": [ "desc","asc" ] }
+                        { "name": "salary", "data": "salary", "orderSequence": [ "desc","asc" ], render: function (data, type, row, meta) {
+          					return meta.settings.fnFormatNumber(row.salary); }}
                 	],
                 "columnDefs": [
                     { className: "text-left", "targets": [ 0,1,2 ] }
