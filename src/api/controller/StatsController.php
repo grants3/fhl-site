@@ -63,6 +63,7 @@ class StatsController extends BaseSearchController
         $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
         if (!empty($previousSeasons)) {
             foreach ($previousSeasons as $prevSeason) {
+                error_log($prevSeason);
                 $holder = $model->findBySeason($prevSeason, $seasonType, $team);
                 
                 if(isset($type) && 'goalie' == $type){
@@ -75,23 +76,85 @@ class StatsController extends BaseSearchController
             }
         }
         
-        //reduce.
-        $responseData = array();
+        //reduce to map by name.
+        $mappedData = array();
         foreach($data as $player){
             //error_log(print_r($player,1));
-            $responseData[$player->getName()][] = $player;
+            $mappedData[$player->getName()][] = $player;
         }
         
-        foreach($responseData as $playerArray){
-            $goalsSum = array_reduce($playerArray, function($carry, $player)
+        //aggregate totals
+        $aggregatedData = array();
+        foreach($mappedData as $playerArray){
+            
+            if (!($playerArray[0] instanceof ScoringPlayerObj)) continue;
+
+            $playerSum = array_reduce($playerArray, function($carry, $player)
             {
-                return $carry + $player->__get('goals');
-            });
-            error_log($player->__get('goals').' goals='.$goalsSum);
+                $carry['gamesPlayed'] += $player->getGamesPlayed();
+                $carry['goals'] += $player->getGoals();
+                $carry['assists'] += $player->getAssists();
+                $carry['points'] += $player->getPoints();
+                $carry['plusMinus'] += $player->getPlusMinus();
+                
+                $carry['pim'] += $player->getPim();
+                $carry['ppg'] += $player->getPpg();
+                $carry['shg'] += $player->getShg();
+                $carry['gwg'] += $player->getGwg();
+                $carry['gtg'] += $player->getGtg();
+                $carry['hits'] += $player->getHits();
+                $carry['shots'] += $player->getShots();
+                $carry['shotPct'] =  $carry['goals'] ? (round($carry['shots'] / $carry['goals'], 3)) : 0;
+
+                return $carry;
+            },[
+                'gamesPlayed'=>0,
+                'goals'=>0,
+                'assists'=>0,
+                'points'=>0,
+                'plusMinus'=>0,
+                'pim'=>0,
+                'ppg'=>0,
+                'shg'=>0,
+                'gwg'=>0,
+                'gtg'=>0,
+                'hits'=>0,
+                'shots'=>0,
+                'shotPct'=>0,
+                
+            ]);
+            
+            $player = $playerArray[0];
+            
+            $scoring = new ScoringPlayerObj();
+            
+            $scoring->setNumber($player->getNumber());
+            $scoring->setTeam($player->getTeam());
+            $scoring->setTeamAbbr($player->getTeamAbbr()); 
+            $scoring->setPosition($player->getPosition());
+            $scoring->setRookieStatus($player->getRookieStatus());
+            $scoring->setName($player->getName());
+            $scoring->setGamesPlayed($playerSum['gamesPlayed']);
+            $scoring->setGoals($playerSum['goals']);
+            $scoring->setAssists($playerSum['assists']);
+            $scoring->setPoints($playerSum['points']);
+            $scoring->setPlusMinus($playerSum['plusMinus']);
+            $scoring->setPim($playerSum['pim']);
+            $scoring->setPpg($playerSum['ppg']);
+            $scoring->setShg($playerSum['shg']);
+            $scoring->setGwg($playerSum['gwg']);
+            $scoring->setGtg($playerSum['gtg']);
+            $scoring->setHits($playerSum['hits']);
+            $scoring->setShots($playerSum['shots']);
+            $scoring->setShotPct($playerSum['shotPct']);
+            $scoring->setGoalStreak('');
+            $scoring->setPointStreak('');
+            
+            array_push($aggregatedData, $scoring);
         }
         
         $data = null;
-        $responseData = json_encode($responseData);
+        $responseData = json_encode($aggregatedData);
       
      
         
