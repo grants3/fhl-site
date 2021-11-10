@@ -85,7 +85,7 @@ else if($siteColorTheme == 'red') {
    --color-primary-3: #83c5be; 
    --color-alternate-1:#ffddd2; 
    --color-alternate-2:#edf6f9;
-   --color-alternate-3:#e29578;
+   --color-alternate-3:#fff0eb;
 
    --table-sort-asc:#798777; 
    --table-sort-desc:#BDD2B6; 

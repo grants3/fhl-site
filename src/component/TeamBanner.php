@@ -36,7 +36,9 @@ if(!isset($teamList)){
 
 /*CENTER NOT STRETCH*/
 .team-banner-logo{
+  <?php if(!IS_IE){?>
   display: flex;
+  <?php }?> ?>
   justify-content: center;
   align-items: center;
   max-height: 49px;

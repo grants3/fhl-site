@@ -170,8 +170,8 @@ if(isset($navbarMode) && $navbarMode != 0){
 
 ?>
 
-	
-<div class="container-fluid2 site-content header-content top-container">
+	<!-- REMOVE header-content -->
+<div class="site-content top-container">
 
 <?php include FS_ROOT.'demo.php'?>
 

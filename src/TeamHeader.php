@@ -65,7 +65,9 @@ border-bottom:1px solid blue;
 
 /*CENTER NOT STRETCH*/
 .team-nav-logo{
+    <?php if(!IS_IE){?>
   display: flex;
+  <?php }?> ?>
   justify-content: center;
   align-items: center;
   max-height: 49px;

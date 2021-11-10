@@ -5,28 +5,27 @@
   --color-primary-3: rgb(0, 39, 79);
   --color-alternate-1: rgb(225, 239, 255);
   --color-alternate-2: rgb(176, 214, 255); 
-  --color-alternate-3: rgb(240, 248, 255); 
+  --color-alternate-3: rgb(247, 251, 255); 
   
   --color-text-primary-0: #323232;
   --color-text-primary-1: white;
   --color-text-primary-2: var(--color-primary-3);
+  
+  --background-primary:var(--color-alternate-3);
+  --background-secondary:var(--color-alternate-1);
+  --background-gradient:linear-gradient(var(--background-primary), var(--background-primary) 70%, var(--background-secondary) 100%) fixed;
   
   --table-highlight:var(--color-primary-1);
   --table-sort-asc:rgb(57, 27, 162);
   --table-sort-desc:rgb(15, 40, 81);
   --selection-border:rgb(0, 0, 102);
   --table-link-color:var(--color-primary-2);
-  
-  --background-gradient: gradient(linear, left top, left bottom, from(#fff), to(#cbccc8)) fixed;
-  --background-gradient-webkit:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#cbccc8)) fixed;
    	
   --table-bg-color-1: var(--color-alternate-1);
   --table-bg-color-2: var(--color-alternate-2);
   --table-header-bg:var(--color-primary-1);
   --table-header-text:var(--color-text-primary-1);
 
-  
-/*   --header-gradient:linear-gradient(rgb(0, 39, 79) 0%, rgb(0, 39, 79) 60%, rgb(27, 98, 162) 100%); */
   --header-gradient:linear-gradient(var(--color-primary-2) 0%, var(--color-primary-2) 60%, var(--color-primary-1) 100%);
   --header-gradient-webkit:-webkit-gradient(var(--color-primary-2) 0%, var(--color-primary-2) 60%, var(--color-primary-1) 100%);
   
@@ -39,26 +38,6 @@
 
 /***** General style, all sections *****/
 
-/* * { */
-/*     font-family: Open Sans; */
-/*   } */
-
-
-
-/* body {   */
-/* 	/*margin-top: 60px; nav margins. using js instead*/ */
-/* 	font-size: 15px;  */
-/* 	font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Verdana , Arial, sans-serif; */
-/* 	font-weight: 300;  */
-/* 	color: #888; */
-/* 	background:var(--background-gradient-webkit); */
-/* 	background:var(--background-gradient); */
-/*  	background-image: linear-gradient(to top, #ffffff, #fcfcff, #f9f9ff, #f5f7ff, #f1f4ff, #ecf1fc, #e7edf9, #e2eaf6, #dce4ef, #d5dee9, #cfd9e2, #c9d3dc);    */
-/* } */
-
-
-
-
 .fhlElement{  
 	font-size: 15px; 
 	font-family: 'Roboto','Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif;
@@ -69,17 +48,16 @@
 }
 
 body.fhlElement {  
-	/*margin-top: 60px; nav margins. much to each nav*/
+
 	font-size: 15px; 
 	font-family: 'Roboto',"Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
 	font-weight: 300; 
-	/* 	color: #888; */
-	color: var(--color-text-primary-0);
-	
-	background:var(--background-gradient-webkit);
-	background:var(--background-gradient);
- 	background-image: linear-gradient(to top, #ffffff, #fcfcff, #f9f9ff, #f5f7ff, #f1f4ff, #ecf1fc, #e7edf9, #e2eaf6, #dce4ef, #d5dee9, #cfd9e2, #c9d3dc);  
 
+	color: var(--color-text-primary-0);
+
+	background: var(--background-primary);
+	background: var(--background-gradient);
+    
 }
 
 /*team banner and logo gradients*/

@@ -140,11 +140,6 @@ include 'TeamHeader.php';
                                         https://www.tsn.ca/nhl/player-bio/sidney-crosby
                                         
                                         $playerCareersLink = 'CareerStatsPlayer.php?csName='.htmlspecialchars_decode($roster->getName());
-                                     //   $playerSalary = toMoney($vitals->getSalary());
-                                        
-                                       // $fmt = new NumberFormatter( 'en_US', NumberFormatter::CURRENCY );
-//                                         if(LEAGUE_LANG == 'FR') $playerSalary = number_format($vitals->getSalary(), 0)."$";
-//                                         else $playerSalary = "$".number_format($vitals->getSalary(), 0);
                                         $playerSalary = format_money($vitals->getSalary(),'%(.0n');
                                         
                                         echo '<tr>';
