@@ -15,7 +15,7 @@ include_once 'classes/ScheduleObj.php';
 include_once 'classes/TeamAbbrHolder.php';
 
 $CurrentHTML = 'Scores.php';
-$CurrentTitle = 'Scores';
+$CurrentTitle = $allScores;
 $CurrentPage = 'Scores';
 include 'head.php';
 
@@ -408,7 +408,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 	<?php 
 	if($scheduleHolder->isSeasonStarted()){
 	    
-	    $CurrentTitle = $CurrentTitle . ' (Day - '.$selectedDay.')';
+	    $CurrentTitle = $CurrentTitle . ' ('.$schedDay.' - '.$selectedDay.')';
 	}
 	
 	include 'SectionHeader.php';
@@ -641,7 +641,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
                 
                 echo '<div class = "row game-score-footer" style="margin-top: -15px;">'; //goals scoring details
                     //echo '<span class = "footer-header">Goals</span>';
-                    echo '<div class = "footer-header text-left" style="width: 100%;">Goals</div>';
+                echo '<div class = "footer-header text-left" style="width: 100%;">'.$gamesGoalF.'</div>';
 
                     $scoringList = '';
                     if(isset($gameScorer1[$i])) {
@@ -687,7 +687,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
                 echo '</div>'; // end scoring details
                 
                echo '<div class = "row game-score-footer" style="margin-bottom: -15px;">'; //goalie details 
-                 echo '<div class = "footer-header text-left" style="width: 100%;">Goalies</div>';
+               echo '<div class = "footer-header text-left" style="width: 100%;">'.$gamesSchoolGoalers.'</div>';
                  echo '<div>'.$lastEquipe1.' - '.$gameGoal1[$i].'</div>';
                  echo '<div>'.$lastEquipe2.' - '.$gameGoal2[$i].'</div>';      
                echo '</div>'; // end goalie details
@@ -701,7 +701,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
                 echo '</div>'; //end card-body
                 
                 echo '<div class = "card-footer box-score py-1" >';
-                    echo '<div class="col text-center"><a class="lien-blanc" href="games.php?num='.$matchNumber.$playoffLink.'">BOX SCORE</a></div>';      
+                echo '<div class="col text-center"><a class="lien-blanc text-uppercase" href="games.php?num='.$matchNumber.$playoffLink.'">'.$gamesBoxScore.'</a></div>';      
                 echo '</div>'; //end card footer 
                 
                 echo '</div>'; //end card

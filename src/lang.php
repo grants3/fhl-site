@@ -10,8 +10,23 @@ if($leagueLang == 'FR') {
 	$allLines = 'Alignements';
 	$allProspects = 'Espoirs';
 	$allTeamCard = 'Fiche';
-	$allRosters = 'Roster';
+	$allRosters = 'Formation';
 	$allBack = 'Retour';
+	$allTeam = "Équipes";
+	$allScores = "Résultats";
+	$alltransact = "Mouvement";
+	$allFreeAgents = "Agents libres";
+	$allLeague = "Ligue";
+	
+	//position
+	$positionLW  = "Ailier Gauche";
+	$positionC = "Centre";
+	$positionRW = "Ailier Droit";
+	$positionD = "Défenseur";
+	$positionGoalie = "Gardien";
+	$positionForwards = "Attaquants";
+	$positionSkaters = "Skaters";
+	$positionAll = "Tous Les Joueurs";
 	
 	// Accueil
 	$homeTitle = 'Accueil';
@@ -87,6 +102,7 @@ if($leagueLang == 'FR') {
 	
 	// Parties
 	$gamesTitle = 'Résultat de la partie';
+	$gamesBoxScore = 'Sommaire';
 	$gamesFinalResult = 'LA MARQUE FINALE';
 	$gamesShotOnGoal = 'LES TIRS AU BUT';
 	$gamesGoalScore = 'LES BUTS MARQUÉS';
@@ -318,7 +334,7 @@ if($leagueLang == 'FR') {
 	$joueursProTeamAverage = 'Moyenne de l\'équipe';
 	
 	// Rosters
-	$rostersTitle = 'Roster';
+	$rostersTitle = 'Formation';
 	$rostersLeft = 'G';
 	$rostersRight = 'D';
 	$rostersLW = 'AG';
@@ -650,6 +666,21 @@ if($leagueLang == 'EN') {
 	$allTeamCard = 'Overview';
 	$allRosters = 'Roster';
 	$allBack = 'Back';
+	$allTeam = "Teams";
+	$allScores = "Scores";
+	$alltransact = "Transactions";
+	$allFreeAgents = "Free Agents";
+	$allLeague = "League";
+	
+	//position
+	$positionLW  = "Left Wing";
+	$positionC = "Center";
+	$positionRW = "Right Wing";
+	$positionD = "Defenseman";
+	$positionGoalie = "Goalie";
+	$positionForwards = "Forwards";
+	$positionSkaters = "Skaters";
+	$positionAll = "All Players";
 	
 	// Home
 	$homeTitle = 'Home';
@@ -725,6 +756,7 @@ if($leagueLang == 'EN') {
 	
 	// Games
 	$gamesTitle = 'Game Result';
+	$gamesBoxScore = 'Box Score';
 	$gamesFinalResult = 'FINAL SCORE';
 	$gamesShotOnGoal = 'SHOTS';
 	$gamesGoalScore = 'GOALS';

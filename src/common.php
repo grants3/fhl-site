@@ -156,5 +156,9 @@ function URL_exists($url){
   //  return $exists;
 }
 
+function formatHtmlText(string $text){
+    return str_replace(' ', '&nbsp', $text);
+}
+
 
 ?>

@@ -87,7 +87,7 @@ class PlayerSearchController extends BaseSearchController
     
     protected function getSecondarySort(): string
     {
-        return '';
+        return 'name';
     }
   
 }

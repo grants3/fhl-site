@@ -18,7 +18,7 @@
   --table-highlight:var(--color-primary-1);
   --table-sort-asc:rgb(57, 27, 162);
   --table-sort-desc:rgb(15, 40, 81);
-  --selection-border:rgb(0, 0, 102);
+  --selection-border:var(--color-primary-3);
   --table-link-color:var(--color-primary-2);
    	
   --table-bg-color-1: var(--color-alternate-1);

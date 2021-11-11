@@ -17,7 +17,7 @@ $leagueLogo = '';
 $cdnSupport = true;
 
 // Language | Français: 'FR' | English: 'EN'
-$leagueLang = "EN";
+$leagueLang = "FR";
 
 //enter where you site home address (your main index.html/php) is located in comparison to the TablePage addon. 
 //Will be used on nav home button/league logo. Same folder "";
@@ -111,12 +111,18 @@ $leagueMode = 0;
 # Auto: 0 Navbar disabled : 1 Full Navbar enabled (default) : 2 Simple nav with team icons : 3 Simple nav with team dropdown. : 4 Use your own custom nav.
 $navbarMode = 1;
 
+#use custom nav. set this to define location of custom nav relative to this config file.
+#ex: if http://yourLeague.com/nav.php is where your nav is located and -> Add-on folder: http://yourLeague.com/TablePage/
+#then set value to "../nav.php"  
+#$navBarLoc="nav.php";
+
+
 #text to display in footer(bottom) of each page.
 $footerText="FHL TableSim 2.0";
 
 //default color scheme.
 //blue,green,red,teal,custom
-$siteTheme="dark";
+$siteTheme="blue";
 
 //-----------------------------------------
 //DO NOT TOUCH ANYTHING BELOW HERE.

@@ -73,12 +73,12 @@ if(isset($_GET['sort']) || isset($_POST['sort'])) {
 								<label class="input-group-text" for="positionInputField">Position</label>
 							</div>
 							<select class="custom-select" id="positionInputField">
-								<option value="">All Players</option>
-								<option value="Forwards">All Forwards</option>
-								<option value="C">Center</option>
-								<option value="RW">Right Wing</option>
-								<option value="LW">Left Wing</option>
-								<option value="D">Defense</option>
+								<option value=""><?php echo $positionAll?></option>
+								<option value="Forwards"><?php echo $positionForwards?></option>
+								<option value="C"><?php echo $positionC?></option>
+								<option value="RW"><?php echo $positionRW?></option>
+								<option value="LW"><?php echo $positionLW?></option>
+								<option value="D"><?php echo $positionD?></option>
 							</select>
 						</div>
 					</div>
@@ -196,7 +196,18 @@ $(function() {
                     }
                 },
 				{ name: "team" ,data: "team" },
-                { name: "position" ,data: "position" },
+                //{ name: "position" ,data: "position" },
+                { "name": "position","data": "position",
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    	var pos = oData.position;
+                    	
+                    	<?php if($leagueLang == 'FR'){?>
+                    		if('RW' === pos) pos = 'AD';
+                    		if('LW' === pos) pos = 'AG';
+                    	<?php }?>
+                        $(nTd).html(pos);
+                    }
+                },
                 //{ name: "rookieStatus" ,data: "rookieStatus" },
                 {"name": "rookieStatus" ,data: "rookieStatus",
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {

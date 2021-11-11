@@ -145,6 +145,10 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
 	padding-inline-start: 10px;
 }
 
+.top-leader-list li>span{
+    cursor: pointer;
+}
+
 .eTUABY {
 	display: flex;
 	-webkit-box-pack: justify;

@@ -5,7 +5,7 @@ include_once 'common.php';
 
 $CurrentPage = 'Schedule';
 $CurrentHTML = 'Schedule.php';
-$CurrentTitle = 'Schedule';
+$CurrentTitle = $schedTitle;
 
 include 'head.php';
 include_once 'classes/ScheduleHolder.php';
