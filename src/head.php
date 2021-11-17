@@ -54,7 +54,7 @@ if(isset($_GET['theme'])) {
 // }
 
 //set nav type
-$navbarMode = NAVBAR_MODE;
+if(!isset($navbarMode)) $navbarMode = NAVBAR_MODE;
 if(isset($_GET['navbarMode'])) {
     $_SESSION["navbarMode"] = $_GET['navbarMode'];
     $navbarMode = $_SESSION["navbarMode"];

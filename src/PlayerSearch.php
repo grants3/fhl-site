@@ -62,11 +62,11 @@ $teams = new TeamHolder($gmFile);
 							<!-- team -->
 							<div class="input-group mb-3 col-sm-6">
 								<div class="input-group-prepend">
-									<label class="input-group-text" for="teamInputField">Team</label>
+									<label class="input-group-text" for="teamInputField"><?php echo $allTeam;?></label>
 								</div>
 								<select class="custom-select" id="teamInputField">
-									<option value="" selected>All Teams</option>
-									<option value="Unassigned">Unassigned</option>
+									<option value="" selected><?php echo $langCareerTeamLeadersAllTeam;?></option>
+									<option value="Unassigned"><?php echo $langUnassignedPlayers?></option>
                       				<?php
                                         foreach ($teams->get_teams() as $team) {
                                             echo '<option value="' . $team . '">' . $team . '</option>';
@@ -82,14 +82,14 @@ $teams = new TeamHolder($gmFile);
 							<!-- type -->
 							<div class="input-group mb-3 col-sm-6">
 								<div class="input-group-prepend">
-									<label class="input-group-text" for="typeInputField">Type</label>
+									<label class="input-group-text" for="typeInputField"><?php echo $seasonType;?></label>
 								</div>
 								<select class="custom-select" id="typeInputField">
 									<option value="ALL">All Types</option>
 									<option value="PROFRM" selected>Pro/Farm</option>
 									<option value="PRO">Pro</option>
 									<option value="FRM">Farm</option>
-									<option value="PCT">Prospect</option>			
+									<option value="PCT"><?php echo $allProspects;?></option>			
                     		   </select>
 							</div>
 						</div>
@@ -99,7 +99,7 @@ $teams = new TeamHolder($gmFile);
                             <div class="card-header" id="advancedSearchHeader">
                               <h5 class="mb-0 text-center">
                                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch">
-                                  Advanced Filter
+                                  <?php echo $playerSearchMoreFilters?>
                                 </button>
                               </h5>
                             </div>
@@ -262,7 +262,7 @@ $teams = new TeamHolder($gmFile);
                         <thead>
                             <tr>
                             	<th class="text-left"><?php echo $rostersName ?></th>
-                           	    <th>Team</th>
+                           	    <th><?php echo $playerSearchTeam?></th>
                            	    <th>Type</th>
 								<th>PO</th>
 								<th><?php echo $rostersIT ?> </th>
@@ -281,7 +281,7 @@ $teams = new TeamHolder($gmFile);
 								<th><?php echo $rostersOV ?> </th>	 	
 								<th>#</th>
 								<th>CT</th>
-								<th>Salary</th>
+								<th><?php echo $joueursSalary;?></th>
                             </tr>
                         </thead>             
                     </table>
@@ -313,7 +313,8 @@ $teams = new TeamHolder($gmFile);
                 
                 lengthMenu: [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
                 language: {
-                    "lengthMenu": "Display _MENU_ records"
+                    "lengthMenu": "Display _MENU_ records",
+                    "search": "<?php echo $playerSearchSearch;?>"
                 }, 
                 "ajax": {
                 	url : '<?php echo 'api?api=search&action=find'; ?>',
@@ -384,7 +385,8 @@ $teams = new TeamHolder($gmFile);
                         { "data": "number", "orderSequence": [ "desc","asc" ] },
                         { "data": "ct", "orderSequence": [ "desc","asc" ] },
                         { "name": "salary", "data": "salary", "orderSequence": [ "desc","asc" ], render: function (data, type, row, meta) {
-          					return meta.settings.fnFormatNumber(row.salary); }}
+                        	var sal = row.salary != null ? row.salary : 0;
+          					return meta.settings.fnFormatNumber(sal); }}
                 	],
                 "columnDefs": [
                     { className: "text-left", "targets": [ 0,1,2 ] }

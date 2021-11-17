@@ -1,6 +1,7 @@
 <?php
 require_once 'config.php';
 include 'lang.php';
+include 'common.php';
 include 'numberUtils.php';
 include 'fileUtils.php';
 $CurrentHTML = 'TeamOverview.php';
@@ -13,20 +14,6 @@ include 'classes/TeamAbbrHolder.php';
 ?>
 
 <?php
-// Format Ordinal
-function ordinalEnglish($number) {
-    $ends = array('th','st','nd','rd','th','th','th','th','th','th');
-    if ((($number % 100) >= 11) && (($number%100) <= 13))
-        return $number. 'th';
-    else
-        return $number. $ends[$number % 10];
-}
-function ordinalFrench($number) {
-    if($number == 1) return $number. 'er';
-	else return $number. 'e';
-}
-
-
 // Nom du club-école - want latest reg season standings always.
 //$Fnm = $folder.$folderLeagueURL2.'FarmStandings.html';
 $Fnm = getCurrentRegSeasonFile('FarmStandings');
@@ -733,7 +720,7 @@ echo '<div class = "row">';
     	echo '<div class = "table-responsive">';
     		echo '<table class="table table-sm table-rounded table-striped">';
     		echo '<thead>';
-    		echo '<tr class="tableau-top"><th colspan="4"><h5 class="m-0">Team Info</h5></th></tr>';
+    		echo '<tr class="tableau-top"><th colspan="4"><h5 class="m-0">'.$teamCardGeneralInfos.'</h5></th></tr>';
     		
     		echo '</thead>';
     		echo '<tbody>';

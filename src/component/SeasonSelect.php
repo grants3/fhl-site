@@ -11,14 +11,14 @@ if(!isset($seasonType)) $seasonType = 'REG';
 			<div class="col py-1 pr-1">
 				<div class="input-group">
 					<div class="input-group-prepend">
-						<label class="input-group-text" for="seasonMenu">Season</label>
+						<label class="input-group-text" for="seasonMenu"><?php echo $homeSeason;?></label>
 					</div>
 
 					<?php 	
 					$currentSeason = $seasonId ? $seasonId : 'Current';
 					?>
 					<select class="col custom-select" id="seasonMenu">
-						<option <?php echo ($currentSeason == 'Current' ? 'selected' : '');?> <?php echo ($currentSeason == 'Current' && $seasonType == 'PLF' && !PLAYOFF_MODE ? 'disabled' : '');?> value="Current">Current</option>
+						<option <?php echo ($currentSeason == 'Current' ? 'selected' : '');?> <?php echo ($currentSeason == 'Current' && $seasonType == 'PLF' && !PLAYOFF_MODE ? 'disabled' : '');?> value="Current"><?php echo $allCurrent;?></option>
 						<?php 
 						//get seasons which will be used to populate previous season dropdown if they exist
 						$previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
@@ -39,20 +39,20 @@ if(!isset($seasonType)) $seasonType = 'REG';
 			<div class="col py-1">
 				<div class="input-group">
 					<div class="input-group-prepend">
-						<label class="input-group-text" for="typeMenu">Type</label>
+						<label class="input-group-text" for="typeMenu"><?php echo $seasonType;?></label>
 					</div>
 					<select class="custom-select" id="typeMenu">
                             <?php 
                             $currentType = $seasonType ? $seasonType : 'REG';
                             if(PLAYOFF_MODE && !$seasonType && !$seasonId){
-                                echo '<option value=REG>Regular</option>';
-                                echo '<option selected value=PLF>Playoffs</option>';
+                                echo '<option value=REG>'.$seasonRegular.'</option>';
+                                echo '<option selected value=PLF>'.$seasonPLF.'</option>';
                             }else if(!PLAYOFF_MODE && !$seasonType && !$seasonId){
-                                echo '<option selected value=REG>Regular</option>';
-                                echo '<option disabled value=PLF>Playoffs</option>';
+                                echo '<option selected value=REG>'.$seasonRegular.'</option>';
+                                echo '<option disabled value=PLF>'.$seasonPLF.'</option>';
                             }else{
-                                echo '<option '.($currentType == 'REG' ? 'selected' : '').' value=REG>Regular</option>';
-                                echo '<option '.($currentType == 'PLF' ? 'selected' : '').' value=PLF>Playoffs</option>';
+                                echo '<option '.($currentType == 'REG' ? 'selected' : '').' value=REG>'.$seasonRegular.'</option>';
+                                echo '<option '.($currentType == 'PLF' ? 'selected' : '').' value=PLF>'.$seasonPLF.'</option>';
                             }
 
                             ?>

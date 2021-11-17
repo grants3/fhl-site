@@ -63,11 +63,11 @@ $teamAbbr = $teamAbbrHolder->getAbbr($team);
         	<?php
 			$eventsActive = '';
 			if(TRANSACTIONS_TRADES_ENABLED){?>
-			<li class="nav-item"><a	class="nav-link active" href="#TeamTrades"	data-toggle="tab">Trades</a></li>
+			<li class="nav-item"><a	class="nav-link active" href="#TeamTrades"	data-toggle="tab"><?php echo $transactTrades;?></a></li>
 			<?php }else{ $eventsActive = 'active';}?>
 			
-			<li class="nav-item"><a	class="nav-link <?php echo $eventsActive;?>" href="#TeamEvents" data-toggle="tab">Transactions</a></li>
-			<li class="nav-item"><a	class="nav-link" href="#TransactInjuries" data-toggle="tab">Injuries</a></li>
+			<li class="nav-item"><a	class="nav-link <?php echo $eventsActive;?>" href="#TeamEvents" data-toggle="tab"><?php echo $transactTitle;?></a></li>
+			<li class="nav-item"><a	class="nav-link" href="#TransactInjuries" data-toggle="tab"><?php echo $transactInj;?></a></li>
 		</ul>
 	</div>
 	

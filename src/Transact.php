@@ -46,11 +46,11 @@ include 'head.php';
 						<div class="col py-1 pr-1">
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<label class="input-group-text" for="seasonMenu">Season</label>
+									<label class="input-group-text" for="seasonMenu"><?php echo $homeSeason;?></label>
 								</div>
 
 								<select class="col custom-select" id="seasonMenu">
-									<option selected value="Current">Current</option>
+									<option selected value="Current"><?php echo $allCurrent;?></option>
 									<?php 
 
 									if (!empty($previousSeasons)) {
@@ -68,17 +68,17 @@ include 'head.php';
 						<div class="col py-1">
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<label class="input-group-text" for="typeMenu">Type</label>
+									<label class="input-group-text" for="typeMenu"><?php echo $seasonType;?></label>
 								</div>
 								<select class="custom-select" id="typeMenu">
                                         <?php 
                                         //if(isPlayoffs($folder, $playoffMode)){
                                         if(PLAYOFF_MODE){
-                                            echo '<option value=REG>Regular</option>';
-                                            echo '<option selected value=PLF>Playoffs</option> ';
+                                            echo '<option value=REG>'.$seasonRegular.'</option>';
+                                            echo '<option selected value=PLF>'.$seasonPLF.'</option> ';
                                         }else{
-                                            echo '<option selected value=REG>Regular</option>';
-                                            echo '<option disabled value=PLF >Playoffs</option> ';
+                                            echo '<option selected value=REG>'.$seasonRegular.'</option>';
+                                            echo '<option disabled value=PLF >'.$seasonPLF.'</option> ';
                                         }
                                         ?>
 								</select>
@@ -96,10 +96,10 @@ include 'head.php';
             			<?php
             			$eventsActive = '';
             			if(TRANSACTIONS_TRADES_ENABLED){?>
-            			<li class="nav-item"><a	class="nav-link active" href="#TransactTrades"	data-toggle="tab">Trades</a></li>
+            			<li class="nav-item"><a	class="nav-link active" href="#TransactTrades"	data-toggle="tab"><?php echo $transactTrades;?></a></li>
             			<?php }else{ $eventsActive = 'active';}?>
-            			<li class="nav-item"><a	class="nav-link <?php echo $eventsActive;?>" href="#TransactEvents"	data-toggle="tab">Transactions</a></li>
-            			<li class="nav-item"><a	class="nav-link" href="#TransactInjuries" data-toggle="tab">Injuries</a></li>
+            			<li class="nav-item"><a	class="nav-link <?php echo $eventsActive;?>" href="#TransactEvents"	data-toggle="tab"><?php echo $transactTitle;?></a></li>
+            			<li class="nav-item"><a	class="nav-link" href="#TransactInjuries" data-toggle="tab"><?php echo $transactInj;?></a></li>
             		</ul>
             	</div>
             	<div class="card-body tab-content m-0 p-0 pt-2">

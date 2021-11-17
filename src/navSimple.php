@@ -61,7 +61,7 @@
 #main-navbar.navbar-dark  .nav-link:focus { color: #fff; outline: 0; }
 
 
-<?php if($navbarMode == 3 || $navbarMode == 4){
+<?php if(($navbarMode == 3 || $navbarMode == 4) && str_starts_with($CurrentPage,'Team')){
 //need to override color for smaller nav bar as unable to read text.?>
 :root {
   --team-header-background-color-1:var(--color-primary-1); 
@@ -84,15 +84,15 @@
 		<div class="container px-0">
 			<div class = "row no-gutters">
     			<div class="col">
-    				<a class="nav-item nav-link pl-0 pr-2 pl-1" href="<?php echo (HOME ? HOME : '.');?>">HOME</a>
+    				<a class="nav-item nav-link pl-0 pr-2 pl-1" href="<?php echo (HOME ? HOME : '.');?>"><?php echo $homeTitle?></a>
     			</div>
     			<?php if(!empty(GMO_DIR)){?>
     			<div class="col">
-    				<a class="nav-item nav-link px-2" href="<?php echo GMO_DIR;?>">GMO</a>
+    				<a class="nav-item nav-link px-2" href="<?php echo GMO_DIR;?>">GMOE</a>
     			</div>
     			<?php }?>
     			<div class="col">
-    				<a class="nav-item nav-link backButton px-2" href="#">Back</a>
+    				<a class="nav-item nav-link backButton px-2" href="#"><?php echo $allBack?></a>
     			</div>
 			</div>
 			<!-- only display for team pages -->

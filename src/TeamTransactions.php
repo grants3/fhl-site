@@ -39,11 +39,11 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
             		<div class="col-sm-12 col-md-8 col-lg-6">
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<label class="input-group-text" for="contractsMenu">Season</label>
+									<label class="input-group-text" for="contractsMenu"><?php echo $homeSeason;?></label>
 								</div>
 
     							<select id="contractsMenu" class="col custom-select">
-            						<option value="Current">Current</option>
+            						<option value="Current"><?php echo $allCurrent;?></option>
             						<?php 
                                     //set dropdown dynamically from prev season dirs
             						if (!empty($previousSeasons)) {

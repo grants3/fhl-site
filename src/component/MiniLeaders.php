@@ -177,20 +177,20 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
     
 <!--     	</div> -->
 <!--       </div>	 -->
-	  <h5 class="tableau-top">Skaters</h5>
+	  <h5 class="tableau-top"><?php echo $positionSkaters?></h5>
       <div class="card leader-container">
         <div class="card-header pt-0">
       
          <div class="card-heading"></div>
           <ul class="nav nav-tabs card-header-tabs" id="top-scorers-list" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" href="#top-scoring-points" role="tab" aria-controls="top-scoring-points" aria-selected="true">Points</a>
+              <a class="nav-link active" href="#top-scoring-points" role="tab" aria-controls="top-scoring-points" aria-selected="true"><?php echo $leaderPointsF?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link"  href="#top-scoring-goals" role="tab" aria-controls="top-scoring-goals" aria-selected="false">Goals</a>
+              <a class="nav-link"  href="#top-scoring-goals" role="tab" aria-controls="top-scoring-goals" aria-selected="false"><?php echo $leaderGoalF?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#top-scoring-assists" role="tab" aria-controls="top-scoring-assists" aria-selected="false">Assists</a>
+              <a class="nav-link" href="#top-scoring-assists" role="tab" aria-controls="top-scoring-assists" aria-selected="false"><?php echo $leaderAssistF?></a>
             </li>
           </ul>
         </div>
@@ -230,19 +230,19 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
     
 <!--     	</div> -->
 <!--       </div> -->
-	  <h5 class="tableau-top">Defenseman</h5>
+	  <h5 class="tableau-top"><?php echo $positionD?></h5>
       <div class="card leader-container">
         <div class="card-header pt-0">
          <div class="card-heading"></div>
           <ul class="nav nav-tabs card-header-tabs" id="top-scorers-defense-list" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" href="#top-scoring-defense-points" role="tab" aria-controls="top-scoring-defense-points" aria-selected="true">Points</a>
+              <a class="nav-link active" href="#top-scoring-defense-points" role="tab" aria-controls="top-scoring-defense-points" aria-selected="true"><?php echo $leaderPointsF?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link"  href="#top-scoring-defense-goals" role="tab" aria-controls="top-scoring-defense-goals" aria-selected="false">Goals</a>
+              <a class="nav-link"  href="#top-scoring-defense-goals" role="tab" aria-controls="top-scoring-defense-goals" aria-selected="false"><?php echo $leaderGoalF?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#top-scoring-defense-assists" role="tab" aria-controls="top-scoring-defense-assists" aria-selected="false">Assists</a>
+              <a class="nav-link" href="#top-scoring-defense-assists" role="tab" aria-controls="top-scoring-defense-assists" aria-selected="false"><?php echo $leaderAssistF?></a>
             </li>
           </ul>
         </div>
@@ -282,19 +282,19 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
     
 <!--     	</div> -->
 <!--    	  </div> -->
-   	  <h5 class="tableau-top">Goalies <span style="font-size: 0.75rem">(played for <?php echo $minGameCount;?> or more games)</span></h5>
+   	  <h5 class="tableau-top"><?php echo $positionGoalie?> <span style="font-size: 0.75rem">(played for <?php echo $minGameCount;?> or more games)</span></h5>
       <div class="card leader-container">
         <div class="card-header pt-0">
          
           <ul class="nav nav-tabs card-header-tabs" id="top-goalies-list" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" href="#top-scoring-goalies-points" role="tab" aria-controls="top-scoring-goalies-points" aria-selected="true">GAA</a>
+              <a class="nav-link active" href="#top-scoring-goalies-points" role="tab" aria-controls="top-scoring-goalies-points" aria-selected="true"><?php echo $leaderAVG?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link"  href="#top-scoring-goalies-goals" role="tab" aria-controls="top-scoring-goalies-goals" aria-selected="false">SV%</a>
+              <a class="nav-link"  href="#top-scoring-goalies-goals" role="tab" aria-controls="top-scoring-goalies-goals" aria-selected="false"><?php echo $leaderPct?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#top-scoring-goalies-assists" role="tab" aria-controls="top-scoring-goalies-assists" aria-selected="false">SHUTOUTS</a>
+              <a class="nav-link" href="#top-scoring-goalies-assists" role="tab" aria-controls="top-scoring-goalies-assists" aria-selected="false"><?php echo $leaderSOF?></a>
             </li>
           </ul>
         </div>

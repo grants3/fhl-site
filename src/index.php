@@ -33,9 +33,9 @@ include 'head.php';
     					<div class="card-header p-2">
     						<h4 class="m-0"><?php
     						if (PLAYOFF_MODE) {
-                                echo 'Playoff Tree';
+    						    echo $StandingsTreeTitle;
                             } else {
-                                echo 'Overall Standings';
+                                echo $standingOVTitle;
                             }
                     
                             ?></h4>
@@ -55,7 +55,7 @@ include 'head.php';
     
 				    <div class="card mt-3">
     					<div class="card-header p-2">
-    						<h4 class="m-0">News</h4>
+    						<h4 class="m-0"><?php echo $mainNews;?></h4>
     					</div>
     					<div class="card-body p-2">
     						<?php include FS_ROOT.'component/News.php'; ?>
@@ -65,7 +65,7 @@ include 'head.php';
     				    					        			
     			    <div class="card">
     					<div class="card-header p-2">
-    						<h4 class="m-0">Waivers</h4>
+    						<h4 class="m-0"><?php echo $waiversTitle;?></h4>
     					</div>
     					<div class="card-body p-2">
     						<?php //include 'MiniWaivers.php'; ?>
@@ -85,7 +85,7 @@ include 'head.php';
     
     				<div class="card">
     					<div class="card-header p-2">
-    						<h4 class="m-0">Next Games</h4>
+    						<h4 class="m-0"><?php echo $todayNextGames;?></h4>
     					</div>
     					<div class="card-body p-2">
     						<?php include FS_ROOT.'component/MiniNextGames.php'; ?>
@@ -94,7 +94,7 @@ include 'head.php';
     
     				<div class="card">
     					<div class="card-header p-2">
-    						<h4 class="m-0">Leaders</h4>
+    						<h4 class="m-0"><?php echo $leaderTitle;?></h4>
     					</div>
     					<div class="card-body p-2">
     						<?php //include FS_ROOT.'MiniTop5.php'; ?>

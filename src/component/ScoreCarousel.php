@@ -253,7 +253,7 @@ if ($scheduleHolder->isSeasonStarted()) {
             //echo '<tbody>';
             echo '<col><col>'; //define two columns so we can still colspan the header.
             echo '<tr style = "text-transform: uppercase;">'; // header
-            echo '<th colspan="2">Final'. (($games->getIsOt()) ? '(OT)' : '').'</th>';
+            echo '<th colspan="2">Final'. (($games->getIsOt()) ? '('.$schedOT.')' : '').'</th>';
             echo '</tr>';
             
             echo '<tr class="d-flex">'; // score 1

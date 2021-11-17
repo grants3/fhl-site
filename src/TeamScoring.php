@@ -51,11 +51,11 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 						<div class="col py-1 pr-1">
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<label class="input-group-text" for="seasonMenu">Season</label>
+									<label class="input-group-text" for="seasonMenu"><?php echo $homeSeason;?></label>
 								</div>
 
 								<select class="col custom-select" id="seasonMenu">
-									<option selected value="Current">Current</option>
+									<option selected value="Current"><?php echo $allCurrent;?></option>
 									<?php 
 
 									if (!empty($previousSeasons)) {
@@ -73,7 +73,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 						<div class="col py-1">
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<label class="input-group-text" for="typeMenu">Type</label>
+									<label class="input-group-text" for="typeMenu"><?php echo $seasonType;?></label>
 								</div>
 								<select class="custom-select" id="typeMenu">
 <!-- 									<option selected value=REG>Regular</option> -->
@@ -82,11 +82,11 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
                                         <?php 
                                         //if(isPlayoffs($folder, $playoffMode)){
                                         if(PLAYOFF_MODE){
-                                            echo '<option value=REG>Regular</option>';
-                                            echo '<option selected value=PLF>Playoffs</option> ';
+                                            echo '<option value=REG>'.$seasonRegular.'</option>';
+                                            echo '<option selected value=PLF>'.$seasonPLF.'</option> ';
                                         }else{
-                                            echo '<option selected value=REG>Regular</option>';
-                                            echo '<option disabled value=PLF >Playoffs</option> ';
+                                            echo '<option selected value=REG>'.$seasonRegular.'</option>';
+                                            echo '<option disabled value=PLF >'.$seasonPLF.'</option> ';
                                         }
                                         ?>
 								</select>

@@ -4,7 +4,7 @@ $dataTablesRequired = 1; //require datatables import
 require_once 'config.php';
 include 'lang.php';
 $CurrentHTML = 'FreeAgents.php';
-$CurrentTitle = 'Free Agents';
+$CurrentTitle = $allFreeAgents;
 $CurrentPage = 'FreeAgents';
 //$SecurePage = true;
 include 'head.php';
@@ -34,14 +34,14 @@ include 'head.php';
     									<label class="input-group-text" for="positionInputField">Position</label>
     								</div>
     								<select class="custom-select" id="positionInputField">
-    									<option value="">All Players</option>
-    									<option value="Skaters">All Skaters</option>
-    									<option value="Forwards">All Forwards</option>
-    									<option value="C">Center</option>
-    									<option value="RW">Right Wing</option>
-    									<option value="LW">Left Wing</option>
-    									<option value="D">Defense</option>
-    									<option value="G">Goalie</option>
+          								<option value=""><?php echo $positionAll?></option>
+    									<option value="Skaters"><?php echo $positionSkaters?></option>
+            							<option value="Forwards"><?php echo $positionForwards?></option>
+            							<option value="C"><?php echo $positionC?></option>
+            							<option value="RW"><?php echo $positionRW?></option>
+            							<option value="LW"><?php echo $positionLW?></option>
+            							<option value="D"><?php echo $positionD?></option>
+            							<option value="G"><?php echo $positionGoalie?></option>
     								</select>
     							</div>
     						</div>
@@ -129,7 +129,7 @@ include 'head.php';
                 		          echo '<thead>
                                             <tr>
                                                 <th>'.$rostersName.'</th>
-                                                <th>Team</th>
+                                                <th>'.$playerSearchTeam.'</th>
                                                 <th>Age</th>
                                                 <th>Status</th>
                                     			<th>PO</th>
@@ -222,7 +222,8 @@ include 'head.php';
         pagingType: "simple_numbers",
         lengthMenu: [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
         language: {
-            "lengthMenu": "Display _MENU_ records"
+            "lengthMenu": "Display _MENU_ records",
+            "search": "<?php echo $playerSearchSearch;?>"
         },   
         search: {
             "regex": true

@@ -98,32 +98,19 @@ $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
                         <tbody style="font-weight:normal">
                         	<?php foreach ($scoringHolder->getSkaters() as $skater) {
                         	
-                        	    //want to add other teams and total.
-//                         	    $skaterName = ''; 
-//                         	    $skaterNameAlign = 'text-left';
-//                         	    if(!empty($skater->getName())){
-//                         	        $skaterName = '<a href="CareerStatsPlayer.php?csName='.urlencode($skater->getName()).'">'.$skater->getName().'</a>';
-//                         	    }else{
-//                         	        $skaterNameAlign = "text-right";
-//                         	        $skaterName = '';
-//                         	        if($skater->getTeamAbbr() == 'TOT'){
-//                         	            $skaterName = 'Total';
-//                         	        }else{
-//                         	            $skaterTeamAbbr = $teamAbbrHolder->getTeamName($skater->getTeamAbbr());
-//                         	            $skaterName = !empty($skaterTeamAbbr) ? $skaterTeamAbbr : $skater->getTeamAbbr();
-//                         	            //$skaterName =  ucwords(strtolower($skaterName));
-//                         	            $skaterName = $skater->getTeamAbbr();
-//                         	        }
-      
-//                         	    }
+                        	    $position = $skater->getPosition();
+                        	    if($leagueLang == 'FR'){
+                        	        if('RW' === $position){
+                        	            $position = 'AD';
+                        	        }else if('LW' === $position){
+                        	            $position = 'AG';
+                        	        }
+                        	    }
                         	    
-                        	   // echo '<tr class="hover'.$c.'">
-//                         	    echo '<tr>
-//                     			<td class="'.$skaterNameAlign.'">'.$skaterName.'</td>
                         	    echo '<tr>
                     			<td class="text-left">'.$skater->getName().'</td>
                                 <td>'.$skater->getTeamAbbr().'</td>
-                    			<td>'.$skater->getPosition().'</td>
+                    			<td>'.$position.'</td>
                     			<td>'.($skater->getRookieStatus() ? '*' : '').'</td>
                     			<td>'.$skater->getGamesPlayed().'</td>
                     			<td>'.$skater->getGoals().'</td>

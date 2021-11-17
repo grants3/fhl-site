@@ -102,7 +102,7 @@ if($scheduleHolder->isScheduleComplete()){
         echo '<div class="'.$miniNexyAddMargin.'">';
         //echo '<h5>Day' . $i . '</h5>';
     
-        echo '<h5 class="tableau-top m-0">Day ' . $i . '</h5>';
+        echo '<h5 class="tableau-top m-0">'.$schedDay.' ' . $i . '</h5>';
         //echo '</div>';
     
         echo '<div class = "row no-gutters d-flex justify-content-center latest-score-day">';

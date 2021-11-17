@@ -37,12 +37,12 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
-						<span class="input-group-text" id="seasonMenuHeader">Season</span>
+						<span class="input-group-text" id="seasonMenuHeader"><?php echo $homeSeason;?></span>
 					</div>
 
 					<select class="form-control" aria-label="Select Season"
 						id="seasonMenu" aria-describedby="seasonMenuHeader">
-						<option value="Current">Current</option>
+						<option value="Current"><?php echo $allCurrent;?></option>
 						<?php 
                         //set dropdown dynamically from prev season dirs
 						if (!empty($previousSeasons)) {
@@ -62,11 +62,11 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 					<ul class="nav nav-tabs nav-fill">
 						<li class="nav-item"><a
 							class="nav-link <?php echo $seasonActive?>" href="#Season"
-							data-toggle="tab">Regular Season</a></li>
+							data-toggle="tab"><?php echo $seasonRegular;?></a></li>
 
 						<li class="nav-item"><a
 							class="nav-link <?php echo $playoffActive?>" href="#Playoffs"
-							data-toggle="tab">Playoffs</a></li>
+							data-toggle="tab"><?php echo $seasonPLF;?></a></li>
 					</ul>
 				</div>
 				<div class="card-body tab-content m-0 p-0 pt-2">

@@ -160,5 +160,18 @@ function formatHtmlText(string $text){
     return str_replace(' ', '&nbsp', $text);
 }
 
+// Format Ordinal
+function ordinalEnglish($number) {
+    $ends = array('th','st','nd','rd','th','th','th','th','th','th');
+    if ((($number % 100) >= 11) && (($number%100) <= 13))
+        return $number. 'th';
+        else
+            return $number. $ends[$number % 10];
+}
+function ordinalFrench($number) {
+    if($number == 1) return $number. 'er';
+    else return $number. 'e';
+}
+
 
 ?>

@@ -85,7 +85,7 @@ include 'TeamHeader.php';
 
 			<div class = "row">
 				<div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2">
-				<div class="tableau-top">Team Schedule</div>
+				<div class="tableau-top"><?php echo $ScheldTeam;?></div>
 				<div class = "table-responsive">
 					<table class="table table-sm table-striped table-rounded-bottom">
 					

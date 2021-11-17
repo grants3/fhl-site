@@ -17,7 +17,18 @@ if($leagueLang == 'FR') {
 	$alltransact = "Mouvement";
 	$allFreeAgents = "Agents libres";
 	$allLeague = "Ligue";
+	$allCurrent = "Actuel";
+	$allOther = "Autre";
 	
+	//main
+	$mainNews = 'Nouvelles';
+	
+	//season
+	$seasonType = "Type";
+	$seasonRegular = "Régulière";
+	$seasonPLF = "Séries";
+	
+
 	//position
 	$positionLW  = "Ailier Gauche";
 	$positionC = "Centre";
@@ -25,8 +36,8 @@ if($leagueLang == 'FR') {
 	$positionD = "Défenseur";
 	$positionGoalie = "Gardien";
 	$positionForwards = "Attaquants";
-	$positionSkaters = "Skaters";
-	$positionAll = "Tous Les Joueurs";
+	$positionSkaters = "Patineurs";
+	$positionAll = "Toutes Les Joueurs";
 	
 	// Accueil
 	$homeTitle = 'Accueil';
@@ -59,6 +70,10 @@ if($leagueLang == 'FR') {
 	$ScheldVisitor = 'Visiteur';
 	$ScheldHome = 'Local';
 	$ScheldMatchups = 'Partie Vs';
+	$ScheldTeam = "Calendrier de l'équipe";
+	$ScheldRemaining='Restant';
+	$ScheldCompleted='Fini';
+	$ScheldAt='à';
 	
 	// Classement
 	$standingTitle = 'Classement';
@@ -113,6 +128,7 @@ if($leagueLang == 'FR') {
 	$gamesAttendance = 'Assistance';
 	$gamesNetProfit = 'Profit Net';
 	$gamesFinancial = 'FINANCE';
+	$gamesName = 'Nom';
 	$gamesGoal = 'B';
 	$gamesGoalF = 'Buts';
 	$gamesAss = 'A';
@@ -212,6 +228,7 @@ if($leagueLang == 'FR') {
 	$leaderAVGF = 'Moyenne de buts alloués par partie';
 	$leaderPct = 'GA%';
 	$leaderPctF = '% de buts alloués';
+	$leaderAll = 'Toutes les Meneurs';
 	
 	// Finance
 	$financeTitle = 'Finances';
@@ -314,7 +331,7 @@ if($leagueLang == 'FR') {
 	$linesLW = 'AG';
 	
 	// Overall Standings
-	$standingOVTitle = 'Overall Standings';
+	$standingOVTitle = 'Classement Général';
 	
 	// Joueurs
 	$joueursTitle = 'Joueurs';
@@ -377,6 +394,7 @@ if($leagueLang == 'FR') {
 	$rostersOVF = 'Total des habiletés';
 	$rostersFarm = 'Club-École';
 	$rostersLinked = 'Le fichier Rosters.html contient les données du LinkedRosters.html';
+	$rostersLink = "Lien";
 	
 	// Pointeurs
 	$scoringTitle = 'Pointeurs';
@@ -534,6 +552,8 @@ if($leagueLang == 'FR') {
 	$transactPlayers = 'JOUEUR';
 	$transactTeam = 'TM';
 	$transactStatus = 'STATUS';
+	$transactInj = 'Blessures';
+	$transactTrades = 'Échanges';
 	
 	// Top5
 	$top5Points = 'TOP 5 POINTS';
@@ -637,6 +657,18 @@ if($leagueLang == 'FR') {
 	$langUnassignedPlayers = 'Joueurs Libres';
 	$langUnassignedPlayersNotFound = 'Aucun joueur trouvé!';
 	
+	//scores
+	$scoresHeadingFirst = '1er';
+	$scoresHeadingSecond = '2e';
+	$scoresHeadingThird = '3e';
+	$scoresHeadingOt = 'PROL';
+	
+	//player search
+	$playerSearchSearch = 'Cherche';
+	$playerSearchMoreFilters='Affiner les résultats';
+	$playerSearchTeam = 'Équipe';
+	$playerSearchSalary = 'Équipe';
+	
 	// ChatBox
 	$langChatBoxTitle = 'Conversation';
 	$langChatBoxNew = 'Nouveau message!';
@@ -671,13 +703,23 @@ if($leagueLang == 'EN') {
 	$alltransact = "Transactions";
 	$allFreeAgents = "Free Agents";
 	$allLeague = "League";
+	$allCurrent = "Current";
+	$allOther = "Other";
+	
+	//main
+	$mainNews = 'Nouvelles';
+	
+	//season
+	$seasonType = "Type";
+	$seasonRegular = "Regular";
+	$seasonPLF = "Playoffs";
 	
 	//position
 	$positionLW  = "Left Wing";
 	$positionC = "Center";
 	$positionRW = "Right Wing";
 	$positionD = "Defenseman";
-	$positionGoalie = "Goalie";
+	$positionGoalie = "Goalies";
 	$positionForwards = "Forwards";
 	$positionSkaters = "Skaters";
 	$positionAll = "All Players";
@@ -713,6 +755,10 @@ if($leagueLang == 'EN') {
 	$ScheldVisitor = 'Visitor';
 	$ScheldHome = 'Home';
 	$ScheldMatchups = 'Team Matchups';
+	$ScheldTeam = "Team Schedule";
+	$ScheldRemaining="Remaining";
+	$ScheldCompleted="Completed";
+	$ScheldAt="at";
 	
 	// Standing
 	$standingTitle = 'Standings';
@@ -767,16 +813,17 @@ if($leagueLang == 'EN') {
 	$gamesAttendance = 'Attendance';
 	$gamesNetProfit = 'Net Profit';
 	$gamesFinancial = 'FINANCIAL';
+	$gamesName = 'Name';
 	$gamesGoal = 'G';
 	$gamesGoalF = 'Goals';
 	$gamesAss = 'A';
 	$gamesAssF = 'Assits';
-	$gamesPoints = 'P';
+	$gamesPoints = 'PTS';
 	$gamesPointsF = 'Points';
-	$gamesDiff = 'Differential';
+	$gamesDiff = '+/-';
 	$gamesPIM = 'PIM';
 	$gamesPIMF = 'Penalty in minutes';
-	$gamesShots = 'S';
+	$gamesShots = 'SOG';
 	$gamesShotsF = 'Shots';
 	$gamesHT = 'HT';
 	$gamesHTF = 'Hit';
@@ -861,11 +908,12 @@ if($leagueLang == 'EN') {
 	$leaderGA = 'GA';
 	$leaderGAF = 'Goals Against';
 	$leaderSO = 'SO';
-	$leaderSOF = 'Shootout';
+	$leaderSOF = 'Shutouts';
 	$leaderAVG = 'GAA';
 	$leaderAVGF = 'Goals Against Average';
-	$leaderPct = 'GA%';
-	$leaderPctF = 'Goals Against %';
+	$leaderPct = 'SV%';
+	$leaderPctF = 'Save %';
+	$leaderAll = 'All Leaders';
 	
 	// Finances
 	$financeTitle = 'Financial Report';
@@ -1031,6 +1079,7 @@ if($leagueLang == 'EN') {
 	$rostersOVF = 'Overall';
 	$rostersFarm = 'Farm Roster';
 	$rostersLinked = 'The file Rosters.html was overwritten by LinkedRosters.html';
+	$rostersLink = "Link";
 	
 	// Team Scoring
 	$scoringTitle = 'Team Scoring';
@@ -1188,6 +1237,8 @@ if($leagueLang == 'EN') {
 	$transactPlayers = 'PLAYER';
 	$transactTeam = 'TEAM';
 	$transactStatus = 'STATUS';
+	$transactInj = 'Injuries';
+	$transactTrades = 'Trades';
 	
 	// Top5
 	$top5Points = 'TOP 5 POINTS';
@@ -1290,6 +1341,17 @@ if($leagueLang == 'EN') {
 	// Unassigned Players
 	$langUnassignedPlayers = 'Unassigned Players';
 	$langUnassignedPlayersNotFound = 'No Player Found!';
+	
+	//scores
+	$scoresHeadingFirst = '1st';
+	$scoresHeadingSecond = '2nd';
+	$scoresHeadingThird = '3rd';
+	$scoresHeadingOt = 'OT';
+	
+	//player search
+	$playerSearchSearch = 'Search';
+	$playerSearchMoreFilters='More Filters';
+	$playerSearchTeam = 'Team';
 	
 	// ChatBox
 	$langChatBoxTitle = 'Chat Box';

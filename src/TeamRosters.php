@@ -57,10 +57,10 @@ include 'TeamHeader.php';
                             echo'<div id="rosterTabs" class="card-header px-2 px-lg-4 pb-1 pt-2">';
                             echo'<ul class="nav nav-tabs nav-fill">
                                 			<li class="nav-item">
-                                                <a class="nav-link active" href="#Pro" data-toggle="tab">Pro Roster</a>
+                                                <a class="nav-link active" href="#Pro" data-toggle="tab">'.$rostersPro.'</a>
                                 			</li>
                                 			<li class="nav-item">
-                                                <a class="nav-link" href="#Farm" data-toggle="tab">Farm Roster</a>
+                                                <a class="nav-link" href="#Farm" data-toggle="tab">'.$rostersFarm.'</a>
                                 			</li>
                                 </ul>';
                             echo '</div>';
@@ -106,7 +106,7 @@ include 'TeamHeader.php';
                                             <th data-toggle="tooltip" data-placement="top" title="'.$linkedYearF.'">CT</th>
                                             <th data-toggle="tooltip" data-placement="top" title="'.$joueursHeightF.'">HT</th>
                                             <th data-toggle="tooltip" data-placement="top" title="'.$joueursWeight.'">WT</th>
-                                            <th data-toggle="tooltip" data-placement="top" class="text-left" title="Link">LINK</th>
+                                            <th data-toggle="tooltip" data-placement="top" class="text-left text-uppercase" title="'.$rostersLink.'">'.$rostersLink.'</th>
                             			</tr>    
                                     </thead>';
                                     
@@ -120,9 +120,14 @@ include 'TeamHeader.php';
                                     
                                     echo '<tbody style="font-weight:normal">';
                                     //create result rows
+                                    $totalContract = 0;
+                                    $totalSalary = 0;
+                                    $totalWeight = 0;
+                                    $totalAge = 0;
                                     foreach ($results as $roster) {
                                         
                                         $vitals = $playerVitals->findVital($roster->getNumber(), $roster->getName());
+                                        $totalContract += $vitals->getContractLength();
                                         //var_dump($vitals);
                                         
 //                                         $scoringNameSearch = htmlspecialchars($roster->getName());
@@ -141,11 +146,30 @@ include 'TeamHeader.php';
                                         
                                         $playerCareersLink = 'CareerStatsPlayer.php?csName='.htmlspecialchars_decode($roster->getName());
                                         $playerSalary = format_money($vitals->getSalary(),'%(.0n');
+                                        $totalSalary += $vitals->getSalary();
+                                        $totalWeight += preg_replace("/[^0-9.]/", "", $vitals->getWeight());
+                                        $totalAge +=$vitals->getAge();
                                         
+                                        $position = $roster->getPosition();
+                                        $hand = $roster->getHand();
+                                        if($leagueLang == 'FR'){
+                                            if('RW' === $position){
+                                                $position = 'AD';     
+                                            }else if('LW' === $position){
+                                                $position = 'AG';
+                                            }
+                                            
+                                            if("L"== $hand){
+                                                $hand = 'G';
+                                            }else if("R" == $hand){
+                                                $hand = 'D';
+                                            }
+                                        }
+
                                         echo '<tr>';
                                         echo '<td class="text-left"><a href="'.$playerCareersLink.'">'.$roster->getName().'</a></td>';
-                                            echo '<td>'.$roster->getPosition().'</td>';
-                                            echo '<td>'.$roster->getHand().'</td>';
+                                            echo '<td>'.$position.'</td>';
+                                            echo '<td>'.$hand.'</td>';
                                             echo '<td>'.$roster->getCondition().'</td>';
                                             echo '<td>'.$roster->getInjStatus().'</td>';
                                             echo '<td>'.$roster->getIt().'</td>';
@@ -167,12 +191,17 @@ include 'TeamHeader.php';
                                             echo '<td class="text-center">'.$vitals->getContractLength().'</td>';
                                             echo '<td>'.$vitals->getHeight().'</td>';
                                             echo '<td>'.$vitals->getWeight().'</td>';
-                                            echo '<td class="text-left"><a href="'.$hockeyFutureLink.'">LINK</a></td>';
+                                            echo '<td class="text-left text-uppercase"><a href="'.$hockeyFutureLink.'">'.$rostersLink.'</a></td>';
                                         echo '</tr>';             
                                     }
                                     echo '</tbody>';
       
-                                    $avgPlayerSalary = format_money($playerVitals->getAvgSalary(),'%.0n');
+                                    //$avgPlayerSalary = format_money($playerVitals->getAvgSalary(),'%.0n', true);
+                                    $totalPlayers = count($results);
+                                    $averageAge = $totalPlayers ? format_number($totalAge/$totalPlayers,0) : 0;
+                                    $avgPlayerSalary = $totalPlayers ? format_money($totalSalary/$totalPlayers,'%.0n', true) : 0;
+                                    $averageContract = $totalPlayers ? format_number($totalContract/$totalPlayers,1) : 0;
+                                    $averageWeight = $totalPlayers ? format_number($totalWeight/$totalPlayers,0).' lbs' : '0 lbs';
                                     //display averages in table footer
                                     echo ' <tfoot>
                                         <tr>
@@ -195,11 +224,11 @@ include 'TeamHeader.php';
                                             <td>'.$rosterAvgs->getAvgEx().'</td>
                                             <td>'.$rosterAvgs->getAvgLd().'</td>
                                             <td>'.$rosterAvgs->getAvgOv().'</td>
-                                            <td>'.$playerVitals->getAvgAge().'</td>
+                                            <td>'.$averageAge.'</td>
                                             <td class="text-right">'.$avgPlayerSalary.'</td>
-                                            <td></td>
+                                            <td>'.$averageContract.'</td>
                                             <td>'.$playerVitals->getAvgHeight().'</td>
-                                            <td>'.$playerVitals->getAvgWeight().'</td>
+                                            <td>'.$averageWeight.'</td>
                                             <td></td> 
                             			</tr>
                                     </tfoot>'; 
@@ -213,7 +242,7 @@ include 'TeamHeader.php';
                             echo '<h6 class = "text-center">'.$allLastUpdate.' '.$lastUpdated.'</h6>';
                         }else{
                             //parsing error
-                            echo '<h3>ERROR PARSING ROSTERS</h3>';
+                            echo '<h6>ERROR PARSING ROSTERS</h6>';
                         }
                         
         

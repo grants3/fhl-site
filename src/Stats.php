@@ -16,7 +16,7 @@ include_once FS_ROOT.'classes/TeamAbbrHolder.php';
 include_once FS_ROOT.'classes/ScoringAccumulator.php';
 
 $CurrentHTML = 'Stats.php';
-$CurrentTitle = 'Statistics';
+$CurrentTitle = $homeStats;
 $CurrentPage = 'Statistics';
 
 $seasonId='';
@@ -218,7 +218,7 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
     		<?php include 'component/SeasonSelect.php';?>
 			<div class="row no-gutters">
 				<div class="col-sm-12 col-md-12 col-lg-6 p-1">
-					<h5 class="tableau-top">Skaters</h5>
+					<h5 class="tableau-top"><?php echo $positionSkaters?></h5>
 					<div class="leader-container">
     					<div class="card">
                             <div class="card-header pt-0">
@@ -226,13 +226,13 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
                              <div class="card-heading"></div>
                               <ul class="nav nav-tabs card-header-tabs" id="top-scorers-list" role="tablist">
                                 <li class="nav-item">
-                                  <a class="nav-link active" href="#top-scoring-points" role="tab" aria-controls="top-scoring-points" aria-selected="true">Points</a>
+                                  <a class="nav-link active" href="#top-scoring-points" role="tab" aria-controls="top-scoring-points" aria-selected="true"><?php echo $leaderPointsF?></a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link"  href="#top-scoring-goals" role="tab" aria-controls="top-scoring-goals" aria-selected="false">Goals</a>
+                                  <a class="nav-link"  href="#top-scoring-goals" role="tab" aria-controls="top-scoring-goals" aria-selected="false"><?php echo $leaderGoalF?></a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link" href="#top-scoring-assists" role="tab" aria-controls="top-scoring-assists" aria-selected="false">Assists</a>
+                                  <a class="nav-link" href="#top-scoring-assists" role="tab" aria-controls="top-scoring-assists" aria-selected="false"><?php echo $leaderAssistF?></a>
                                 </li>
                               </ul>
                             </div>
@@ -263,7 +263,7 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
 					</div>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-6 p-1">
-					<h5 class="tableau-top">Defenseman</h5>
+					<h5 class="tableau-top"><?php echo $positionD?></h5>
 					<div class="leader-container">
 
                         <div class="card">
@@ -271,13 +271,13 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
                                  <div class="card-heading"></div>
                                   <ul class="nav nav-tabs card-header-tabs" id="top-scorers-defense-list" role="tablist">
                                     <li class="nav-item">
-                                      <a class="nav-link active" href="#top-scoring-defense-points" role="tab" aria-controls="top-scoring-defense-points" aria-selected="true">Points</a>
+                                      <a class="nav-link active" href="#top-scoring-defense-points" role="tab" aria-controls="top-scoring-defense-points" aria-selected="true"><?php echo $leaderPointsF?></a>
                                     </li>
                                     <li class="nav-item">
-                                      <a class="nav-link"  href="#top-scoring-defense-goals" role="tab" aria-controls="top-scoring-defense-goals" aria-selected="false">Goals</a>
+                                      <a class="nav-link"  href="#top-scoring-defense-goals" role="tab" aria-controls="top-scoring-defense-goals" aria-selected="false"><?php echo $leaderGoalF?></a>
                                     </li>
                                     <li class="nav-item">
-                                      <a class="nav-link" href="#top-scoring-defense-assists" role="tab" aria-controls="top-scoring-defense-assists" aria-selected="false">Assists</a>
+                                      <a class="nav-link" href="#top-scoring-defense-assists" role="tab" aria-controls="top-scoring-defense-assists" aria-selected="false"><?php echo $leaderAssistF?></a>
                                     </li>
                                   </ul>
                                 </div>
@@ -309,7 +309,7 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
 					</div>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-6 p-1">
-					<h5 class="tableau-top">Goalies <span style="font-size: 0.75rem">(played for <?php echo $minGameCount;?> or more games)</span></h5>
+					<h5 class="tableau-top"><?php echo $positionGoalie?> <span style="font-size: 0.75rem">(played for <?php echo $minGameCount;?> or more games)</span></h5>
 					</h6>
 					<div class="leader-container">
 
@@ -318,13 +318,13 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
                              
                               <ul class="nav nav-tabs card-header-tabs" id="top-goalies-list" role="tablist">
                                 <li class="nav-item">
-                                  <a class="nav-link active" href="#top-scoring-goalies-points" role="tab" aria-controls="top-scoring-goalies-points" aria-selected="true">GAA</a>
+                                  <a class="nav-link active" href="#top-scoring-goalies-points" role="tab" aria-controls="top-scoring-goalies-points" aria-selected="true"><?php echo $leaderAVG?></a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link"  href="#top-scoring-goalies-goals" role="tab" aria-controls="top-scoring-goalies-goals" aria-selected="false">SV%</a>
+                                  <a class="nav-link"  href="#top-scoring-goalies-goals" role="tab" aria-controls="top-scoring-goalies-goals" aria-selected="false"><?php echo $leaderPct?></a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link" href="#top-scoring-goalies-assists" role="tab" aria-controls="top-scoring-goalies-assists" aria-selected="false">Shutouts</a>
+                                  <a class="nav-link" href="#top-scoring-goalies-assists" role="tab" aria-controls="top-scoring-goalies-assists" aria-selected="false"><?php echo $leaderSOF?></a>
                                 </li>
                               </ul>
                             </div>
@@ -357,7 +357,7 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
 				</div><!-- end goalies col -->
 				
 				<div class="col-sm-12 col-md-12 col-lg-6 p-1">
-					<h5 class="tableau-top">Rookies</h5>
+					<h5 class="tableau-top"><?php echo $individualRookies?></h5>
 					<div class="leader-container">
 
                     	<div class="card">
@@ -365,13 +365,13 @@ $assistsArrayR = $scoringAccumulator->getTopScorers('assists',10, $rFilter);
                              
                               <ul class="nav nav-tabs card-header-tabs" id="top-rookies-list" role="tablist">
                                 <li class="nav-item">
-                                  <a class="nav-link active" href="#top-scoring-rookies-points" role="tab" aria-controls="top-scoring-rookies-points" aria-selected="true">Points</a>
+                                  <a class="nav-link active" href="#top-scoring-rookies-points" role="tab" aria-controls="top-scoring-rookies-points" aria-selected="true"><?php echo $leaderPointsF?></a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link"  href="#top-scoring-rookies-goals" role="tab" aria-controls="top-scoring-rookies-goals" aria-selected="false">Goals</a>
+                                  <a class="nav-link"  href="#top-scoring-rookies-goals" role="tab" aria-controls="top-scoring-rookies-goals" aria-selected="false"><?php echo $leaderGoalF?></a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link" href="#top-scoring-rookies-assists" role="tab" aria-controls="top-scoring-rookies-assists" aria-selected="false">Assists</a>
+                                  <a class="nav-link" href="#top-scoring-rookies-assists" role="tab" aria-controls="top-scoring-rookies-assists" aria-selected="false"><?php echo $leaderAssistF?></a>
                                 </li>
                               </ul>
                             </div>

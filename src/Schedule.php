@@ -108,11 +108,11 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
 				<div id="standingsTabs" class="card-header px-2 px-lg-4 pb-1 pt-2">
 					<ul class="nav nav-tabs nav-fill">
 						<li class="nav-item">
-							<a class="nav-link active" href="#remaining" data-toggle="tab">Remaining</a>
+							<a class="nav-link active" href="#remaining" data-toggle="tab"><?php echo $ScheldRemaining;?></a>
 						</li>
 
 						<li class="nav-item">
-							<a class="nav-link" href="#completed" data-toggle="tab">Completed</a>
+							<a class="nav-link" href="#completed" data-toggle="tab"><?php echo $ScheldCompleted;?></a>
 						</li>
 					</ul>
 				</div>
@@ -152,7 +152,7 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
                     			        echo '<div class="col-sm-12 col-md-6 col-lg-4 mt-3">';
                     			        echo '<div class="card ">';
                     			        echo '<div class="card-header day-header p-0">
-                                            	<h5 class="mb-0 ml-2"> Day: '.$schedule->getGameDay().($schedule->getGameDay() == $scheduleHolder->getTradeDeadline() ? ' TRADE DEADLINE' : '').'</h5>
+                                            	<h5 class="mb-0 ml-2"> '.$schedDay.': '.$schedule->getGameDay().($schedule->getGameDay() == $scheduleHolder->getTradeDeadline() ? ' TRADE DEADLINE' : '').'</h5>
                                               </div>';
                     			        echo '<div class="card-body p-1">';
                     			        $lastDay = $schedule->getGameDay();
@@ -182,7 +182,7 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
                                       		
                                       		 <li class="list-group-item p-1 border-0">
                                       		 	<a class="lien-noir" style="display:block; width:100%;" href="games.php?num=<?php echo$schedule->getGameNumber().$linkSeasonId.$linkRnd?>">
-                                             	<span><strong><?php echo $schedule->getTeam1().' at '.$schedule->getTeam2()?></strong>
+                                             	<span><strong><?php echo $schedule->getTeam1().' '.$ScheldAt.' '.$schedule->getTeam2()?></strong>
                                              	  <?php echo $schedule->getTeam1Score().' - '.$schedule->getTeam2Score().' '.$schedule->getGameTitle()?></span>
                                              	</a>
                                              </li>
@@ -196,7 +196,7 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
                                                 }
                                                 
                                                 ?>
-                                          	 <li class="list-group-item p-1 border-0 lien-noir"><span style="<?php echo $textStyle;?>"><?php echo $schedule->getTeam1().' at '.$schedule->getTeam2() ?></span></li>
+                                          	 <li class="list-group-item p-1 border-0 lien-noir"><span style="<?php echo $textStyle;?>"><?php echo $schedule->getTeam1().' '.$ScheldAt.' '.$schedule->getTeam2() ?></span></li>
                                              <?php 
                         			
                         			         }?>
@@ -263,7 +263,7 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
                     			        echo '<div class="col-sm-12 col-md-6 col-lg-4 mt-3">';
                     			        echo '<div class="card ">';
                     			        echo '<div class="card-header day-header p-0">
-                                            	<h5 class="mb-0 ml-2"> Day: '.$schedule->getGameDay().($schedule->getGameDay() == $scheduleHolder->getTradeDeadline() ? ' TRADE DEADLINE' : '').'</h5>
+                                            	<h5 class="mb-0 ml-2"> '.$schedDay.': '.$schedule->getGameDay().($schedule->getGameDay() == $scheduleHolder->getTradeDeadline() ? ' TRADE DEADLINE' : '').'</h5>
                                               </div>';
                     			        echo '<div class="card-body p-1">';
                     			        $lastDay = $schedule->getGameDay();
@@ -288,12 +288,12 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
                                       		
                                       		 <li class="list-group-item p-1 border-0">
                                       		 	<a class="lien-noir" style="display:block; width:100%;" href="games.php?num=<?php echo$schedule->getGameNumber().$linkSeasonId.$linkRnd?>">
-                                             	<span><strong><?php echo $schedule->getTeam1().' at '.$schedule->getTeam2()?></strong>
+                                             	<span><strong><?php echo $schedule->getTeam1().' '.$ScheldAt.' '.$schedule->getTeam2()?></strong>
                                              	  <?php echo $schedule->getTeam1Score().' - '.$schedule->getTeam2Score().' '.$schedule->getGameTitle()?></span>
                                              	</a>
                                              </li>
                                             <?php }else{?>
-                                          	 <li class="list-group-item p-1 border-0 lien-noir"><span><?php echo $schedule->getTeam1().' at '.$schedule->getTeam2() ?></span></li>
+                                          	 <li class="list-group-item p-1 border-0 lien-noir"><span><?php echo $schedule->getTeam1().' '.$ScheldAt.' '.$schedule->getTeam2() ?></span></li>
                                              <?php 
                         			
                         			         }?>

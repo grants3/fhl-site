@@ -33,7 +33,7 @@
 
 
 		<div class="container px-0">
-			<a class="navbar-brand" href="<?php echo (HOME ? HOME : '.');?>">Home</a>
+			<a class="navbar-brand" href="<?php echo (HOME ? HOME : '.');?>"><?php echo $homeTitle?></a>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -95,7 +95,7 @@
 						</ul>
 					  </li>
 					  <li class="dropdown">
-						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other&nbsp;<span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo$allOther?>&nbsp;<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li class="nav-item"><a class="nav-link-inner" href="GMs.php"><?php echo formatHtmlText($GMsTitle)?></a></li>
 							<li class="dropdown-divider"></li>

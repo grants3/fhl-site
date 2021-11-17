@@ -102,13 +102,24 @@ $teamCardInfo = new TeamInfo($standingsFile, $currentTeam);
         ?>
      </div>
 
+
+	 <?php 
+	 
+	 $teamCardPlace = $teamCardInfo->getPlace();
+	 if($leagueLang == 'FR'){
+	     $teamCardPlace = ordinalFrench($teamCardPlace);
+	 }else{
+	     $teamCardPlace = ordinalEnglish($teamCardPlace);
+	 }
+	 
+	 ?>
      <div class="header-container">
 
 		<div class="gloss"></div>
 		<div class="header">
 			<h3 class="mb-0" ><?php echo $CurrentTitle ?></h3>
 			<?php echo $currentTeam.' '.$teamCardInfo->getWins().'-'.$teamCardInfo->getLosses().'-'.$teamCardInfo->getTies() ?>
-			<?php echo '('.$teamCardInfo->getPlaceString().' '.$teamCardInfo->getConferenceSafeString().')' ?>
+			<?php echo '('.$teamCardPlace.' '.$teamCardInfo->getConferenceSafeString().')' ?>
 			
 		</div>
 	</div>

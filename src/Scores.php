@@ -588,11 +588,11 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 				    echo '<tbody>';
     				echo '<tr class="d-flex"  style = "text-transform: uppercase;">'; //header
     				    echo '<th class = "col-6"></th>';
-    				    echo '<th class = "col text-center">1st</th>';
-    				    echo '<th class = "col text-center">2nd</th>';
-    				    echo '<th class = "col text-center">3rd</th>';
+    				    echo '<th class = "col text-center">'.$scoresHeadingFirst.'</th>';
+    				    echo '<th class = "col text-center">'.$scoresHeadingSecond.'</th>';
+    				    echo '<th class = "col text-center">'.$scoresHeadingThird.'</th>';
     				    if ($gameOvertime[$i] != '') {
-    				        echo '<th class = "col text-center">OT</th>';
+    				        echo '<th class = "col text-center">'.$scoresHeadingOt.'</th>';
     				    }
     				    echo '<th class = "col text-center">T</th>';
                     echo '</tr>';
