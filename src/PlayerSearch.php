@@ -4,7 +4,7 @@ $dataTablesRequired = 1; //require datatables import
 require_once 'config.php';
 include 'lang.php';
 $CurrentHTML = 'PlayerSearch.php';
-$CurrentTitle ='Player Search';
+$CurrentTitle =$searchPlayerTitle;
 $CurrentPage = 'PlayerSearch';
 include 'head.php';
 

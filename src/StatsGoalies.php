@@ -11,7 +11,7 @@ include_once 'classes/ScoringObj.php';
 include_once 'classes/ScoringAccumulator.php';
 
 $CurrentHTML = 'StatsGoalies.php';
-$CurrentTitle = 'Statistics';
+$CurrentTitle = $allStats.' '.$positionGoalie;
 $CurrentPage = 'StatsGoalies';
 
 $dataTablesRequired = 1; //require datatables import
