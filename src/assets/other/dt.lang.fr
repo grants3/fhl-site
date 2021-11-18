@@ -128,9 +128,9 @@
     "decimal": ",",
     "info": "Affichage de _START_ à _END_ sur _TOTAL_ éléments",
     "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
-    "infoThousands": ".",
+    "infoThousands": " ",
     "search": "Rechercher:",
-    "thousands": ".",
+    "thousands": " ",
     "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
     "datetime": {
         "previous": "Précédent",
