@@ -202,7 +202,7 @@ var tradesTable = $('#trades-table').DataTable({
 	"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
     language: {
         emptyTable: "Sim data not found",
-        lengthMenu: "Display _MENU_ records",
+        <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
     },   
     "order": [],
 	"ajax": {
@@ -242,7 +242,7 @@ var eventsTable = $('#events-table').DataTable({
 	"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
     language: {
         emptyTable: "Sim data not found",
-        lengthMenu: "Display _MENU_ records",
+        <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
     },   
     "order": [],
 	"ajax": {
@@ -277,7 +277,8 @@ var injuriesTable = $('#inj-table').DataTable({
 	"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
     language: {
         emptyTable: "Sim data not found",
-        lengthMenu: "Display _MENU_ records",
+        <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
+        
     },   
     "order": [],
 	"ajax": {

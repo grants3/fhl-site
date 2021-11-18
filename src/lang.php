@@ -695,7 +695,7 @@ if($leagueLang == 'FR') {
 	$scoresHeadingOt = 'PROL';
 	
 	//player search
-	$playerSearchSearch = 'Cherche';
+	$playerSearchSearch = 'Rechercher';
 	$playerSearchMoreFilters='Affiner les résultats';
 	$playerSearchTeam = 'Équipe';
 	$playerSearchSalary = 'Équipe';

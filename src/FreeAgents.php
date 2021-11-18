@@ -222,8 +222,7 @@ include 'head.php';
         pagingType: "simple_numbers",
         lengthMenu: [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
         language: {
-            "lengthMenu": "Display _MENU_ records",
-            "search": "<?php echo $playerSearchSearch;?>"
+            <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
         },   
         search: {
             "regex": true

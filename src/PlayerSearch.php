@@ -42,7 +42,7 @@ $teams = new TeamHolder($gmFile);
 					<div class="col px-0 px-md-2 px-lg-3">
 
 						<!-- position -->
-						<div class="row">
+						<div class="row no-gutters">
 							<div class="input-group mb-3 col-sm-6">
 								<div class="input-group-prepend">
 									<label class="input-group-text" for="positionInputField">Position</label>
@@ -77,7 +77,7 @@ $teams = new TeamHolder($gmFile);
 							</div>
 			
 						</div>
-						<div class="row">
+						<div class="row no-gutters">
 										
 							<!-- type -->
 							<div class="input-group mb-3 col-sm-6">
@@ -313,8 +313,8 @@ $teams = new TeamHolder($gmFile);
                 
                 lengthMenu: [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
                 language: {
-                    "lengthMenu": "Display _MENU_ records",
-                    "search": "<?php echo $playerSearchSearch;?>"
+                    <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
+                    
                 }, 
                 "ajax": {
                 	url : '<?php echo 'api?api=search&action=find'; ?>',
