@@ -136,9 +136,25 @@ class ScheduleHolder implements \JsonSerializable{
                     
                     $isPlayed = true;
                     
-                    
                     $i++;
-                }else{ //neither (should probably reorder statements. This is for lines with nothing to parse)
+                }
+                else if(substr_count($val, '(OT)')){ //neither (should probably reorder statements. This is for lines with nothing to parse)
+                    $team2Score = explode(' ',trim($team2Score))[0];
+                    
+                    $scheduleDay->setGameTitle('(OT)');
+                    $scheduleDay->setIsOt(true);
+                    $i++;
+                    continue;
+                }else if(substr_count($val, ' SO)')){ //neither (should probably reorder statements. This is for lines with nothing to parse)
+                    $team2Score = explode(' ',trim($team2Score))[0];
+                    
+                    //$scheduleDay->setGameTitle('(OT '.$shootOutNum.'SO)');
+                    $scheduleDay->setGameTitle('(SO)');
+                    $scheduleDay->setIsOt(true);
+                    $i++;
+                    continue;
+                }
+                else{ //neither (should probably reorder statements. This is for lines with nothing to parse)
                     $i++;
                     continue;
                 }
@@ -155,11 +171,11 @@ class ScheduleHolder implements \JsonSerializable{
                     $lastGame = $gameNumber;
                     $this->lastDayPlayed = $gameDay;
                 }
-                
-                
-                
+
                 $scheduleDay = new ScheduleObj();
 
+                //sometimes this is on the same line. sometimes it is on a different line.
+                //should probably support better instead of duplicating code
                 //need to modify team score 2 back to numeric only.
                 if(substr_count($val, '(OT)')){
                     $team2Score = explode(' ',trim($team2Score))[0];
@@ -169,10 +185,11 @@ class ScheduleHolder implements \JsonSerializable{
            
                 }else if(substr_count($val, 'SO)')){
                     
-                    $shootOutNum = (int) $team2Score;
+                  //  $shootOutNum = (int) $team2Score;
                     $team2Score = explode(' ',trim($team2Score))[0];
                     
-                    $scheduleDay->setGameTitle('(OT '.$shootOutNum.'SO)');
+                    //$scheduleDay->setGameTitle('(OT '.$shootOutNum.'SO)');
+                    $scheduleDay->setGameTitle('(SO)');
                     $scheduleDay->setIsOt(true);
                 
                 }

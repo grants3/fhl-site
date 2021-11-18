@@ -110,12 +110,12 @@ include 'head.php';
 							<div class="row no-gutters">
 								<div class="col">
 									<table id="trades-table" class="table table-sm table-striped table-rounded-bottom" style="width:100%">
-										<thead>
+										<thead class="text-uppercase">
 											<tr>
-												<th class="col-1">Team 1</th>
-												<th class="col-5">Team 1 Receiving</th>
-												<th class="col-1">Team 2</th>
-												<th class="col-5">Team 2 Receiving</th>
+												<th class="col-1"><?php echo $transactTeam;?> 1</th>
+												<th class="col-5"><?php echo $transactTeam;?> 1 <?php echo $transactReceiving?></th>
+												<th class="col-1"><?php echo $transactTeam;?> 2</th>
+												<th class="col-5"><?php echo $transactTeam;?> 2 <?php echo $transactReceiving?></th>
 											</tr>
 										</thead>
 										<tbody> 
@@ -135,11 +135,11 @@ include 'head.php';
 							<div class="row no-gutters">
 								<div class="col">
 									<table id="events-table" class="table table-sm table-striped table-rounded-bottom" style="width:100%">
-										<thead>
+										<thead class="text-uppercase">
 											<tr>
-												<th class="col-2">Team</th> 
-                 								<th class="col-3">Transaction</th> 
-                 								<th class="col-7">Details</th> 
+												<th class="col-2"><?php echo $transactTeam;?></th> 
+                 								<th class="col-3"><?php echo $transactTitle;?></th> 
+                 								<th class="col-7"><?php echo $transactDetails;?></th> 
 											</tr>
 										</thead>
 										<tbody> 
@@ -158,11 +158,11 @@ include 'head.php';
 							<div class="row no-gutters">
 								<div class="col">
 									<table id="inj-table" class="table table-sm table-striped table-rounded-bottom" style="width:100%">
-										<thead style="width:100%">
+										<thead style="width:100%" class="text-uppercase">
 											<tr>
-												<th class="col-2">Team</th> 
-                 								<th class="col-3">Player</th> 
-                 								<th class="col-7">Status</th> 
+												<th class="col-2"><?php echo $transactTeam;?></th> 
+                 								<th class="col-3"><?php echo $transactPlayers;?></th> 
+                 								<th class="col-7"><?php echo $transactStatus?></th> 
 											</tr>
 										</thead>
 										<tbody> 

@@ -1,13 +1,14 @@
 <?php
 require_once 'config.php';
 include 'lang.php';
+include_once 'fileUtils.php';
 include_once 'common.php';
 
 $CurrentPage = 'Schedule';
 $CurrentHTML = 'Schedule.php';
 $CurrentTitle = $schedTitle;
 
-include 'head.php';
+
 include_once 'classes/ScheduleHolder.php';
 include_once 'classes/ScheduleObj.php';
 
@@ -62,6 +63,8 @@ if($seasonId || $round){
     $fileName = getCurrentLeagueFile($baseFileName);
 }
 
+$OrigHTML = $fileName;
+
 if(!file_exists($fileName)) {
     echo '<h5>'.$allFileNotFound.' - '.$baseFileName.'</h5>';
     exit;
@@ -70,6 +73,7 @@ if(!file_exists($fileName)) {
 $scheduleHolder = new ScheduleHolder($fileName, '');
 
 
+include 'head.php';
 ?>
 
 <style>

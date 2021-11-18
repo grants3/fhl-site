@@ -199,19 +199,19 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
            <div class="tab-content mt-1">
             <div class="tab-pane active" id="top-scoring-points" role="tabpanel">
                 <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                  array('scoringArray' => $pointsArray, 'attribute' => 'points', 'sort' => 7)); ?>
+                    array('scoringArray' => $pointsArray, 'attribute' => 'points', 'sort' => 7, 'leaderAll' => $leaderAll, 'attributeF' => $leaderPointsF)); ?>
               
             </div><!-- end points -->
              
             <div class="tab-pane" id="top-scoring-goals" role="tabpanel" aria-labelledby="top-scoring-goals-tab">  
             	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                  array('scoringArray' => $goalsArray, 'attribute' => 'goals', 'sort' => 5)); ?>
+            	    array('scoringArray' => $goalsArray, 'attribute' => 'goals', 'sort' => 5, 'leaderAll' => $leaderAll, 'attributeF' => $leaderGoalF)); ?>
               
             </div> <!-- end goals -->
              
             <div class="tab-pane" id="top-scoring-assists" role="tabpanel" aria-labelledby="top-scoring-assists-tab">
               <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                  array('scoringArray' => $assistsArray, 'attribute' => 'assists', 'sort' => 6)); ?>
+                  array('scoringArray' => $assistsArray, 'attribute' => 'assists', 'sort' => 6, 'leaderAll' => $leaderAll, 'attributeF' => $leaderAssistF)); ?>
               
             </div> <!-- end assists -->
             
@@ -251,19 +251,19 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
            <div class="tab-content mt-1">
             <div class="tab-pane active" id="top-scoring-defense-points" role="tabpanel">
                 <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                  array('scoringArray' => $pointsArrayD, 'attribute' => 'points', 'sort' => 7, 'positionType' => 'D')); ?>
+                    array('scoringArray' => $pointsArrayD, 'attribute' => 'points', 'sort' => 7, 'positionType' => 'D', 'leaderAll' => $leaderAll, 'attributeF' => $leaderPointsF)); ?>
               
             </div><!-- end points -->
              
             <div class="tab-pane" id="top-scoring-defense-goals" role="tabpanel" aria-labelledby="top-scoring-defense-goals-tab">  
             	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-            	    array('scoringArray' => $goalsArrayD, 'attribute' => 'goals', 'sort' => 5, 'positionType' => 'D')); ?>
+            	    array('scoringArray' => $goalsArrayD, 'attribute' => 'goals', 'sort' => 5, 'positionType' => 'D', 'leaderAll' => $leaderAll, 'attributeF' => $leaderGoalF)); ?>
               
             </div> <!-- end goals -->
              
             <div class="tab-pane" id="top-scoring-defense-assists" role="tabpanel" aria-labelledby="top-scoring-defense-assists-tab">
               <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                  array('scoringArray' => $assistsArrayD, 'attribute' => 'assists', 'sort' => 6, 'positionType' => 'D')); ?>
+                  array('scoringArray' => $assistsArrayD, 'attribute' => 'assists', 'sort' => 6, 'positionType' => 'D', 'leaderAll' => $leaderAll, 'attributeF' => $leaderAssistF)); ?>
               
             </div> <!-- end assists -->
             
@@ -303,19 +303,19 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
            <div class="tab-content mt-1">
             <div class="tab-pane active" id="top-scoring-goalies-points" role="tabpanel">
                 <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                    array('scoringArray' => $goaliesGaaArray, 'attribute' => 'gaa', 'sort' => 6, 'positionType' => 'G', 'sortOrder' => 'asc')); ?>
+                    array('scoringArray' => $goaliesGaaArray, 'attribute' => 'gaa', 'sort' => 6, 'positionType' => 'G', 'sortOrder' => 'asc', 'leaderAll' => $leaderAll, 'attributeF' => $leaderAVG)); ?>
               
             </div><!-- end points -->
              
             <div class="tab-pane" id="top-scoring-goalies-goals" role="tabpanel" aria-labelledby="top-scoring-goalies-goals-tab">  
             	<?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-            	    array('scoringArray' => $goaliesSvPctArray, 'attribute' => 'savePct', 'sort' => 13, 'positionType' => 'G')); ?>
+            	    array('scoringArray' => $goaliesSvPctArray, 'attribute' => 'savePct', 'sort' => 13, 'positionType' => 'G', 'leaderAll' => $leaderAll, 'attributeF' => $leaderPct)); ?>
               
             </div> <!-- end goals -->
              
             <div class="tab-pane" id="top-scoring-goalies-assists" role="tabpanel" aria-labelledby="top-scoring-goalies-assists-tab">
               <?php includeWithVariables(FS_ROOT.'component/ScoringLeaderTemplate.php',
-                  array('scoringArray' => $goaliesShutoutArray, 'attribute' => 'shutouts', 'sort' => 10, 'positionType' => 'G')); ?>
+                  array('scoringArray' => $goaliesShutoutArray, 'attribute' => 'shutouts', 'sort' => 10, 'positionType' => 'G', 'leaderAll' => $leaderAll, 'attributeF' => $leaderSOF)); ?>
               
             </div> <!-- end assists -->
             

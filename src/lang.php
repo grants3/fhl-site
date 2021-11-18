@@ -19,6 +19,7 @@ if($leagueLang == 'FR') {
 	$allLeague = "Ligue";
 	$allCurrent = "Actuel";
 	$allOther = "Autre";
+	$allNone = "None";
 	
 	//main
 	$mainNews = 'Nouvelles';
@@ -51,7 +52,8 @@ if($leagueLang == 'FR') {
 	// Calendrier
 	$schedTitle = 'Calendrier';
 	$schedDay = 'Jour';
-	$schedOT = 'PROL';
+	$schedOT = 'P';
+	$schedSO = 'TB';
 	$schedTradeDeadline = 'Date limite des transactions';
 	$scheldDetails = 'Détails';
 	$scheldSelectTeam = 'Votre équipe seulement';
@@ -119,23 +121,24 @@ if($leagueLang == 'FR') {
 	$gamesTitle = 'Résultat de la partie';
 	$gamesBoxScore = 'Sommaire';
 	$gamesFinalResult = 'LA MARQUE FINALE';
-	$gamesShotOnGoal = 'LES TIRS AU BUT';
+	$gamesShotOnGoal = 'Tirs';
 	$gamesGoalScore = 'LES BUTS MARQUÉS';
 	$gamesSchoolGoalers = 'LES GARDIENS';
 	$gamesGoalScorers = 'SOMMAIRE DES BUTS';
 	$gamesMinorLeagueBoxScore = 'RAPPORT DU CLUB-ÉCOLE';
-	$gamesGameNotes = 'NOTES DE LA RENCONTRE';
+	$gamesGameNotes = 'Notes de la Recontre';
 	$gamesAttendance = 'Assistance';
 	$gamesNetProfit = 'Profit Net';
-	$gamesFinancial = 'FINANCE';
+	$gamesFinancial = 'FINANCIALS';
 	$gamesName = 'Nom';
 	$gamesGoal = 'B';
 	$gamesGoalF = 'Buts';
 	$gamesAss = 'A';
 	$gamesAssF = 'Assitances';
-	$gamesPoints = 'P';
+	$gamesPoints = 'PTS';
 	$gamesPointsF = 'Points';
-	$gamesDiff = 'Différentiel';
+	$gamesDiff = '+/-';
+	$gamesDiffF = 'Différentiel';
 	$gamesPIM = 'PÉN';
 	$gamesPIMF = 'Minutes de pénalité';
 	$gamesShots = 'T';
@@ -146,25 +149,42 @@ if($leagueLang == 'FR') {
 	$gamesIceTimeF = 'Temps de glace';
 	$gamesPlayerStats = 'STATISTIQUES DES JOUEURS';
 	$gamesThreeStars = 'LES TROIS ÉTOILES';
-	$gamesPPC = 'BUTS EN SUPÉRIORITÉ NUMÉRIQUE';
+	$gamesPPC = 'SUPÉRIORITÉ NUMÉRIQUE';
 	$gamesSavesOutOf = 'arrêt sur';
 	$gamesGoalShots = 'tirs';
 	$gamesW = 'W';
 	$gamesL = 'L';
 	$gamesT = 'T';
-	$gamesSumPen = 'SOMMAIRE DES PÉNALITÉS';
-	$games1stPer = 'PREMIÈRE PÉRIODE';
-	$games2ndPer = 'DEUXIÈME PÉRIODE';
-	$games3rdPer = 'TROISIÈME PÉRIODE';
+	$gamesSumPen = 'Punitions';
+	$games1stPer = '1er PÉRIODE';
+	$games2ndPer = '2e PÉRIODE';
+	$games3rdPer = '3e PÉRIODE';
 	$gamesOTPer = 'PROLONGATION';
-	$gamesGoalieStats = 'STATISTIQUE DES GARDIENS';
+	$gamesGoalieStats = 'Gardiens';
 	$gamesTeam = 'ÉQ';
 	$gamesTeamF = 'Équipe';
 	$gamesSavesShots = 'ARRÊTS - TIRS';
 	$gamesStatus = 'Status<br>G=Gagné P=Perdu N=Nulle';
 	$gamesTotal = 'Nombre de Victoire-Défaite-Nulle';
-	$gamesNoScoring = 'AUCUN BUT';
+	$gamesNoScoring = 'Aucun But';
 	$gamesin = 'en';
+	$gameStats = 'Statistiques';
+	$gameStaters = 'Patineurs';
+	$gameSummary = 'Sommaire de la partie';
+	$gameShootoutResult = 'Sommaire de la Tirs de Barrage';
+	$gameShootoutWinner = 'But gagnant';
+	$gameScoring = 'Buts';
+	$gameSaves="TA";
+	$gameSavesF="Tirs Arrêtés";
+	$gameSavesAttempted="TR";
+	$gameSavesAttemptedF="Tirs Reçus";
+	$gameSVPCT="%EFF";
+	$gameSVPCTF="Pourcentage d'arrêt";
+	$gameWinLoss="W/L";
+	$gameWinLossF="Résultat";
+	$gameRecord="REC";
+	$gameRecordF="Win-Loss Record";
+	$gameShot='Tir';
 	
 	// Liste des DGs
 	$GMsTitle = 'Directeurs Généraux';
@@ -550,10 +570,13 @@ if($leagueLang == 'FR') {
 	$transactTitle = 'Mouvement';
 	$transactNo = 'Aucun mouvement';
 	$transactPlayers = 'JOUEUR';
-	$transactTeam = 'TM';
-	$transactStatus = 'STATUS';
+	$transactTeam = 'Équipe';
+	$transactStatus = 'Statut';
 	$transactInj = 'Blessures';
 	$transactTrades = 'Échanges';
+	$transactDetails = 'Détails';
+	$transactReceiving= 'Obtiennent';
+	$transactTraded = 'Échangers';
 	
 	// Top5
 	$top5Points = 'TOP 5 POINTS';
@@ -582,7 +605,7 @@ if($leagueLang == 'FR') {
 	$todayNoSimGame = 'Aucune partie simulée';
 	
 	// Standings Tree
-	$StandingsTreeTitle = 'Arbre des Séries';
+	$StandingsTreeTitle = 'Tableau des Séries';
 	
 	// Career Stats
 	$careerStatsTitle = 'Stats en Carrière';
@@ -661,6 +684,7 @@ if($leagueLang == 'FR') {
 	$scoresHeadingFirst = '1er';
 	$scoresHeadingSecond = '2e';
 	$scoresHeadingThird = '3e';
+	$scoresHeadingTotal = 'T';
 	$scoresHeadingOt = 'PROL';
 	
 	//player search
@@ -705,6 +729,7 @@ if($leagueLang == 'EN') {
 	$allLeague = "League";
 	$allCurrent = "Current";
 	$allOther = "Other";
+	$allNone = "None";
 	
 	//main
 	$mainNews = 'Nouvelles';
@@ -737,6 +762,7 @@ if($leagueLang == 'EN') {
 	$schedTitle = 'Schedule';
 	$schedDay = 'Day';
 	$schedOT = 'OT';
+	$schedSO = 'SO';
 	$schedTradeDeadline = 'Trade deadline';
 	$scheldDetails = 'Details';
 	$scheldSelectTeam = 'Show Your Team Only';
@@ -804,15 +830,15 @@ if($leagueLang == 'EN') {
 	$gamesTitle = 'Game Result';
 	$gamesBoxScore = 'Box Score';
 	$gamesFinalResult = 'FINAL SCORE';
-	$gamesShotOnGoal = 'SHOTS';
+	$gamesShotOnGoal = 'Shots';
 	$gamesGoalScore = 'GOALS';
 	$gamesSchoolGoalers = 'GOALIES';
-	$gamesGoalScorers = 'SCORING SUMMARY';
-	$gamesMinorLeagueBoxScore = 'MINOR LEAGUE BOX SCORE';
-	$gamesGameNotes = 'GAME NOTES';
+	$gamesGoalScorers = 'Scoring Summary';
+	$gamesMinorLeagueBoxScore = 'Minor League Box Score';
+	$gamesGameNotes = 'Game Notes';
 	$gamesAttendance = 'Attendance';
 	$gamesNetProfit = 'Net Profit';
-	$gamesFinancial = 'FINANCIAL';
+	$gamesFinancial = 'Financials';
 	$gamesName = 'Name';
 	$gamesGoal = 'G';
 	$gamesGoalF = 'Goals';
@@ -821,6 +847,7 @@ if($leagueLang == 'EN') {
 	$gamesPoints = 'PTS';
 	$gamesPointsF = 'Points';
 	$gamesDiff = '+/-';
+	$gamesDiffF = 'Plus Minus Rating';
 	$gamesPIM = 'PIM';
 	$gamesPIMF = 'Penalty in minutes';
 	$gamesShots = 'SOG';
@@ -830,26 +857,43 @@ if($leagueLang == 'EN') {
 	$gamesIceTime = 'IT';
 	$gamesIceTimeF = 'Ice Time';
 	$gamesPlayerStats = 'PLAYER STATISTICS';
-	$gamesThreeStars = 'GAME STARS';
-	$gamesPPC = 'POWER PLAY CONVERSIONS';
+	$gamesThreeStars = 'Game Stars';
+	$gamesPPC = 'Power Play';
 	$gamesSavesOutOf = 'saves out of';
 	$gamesGoalShots = 'shots';
 	$gamesW = 'W';
 	$gamesL = 'L';
 	$gamesT = 'T';
-	$gamesSumPen = 'PENALTIES SUMMARY';
+	$gamesSumPen = 'Penalty';
 	$games1stPer = '1ST PERIOD';
 	$games2ndPer = '2ND PERIOD';
 	$games3rdPer = '3RD PERIOD';
-	$gamesOTPer = 'OVERTIME';
-	$gamesGoalieStats = 'GOALIE STATISTICS';
+	$gamesOTPer = 'OVERTIME PERIOD';
+	$gamesGoalieStats = 'Goalies';
 	$gamesTeam = 'TM';
 	$gamesTeamF = 'Team';
 	$gamesSavesShots = 'SAVES - SHOTS';
 	$gamesStatus = 'Status<br>W=Win L=Lose T=Tie';
 	$gamesTotal = 'Win-Lose-Tie';
-	$gamesNoScoring = 'NO SCORING';
+	$gamesNoScoring = 'No Scoring';
 	$gamesin = 'for';
+	$gameStats = 'Statistics';
+	$gameStaters = 'Skaters';
+	$gameSummary = 'Game Summary';
+	$gameShootoutResult = 'Shootout Result';
+	$gameShootoutWinner = 'Shootout Winner';
+	$gameScoring = 'Scoring';
+	$gameSaves="S";
+	$gameSavesF="Saves";
+	$gameSavesAttempted="SA";
+	$gameSavesAttemptedF="Saves Attempted";
+	$gameSVPCT="SV%";
+	$gameSVPCTF="Save Percentage";
+	$gameWinLoss="W/L";
+	$gameWinLossF="Result";
+	$gameRecord="REC";
+	$gameRecordF="Win-Loss Record";
+	$gameShot='Shot';
 	
 	// GMs List
 	$GMsTitle = 'General Managers';
@@ -1235,10 +1279,13 @@ if($leagueLang == 'EN') {
 	$transactTitle = 'Transactions';
 	$transactNo = 'No transact';
 	$transactPlayers = 'PLAYER';
-	$transactTeam = 'TEAM';
+	$transactTeam = 'Team';
 	$transactStatus = 'STATUS';
 	$transactInj = 'Injuries';
 	$transactTrades = 'Trades';
+	$transactDetails = 'Détails';
+	$transactReceiving= 'Receiving';
+	$transactTraded = 'Traded';
 	
 	// Top5
 	$top5Points = 'TOP 5 POINTS';
@@ -1343,9 +1390,10 @@ if($leagueLang == 'EN') {
 	$langUnassignedPlayersNotFound = 'No Player Found!';
 	
 	//scores
-	$scoresHeadingFirst = '1st';
-	$scoresHeadingSecond = '2nd';
-	$scoresHeadingThird = '3rd';
+	$scoresHeadingFirst = '1ST';
+	$scoresHeadingSecond = '2ND';
+	$scoresHeadingThird = '3RD';
+	$scoresHeadingTotal = 'T';
 	$scoresHeadingOt = 'OT';
 	
 	//player search

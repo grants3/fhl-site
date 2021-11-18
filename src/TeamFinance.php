@@ -2,11 +2,11 @@
 require_once 'config.php';
 include 'lang.php';
 include 'numberUtils.php';
+include 'fileUtils.php';
+
 $CurrentHTML = 'TeamFinance.php';
 $CurrentTitle = $financeTitle;
 $CurrentPage = 'TeamFinance';
-include 'head.php';
-include 'TeamHeader.php';
 
 include_once 'classes/RosterObj.php';
 include_once 'classes/RosterAvgObj.php';
@@ -14,15 +14,23 @@ include_once 'classes/RostersHolder.php';
 include_once 'classes/PlayerVitalObj.php';
 include_once 'classes/PlayerVitalsHolder.php';
 
+$Fnm =  getCurrentLeagueFile('Finance');
+$OrigHTML = $Fnm;
+
+$rosterFileName = getCurrentLeagueFile('Rosters');
+$vitalsFileName = getCurrentLeagueFile('PlayerVitals');
+
+include 'head.php';
+include 'TeamHeader.php';
+
+
 ?>
 
 <div class="container px-0">
 
 <?php
 
-$Fnm =  getCurrentLeagueFile('Finance');
-$rosterFileName = getCurrentLeagueFile('Rosters');
-$vitalsFileName = getCurrentLeagueFile('PlayerVitals');
+
 
 $a = 0;
 $b = 0;

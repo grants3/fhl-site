@@ -553,6 +553,15 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 		
 			    //could change the name but will support OT and shootout headings.
 			    $gameOvertime[$i] = $game->getGameTitle();
+			    if($leagueLang =='FR'){
+			        if(substr_count($game->getGameTitle(), '(OT)')){
+			            $gameOvertime[$i] = str_replace('(OT)',$game->getGameTitle(),'('.$schedOT.')');
+			        }else if(substr_count($game->getGameTitle(), '(SO)')){
+			            $gameOvertime[$i] = str_replace('(OT SO)',$game->getGameTitle(),'('.$schedSO.')');
+			        }
+			        
+			        
+			    }
 
 			    $matchNumber = $game->getGameNumber();
 	
@@ -586,7 +595,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 				echo '<div class = "row" style=" margin-top: -15px;">';
 				    echo '<table class = "table table-sm table-bordered" style="background-color:white";>';
 				    echo '<tbody>';
-    				echo '<tr class="d-flex"  style = "text-transform: uppercase;">'; //header
+    				echo '<tr class="d-flex">'; //header
     				    echo '<th class = "col-6"></th>';
     				    echo '<th class = "col text-center">'.$scoresHeadingFirst.'</th>';
     				    echo '<th class = "col text-center">'.$scoresHeadingSecond.'</th>';

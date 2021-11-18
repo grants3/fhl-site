@@ -194,12 +194,13 @@ a:hover {
 
 /***** Main Navbar  **** */
 
-.navbar {
+#main-navbar.navbar {
 	background: #444;
 	-o-transition: all .6s; -moz-transition: all .6s; -webkit-transition: all .6s; -ms-transition: all .6s; transition: all .6s;
 	-webkit-backface-visibility: hidden; 
 	backface-visibility: hidden;
-	
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
 }
 #main-navbar.navbar.navbar-no-bg { background: #444; background: rgba(0, 0, 0, 0.5); }
 
@@ -221,9 +222,9 @@ a:hover {
 #main-navbar .navbar-brand {
 /* 	background: url(../img/nav-logo.png) left center no-repeat; */
 	background: var(--nav-logo-url);
-	max-height: 40px;
+	max-height: 35px;
 	max-width: 150px;
-	height: 40px;
+	height: 35px;
 	width: 150px;
 	-webkit-background-size: contain;
     -moz-background-size: contain;

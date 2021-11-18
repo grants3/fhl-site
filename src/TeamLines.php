@@ -1,9 +1,15 @@
 <?php
 require_once 'config.php';
-include 'lang.php';
+include_once 'lang.php';
+include_once 'fileUtils.php';
+
 $CurrentHTML = 'TeamLines.php';
 $CurrentTitle = $linesTitle;
 $CurrentPage = 'TeamLines';
+
+$Fnm = getCurrentLeagueFile('Lines');
+$OrigHTML = $Fnm;
+
 include 'head.php';
 include 'TeamHeader.php';
 ?>
@@ -11,9 +17,6 @@ include 'TeamHeader.php';
 <div class="container px-0">
 
 <?php
-
-//$Fnm = getLeagueFile($folder, $playoff, 'Lines.html', 'Lines');
-$Fnm = getCurrentLeagueFile('Lines');
 
 $a = 0;
 $b = 0;

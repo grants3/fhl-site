@@ -500,7 +500,7 @@ class GameHolder implements \JsonSerializable
                     $val = trim($val);
                     $long = strlen($val);
                     $pos = $long - 9;
-                    $temps = substr($val, $pos-1, 5);
+                    $temps = substr($val, $pos-1, 6);
                     $pos_avant = strpos($val, '.') + 1;
                     $pos_apres = strpos($val, ',');
                     $pos_apres2 = $pos_apres - $pos_avant;
@@ -836,9 +836,6 @@ class GameHolder implements \JsonSerializable
     }
     
     public function isOvertime() :bool{
-       // return !empty($this->scoringOtPeriod);
-//         error_log(var_dump($this->awayGoals));
-//         return count($this->awayGoals) >= 4;
         return $this->overtime;
     }
 

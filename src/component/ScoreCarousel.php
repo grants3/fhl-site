@@ -136,12 +136,10 @@ padding-right:30px;
     
 
 <?php
-//$playoff = isPlayoffs($folder, $playoffMode);
+
 if (PLAYOFF_MODE) {
-    //$playoff = 'PLF';
     $round = getPlayoffRound();
 
-    //$fileName = getLeagueFile($folder, $playoff, '-Round' . $round . '-Schedule.html', '-Round' . $round . '-Schedule');
     $fileName = getCurrentPlayoffLeagueFile('-Round' . $round . '-Schedule');
     $playoffLink = '&rnd=' . $round;
 
@@ -153,7 +151,7 @@ if (PLAYOFF_MODE) {
     if ($scheduleHolder->isScheduleComplete() && $round > 1 && $round < 4) {
         $nextGameScheduleHolder = $scheduleHolder;
         $nextRound = $round + 1;
-        //$fileName = getLeagueFile($folder, $playoff, '-Round' . $nextRound . '-Schedule.html', '-Round' . $nextRound . '-Schedule');
+
         $fileName = getCurrentPlayoffLeagueFile('-Round' . $nextRound . '-Schedule.html', '-Round' . $nextRound . '-Schedule');
         
         $nextGamesRound = $nextRound;
@@ -171,14 +169,12 @@ if (PLAYOFF_MODE) {
     }
 
 } else {
-    //$fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
     $fileName = getCurrentLeagueFile('Schedule');
     $scheduleHolder = new ScheduleHolder($fileName, '');
     $nextGameScheduleHolder = $scheduleHolder;
     $playoffLink = '';
 }
 
-//$teamScoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
 $teamScoringFile = getCurrentLeagueFile('TeamScoring');
 
 if(!file_exists($teamScoringFile)) {
@@ -226,26 +222,21 @@ if ($scheduleHolder->isSeasonStarted()) {
                 continue;
             }
             
-//             $matches = glob(FS_ROOT.LOGO_DIR . strtolower($games->team1) . '.*');
-//             $todayImage1 = '';
-//             for ($j = 0; $j < count($matches); $j ++) {
-//                 $todayImage1 = $matches[$j];
-//                 $todayImage1 = basename($todayImage1);
-//                 break 1;
-//             }
-//             $matches = glob(FS_ROOT.LOGO_DIR . strtolower($games->team2) . '.*');
-//             $todayImage2 = '';
-//             for ($j = 0; $j < count($matches); $j ++) {
-//                 $todayImage2 = $matches[$j];
-//                 $todayImage2 = basename($todayImage2);
-//                 break 1;
-//             }
-            
             $todayImage1 = getTeamLogoUrl($games->team1);
             $todayImage2 = getTeamLogoUrl($games->team2);
             
             $team1Abbr = $teamAbbrHolder->getAbbr($games->team1);
             $team2Abbr = $teamAbbrHolder->getAbbr($games->team2);
+            
+            $gameInfo = $games->getGameTitle();
+
+            if($games->getIsOt()){
+                if(substr_count($gameInfo, '(SO)')){
+                    $gameInfo = str_lreplace('(SO)',$gameInfo,'('.$schedSO.')');
+                }else if(substr_count($games->getGameTitle(), '(OT)')){
+                    $gameInfo = str_lreplace('(OT)',$gameInfo,'('.$schedOT.')');
+                } 
+            }
             
             echo '<div class="banner-game">';
             echo '<a href="'.BASE_URL.'games.php?num=' . $games->getGameNumber() . $playoffLink . '">';
@@ -253,7 +244,7 @@ if ($scheduleHolder->isSeasonStarted()) {
             //echo '<tbody>';
             echo '<col><col>'; //define two columns so we can still colspan the header.
             echo '<tr style = "text-transform: uppercase;">'; // header
-            echo '<th colspan="2">Final'. (($games->getIsOt()) ? '('.$schedOT.')' : '').'</th>';
+            echo '<th colspan="2">Final'. $gameInfo.'</th>';
             echo '</tr>';
             
             echo '<tr class="d-flex">'; // score 1

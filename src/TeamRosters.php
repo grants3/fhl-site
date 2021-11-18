@@ -18,6 +18,11 @@ $CurrentHTML = 'TeamRosters.php';
 $CurrentTitle = $rostersTitle;
 $CurrentPage = 'TeamRosters';
 
+$fileName = getCurrentLeagueFile('Rosters');
+$vitalsFileName = getCurrentLeagueFile('PlayerVitals');
+
+$OrigHTML = $fileName;
+
 include 'head.php';
 include 'TeamHeader.php';
 
@@ -33,11 +38,6 @@ include 'TeamHeader.php';
     
                     <?php
 
-                    //$fileName = getLeagueFile($folder, $playoff, 'Rosters.html', 'Rosters');
-                    $fileName = getCurrentLeagueFile('Rosters');
-
-                    //$vitalsFileName = getLeagueFile($folder, $playoff, 'PlayerVitals.html', 'PlayerVitals');
-                    $vitalsFileName = getCurrentLeagueFile('PlayerVitals');
                     $lastUpdated = '';
                     
                     if (file_exists($fileName) && file_exists($vitalsFileName)) {

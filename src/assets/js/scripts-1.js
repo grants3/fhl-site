@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
 	     * Top container of each page. 
 	     */
 		$('.top-container').waypoint(function() {
-			$('nav').toggleClass('navbar-no-bg');
+			$('#main-navbar.navbar').toggleClass('navbar-no-bg');
 		});
 	}
    
@@ -84,3 +84,10 @@ function makeTableSortable(tableId) {
     var t = document.getElementById(tableId);
     makeSortable(t);
 }
+
+function addParameterToURL(param){
+    _url = window.location.href;
+    _url += (_url.split('?')[1] ? '&':'?') + param;
+    return _url;
+}
+

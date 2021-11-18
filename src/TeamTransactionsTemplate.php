@@ -81,12 +81,12 @@ $teamAbbr = $teamAbbrHolder->getAbbr($team);
 <!--                 		<div class="tableau-top">Trades</div> -->
                 		<div class="table-responsive">
                     		<table id = "trades-table" class="table table-sm table-striped table-hover table-rounded-bottom">
-                    			<thead>
+                    			<thead class="text-uppercase">
                                     <tr>
 										
-										<th class="col-2">Team</th>
-										<th class="col-5">Traded</th>
-										<th class="col-5">Received</th>
+										<th class="col-2"><?php echo $transactTeam;?></th>
+										<th class="col-5"><?php echo $transactTraded?></th>
+										<th class="col-5"><?php echo $transactReceiving?></th>
                                     </tr>
                     			</thead>
                     			<tbody>
@@ -128,10 +128,10 @@ $teamAbbr = $teamAbbrHolder->getAbbr($team);
                 		<!-- <div class="tableau-top">Transactions</div> -->
                 		<div class="table-responsive">
                     		<table id = "team-events-table" class="table table-sm table-striped table-hover table-rounded-bottom ">
-                    			<thead>
+                    			<thead class="text-uppercase">
                                     <tr>
-             							<th class="col-4">Transaction</th> 
-             							<th class="col-8">Details</th> 
+             							<th class="col-4"><?php echo $transactTitle;?></th> 
+             							<th class="col-8"><?php echo $transactDetails;?></th> 
                                     </tr>
                     			</thead>
                     			<tbody>
@@ -159,10 +159,10 @@ $teamAbbr = $teamAbbrHolder->getAbbr($team);
 <!--                 		<div class="tableau-top">Injuries</div> -->
                 		<div class="table-responsive">
                     		<table id = "team-injuries-table" class="table table-sm table-striped table-hover table-rounded-bottom ">
-                    			<thead>
+                    			<thead class="text-uppercase">
                                     <tr>
-                                    	<th class="col-4">Player</th> 
-             							<th class="col-8">Status</th> 
+                                    	<th class="col-4"><?php echo $transactPlayers?></th> 
+             							<th class="col-8"><?php echo $transactStatus?></th> 
              							
                                     </tr>
                     			</thead>

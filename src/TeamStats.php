@@ -13,6 +13,9 @@ if(isset($_GET['sort']) || isset($_POST['sort'])) {
     $sort = htmlspecialchars($sort);
 }
 
+$teamStatsFile = getCurrentLeagueFile('TeamStats');
+$OrigHTML = $teamStatsFile;
+
 include 'head.php';
 
 ?>
@@ -163,25 +166,12 @@ for($j=1;$j<=$round;$j++) {
 }
 
 // Team Stats
-// $matches = glob($folder.'*'.$playoff.'TeamStats.html');
-// $folderLeagueURL = '';
-// $matchesDate = array_map('filemtime', $matches);
-// arsort($matchesDate);
-// foreach ($matchesDate as $j => $val) {
-// 	if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-// 		$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'TeamStats')-strrpos($matches[$j], '/')-1);
-// 		break 1;
-// 	}
-// }
-// //$Fnm = $folder.$folderLeagueURL.'TeamStats.html';
-$Fnm = getCurrentLeagueFile('TeamStats');
-
 $a = 0;
 $c = 1;
 $lastUpdated = '';
 
-if(file_exists($Fnm)) {
-	$tableau = file($Fnm);
+if(file_exists($teamStatsFile)) {
+    $tableau = file($teamStatsFile);
 	while(list($cle,$val) = myEach($tableau)) {
 		$val = utf8_encode($val);
 		if(substr_count($val, '<P>(As of')){

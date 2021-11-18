@@ -40,6 +40,9 @@ if($rnd) $schedTitlePlayoff = ' - '.$scheldRound.' '.$rnd;
 $CurrentHTML = 'TeamSchedule.php';
 $CurrentTitle = $schedTitle;
 $CurrentPage = 'TeamSchedule';
+$OrigHTML = $Fnm;
+
+
 include 'head.php';
 include 'TeamHeader.php';
 

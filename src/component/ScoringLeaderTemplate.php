@@ -12,8 +12,10 @@
 	if(!isset($sortOrder)) $sortOrder = 'desc';
 	if(!isset($positionType)) $positionType = null; //dont filter
 	if(!isset($rookie)) $rookie = false;
+	if(!isset($leaderAll)) $leaderAll = 'All Leaders';
+	if(!isset($attributeF)) $attributeF = $attribute; //friendy name of attribute.
 	$statsUrlParams= !isset($statsUrlParams) ? '' : '&'.$statsUrlParams;
-		
+	
 	$link = 'StatsSkaters.php?sort='.$sort.'&sortOrder='.$sortOrder;
 	if(isset($positionType)&& $positionType){
 	    if('G' == $positionType){
@@ -69,7 +71,7 @@
         				<span class="statPlayerPosition"><?php echo $scoringArray[0]->getPosition();?></span>
         			</a>
                     <div id= "top-player-value-<?php echo $attribute.$positionType?>" class="styles__StatDetails-sc-16cx6ic-9 glDXkE">
-            			<p style="margin-bottom:5px" class="styles__StatCategoryName-sc-16cx6ic-10 KRrDV text-uppercase"><?php echo ucwords($attribute);?></p>
+            			<p style="margin-bottom:5px" class="styles__StatCategoryName-sc-16cx6ic-10 KRrDV text-uppercase"><?php echo ucwords($attributeF);?></p>
             			<p  style="font-size:3rem; font-weight:500; line-height:45px" 
             				class="statCategoryValue m-0 "><?php echo $scoringArray[0]->__get($attribute) ?></p>
             		</div>
@@ -102,7 +104,7 @@
         		
         		
         		?>
-        		<a class="styles__LeadersNavLink-owf6ne-8 bvgUsd" href="<?php echo BASE_URL.$link.$statsUrlParams?>">All Leaders</a>
+        		<a class="styles__LeadersNavLink-owf6ne-8 bvgUsd" href="<?php echo BASE_URL.$link.$statsUrlParams?>"><?php echo $leaderAll?></a>
 	
 			</div>
 		</div>
