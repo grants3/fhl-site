@@ -224,7 +224,7 @@ include 'head.php';
                     			<?php }else{?>
                     			    <div class="card">
                     			   	 <div class="card-body text-center">
-                    			    	<h5>No Games Remaining</h5>
+                    			    	<h5><?php echo $ScheldNoGames;?></h5>
                     			     </div>
                     			    </div>
                     		
@@ -288,12 +288,24 @@ include 'head.php';
                                       		    if($seasonId) {
                                       		        $linkSeasonId = '&seasonId='.$seasonId;
                                       		    }
+                                      		    
+                                      		    $gameTitle = $schedule->getGameTitle();
+                                      		    if($leagueLang =='FR'){
+                                      		        if(substr_count($gameTitle, '(OT)')){
+                                      		            $gameTitle = str_replace('(OT)',$gameTitle,'('.$schedOT.')');
+                                      		        }else if(substr_count($schedule->getGameTitle(), '(SO)')){
+                                      		            $gameTitle = str_replace('(SO)',$gameTitle,'('.$schedSO.')');
+                                      		        }
+                                      		        
+                                      		        
+                                      		    }
+                                      		    
                                       		    ?>
                                       		
                                       		 <li class="list-group-item p-1 border-0">
                                       		 	<a class="lien-noir" style="display:block; width:100%;" href="games.php?num=<?php echo$schedule->getGameNumber().$linkSeasonId.$linkRnd?>">
                                              	<span><strong><?php echo $schedule->getTeam1().' '.$ScheldAt.' '.$schedule->getTeam2()?></strong>
-                                             	  <?php echo $schedule->getTeam1Score().' - '.$schedule->getTeam2Score().' '.$schedule->getGameTitle()?></span>
+                                             	  <?php echo $schedule->getTeam1Score().' - '.$schedule->getTeam2Score().' '.$gameTitle?></span>
                                              	</a>
                                              </li>
                                             <?php }else{?>
@@ -322,7 +334,7 @@ include 'head.php';
               
                     			    <div class="card">
                     			   	 <div class="card-body text-center">
-                    			    	<h5>No Games Completed</h5>
+                    			    	<h5><?php echo $ScheldNoGamesComp;?></h5>
                     			     </div>
                     			    </div>
                     		

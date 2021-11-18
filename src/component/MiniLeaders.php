@@ -282,7 +282,8 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
     
 <!--     	</div> -->
 <!--    	  </div> -->
-   	  <h5 class="tableau-top"><?php echo $positionGoalie?> <span style="font-size: 0.75rem">(played for <?php echo $minGameCount;?> or more games)</span></h5>
+	  <?php $leaderGoalieMinFinal = str_replace('<min>',$minGameCount,$leaderGoalieMin)?>
+   	  <h5 class="tableau-top"><?php echo $positionGoalie?> <span style="font-size: 0.75rem">(<?php echo $leaderGoalieMinFinal;?>)</span></h5>
       <div class="card leader-container">
         <div class="card-header pt-0">
          

@@ -324,7 +324,8 @@ $leadersLangGoalies = array(
 					</div>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-6 p-1">
-					<h5 class="tableau-top"><?php echo $positionGoalie?> <span style="font-size: 0.75rem">(played for <?php echo $minGameCount;?> or more games)</span></h5>
+					<?php $leaderGoalieMinFinal = str_replace('<min>',$minGameCount,$leaderGoalieMin)?>
+					<h5 class="tableau-top"><?php echo $positionGoalie?> <span style="font-size: 0.75rem">(<?php echo $leaderGoalieMinFinal?>)</span></h5>
 					</h6>
 					<div class="leader-container">
 

@@ -76,6 +76,8 @@ if($leagueLang == 'FR') {
 	$ScheldRemaining='Restant';
 	$ScheldCompleted='Fini';
 	$ScheldAt='à';
+	$ScheldNoGames = 'Aucun jeux restant';
+	$ScheldNoGamesComp = 'Aucun jeux terminé';
 	
 	// Classement
 	$standingTitle = 'Classement';
@@ -249,6 +251,7 @@ if($leagueLang == 'FR') {
 	$leaderPct = 'GA%';
 	$leaderPctF = '% de buts alloués';
 	$leaderAll = 'Toutes les Meneurs';
+	$leaderGoalieMin = 'a disputé au moins <min> matchs';
 	
 	// Finance
 	$financeTitle = 'Finances';
@@ -785,6 +788,8 @@ if($leagueLang == 'EN') {
 	$ScheldRemaining="Remaining";
 	$ScheldCompleted="Completed";
 	$ScheldAt="at";
+	$ScheldNoGames = 'No Games Remaining';
+	$ScheldNoGamesComp = 'No Games Completed';
 	
 	// Standing
 	$standingTitle = 'Standings';
@@ -958,6 +963,7 @@ if($leagueLang == 'EN') {
 	$leaderPct = 'SV%';
 	$leaderPctF = 'Save %';
 	$leaderAll = 'All Leaders';
+	$leaderGoalieMin = 'Played in <min> or more games';
 	
 	// Finances
 	$financeTitle = 'Financial Report';

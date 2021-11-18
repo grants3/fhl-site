@@ -308,7 +308,7 @@ include 'TeamHeader.php';
 										echo '<td class="text-center">'.$equipe2[$i].'</td>';
 										echo '<td class="text-center">'.$score1[$i].'-'.$score2[$i].'</td>';
 										if(isset($prol[$i]) && $prol[$i] == 'PROL') echo '<td class="text-center">'.$schedOT.'</td>';
-										else if(isset($prol[$i]) && $prol[$i] == 'SO') echo '<td class="text-center">SO</td>';
+										else if(isset($prol[$i]) && $prol[$i] == 'SO') echo '<td class="text-center">'.$schedSO.'</td>';
 										else echo '<td></td>';
 										$replaceOrigin = array('W', 'L', 'T');
 										$replaceBy = array($ScheldW, $ScheldL, $ScheldT);

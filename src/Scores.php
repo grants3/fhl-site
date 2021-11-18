@@ -557,7 +557,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 			        if(substr_count($game->getGameTitle(), '(OT)')){
 			            $gameOvertime[$i] = str_replace('(OT)',$game->getGameTitle(),'('.$schedOT.')');
 			        }else if(substr_count($game->getGameTitle(), '(SO)')){
-			            $gameOvertime[$i] = str_replace('(OT SO)',$game->getGameTitle(),'('.$schedSO.')');
+			            $gameOvertime[$i] = str_replace('(SO)',$game->getGameTitle(),'('.$schedSO.')');
 			        }
 			        
 			        
