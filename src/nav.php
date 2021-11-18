@@ -51,9 +51,9 @@
 					  <li class="dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $standingTitle?><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-						  <li class="nav-item"><a class="nav-link-inner" href="Standings.php"><?php echo formatHtmlText('Pro'.$standingTitle)?></a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="Standings.php"><?php echo formatHtmlText($homeStandingsPro)?></a></li>
 						  <li class="dropdown-divider"></li>
-						  <li class="nav-item"><a class="nav-link-inner" href="FarmStandings.php?s=1"><?php echo formatHtmlText('Farm'.$standingTitle)?></a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="FarmStandings.php?s=1"><?php echo formatHtmlText($homeStandingsFarm)?></a></li>
 						</ul>
 					  </li>
 

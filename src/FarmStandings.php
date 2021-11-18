@@ -3,7 +3,7 @@ require_once 'config.php';
 include 'lang.php';
 
 $CurrentHTML = 'FarmStandings.php';
-$CurrentTitle = $standingTitle;
+$CurrentTitle = $homeStandingsFarm;
 $CurrentPage = 'FarmStandings';
 
 
@@ -12,7 +12,7 @@ include 'head.php';
 //hardcode to farm
 $currentFarm = 1;
 $tableCol = 11;
-$CurrentTitle = 'Farm '.$CurrentTitle;
+
 ?>
 
 <div class = "container px-0">

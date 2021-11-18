@@ -50,6 +50,8 @@ if($leagueLang == 'FR') {
 	$homeStats = 'Stats';
 	$homeFarm = 'Club-École';
 	$homeUtilityPage = 'Pages utiles';
+	$homeStandingsPro = 'Classment Pro';
+	$homeStandingsFarm = 'Classment Club-École';
 	
 	// Calendrier
 	$schedTitle = 'Calendrier';
@@ -764,6 +766,8 @@ if($leagueLang == 'EN') {
 	$homeStats = 'Stats';
 	$homeFarm = 'Farm';
 	$homeUtilityPage = 'Utility Pages';
+	$homeStandingsPro = 'Pro Standings';
+	$homeStandingsFarm = 'Farm Standings';
 	
 	// Schedule
 	$schedTitle = 'Schedule';

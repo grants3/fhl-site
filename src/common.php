@@ -157,7 +157,8 @@ function URL_exists($url){
 }
 
 function formatHtmlText(string $text){
-    return str_replace(' ', '&nbsp', $text);
+     $text = str_replace('-', '&#8209;', $text);   
+     return str_replace(' ', '&nbsp', $text);
 }
 
 // Format Ordinal
