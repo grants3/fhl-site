@@ -41,7 +41,7 @@
 			<div class="collapse navbar-collapse navbar-nav-scroll" id="navbarNav">
 				<ul class="navbar-nav ml-auto scrollable text-right">
 					  <?php if(!empty(GMO_DIR)){?>
-    					<li class="nav-item"><a class="nav-item nav-link" href="<?php echo GMO_DIR;?>">GMOE</a></li>
+    					<li class="nav-item"><a class="nav-item nav-link" href="<?php echo GMO_DIR;?>"><?php echo $allGMOE;?></a></li>
     				  <?php }?>
 					  
 					  <li class="nav-item"><a class="nav-link" href="Scores.php"><?php echo $allScores?></a></li>
@@ -51,16 +51,16 @@
 					  <li class="dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $standingTitle?><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-						  <li class="nav-item"><a class="nav-link-inner" href="Standings.php">Pro&nbsp;<?php echo $standingTitle?></a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="Standings.php"><?php echo formatHtmlText('Pro'.$standingTitle)?></a></li>
 						  <li class="dropdown-divider"></li>
-						  <li class="nav-item"><a class="nav-link-inner" href="FarmStandings.php?s=1">Farm&nbsp;<?php echo $standingTitle?></a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="FarmStandings.php?s=1"><?php echo formatHtmlText('Farm'.$standingTitle)?></a></li>
 						</ul>
 					  </li>
 
 					  <li class="dropdown">
-						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stats<span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $homeStats?><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-						  <li class="nav-item"><a class="nav-link-inner" href="Stats.php"><?php echo formatHtmlText($homeStats)?></a></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="Stats.php"><?php echo formatHtmlText($allStats)?></a></li>
 						  <li class="dropdown-divider"></li>
 						  <li class="nav-item"><a class="nav-link-inner" href="TeamStats.php"><?php echo formatHtmlText($teamStatsTitle)?></a></li>
 						  <li class="dropdown-divider"></li>

@@ -16,7 +16,7 @@ include_once FS_ROOT.'classes/TeamAbbrHolder.php';
 include_once FS_ROOT.'classes/ScoringAccumulator.php';
 
 $CurrentHTML = 'Stats.php';
-$CurrentTitle = $homeStats;
+$CurrentTitle = $allstats;
 $CurrentPage = 'Statistics';
 
 $seasonId='';

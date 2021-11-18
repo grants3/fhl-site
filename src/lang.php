@@ -20,6 +20,8 @@ if($leagueLang == 'FR') {
 	$allCurrent = "Actuel";
 	$allOther = "Autre";
 	$allNone = "None";
+	$allGMOE = 'GMOE';
+	$allStats = 'Statistiques';
 	
 	//main
 	$mainNews = 'Nouvelles';
@@ -45,7 +47,7 @@ if($leagueLang == 'FR') {
 	$homeSeason = 'Saison';
 	$homePlayoff = 'Série';
 	$homeTeam = 'Équipe';
-	$homeStats = 'Statistiques';
+	$homeStats = 'Stats';
 	$homeFarm = 'Club-École';
 	$homeUtilityPage = 'Pages utiles';
 	
@@ -733,6 +735,8 @@ if($leagueLang == 'EN') {
 	$allCurrent = "Current";
 	$allOther = "Other";
 	$allNone = "None";
+	$allGMOE = 'GMOE';
+	$allStats = 'Statistiques';
 	
 	//main
 	$mainNews = 'Nouvelles';
@@ -757,7 +761,7 @@ if($leagueLang == 'EN') {
 	$homeSeason = 'Season';
 	$homePlayoff = 'Playoff';
 	$homeTeam = 'Team';
-	$homeStats = 'Statistics';
+	$homeStats = 'Stats';
 	$homeFarm = 'Farm';
 	$homeUtilityPage = 'Utility Pages';
 	
