@@ -61,7 +61,7 @@
 #main-navbar.navbar-dark  .nav-link:focus { color: #fff; outline: 0; }
 
 
-<?php if(($navbarMode == 3 || $navbarMode == 4) && str_starts_with($CurrentPage,'Team')){
+<?php if((NAVBAR_MODE == 3 || NAVBAR_MODE == 4) && str_starts_with($CurrentPage,'Team')){
 //need to override color for smaller nav bar as unable to read text.?>
 :root {
   --team-header-background-color-1:var(--color-primary-1); 
@@ -88,7 +88,7 @@
     			</div>
     			<?php if(!empty(GMO_DIR)){?>
     			<div class="col">
-    				<a class="nav-item nav-link px-2" href="<?php echo GMO_DIR;?>">GMOE</a>
+    				<a class="nav-item nav-link px-2" href="<?php echo GMO_DIR;?>"><?php echo $allGMOE;?></a>
     			</div>
     			<?php }?>
     			<div class="col">
@@ -96,7 +96,7 @@
     			</div>
 			</div>
 			<!-- only display for team pages -->
-			<?php if($navbarMode == 3 && str_starts_with($CurrentPage, 'Team')){?>
+			<?php if(NAVBAR_MODE == 3 && str_starts_with($CurrentPage, 'Team')){?>
 
 			<div>
     			<select class="btn-outline-primary my-1 py-1 pr-4" onchange="location = this.value;">

@@ -91,6 +91,7 @@ for($j=1;$j<=$existRnd;$j++) {
 	$currentTeamCpt = 0;
 	$equipe1 = '';
 	$Fnm = $baseFolder.$folderLeagueURL2.'PLF-Round'.$j.'-Schedule.html';
+
 	if(file_exists($Fnm)) {
 		for($x=0;$x<$TeamNumber;$x++) {
 			$tableau = file($Fnm);

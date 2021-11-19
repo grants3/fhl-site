@@ -19,6 +19,7 @@ include 'head.php';
 <?php
 
 $Fnm = getLeagueFile('GMs');
+$OrigHTML = $Fnm;
 
 $c = 1;
 $i = 0;

@@ -80,7 +80,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 <!-- 									<option value=PLF>Playoffs</option> -->
 
                                         <?php 
-                                        //if(isPlayoffs($folder, $playoffMode)){
+
                                         if(PLAYOFF_MODE){
                                             echo '<option value=REG>'.$seasonRegular.'</option>';
                                             echo '<option selected value=PLF>'.$seasonPLF.'</option> ';

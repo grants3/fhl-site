@@ -1,6 +1,4 @@
 <?php
-//base configuration. do not touch
-require_once 'baseConfig.php';
 
 //Session attributes
 $sessionName = 'FHL';
@@ -18,6 +16,9 @@ $cdnSupport = true;
 
 // Language | Français: 'FR' | English: 'EN'
 $leagueLang = "FR";
+
+//1 to enable demo menu (test navs, colors, languages). 0 to disable.
+$demoMode = 1;
 
 //enter where you site home address (your main index.html/php) is located in comparison to the TablePage addon. 
 //Will be used on nav home button/league logo. Same folder "";
@@ -103,36 +104,49 @@ $leagueOvertimePoint = 1;
 $minActivePlayers = 20;
 
 # League mode (Auto mode will check if playoff files exist in main transfer directory ($folder), otherwise mode is user selected)
+# Switch pages back and forth between using playoff and regular season files. (rosters, transactions, scoring etc)
 # Regular Season: 0 | Playoffs : 1 | Auto Detect : 2
 $leagueMode = 0;
-
-# Whether or not main navbar should be displayed and the type of nav to be displayed.
-# Default navbar includes all site links, simple nav only contains home button and team links.
-# Auto: 0 Navbar disabled : 1 Full Navbar enabled (default) : 2 Simple nav with team icons : 3 Simple nav with team dropdown. : 4 Use your own custom nav.
-$navbarMode = 1;
-
-#use custom nav. set this to define location of custom nav relative to this config file.
-#ex: if http://yourLeague.com/nav.php is where your nav is located and -> Add-on folder: http://yourLeague.com/TablePage/
-#then set value to "../nav.php"  
-#$navBarLoc="nav.php";
-
 
 #text to display in footer(bottom) of each page.
 $footerText="FHL TableSim 2.0";
 
-//default color scheme.
-//blue,green,red,teal,custom
+#default color scheme.
+#blue,green,red,teal
 $siteTheme="blue";
 
-//-----------------------------------------
+# Whether or not main navbar should be displayed and the type of nav to be displayed.
+# Default navbar includes all site links, simple nav only contains home button and team links.
+# Auto: 0 Navbar disabled : 1 Full Navbar enabled (default) : 2 Simple nav with team icons : 3 Simple nav with team dropdown. 
+$navbarMode = 1;
+
+#-----------------------------------------
+#ADVANCED SETTINGS - ADVANCED USERS ONLY (do not touch unless you know what you are doing)
+#-----------------------------------------
+
+#use custom nav. set this to define location of custom nav relative to this config file.
+#ONLY change this is you intend on using your own nav. navbarMode must be set to 1 to use this functionality.
+#Note that your table sim links need to be relative to where you nav is located!
+#ex: if http://yourLeague.com/nav.php is where your nav is located and -> Add-on folder: http://yourLeague.com/TablePage/
+#then set value to "../nav.php"  (and all links would need to start with TablePage/)
+$navBarLoc="nav.php";
+
+#-----------------------------------------
 //DO NOT TOUCH ANYTHING BELOW HERE.
-//-----------------------------------------
+#-----------------------------------------
+//base configuration. do not touch
+require_once 'baseConfig.php';
+
 define("APP_VERSION",'2.0-alpha-1');
 define("SESSION_NAME",$sessionName);
 define("LEAGUE_NAME",$leagueName);
 define("LEAGUE_LOGO",$leagueLogo);
+define("DEMO_MODE",$demoMode);
 define("CDN_SUPPORT", $cdnSupport);
-define("LEAGUE_LANG",$leagueLang);
+define("LEAGUE_LANG",initLang($leagueLang));
+define("NAVBAR_MODE",$navbarMode);
+define("NAV_LOC",$navBarLoc);
+
 define("HOME",$home);
 define("TRANSFER_DIR",FS_ROOT.$folder);
 define("GAMES_DIR",$folderGames);
@@ -156,16 +170,16 @@ define("PLAYER_IMG_SOURCE",$leaguePlayerImages);
 define("ROSTERS_LINK_MODE",$leagueRostersLink);
 define("FUTURES_LINK_MODE",$leagueFuturesLink);
 define("FUTURES_DRAFT_YEARS",$leagueFuturesDraftYears);
-define("LEAGUE_MODE",inferLeagueMode(TRANSFER_DIR,$leagueMode));
+define("LEAGUE_MODE",initLeagueMode(TRANSFER_DIR,$leagueMode));
 define("PLAYOFF_MODE",LEAGUE_MODE == 'PLF' ? 1 : 0);
-define("NAVBAR_MODE",$navbarMode);
 define("FOOTER_TEXT", $footerText);
 define("SITE_THEME", $siteTheme);
 
 unset($sessionName);
 unset($leagueLogo);
 unset($cdnSupport);
-//unset($leagueLang); //leave as overrideable.
+unset($demoMode);
+unset($leagueLang);
 unset($home);
 unset($folder);
 unset($folderGames);

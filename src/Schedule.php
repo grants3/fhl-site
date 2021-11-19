@@ -290,7 +290,7 @@ include 'head.php';
                                       		    }
                                       		    
                                       		    $gameTitle = $schedule->getGameTitle();
-                                      		    if($leagueLang =='FR'){
+                                      		    if(LEAGUE_LANG =='FR'){
                                       		        if(substr_count($gameTitle, '(OT)')){
                                       		            $gameTitle = str_replace('(OT)',$gameTitle,'('.$schedOT.')');
                                       		        }else if(substr_count($schedule->getGameTitle(), '(SO)')){

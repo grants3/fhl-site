@@ -86,7 +86,7 @@ border-bottom:1px solid blue;
     
 //team logo links
 
-if($navbarMode != 3){ ?>
+if(NAVBAR_MODE != 3){ ?>
    
 	<div class="row py-1">
     	

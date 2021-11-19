@@ -9,6 +9,9 @@ $CurrentPage = 'FreeAgents';
 //$SecurePage = true;
 include 'head.php';
 
+$fileName = getCurrentLeagueFile('FreeAgents');
+$OrigHTML = $fileName;
+
 ?>
 
 <style>
@@ -222,7 +225,7 @@ include 'head.php';
         pagingType: "simple_numbers",
         lengthMenu: [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
         language: {
-            <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
+            <?php if(LEAGUE_LANG == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
         },   
         search: {
             "regex": true

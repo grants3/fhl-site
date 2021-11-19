@@ -1,5 +1,5 @@
 <?php
-if($leagueLang == 'FR') {
+if(LEAGUE_LANG == 'FR') {
 	// Toutes les pages
 	$allOriginal = 'Originale';
 	$allFileNotFound = 'Le fichier demandé est inexistant!';
@@ -20,7 +20,7 @@ if($leagueLang == 'FR') {
 	$allCurrent = "Actuel";
 	$allOther = "Autre";
 	$allNone = "None";
-	$allGMOE = 'GMOE';
+	$allGMOE = 'OGME';
 	$allStats = 'Statistiques';
 	
 	//main
@@ -56,12 +56,13 @@ if($leagueLang == 'FR') {
 	// Calendrier
 	$schedTitle = 'Calendrier';
 	$schedDay = 'Jour';
-	$schedOT = 'P';
+	$schedOT = 'PROL';
 	$schedSO = 'TB';
 	$schedTradeDeadline = 'Date limite des transactions';
 	$scheldDetails = 'Détails';
 	$scheldSelectTeam = 'Votre équipe seulement';
 	$scheldRound = 'Tour';
+	$scheldRoundS = 'Tr';
 	$ScheldTeam = 'Équipe';
 	$ScheldGP = 'GP';
 	$ScheldW = 'W';
@@ -80,8 +81,8 @@ if($leagueLang == 'FR') {
 	$ScheldRemaining='Restant';
 	$ScheldCompleted='Fini';
 	$ScheldAt='à';
-	$ScheldNoGames = 'Aucun jeux restant';
-	$ScheldNoGamesComp = 'Aucun jeux terminé';
+	$ScheldNoGames = 'Aucun partie planifiée';
+	$ScheldNoGamesComp = 'Aucun partie terminé';
 	
 	// Classement
 	$standingTitle = 'Classement';
@@ -692,7 +693,7 @@ if($leagueLang == 'FR') {
 	$scoresHeadingSecond = '2e';
 	$scoresHeadingThird = '3e';
 	$scoresHeadingTotal = 'T';
-	$scoresHeadingOt = 'PROL';
+	$scoresHeadingOt = 'P';
 	
 	//player search
 	$playerSearchSearch = 'Rechercher';
@@ -716,7 +717,7 @@ if($leagueLang == 'FR') {
 	$langSalaryCopDailyHowTo = 'Vous devez ouvrir cette page à chaque jour de simulation pour enregistrer correctement les dépenses par jour. Si vous voullez commencer en milieu de saison, vous avez de besoin de modifier le fichier SalaryCopDaily.txt et entrer le chiffre du montant dépensé pour chaque équipe. Le premier nombre est celui du jour actuel dans la calendrier.';
 }
 
-if($leagueLang == 'EN') {
+if(LEAGUE_LANG == 'EN') {
 	// All the pages
 	$allOriginal = 'Original';
 	$allFileNotFound = 'File not found!';
@@ -737,7 +738,7 @@ if($leagueLang == 'EN') {
 	$allCurrent = "Current";
 	$allOther = "Other";
 	$allNone = "None";
-	$allGMOE = 'GMOE';
+	$allGMOE = 'OGME';
 	$allStats = 'Statistiques';
 	
 	//main
@@ -778,6 +779,7 @@ if($leagueLang == 'EN') {
 	$scheldDetails = 'Details';
 	$scheldSelectTeam = 'Show Your Team Only';
 	$scheldRound = 'Round';
+	$scheldRoundS = 'Rnd';
 	$ScheldTeam = 'Team';
 	$ScheldGP = 'GP';
 	$ScheldW = 'W';
@@ -796,7 +798,7 @@ if($leagueLang == 'EN') {
 	$ScheldRemaining="Remaining";
 	$ScheldCompleted="Completed";
 	$ScheldAt="at";
-	$ScheldNoGames = 'No Games Remaining';
+	$ScheldNoGames = 'No Games Scheduled';
 	$ScheldNoGamesComp = 'No Games Completed';
 	
 	// Standing

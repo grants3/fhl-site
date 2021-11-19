@@ -15,22 +15,10 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-//override lang
-if(isset($_GET['lang'])) {
-	if($_GET['lang'] == 'EN' || $_GET['lang'] == 'FR'){
-	    $_SESSION['lang'] = $_GET['lang'];
-	}
-}
-
-if(isset($_SESSION['lang'])){
-    $leagueLang = $_SESSION['lang'];
-}
-
-include 'lang.php';
+include_once 'lang.php';
 include_once 'common.php';
 include_once 'fileUtils.php';
 include_once 'classes/TeamHolder.php';
-
 
 
 if(!isset($CurrentPage)){
@@ -49,44 +37,23 @@ if(!isset($navbarEnabled)){
 if(isset($_GET['theme'])) {
     $_SESSION["theme"] = $_GET['theme'];
 }
-// else if(!isset($_SESSION['theme'])){
-//     $_SESSION["theme"] = SITE_THEME;
-// }
 
 //set nav type
 if(!isset($navbarMode)) $navbarMode = NAVBAR_MODE;
 if(isset($_GET['navbarMode'])) {
     $_SESSION["navbarMode"] = $_GET['navbarMode'];
-    $navbarMode = $_SESSION["navbarMode"];
+    $navbarMode = $_GET['navbarMode'];
 }
 else if(isset($_SESSION['navbarMode'])){
     $navbarMode = $_SESSION["navbarMode"];
 }
 
-
 //page info
-
 if ($CurrentPage !== ''){
     setcookie('currentPage',$CurrentPage);
 }
 
-// if(isset($_SESSION['teamId'])){
-//     $teamID = $_SESSION['teamId'];
-// }
-
-//backwards compatibility
-//$folder = FS_ROOT;
-//$folderGames = GAMES_DIR;
-//TRACK PLAYOFF STATE
-$playoff = '';
-$currentPLF = 0;
-if(PLAYOFF_MODE){
-    $playoff = 'PLF';
-    $currentPLF = 1;
-}
-
 // // CREATE TEAM LIST
-//$gmFile = getLeagueFile($folder, $playoff, 'GMs.html', 'GMs');
 $gmFile = getCurrentLeagueFile('GMs');
 $teamHolder = new TeamHolder($gmFile);
 //needs to retain order.
@@ -156,22 +123,30 @@ if(isset($_SESSION["team"])){
 <body class="fhlElement">
 
 <?php 
-if(isset($navbarMode) && $navbarMode != 0){
-    if($navbarMode == 1){
-        include FS_ROOT.'nav.php';
-    }else if($navbarMode == 2 || $navbarMode == 3){
-        include FS_ROOT.'navSimple.php';
-    }else if($navbarMode == 4){
-        include FS_ROOT.'navCustom.php';
-    }else{
-        echo '<h5>Unsupported Nav</h5>';
-    }
+
+if($navbarEnabled){
+//     if(isset($navbarMode) && $navbarMode != 0){
+//         if($navbarMode == 1){
+//             include FS_ROOT.NAV_LOC;
+//         }else if($navbarMode == 2 || $navbarMode == 3){
+//             include FS_ROOT.'navSimple.php';
+//         }else{
+//             echo '<h5>Unsupported Nav</h5>';
+//         }
+//     }
+    $navBarLocation = initNav($navbarMode,NAV_LOC);
+    if($navBarLocation) include $navBarLocation;
 }
+
 
 ?>
 
 	<!-- REMOVE header-content -->
 <div class="site-content top-container">
 
-<?php include FS_ROOT.'demo.php'?>
+
+<?php 
+if(DEMO_MODE){
+    include FS_ROOT.'demo.php';
+}?>
 

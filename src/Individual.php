@@ -31,7 +31,8 @@ function firstNumber($string) {
 	return substr($string, $start);
 }
 
-$Fnm = getLeagueFile('Individual');
+$Fnm = getCurrentLeagueFile('Individual');
+$OrigHTML = $Fnm;
 
 $a = 0;
 $c = 1;

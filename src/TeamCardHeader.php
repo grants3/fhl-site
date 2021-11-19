@@ -106,7 +106,7 @@ $teamCardInfo = new TeamInfo($standingsFile, $currentTeam);
 	 <?php 
 	 
 	 $teamCardPlace = $teamCardInfo->getPlace();
-	 if($leagueLang == 'FR'){
+	 if(LEAGUE_LANG == 'FR'){
 	     $teamCardPlace = ordinalFrench($teamCardPlace);
 	 }else{
 	     $teamCardPlace = ordinalEnglish($teamCardPlace);

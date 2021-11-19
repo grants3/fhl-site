@@ -1,8 +1,6 @@
 <?php 
 require_once 'config.php';
 
-define("DEMO_MODE",true);
-
 if(DEMO_MODE){
     
  if(isset($CurrentHTML) && ($CurrentHTML == 'index.php' || !str_starts_with($CurrentHTML,'Team2') )){?>
@@ -41,27 +39,20 @@ if(DEMO_MODE){
     </button>
     <nav class="floating-menu collapse" id="demo-nav">
         <h3 class="text-left font-weight-bold">Theme</h3>
-        <a href="javascript:window.location.href = addParameterToURL('theme=blue')">Blue</a>
-        <a href="javascript:window.location.href = addParameterToURL('theme=green')">Green</a>
-        <a href="javascript:window.location.href = addParameterToURL('theme=red')">Red</a>
-         <a href="javascript:window.location.href = addParameterToURL('theme=teal')">Teal</a>
-        <a href="javascript:window.location.href = addParameterToURL('theme=dark')">Dark</a>
+        <a href="javascript:window.location.href = addParameterToURL('theme','blue')">Blue</a>
+        <a href="javascript:window.location.href = addParameterToURL('theme','green')">Green</a>
+        <a href="javascript:window.location.href = addParameterToURL('theme','red')">Red</a>
+         <a href="javascript:window.location.href = addParameterToURL('theme','teal')">Teal</a>
+        <a href="javascript:window.location.href = addParameterToURL('theme','dark')">Dark</a>
         <h3 class="text-left font-weight-bold">Nav Mode</h3>
-        <a href="javascript:window.location.href = addParameterToURL('navbarMode=1')">Full</a>
-        <a href="javascript:window.location.href = addParameterToURL('navbarMode=0')">None</a>
-        <a href="javascript:window.location.href = addParameterToURL('navbarMode=2')">Simple</a>
-        <a href="javascript:window.location.href = addParameterToURL('navbarMode=3')">Simple Min</a>
-    	<a href="javascript:window.location.href = addParameterToURL('navbarMode=4')">Custom</a>
+        <a href="javascript:window.location.href = addParameterToURL('navbarMode','1')">Full</a>
+        <a href="javascript:window.location.href = addParameterToURL('navbarMode','0')">None</a>
+        <a href="javascript:window.location.href = addParameterToURL('navbarMode','2')">Simple</a>
+        <a href="javascript:window.location.href = addParameterToURL('navbarMode','3')">Simple Min</a>
     	<h3 class="text-left font-weight-bold">Language</h3>
-    	<a href="javascript:window.location.href = addParameterToURL('lang=EN')">English</a>
-		<a href="javascript:window.location.href = addParameterToURL('lang=FR')">French</a>
-    	
-    	<?php 
-    	
-    	if(isset($OrigHTML) && $OrigHTML) {
-    	    echo '<a href="'.$OrigHTML.'" target="_blank">'.$allOriginal.'</a>';
-    	}
-    	?>
+    	<a href="javascript:window.location.href = addParameterToURL('lang','EN')">English</a>
+		<a href="javascript:window.location.href = addParameterToURL('lang','FR')">French</a>
+
     </nav>
 </div>
 

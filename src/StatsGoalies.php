@@ -45,7 +45,7 @@ $goaliesActive = 'active';
 
 
 $fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
-
+$OrigHTML = $fileName;
 $scoringHolder = new ScoringHolder($fileName);
 $shootoutMode = $scoringHolder->isShootoutMode();
 $tieLabel = $shootoutMode ? $scoringOTLm : $scoringTm;
@@ -116,7 +116,7 @@ $(function() {
         },
 		"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
         language: {
-            <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
+            <?php if(LEAGUE_LANG == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
         },   
 		"order": [[ "<?php echo $sort;?>", "<?php echo $sortOrder;?>" ]],
 		"ajax": {
@@ -203,32 +203,26 @@ $(function() {
 	});
 	
 	
-	$("#seasonMenu").on('change', function() {  
+$("#seasonMenu").on('change', function() {  
     var seasonSelection = $(this).val();
-    var typeSelection = $('#typeMenu').find(":selected").val();
 
 	if(seasonSelection == 'Current'){
 	  seasonSelection = '';
 	}
 
-	window.location.href = "StatsGoalies.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+	var newParams = {'seasonId': seasonSelection};
+    window.location.href = addParametersToURL(newParams);
     
-	} );
+} );
 
-    $("#typeMenu").on('change', function() {  
-        var typeSelection = $(this).val();
-        var seasonSelection = $('#seasonMenu').find(":selected").val();
+$("#typeMenu").on('change', function() {  
+    var typeSelection = $(this).val();
+
+	var newParams = {'seasonType': typeSelection};
+    window.location.href = addParametersToURL(newParams);
     
-    	if(seasonSelection == 'Current'){
-    	  seasonSelection = '';
-    	}
-    
-    	window.location.href = "StatsGoalies.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
-        
-    } );
-    
-//$('#seasonMenu option[value="<?php echo ($seasonId ? $seasonId : 'Current');?>"]').attr("selected", "selected");
-//$('#typeMenu option[value="<?php echo ($seasonType ? $seasonType : 'REG');?>"]').attr("selected", "selected");
+} );
+
 
 </script>
 

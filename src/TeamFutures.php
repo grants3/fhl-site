@@ -1,7 +1,7 @@
 <?php
 require_once 'config.php';
-include 'lang.php';
-include 'fileUtils.php';
+include_once 'lang.php';
+include_once 'fileUtils.php';
 
 $CurrentHTML = 'TeamFutures.php';
 $CurrentTitle = $prospectsTitle;

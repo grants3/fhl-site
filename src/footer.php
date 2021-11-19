@@ -7,10 +7,31 @@
 
 #btn-back-to-top {
   position: fixed;
-  bottom: 15px;
-  right: 15px;
+  bottom: 30px;
+  left: 15px;
   display: none;
   opacity: 0.5;
+
+}
+
+.fhl-view-original {
+    position:absolute;
+     bottom:0;
+     left:0;
+}
+
+.fhl-view-original>a {
+   color: white;
+}
+
+.lang-select{
+    position:absolute;
+     bottom:0;
+     right:0;
+
+}
+.lang-select>a{
+     color: white;
 }
 
 </style>
@@ -20,7 +41,22 @@
 		<div class="row no-gutters">
 			
 			<div class="col text-center">
+        		<div class="fhl-view-original">
+                   <?php 
+                   if(isset($OrigHTML) && $OrigHTML) {
+                       
+                       echo '<a href="'.$OrigHTML.(isset($currentTeam) ? '#'.$currentTeam : '').'" target="_blank">'.$allOriginal.'</a>';
+                   }
+                   ?>
+            	</div>
 				<span><?php echo FOOTER_TEXT?></span>
+				<div class="lang-select">
+		
+					<a href="javascript:window.location.href = addParametersToURL({'lang': 'EN'})">EN</a> 
+					<span>/</span>
+					<a href="javascript:window.location.href = addParametersToURL({'lang': 'FR'})">FR</a> 
+				
+				</div>
 			</div>
 		</div>
 	</div>
@@ -28,6 +64,8 @@
     <button type="button" class="btn btn-primary btn-floating btn-lg" id="btn-back-to-top">
       		<i class="fas fa-arrow-up"></i>
     </button>
+    
+
 </footer>	
 
 <script>

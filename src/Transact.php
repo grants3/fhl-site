@@ -72,7 +72,7 @@ include 'head.php';
 								</div>
 								<select class="custom-select" id="typeMenu">
                                         <?php 
-                                        //if(isPlayoffs($folder, $playoffMode)){
+
                                         if(PLAYOFF_MODE){
                                             echo '<option value=REG>'.$seasonRegular.'</option>';
                                             echo '<option selected value=PLF>'.$seasonPLF.'</option> ';
@@ -202,7 +202,7 @@ var tradesTable = $('#trades-table').DataTable({
 	"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
     language: {
         emptyTable: "Sim data not found",
-        <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
+        <?php if(LEAGUE_LANG == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
     },   
     "order": [],
 	"ajax": {
@@ -242,7 +242,7 @@ var eventsTable = $('#events-table').DataTable({
 	"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
     language: {
         emptyTable: "Sim data not found",
-        <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
+        <?php if(LEAGUE_LANG == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
     },   
     "order": [],
 	"ajax": {
@@ -277,7 +277,7 @@ var injuriesTable = $('#inj-table').DataTable({
 	"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
     language: {
         emptyTable: "Sim data not found",
-        <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
+        <?php if(LEAGUE_LANG == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
         
     },   
     "order": [],
@@ -311,8 +311,8 @@ $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
 
 
 //selection handling
-var currentTeam = '<?php echo $currentTeam?>';
-var playoffMode = <?php echo $currentPLF?>;
+
+var playoffMode = <?php echo PLAYOFF_MODE?>;
 
 $(window).on('pageshow', function(){
 

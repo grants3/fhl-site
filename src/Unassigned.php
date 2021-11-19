@@ -10,6 +10,9 @@ include 'head.php';
 
 include_once 'common.php';
 
+$fileName = getCurrentLeagueFile('Unassigned');
+$OrigHTML = $fileName;
+
 $sort = 16;
 $position = '';
 ?>
@@ -123,7 +126,7 @@ $(function() {
         },
 		"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
         language: {
-            <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
+            <?php if(LEAGUE_LANG == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
         },   
 		"order": [[ "<?php echo $sort?>", "desc" ]],
        

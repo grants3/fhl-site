@@ -20,15 +20,7 @@ if(isset($_GET['team']) || isset($_POST['team'])) {
     $team = ( isset($_GET['team']) ) ? $_GET['team'] : $_POST['team'];
     //$team = filter_var($seasonId, FILTER_SANITIZE_STRING);
 }
-// $playoff = '';
-// if(trim($seasonId) == false){
-//     $fileName = getLeagueFile($folder, $playoff, 'Transact.html', 'Transact');
-//     $scoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
-// }else{
-//     $seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
-//     $fileName = getLeagueFile($seasonFolder, $playoff, 'Transact.html', 'Transact');
-//     $scoringFile = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
-// }
+
 $fileName = _getLeagueFile('Transact', $seasonId);
 $scoringFile = _getLeagueFile('TeamScoring', $seasonId);
 

@@ -10,16 +10,6 @@ $CurrentPage = 'Standings';
 
 include 'head.php';
 
-$playoffActive = '';
-$seasonActive = '';
-if(PLAYOFF_MODE){
-    //$playoffActive = 'active';
-   // $seasonActive = '';
-}else{
-   // $playoffActive = '';
-   // $seasonActive = 'active';
-}
-
 //get seasons which will be used to populate previous season dropdown if they exist
 $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 
@@ -61,22 +51,22 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 				<div id="standingsTabs" class="card-header px-2 px-lg-4 pb-1 pt-2">
 					<ul class="nav nav-tabs nav-fill">
 						<li class="nav-item"><a
-							class="nav-link <?php echo $seasonActive?>" href="#Season"
+							class="nav-link" href="#Season"
 							data-toggle="tab"><?php echo $seasonRegular;?></a></li>
 
 						<li class="nav-item"><a
-							class="nav-link <?php echo $playoffActive?>" href="#Playoffs"
+							class="nav-link" href="#Playoffs"
 							data-toggle="tab"><?php echo $seasonPLF;?></a></li>
 					</ul>
 				</div>
 				<div class="card-body tab-content m-0 p-0 pt-2">
-					<div class="tab-pane  <?php echo $seasonActive?>" id="Season">
+					<div class="tab-pane" id="Season">
 						<div id="SeasonInner">
         						<?php include 'StandingsTemplate.php'; ?>
         					</div>
 					</div>
 
-					<div class="tab-pane <?php echo $playoffActive?>" id="Playoffs">
+					<div class="tab-pane" id="Playoffs">
 						<div id="PlayoffsInner">
         						<?php include 'StandingsTreeTemplate.php'; ?>
         					</div>

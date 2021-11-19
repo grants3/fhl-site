@@ -35,7 +35,6 @@ $tableColGoaltending = 14;
 if($currentFarm == 1) {
 	$tableColScoring = 7;
 	$tableColGoaltending = 4;
-	$playoff = '';
 }
 
 $a = 0;
@@ -50,6 +49,8 @@ if($farm){
 }else{
     $Fnm = getCurrentLeagueFile('Leaders','Farm');
 }
+
+$OrigHTML = $Fnm;
 
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);

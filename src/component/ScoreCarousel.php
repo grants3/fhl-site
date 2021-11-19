@@ -158,7 +158,7 @@ if (PLAYOFF_MODE) {
     } else if (! $scheduleHolder->isSeasonStarted() && $round > 1) {
         $nextGameScheduleHolder = $scheduleHolder;
         $previousRound = $round - 1;
-        //$fileName = getLeagueFile($folder, $playoff, '-Round' . $previousRound . '-Schedule.html', '-Round' . $previousRound . '-Schedule');
+
         $fileName = getCurrentPlayoffLeagueFile('-Round' . $previousRound . '-Schedule.html', '-Round' . $previousRound . '-Schedule');
         $scheduleHolder = new ScheduleHolder($fileName, '');
 
@@ -206,10 +206,10 @@ if ($scheduleHolder->isSeasonStarted()) {
         echo '<div class="dayPlayed text-center">';
         //echo '<div style ="padding-top:50%">';
         if (!PLAYOFF_MODE) {
-            echo '<span><strong>Day ' . ($x) . '</strong></span>';
+            echo '<span><strong>'.$schedDay.' ' . ($x) . '</strong></span>';
         } else {
-            echo '<span><strong>Rnd ' . ($playedGamesRound) . '</strong></span>';
-            echo '<span><strong>Day ' . ($x) . '</strong></span>';
+            echo '<span><strong>'.$scheldRoundS.' ' . ($playedGamesRound) . '</strong></span>';
+            echo '<span><strong>'.$schedDay.' ' . ($x) . '</strong></span>';
         }
         
         // echo '</div>';
@@ -297,10 +297,10 @@ for ($x = $nextGame; $x <= $nextGamesToProcess; $x ++) {
 
     echo '<div class="dayPlayed text-center">';
     if (!PLAYOFF_MODE) {
-        echo '<span><strong>Day ' . ($x) . '</strong></span>';
+        echo '<span><strong>'.$schedDay.' ' . ($x) . '</strong></span>';
     } else {
-        echo '<span><strong>Rnd ' . ($nextGamesRound) . '</strong></span>';
-        echo '<span><strong>Day ' . ($x) . '</strong></span>';
+        echo '<span><strong>'.$scheldRoundS.' ' . ($nextGamesRound) . '</strong></span>';
+        echo '<span><strong>'.$schedDay.' ' . ($x) . '</strong></span>';
     }
 
     echo '</div>';
@@ -327,7 +327,7 @@ for ($x = $nextGame; $x <= $nextGamesToProcess; $x ++) {
         $team2Abbr = $teamAbbrHolder->getAbbr($games->team2);
 
         echo '<div class="banner-game">';
-        // echo '<a href="games.php?num='.$games->getGameNumber().$playoffLink.'">';
+
         echo '<table class = "table table-sm ">';
         //echo '<tbody>';
         echo '<col><col>'; //define two columns so we can still colspan the header.

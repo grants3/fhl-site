@@ -313,7 +313,7 @@ $teams = new TeamHolder($gmFile);
                 
                 lengthMenu: [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
                 language: {
-                    <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
+                    <?php if(LEAGUE_LANG == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
                     
                 }, 
                 "ajax": {
@@ -361,7 +361,7 @@ $teams = new TeamHolder($gmFile);
                             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                             	var pos = oData.position;
                             	
-                            	<?php if($leagueLang == 'FR'){?>
+                            	<?php if(LEAGUE_LANG == 'FR'){?>
                             		if('RW' === pos) pos = 'AD';
                             		if('LW' === pos) pos = 'AG';
                             	<?php }?>

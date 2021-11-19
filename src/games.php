@@ -328,7 +328,7 @@ table.table-sm>thead>tr>th:first-of-type {
     
     $teamCardPlaceAway = $teamInfoAway->getPlace();
     $teamCardPlaceHome = $teamInfoHome->getPlace();
-    if($leagueLang == 'FR'){
+    if(LEAGUE_LANG == 'FR'){
         $teamCardPlaceAway = ordinalFrench($teamCardPlaceAway);
         $teamCardPlaceHome = ordinalFrench($teamCardPlaceHome);
     }else{

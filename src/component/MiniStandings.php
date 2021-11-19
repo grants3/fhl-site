@@ -9,11 +9,9 @@ require_once __DIR__.'/../config.php';
 include FS_ROOT.'assets.php';
 
 //default these so warnings are not throw. clean this up
-$playoff = '';
-$farm = '';
 $shootoutMode = false;
 
-$Fnm =  getCurrentLeagueFile('Standings','Farm');
+$Fnm =  getCurrentRegSeasonFile('Standings','Farm');
 
 $c = 1;
 $d = 0;

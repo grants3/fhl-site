@@ -9,14 +9,8 @@ include_once FS_ROOT.'classes/WaiverObj.php';
 
 include FS_ROOT.'assets.php';
 
-// $playoff = isPlayoffs($folder, $playoffMode);
 
-// if ($playoff == 1)
-//     $playoff = 'PLF';
-
-// $fileName = getLeagueFile($folder, $playoff, 'Waivers.html', 'Waivers');
-
-$fileName = getLeagueFile('Waivers');
+$fileName = getCurrentLeagueFile('Waivers');
 
 if (file_exists($fileName)) {
     

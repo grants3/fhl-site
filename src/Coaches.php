@@ -16,6 +16,7 @@ include 'head.php';
 <?php
 
 $fileName = getLeagueFile('Coaches');
+$OrigHTML = $fileName;
 
 $a = 0;
 $c = 1;

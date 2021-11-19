@@ -17,6 +17,8 @@ include 'head.php';
 
 <?php
 $Fnm= getLeagueFile('Injury');
+$OrigHTML = $Fnm;
+
 $b = 0;
 $c = 1;
 $d = 0;

@@ -1,14 +1,13 @@
 <?php
-/* DO NOT TOUCH ANYTHING IN HERE!! */
-
-define("BASE_URL",getBaseContext());
-//define("FS_ROOT",__DIR__.'/');
-define("FS_ROOT",getFsRoot());
-;
-define("IS_IE",isIE());
 
 #Debug Mode. 1 = ON, 0 = OFF
-define("DEBUG_MODE",0);
+define('DEBUG_MODE', 1);
+
+
+/* DO NOT TOUCH ANYTHING BELOW HERE!! */
+define("BASE_URL",getBaseContext());
+define("FS_ROOT",getFsRoot());
+define("IS_IE",isIE());
 
 if(DEBUG_MODE){
     error_log('-------config path info ---------');
@@ -18,7 +17,7 @@ if(DEBUG_MODE){
     error_log('---------------------------------');
 }
 
-function inferLeagueMode($searchDir, $leagueMode) :string{
+function initLeagueMode($searchDir, $leagueMode) :string{
     
     //only run this logic once. cache result.
     //if(isset($GLOBALS["GLOB_LEAGUE_MODE"])) return $GLOBALS["GLOB_LEAGUE_MODE"];
@@ -36,9 +35,53 @@ function inferLeagueMode($searchDir, $leagueMode) :string{
         }
     }
     
-    //$GLOBALS["GLOB_LEAGUE_MODE"] = $result;
+    if(DEBUG_MODE){
+        error_log('LEAGUE MODE = '.$result);
+    }
 
     return $result;
+}
+
+function initLang($leagueLang) :string{
+
+    //override lang
+    if(isset($_GET['lang'])) {
+        if($_GET['lang'] == 'EN' || $_GET['lang'] == 'FR'){
+            setcookie('lang',$_GET['lang']);
+            $leagueLang = $_GET['lang'];
+        }
+    }else if(isset($_COOKIE['lang'])){
+        //set from cookie
+        $leagueLang = $_COOKIE['lang'];
+    }else{
+        //otherwise use league default.
+        setcookie('lang',$leagueLang);
+    }
+      
+    if(DEBUG_MODE){
+        error_log('LANG = '.$leagueLang);
+    }
+
+    return $leagueLang;
+}
+
+//must be called inside active session
+function initNav($navbarMode, $navBarLoc = 'nav.php') :string{
+    
+    if($navbarMode == 1){
+        $navBarLoc =  FS_ROOT.$navBarLoc;
+    }else if($navbarMode == 2 || $navbarMode == 3){
+        $navBarLoc = FS_ROOT.'navSimple.php';
+    }else{
+        $navBarLoc = '';
+    }
+    
+    if(DEBUG_MODE){
+        error_log('NAVMODE = '.$navbarMode);
+        error_log('NAVLOC = '.$navBarLoc);
+    }
+    
+    return $navBarLoc;
 }
 
 //retrieves base url relative to document root.

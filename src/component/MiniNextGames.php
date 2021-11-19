@@ -55,7 +55,7 @@ include FS_ROOT.'assets.php';
 
 </style>
 <?php
-//if(isPlayoffs($folder, $playoffMode)){
+
 if(PLAYOFF_MODE){
     
     $round = getPlayoffRound();
@@ -63,7 +63,7 @@ if(PLAYOFF_MODE){
     $playoffLink = '&rnd='.$round;
     
 }else{
-   // $fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
+
     $fileName = getCurrentLeagueFile('Schedule');
 }
 
@@ -82,14 +82,14 @@ $scheduleHolder = new ScheduleHolder($fileName, '');
 if($scheduleHolder->isScheduleComplete()){
     echo '<div class="card px-0">';
         echo '<div class="card-body px-0">';
-            echo '<h6 class="text-center mb-0">No Games Scheduled</h6>';
+        echo '<h6 class="text-center mb-0">'.$ScheldNoGames.'</h6>';
         echo '</div>';
     echo '</div>';
 
 }else{
     //only display one day for playoffs, 2 for reg season
     $miniNextGame = $scheduleHolder->getLastDayPlayed() + 1;
-    //$miniNextToProcess = !isPlayoffs($folder, $playoffMode) ? $miniNextGame + 1 : $miniNextGame;
+
     $miniNextToProcess = !PLAYOFF_MODE ? $miniNextGame + 1 : $miniNextGame;
     
     for ($i = $miniNextGame; $i <= $miniNextToProcess; $i ++) {

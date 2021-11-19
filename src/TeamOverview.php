@@ -661,8 +661,8 @@ if(file_exists($Fnm)) {
 			$tmpPP = substr($val, 18, 5);
 			if($tmpTeam == $currentTeam) {
 				$teamStatsFilePP = $tmpPP;
-				if($leagueLang == "EN") $teamStatsFilePPPos = ordinalEnglish($i);
-				if($leagueLang == "FR") $teamStatsFilePPPos = ordinalFrench($i);
+				if(LEAGUE_LANG == "EN") $teamStatsFilePPPos = ordinalEnglish($i);
+				if(LEAGUE_LANG == "FR") $teamStatsFilePPPos = ordinalFrench($i);
 			}
 		}
 		if($a == 3 && !isset($teamStatsFilePK)){
@@ -671,8 +671,8 @@ if(file_exists($Fnm)) {
 			$tmpPK = substr($val, 24, 5);
 			if($tmpTeam == $currentTeam) {
 				$teamStatsFilePK = $tmpPK;
-				if($leagueLang == "EN") $teamStatsFilePKPos = ordinalEnglish($i);
-				if($leagueLang == "FR") $teamStatsFilePKPos = ordinalFrench($i);
+				if(LEAGUE_LANG == "EN") $teamStatsFilePKPos = ordinalEnglish($i);
+				if(LEAGUE_LANG == "FR") $teamStatsFilePKPos = ordinalFrench($i);
 			}
 		}
 		if($a == 7 && !isset($teamStatsFileGFG)){
@@ -681,8 +681,8 @@ if(file_exists($Fnm)) {
 			$tmpGFG = substr($val, 39, 5);
 			if($tmpTeam == $currentTeam) {
 				$teamStatsFileGFG = $tmpGFG;
-				if($leagueLang == "EN") $teamStatsFileGFGPos = ordinalEnglish($i);
-				if($leagueLang == "FR") $teamStatsFileGFGPos = ordinalFrench($i);
+				if(LEAGUE_LANG == "EN") $teamStatsFileGFGPos = ordinalEnglish($i);
+				if(LEAGUE_LANG == "FR") $teamStatsFileGFGPos = ordinalFrench($i);
 			}
 		}
 		if($a == 9 && !isset($teamStatsFileGAG)){
@@ -691,8 +691,8 @@ if(file_exists($Fnm)) {
 			$tmpGAG = substr($val, 45, 5);
 			if($tmpTeam == $currentTeam) {
 				$teamStatsFileGAG = $tmpGAG;
-				if($leagueLang == "EN") $teamStatsFileGAGPos = ordinalEnglish($i);
-				if($leagueLang == "FR") $teamStatsFileGAGPos = ordinalFrench($i);
+				if(LEAGUE_LANG == "EN") $teamStatsFileGAGPos = ordinalEnglish($i);
+				if(LEAGUE_LANG == "FR") $teamStatsFileGAGPos = ordinalFrench($i);
 			}
 		}
 		if(substr_count($val, '<PRE>')){

@@ -39,7 +39,7 @@ if(!isset($seasonType)) $seasonType = 'REG';
 			<div class="col py-1">
 				<div class="input-group">
 					<div class="input-group-prepend">
-						<label class="input-group-text" for="typeMenu"><?php echo $seasonType;?></label>
+						<label class="input-group-text" for="typeMenu">Type</label>
 					</div>
 					<select class="custom-select" id="typeMenu">
                             <?php 

@@ -60,7 +60,7 @@ define('DEFAULT_FR_FORMAT',array(
 ));
 
 function getLocale(){
-    if($GLOBALS['leagueLang'] == 'FR') return DEFAULT_FR_FORMAT;
+    if(LEAGUE_LANG == 'FR') return DEFAULT_FR_FORMAT;
     
     return DEFAULT_EN_FORMAT;
 }

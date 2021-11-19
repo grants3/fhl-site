@@ -40,6 +40,7 @@ $leadersActive = 'active';
 
 //$scoringFile = getCurrentLeagueFile('TeamScoring');
 $scoringFile = _getLeagueFile('TeamScoring',$seasonType,$seasonId);
+$OrigHTML = $scoringFile;
 $scoringHolder = new ScoringHolder($scoringFile);
 $scoringAccumulator = new ScoringAccumulator($scoringHolder);
 
@@ -452,30 +453,23 @@ $('#top-rookies-list a').on('click', function (e) {
 
 $("#seasonMenu").on('change', function() {  
     var seasonSelection = $(this).val();
-    var typeSelection = $('#typeMenu').find(":selected").val();
 
 	if(seasonSelection == 'Current'){
 	  seasonSelection = '';
 	}
 
-	window.location.href = "Stats.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+	var newParams = {'seasonId': seasonSelection};
+    window.location.href = addParametersToURL(newParams);
     
 } );
 
 $("#typeMenu").on('change', function() {  
     var typeSelection = $(this).val();
-    var seasonSelection = $('#seasonMenu').find(":selected").val();
 
-	if(seasonSelection == 'Current'){
-	  seasonSelection = '';
-	}
-
-	window.location.href = "Stats.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+	var newParams = {'seasonType': typeSelection};
+    window.location.href = addParametersToURL(newParams);
     
 } );
-
-//$('#seasonMenu option[value="<?php echo ($seasonId ? $seasonId : 'Current');?>"]').attr("selected", "selected");
-//$('#typeMenu option[value="<?php echo ($seasonType ? $seasonType : 'REG');?>"]').attr("selected", "selected");
 
 </script>
 

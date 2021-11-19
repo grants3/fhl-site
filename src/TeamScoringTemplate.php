@@ -35,14 +35,6 @@ if(isset($_GET['team']) || isset($_POST['team'])) {
 
 <?php
 
-// if(trim($seasonId) == false){
-//     //$fileName = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
-//     $fileName = getCurrentLeagueFile('TeamScoring');
-// }else{
-//     //$seasonFolder =  str_replace("#",$seasonId,CAREER_STATS_DIR);
-//     //$fileName = getLeagueFile($seasonFolder, $playoff, 'TeamScoring.html', 'TeamScoring');
-//     $fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
-// }
 $fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
 
 if(!file_exists($fileName) && $seasonType == "PLF") {
@@ -99,7 +91,7 @@ $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
                         	<?php foreach ($scoringHolder->getSkaters() as $skater) {
                         	
                         	    $position = $skater->getPosition();
-                        	    if($leagueLang == 'FR'){
+                        	    if(LEAGUE_LANG == 'FR'){
                         	        if('RW' === $position){
                         	            $position = 'AD';
                         	        }else if('LW' === $position){

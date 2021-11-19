@@ -15,7 +15,6 @@ include FS_ROOT.'assets.php';
 
 if(!isset($teamList)){
     // // CREATE TEAM LIST
-    //$gmFile = getLeagueFile(TRANSFER_DIR, $playoff, 'GMs.html', 'GMs');
     $gmFile = getCurrentLeagueFile('GMs');
     $teamHolder = new TeamHolder($gmFile);
     //needs to retain order.
@@ -36,7 +35,6 @@ if($maxGp >= $minGameCount){
     $minGameCount = 1;
 }
 
-//$scoringFile = getLeagueFile($folder, $playoff, 'TeamScoring.html', 'TeamScoring');
 $scoringFile = getLeagueFile('TeamScoring');
 $scoringHolder = new ScoringHolder($scoringFile);
 $scoringAccumulator = new ScoringAccumulator($scoringHolder);

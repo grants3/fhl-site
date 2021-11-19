@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 require_once 'config.php';
-include 'lang.php';
+include_once 'lang.php';
 include_once 'common.php';
 include_once 'fileUtils.php';
 include_once 'numberUtils.php';
@@ -152,7 +152,7 @@ include 'TeamHeader.php';
                                         
                                         $position = $roster->getPosition();
                                         $hand = $roster->getHand();
-                                        if($leagueLang == 'FR'){
+                                        if(LEAGUE_LANG == 'FR'){
                                             if('RW' === $position){
                                                 $position = 'AD';     
                                             }else if('LW' === $position){

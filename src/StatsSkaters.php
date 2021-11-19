@@ -43,6 +43,9 @@ if(isset($_GET['rookie']) || isset($_POST['rookie'])) {
 
 $statsUrlParams='seasonId='.$seasonId.'&seasonType='.$seasonType;
 
+$fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
+$OrigHTML = $fileName;
+
 //points is column7. handles this better
 $sort = 7;
 if(isset($_GET['sort']) || isset($_POST['sort'])) {
@@ -163,7 +166,7 @@ $(function() {
         },
 		"lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
         language: {
-            <?php if($leagueLang == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
+            <?php if(LEAGUE_LANG == 'FR') echo 'url: \''.BASE_URL.'assets/other/dt.lang.fr\','?>
         },   
 		"order": [[ "<?php echo $sort?>", "desc" ]],
        
@@ -201,7 +204,7 @@ $(function() {
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                     	var pos = oData.position;
                     	
-                    	<?php if($leagueLang == 'FR'){?>
+                    	<?php if(LEAGUE_LANG == 'FR'){?>
                     		if('RW' === pos) pos = 'AD';
                     		if('LW' === pos) pos = 'AG';
                     	<?php }?>
@@ -291,30 +294,25 @@ $(function() {
 
 $("#seasonMenu").on('change', function() {  
     var seasonSelection = $(this).val();
-    var typeSelection = $('#typeMenu').find(":selected").val();
 
 	if(seasonSelection == 'Current'){
 	  seasonSelection = '';
 	}
 
-	window.location.href = "StatsSkaters.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+	var newParams = {'seasonId': seasonSelection};
+    window.location.href = addParametersToURL(newParams);
     
 } );
 
 $("#typeMenu").on('change', function() {  
     var typeSelection = $(this).val();
-    var seasonSelection = $('#seasonMenu').find(":selected").val();
 
-	if(seasonSelection == 'Current'){
-	  seasonSelection = '';
-	}
-
-	window.location.href = "StatsSkaters.php?seasonId=" + seasonSelection + "&seasonType=" + typeSelection; //relative to domain
+	var newParams = {'seasonType': typeSelection};
+    window.location.href = addParametersToURL(newParams);
     
 } );
 
-//$('#seasonMenu option[value="<?php echo ($seasonId ? $seasonId : 'Current');?>"]').attr("selected", "selected");
-//$('#typeMenu option[value="<?php echo ($seasonType ? $seasonType : 'REG');?>"]').attr("selected", "selected");
+
 </script>
 
 

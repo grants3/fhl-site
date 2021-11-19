@@ -293,7 +293,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 		    echo '<tr><td class="text-left">'.$financeFarmPayroll.'</td><td class="text-right"">'.$farmpayroll.'</td></tr>
 			<tr><td class="text-left">'.$financeProspectFees.'</td><td class="text-right"">'.$prospectfees.'</td></tr>
 			<tr><td class="text-left">'.$financeCoach.'</td><td class="text-right"">'.$coach.'</td></tr>';
-    		if($currentPLF == 0){
+		    if(PLAYOFF_MODE == 0){
     		    echo '<tr><td class="text-left">'.$financeGamesRemaining.'</td><td class="text-right"">'.$gamesremaining.'</td></tr>';
     		}
 			echo '<tr><td class="text-left">'.$financeTotalGameExpenses.'</td><td class="text-right"">'.$totalgameexpenses.'</td></tr>
@@ -311,13 +311,8 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
         	</thead>
             <tbody>
 			<tr><td class="text-left">'.$financeCurrentFunds.'</td><td class="text-right"">'.$currentfunds.'</td></tr>';
-// 			if($currentPLF == 0) echo '<tr><td class="text-left">'.$financeHomeGameRemaining.'</td><td class="text-right"">'.$homeGamesRemaining.'</td></tr>
-// 			<tr><td class="text-left">'.$financeAVGAttendance.'</td><td class="text-right"">'.$avgAttendance.'</td></tr>
-// 			<tr><td class="text-left">'.$financeAVGRevenueParGame.'</td><td class="text-right"">'.$avgRevenueGame.'$</td></tr>
-// 			<tr><td class="text-left">'.$financeProjectedRevenue.'</td><td class="text-right"">'.$projectedRevenue.'$</td></tr>
-// 			</tbody>
-// 			</table>';
-		    if($currentPLF == 0) echo '<tr><td class="text-left">'.$financeHomeGameRemaining.'</td><td class="text-right"">'.$homeGamesRemaining.'</td></tr>
+
+		    if(PLAYOFF_MODE == 0) echo '<tr><td class="text-left">'.$financeHomeGameRemaining.'</td><td class="text-right"">'.$homeGamesRemaining.'</td></tr>
 			<tr><td class="text-left">'.$financeAVGAttendance.'</td><td class="text-right"">'.$avgAttendance.'</td></tr>
 			<tr><td class="text-left">'.$financeAVGRevenueParGame.'</td><td class="text-right"">'.$avgRevenueGame.'</td></tr>
 			<tr><td class="text-left">'.$financeProjectedRevenue.'</td><td class="text-right"">'.$projectedRevenue.'</td></tr>';

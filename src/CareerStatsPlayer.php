@@ -25,17 +25,7 @@ if(CAREER_STATS_DIR) {
 
 // PlayerVitals - Current Season
 if($csName != '') {
-// 	$matches = glob($folder.'*'.$playoff.'PlayerVitals.html');
-// 	$folderLeagueURL = '';
-// 	$matchesDate = array_map('filemtime', $matches);
-// 	arsort($matchesDate);
-// 	foreach ($matchesDate as $j => $val) {
-// 		if((!substr_count($matches[$j], 'PLF') && $playoff == '') || (substr_count($matches[$j], 'PLF') && $playoff == 'PLF')) {
-// 			$folderLeagueURL = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'PlayerVitals')-strrpos($matches[$j], '/')-1);
-// 			break 1;
-// 		}
-// 	}
-// 	$Fnm = $folder.$folderLeagueURL.'PlayerVitals.html';
+
     $Fnm = getCurrentRegSeasonFile('PlayerVitals');
     
 	$a = 0;

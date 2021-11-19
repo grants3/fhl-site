@@ -20,7 +20,6 @@ $CurrentPage = 'Scores';
 include 'head.php';
 
 // Today Games
-//$fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
 $i = 0;
 $j = 0;
 $round = 0;
@@ -33,7 +32,6 @@ if(PLAYOFF_MODE){
     $playoffLink = '&rnd='.$round;
     
 }else{
-   // $fileName = getLeagueFile($folder, $playoff, 'Schedule.html', 'Schedule');
     $baseFileName = 'Schedule';
 }
 
@@ -78,8 +76,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 
 			//$matchNumber = $lastGames[$i];
 		    $matchNumber = $game->getGameNumber();
-			//if($playoff == '') $Fnm = $folder.$folderGames.$folderLeagueURL.$matchNumber.'.html';
-			//if($playoff == 'PLF')  $Fnm = $folder.$folderGames.$folderLeagueURL.'-R'.$round.'-'.$matchNumber.'.html';
+
 		    $Fnm = getGameFile($matchNumber, null, $round );
 		    
 			$a = 0;
@@ -553,7 +550,7 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 		
 			    //could change the name but will support OT and shootout headings.
 			    $gameOvertime[$i] = $game->getGameTitle();
-			    if($leagueLang =='FR'){
+			    if(LEAGUE_LANG =='FR'){
 			        if(substr_count($game->getGameTitle(), '(OT)')){
 			            $gameOvertime[$i] = str_replace('(OT)',$game->getGameTitle(),'('.$schedOT.')');
 			        }else if(substr_count($game->getGameTitle(), '(SO)')){
@@ -700,17 +697,11 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
                  echo '<div>'.$lastEquipe1.' - '.$gameGoal1[$i].'</div>';
                  echo '<div>'.$lastEquipe2.' - '.$gameGoal2[$i].'</div>';      
                echo '</div>'; // end goalie details
-               
-//                echo '<div class = "row box-score">'; //box score 
-//                 echo '<div class="col"><a class="lien-blanc" href="games.php?num='.$matchNumber.$playoffLink.'">BOX SCORE</a></div>';  
-//                echo '</div>'; // end box score
-              
- 
-      
+
                 echo '</div>'; //end card-body
                 
                 echo '<div class = "card-footer box-score py-1" >';
-                echo '<div class="col text-center"><a class="lien-blanc text-uppercase" href="games.php?num='.$matchNumber.$playoffLink.'">'.$gamesBoxScore.'</a></div>';      
+                echo '<div class="col text-center"><a class="lien-blanc text-uppercase" style="display:block" href="games.php?num='.$matchNumber.$playoffLink.'">'.$gamesBoxScore.'</a></div>';      
                 echo '</div>'; //end card footer 
                 
                 echo '</div>'; //end card

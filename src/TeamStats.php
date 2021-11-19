@@ -77,9 +77,7 @@ for($j=1;$j<=$round;$j++) {
 		if(isset($schelduleNumber)) {
 			for($i=0;$i<count($schelduleNumber);$i++) {
 				$matchNumber = $schelduleNumber[$i];
-				//if($playoff == '') $Fnm = $folder.$folderGames.$folderLeagueURL.$matchNumber.'.html';
-				//if($playoff == 'PLF') $Fnm = $folder.$folderGames.$folderLeagueURL2.'PLF-R'.$j.'-'.$matchNumber.'.html';
-				
+
 				if(PLAYOFF_MODE){
 				    $Fnm = getGameFile($matchNumber, null, $j);
 				}else{

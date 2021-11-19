@@ -85,9 +85,35 @@ function makeTableSortable(tableId) {
     makeSortable(t);
 }
 
-function addParameterToURL(param){
-    _url = window.location.href;
-    _url += (_url.split('?')[1] ? '&':'?') + param;
-    return _url;
+function addParameterToURL(param, paramValue){
+	var params = {};
+	params[param] = paramValue;
+	return addParametersToURL(params)
 }
 
+function addParametersToURL(newParams){
+	var _url = window.location.href.split('?')[0];
+
+	var params = {}
+	if(document.location.search.substr(1)){
+		document.location.search.substr(1).split('&').forEach(pair => {
+		  [key, value] = pair.split('=')
+		  params[key] = value
+		});
+	
+	}
+	
+	//existing hash handling
+	var hash = window.location.hash;
+	
+	for( var paramKey in newParams ) {
+		params[paramKey] = newParams[paramKey];
+	}
+
+	for( var key in params ) {
+	  var value = params[key];
+	  _url += (_url.split('?')[1] ? '&':'?') + key + '=' +  value;
+	}
+	
+	return _url + hash;
+}
