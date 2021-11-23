@@ -21,7 +21,6 @@ border-bottom:1px solid blue;
 
 
 .team-nav {
-   a { color: rgba(225, 239, 255, 1.0); ; border-bottom: 1px ; text-decoration: none; transition: all .3; }
    a:hover, a:focus { 
     color: #856dc0; border: 0; text-decoration: none;   -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
@@ -29,7 +28,7 @@ border-bottom:1px solid blue;
    }
 }
 
-.team-nav a { color: rgba(225, 239, 255, 1.0); border-bottom: 1px ; text-decoration: none; transition: all .3; }
+.team-nav .nav-link{ color: var(--nav-link-color-main); border-bottom: 1px ; text-decoration: none; transition: all .3; }
 
 .panel-profile-img { 
 	max-width: 75px; 

@@ -10,7 +10,7 @@ include_once 'classes/ScoringObj.php';
 include_once 'classes/ScoringAccumulator.php';
 
 $CurrentHTML = 'StatsSkaters.php';
-$CurrentTitle = $allStats.' '.$positionSkaters;
+$CurrentTitle = $allStats;
 $CurrentPage = 'StatsSkaters';
 
 $dataTablesRequired = 1; //require datatables import

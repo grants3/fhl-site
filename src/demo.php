@@ -38,11 +38,12 @@ if(DEMO_MODE){
         <span class="font-weight-bold">Demo Options</span>
     </button>
     <nav class="floating-menu collapse" id="demo-nav">
+   		 <a href="demoPage.php">Demo Links Page</a>
         <h3 class="text-left font-weight-bold">Theme</h3>
         <a href="javascript:window.location.href = addParameterToURL('theme','blue')">Blue</a>
         <a href="javascript:window.location.href = addParameterToURL('theme','green')">Green</a>
         <a href="javascript:window.location.href = addParameterToURL('theme','red')">Red</a>
-         <a href="javascript:window.location.href = addParameterToURL('theme','teal')">Teal</a>
+         <a href="javascript:window.location.href = addParameterToURL('theme','ocean')">Ocean</a>
         <a href="javascript:window.location.href = addParameterToURL('theme','dark')">Dark</a>
         <h3 class="text-left font-weight-bold">Nav Mode</h3>
         <a href="javascript:window.location.href = addParameterToURL('navbarMode','1')">Full</a>

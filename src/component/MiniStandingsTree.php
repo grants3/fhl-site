@@ -17,23 +17,34 @@ include FS_ROOT.'assets.php';
 //$Fnm = getCurrentPlayoffLeagueFile('-Round1-Schedule.html');
 $existRnd = getPlayoffRound();
 
-if(!$existRnd) exit('<h5>The Playoffs have not started</h5>');
+//if(!$existRnd) exit('<h5>The Playoffs have not started</h5>');
 
 ?>
 
 
+<style>
+nav a,
+nav a:hover,
+nav a:focus {
+    color: var(--color-primary-2);
+}
+
+</style>
 
 
 <?php
 
+if($existRnd){
+
+echo '<div class="fhlElement">';
 echo '<div class = "row">';
 echo '<div class = "col">';
 
 echo '<nav id ="tree-nav" class="nav nav-justified-center justify-content-center">';
-if($existRnd >= 4)echo'<a class="nav-item nav-link" href="Schedule.php?rnd=4">Cup Finals</a>';
-if($existRnd >= 3)echo'<a class="nav-item nav-link" href="Schedule.php?rnd=3">'.$scheldRound.' 3</a>';
-if($existRnd >= 2)echo'<a class="nav-item nav-link" href="Schedule.php?rnd=2">'.$scheldRound.' 2</a>';
-if($existRnd >= 1)echo'<a class="nav-item nav-link" href="Schedule.php?rnd=1">'.$scheldRound.' 1</a>';
+if($existRnd >= 4)echo'<a class="nav-item nav-link" href="'.BASE_URL.'Schedule.php?rnd=4">Cup Finals</a>';
+if($existRnd >= 3)echo'<a class="nav-item nav-link" href="'.BASE_URL.'Schedule.php?rnd=3">'.$scheldRound.' 3</a>';
+if($existRnd >= 2)echo'<a class="nav-item nav-link" href="'.BASE_URL.'Schedule.php?rnd=2">'.$scheldRound.' 2</a>';
+if($existRnd >= 1)echo'<a class="nav-item nav-link" href="'.BASE_URL.'Schedule.php?rnd=1">'.$scheldRound.' 1</a>';
 echo '</nav>';
 
 echo '</div>';
@@ -170,9 +181,9 @@ $j = $existRnd;
 				echo '<td style="width:20%"></td>';
 				//for($w=1;$w<=$m;$w++) {
 				for($w=1;$w<=8;$w++) {
-					if(isset($day[$w]) && isset($score1[$w])) echo '<td style="width:5%" class = "col-xs-1"><a class="lien-blanc" href="games.php?num='.$day[$w].'&rnd='.$j.'" >'.$w.'</a></td>';
+					if(isset($day[$w]) && isset($score1[$w])) echo '<td style="width:5%" class = "col-xs-1"><a class="lien-blanc" href="'.BASE_URL.'games.php?num='.$day[$w].'&rnd='.$j.'" >'.$w.'</a></td>';
 					//else echo '<td>'.$w.'</td>';
-					elseif($w == 8) echo '<th style="width:5%"><a class="lien-blanc" href="Schedule.php">Series</a></th>';
+					elseif($w == 8) echo '<th style="width:5%"><a class="lien-blanc" href="'.BASE_URL.'Schedule.php">Series</a></th>';
 					else echo '<th style="width:5%"></th>';
 				}
 				//echo '<td></td>';
@@ -205,12 +216,17 @@ $j = $existRnd;
 	}
 	else { 
 		//echo '<tr><td>'.$allFileNotFound.' - '.$Fnm.'</td></tr>';
-	    echo $allFileNotFound;
+	    if(DEBUG_MODE)  echo $allFileNotFound;
+	   
 	}
 	//echo '</td>';
 //}
+} else{
+	    echo '<div class="card"><div class="card-body"><h5>The Playoffs have not started</h5></div></div>';
+}
+	 
 ?>
-
+</div>
 <script>
 
 $(document).ready(function() {
@@ -229,6 +245,3 @@ $(document).ready(function() {
 });
 
 </script>
-
-</body>
-</html>

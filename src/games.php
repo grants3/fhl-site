@@ -72,7 +72,7 @@ else {
 <style>
 
 /*don't want whitespace to wrap*/
-.table {
+.fhlElement .table {
 	width: 100%;
 	white-space: normal;
 	line-height: 20px;
@@ -166,11 +166,11 @@ else {
 }
 
 
- .table-dark2>thead th { 
+.fhlElement .table-dark2>thead th { 
  	background-color: rgb(50, 52, 54);
  } 
 
-.table-dark2>tbody td {
+.fhlElement .table-dark2>tbody td {
   background-color: rgb(24, 26, 29);
 
     padding: 1px 7px;
@@ -178,15 +178,15 @@ else {
     border-bottom: 1px solid #27292b;
 }
 
-.table-dark2 .teamName {
+.fhlElement .table-dark2 .teamName {
   border-right: 1px solid #27292b;
 }
 
-.table-dark2 .teamTotal {
+.fhlElement .table-dark2 .teamTotal {
   border-left: 1px solid #27292b;
 }
 
-.table-dark2 {
+.fhlElement .table-dark2 {
 	-bottom-color: rgb(128, 128, 128);
 	graytable border-collapse: collapse;
 	border-left-color: rgb(128, 128, 128);
@@ -207,20 +207,20 @@ else {
 	margin-bottom:0px;
 }
 
-table.table-sm>thead>tr>th:first-of-type {
+.fhlElement table.table-sm>thead>tr>th:first-of-type {
 	padding-left: 0.34rem;
 	padding-right: inherit;
 }
 
-.table-dark2.table-striped>tbody>tr:nth-child(odd)>td{
+.fhlElement .table-dark2.table-striped>tbody>tr:nth-child(odd)>td{
    background-color: rgb(24, 26, 29);
  }
  
-.table-dark2.table-striped>tbody>tr:nth-child(even)>td{
+.fhlElement .table-dark2.table-striped>tbody>tr:nth-child(even)>td{
  background-color: rgb(50, 52, 54);
 }
 
-.nav-tabs-dark .nav-link{
+.fhlElement .nav-tabs-dark .nav-link{
     color:rgb(173, 173, 178);
    
     border: 1px solid transparent;
@@ -229,7 +229,7 @@ table.table-sm>thead>tr>th:first-of-type {
     background-color: rgb(24, 26, 29);
 }
 
-.nav-tabs-dark .nav-link.active {
+.fhlElement .nav-tabs-dark .nav-link.active {
 /*     color: var(--color-primary-1); */
 /*     background-color: var(--color-alternate-2); */
     border-color: #dee2e6 #dee2e6 #fff;
@@ -239,7 +239,7 @@ table.table-sm>thead>tr>th:first-of-type {
 
 }
 
-.nav-tabs-dark a:focus{
+.fhlElement .nav-tabs-dark a:focus{
     color:var(--color-primary-1);
     background-color:var(--color-alternate-2);
     filter: initial;

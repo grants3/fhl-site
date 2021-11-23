@@ -8,9 +8,14 @@
 #btn-back-to-top {
   position: fixed;
   bottom: 30px;
-  left: 15px;
+  right: 13px;
   display: none;
   opacity: 0.5;
+  
+  padding-bottom: 0px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 0px;
 
 }
 

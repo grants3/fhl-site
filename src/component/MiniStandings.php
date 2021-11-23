@@ -1,5 +1,6 @@
 
 <!-- <div class="col"> -->
+<div class="fhlElement">
 <div class = "table-responsive scrollable-table">
 <table id ="miniStandings" class="table table-sm table-striped tableFixHead table-rounded text-center">
 
@@ -131,7 +132,7 @@ if(file_exists($Fnm)) {
 		$key = $sorted[$d]['id'];
 		$pos = $d + 1;
 		echo '<tr class="hover'.$c.'">';
-		echo '<td class="text-left"><a style="display:block; width:100%;" href="TeamRosters.php?team='.urlencode($equipe[$key]).'">'.$equipe[$key].'</a></td>';
+		echo '<td class="text-left"><a style="display:block; width:100%;" href="'.BASE_URL.'TeamRosters.php?team='.urlencode($equipe[$key]).'">'.$equipe[$key].'</a></td>';
 		echo '<td>'.$pj[$key].'</td>';
 		echo '<td>'.$standingsW[$key].'</td>';
 		echo '<td>'.$standingsL[$key].'</td>';
@@ -176,5 +177,5 @@ $(document).ready(function()
 	overflow-y:scroll;
 }
 </style>
+</div>
 
-<!-- </html> -->

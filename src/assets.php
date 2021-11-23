@@ -21,12 +21,16 @@ if($LOAD_BASE_SCRIPTS && !$BASE_SCRIPTS_LOADED){
     	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/ex/animate.css"/>
     	<?php }?>
     	
-    	<!-- Font support //TODO ADD TO LOCAL -->
+    	<!-- Font support -->
+        <?php if(CDN_SUPPORT) {?>
     	<link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    	<?php }else{?>
+        <link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/ex/google-fonts.css"/>
+    	<?php }?>
          
-         <!-- JQuery and bootstrap init -->
+        <!-- JQuery and bootstrap init -->
         <?php if(CDN_SUPPORT) {?>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
@@ -99,9 +103,9 @@ if($LOAD_SLICK_SCRIPTS && !$SLICK_SCRIPTS_LOADED){
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <script type="text/javascript"	src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<?php }else{?>
-	<link rel="stylesheet" type="text/css"	href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-    <script type="text/javascript"	src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<link rel="stylesheet" type="text/css"	href="<?php echo BASE_URL?>assets/css/ex/slick.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL?>assets/css/ex/slick-theme.css" />
+    <script type="text/javascript"	src="<?php echo BASE_URL?>assets/js/ex/slick.min.js"></script>
    <?php }
    
    $SLICK_SCRIPTS_LOADED = true;

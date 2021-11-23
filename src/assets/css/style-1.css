@@ -11,6 +11,8 @@
   --color-text-primary-1: white;
   --color-text-primary-2: var(--color-primary-3);
   
+  --nav-link-color-main: var(--color-alternate-1);
+  
   --background-primary:var(--color-alternate-3);
   --background-secondary:var(--color-alternate-1);
   --background-gradient:linear-gradient(var(--background-primary), var(--background-primary) 70%, var(--background-secondary) 100%) fixed;
@@ -123,9 +125,9 @@ font-weight: bold;
 color:#ffffff;
 }
 
-th:focus,
-a:focus,
-a:hover {
+.fhlElement th:focus,
+.fhlElement a:focus,
+.fhlElement a:hover {
   outline-color: var(--selection-border); 
 }
 
@@ -205,7 +207,7 @@ a:hover {
 #main-navbar.navbar.navbar-no-bg { background: #444; background: rgba(0, 0, 0, 0.5); }
 
 #main-navbar.navbar-dark .navbar-nav { font-size: 17px; color: #fff; text-transform: uppercase; }
-#main-navbar.navbar-dark .navbar-nav .nav-link { color: #4C96D7; color: rgba(182,219,251, 0.8); border: 0; }
+#main-navbar.navbar-dark .navbar-nav .nav-link { color: #4C96D7; color: var(--nav-link-color-main); border: 0; }
 #main-navbar.navbar-dark .navbar-nav .nav-link:hover { color: #fff; }
 #main-navbar.navbar-dark .navbar-nav .nav-link:focus { color: #fff; outline: 0; }
 #main-navbar.navbar-dark .navbar-nav .dropdown-menu .nav-item{text-align:right;}
@@ -263,9 +265,9 @@ a:hover {
 .logo-header { margin-bottom: 10px; background-color: #D8D8D8; border-radius:10px; }
 
 /***** Footer support*****/
-html, body { height:100%; }
+html, body.fhlElement { height:100%; }
 
-body{
+body.fhlElement{
     display:flex;
     flex-direction:column;
     
@@ -306,11 +308,11 @@ body{
   filter:alpha(opacity=100);
 }
 
-.btn-link {
+.fhlElement .btn-link {
 	color: var(--color-primary-1);
 }
 
-.nav-link {
+.fhlElement .nav-link {
 	color: var(--color-primary-1);
 }
 
@@ -340,16 +342,16 @@ input[type="color"]:focus,
   outline: 0 none;
 }
 
-.form-control:focus {
+.fhlElement .form-control:focus {
   box-shadow: none;
 }
 
 /*bootstrap pagination overrides*/
-.page-link {
+.fhlElement .page-link {
     color: var(--color-primary-1);
 }
 
-.page-item.active .page-link {
+.fhlElement .page-item.active .page-link {
     z-index: 1;
     color: var(--color-text-primary-1);
     background-color: var(--color-primary-1);
@@ -358,21 +360,21 @@ input[type="color"]:focus,
 
 /*bootstrap button overrides*/
 
-.btn-primary{color:#fff;background-color:var(--color-primary-1);border-color:var(--color-primary-2)}
+.fhlElement .btn-primary{color:#fff;background-color:var(--color-primary-1);border-color:var(--color-primary-2)}
 
-.btn-primary:hover{color:var(--color-primary-1);background-color:var(--color-alternate-1);border-color:var(--color-primary-2)}
-.btn-primary:focus,.btn-primary.focus{box-shadow:0 0 0 .2rem rgba(var(--color-primary-2),0.5)}
-.btn-primary.disabled,.btn-primary:disabled{color:#fff;background-color:var(--color-primary-1);border-color:#005a5a}
-.btn-primary:not(:disabled):not(.disabled):active,.btn-primary:not(:disabled):not(.disabled).active,.show>.btn-primary.dropdown-toggle{color:#fff;background-color:#00b3b3;border-color:#000}
-.btn-primary:not(:disabled):not(.disabled):active:focus,.btn-primary:not(:disabled):not(.disabled).active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(0,90,90,0.5)}
+.fhlElement .btn-primary:hover{color:var(--color-primary-1);background-color:var(--color-alternate-1);border-color:var(--color-primary-2)}
+.fhlElement .btn-primary:focus,.btn-primary.focus{box-shadow:0 0 0 .2rem rgba(var(--color-primary-2),0.5)}
+.fhlElement .btn-primary.disabled,.btn-primary:disabled{color:#fff;background-color:var(--color-primary-1);border-color:#005a5a}
+.fhlElement .btn-primary:not(:disabled):not(.disabled):active,.btn-primary:not(:disabled):not(.disabled).active,.show>.btn-primary.dropdown-toggle{color:#fff;background-color:#00b3b3;border-color:#000}
+.fhlElement .btn-primary:not(:disabled):not(.disabled):active:focus,.btn-primary:not(:disabled):not(.disabled).active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(0,90,90,0.5)}
 
 
-.btn-outline-primary{color:var(--color-primary-1);background-color:transparent;background-image:none;border-color:var(--color-primary-2)}
-.btn-outline-primary:hover{color:#fff;background-color:var(--color-primary-1);border-color:var(--color-primary-2)}
-.btn-outline-primary:focus,.btn-outline-primary.focus{box-shadow:0 0 0 .2rem rgba(0,128,128,0.5)}
-.btn-outline-primary.disabled,.btn-outline-primary:disabled{color:var(--color-primary-1);background-color:transparent}
-.btn-outline-primary:not(:disabled):not(.disabled):active,.btn-outline-primary:not(:disabled):not(.disabled).active,.show>.btn-outline-primary.dropdown-toggle{color:#fff;background-color:#009a9a;border-color:var(--color-primary-1)}
-.btn-outline-primary:not(:disabled):not(.disabled):active:focus,.btn-outline-primary:not(:disabled):not(.disabled).active:focus,.show>.btn-outline-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(0,128,128,0.5)}
+.fhlElement .btn-outline-primary{color:var(--color-primary-1);background-color:transparent;background-image:none;border-color:var(--color-primary-2)}
+.fhlElement .btn-outline-primary:hover{color:#fff;background-color:var(--color-primary-1);border-color:var(--color-primary-2)}
+.fhlElement .btn-outline-primary:focus,.btn-outline-primary.focus{box-shadow:0 0 0 .2rem rgba(0,128,128,0.5)}
+.fhlElement .btn-outline-primary.disabled,.btn-outline-primary:disabled{color:var(--color-primary-1);background-color:transparent}
+.fhlElement .btn-outline-primary:not(:disabled):not(.disabled):active,.btn-outline-primary:not(:disabled):not(.disabled).active,.show>.btn-outline-primary.dropdown-toggle{color:#fff;background-color:#009a9a;border-color:var(--color-primary-1)}
+.fhlElement .btn-outline-primary:not(:disabled):not(.disabled):active:focus,.btn-outline-primary:not(:disabled):not(.disabled).active:focus,.show>.btn-outline-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(0,128,128,0.5)}
 
 
 /*bootstrap table overrides*/
@@ -394,123 +396,123 @@ div .tableau-top{
 
 
 
-.table{
+.fhlElement .table{
 /* 	line-height:25px; not sure why i did this here */
 	white-space:nowrap;
 	border-collapse: collapse;
 	width: 100%;
 }
 
-.table-sm{
+.fhlElement .table-sm{
  	line-height:20px; 
  }
 
-.table-sm>tfoot td,
-.table-sm>thead th{
+.fhlElement .table-sm>tfoot td,
+.fhlElement .table-sm>thead th{
 	line-height:25px;
 }
 
-.table>tbody a { 
+.fhlElement .table>tbody a { 
 	color: var(--table-link-color); 
  	font-weight: 500; 
 }
 
 
-.table>tfoot td,
-.table>thead th{
+.fhlElement .table>tfoot td,
+.fhlElement .table>thead th{
     background-color:var(--table-header-bg);   
     color:#ffffff;
 }
 
-.table{
+.fhlElement .table{
 	color: var(--color-text-primary-0); /*table text colour*/
 }
 
-.table td {
+.fhlElement .table td {
 	font-size: 0.8rem; /*was 12 and 13*/
 	margin: 0px;
 }
-.table th {
+.fhlElement .table th {
 	font-size: 0.9rem;
  	margin: 0px; 
 }
 
 
-.table-striped>tbody>tr:nth-child(odd)>td, 
-.table-striped>tbody>tr:nth-child(odd)>th {
+.fhlElement .table-striped>tbody>tr:nth-child(odd)>td, 
+.fhlElement .table-striped>tbody>tr:nth-child(odd)>th {
    background-color: var(--table-bg-color-1);
  }
 
-.table-striped>tbody>tr:nth-child(even)>td, 
-.table-striped>tbody>tr:nth-child(even)>th {
+.fhlElement .table-striped>tbody>tr:nth-child(even)>td, 
+.fhlElement .table-striped>tbody>tr:nth-child(even)>th {
     background-color: var(--table-bg-color-2);  
  }
  
-.table > tbody > tr.tableau-top > td {
+.fhlElement .table > tbody > tr.tableau-top > td {
     background-color:var(--table-header-bg);  
     color:var(--table-header-text);  
 }
 
-.table > tbody > tr > td > a {
+.fhlElement .table > tbody > tr > td > a {
    display:block; 
    width:100%;
    transition: none;
 }
 
-.table>tbody a:hover,
-.table>tbody a:focus { 
+.fhlElement .table>tbody a:hover,
+.fhlElement .table>tbody a:focus { 
     filter:none;
     text-decoration: underline;
 }
 
 
-.table.fixed-column td,
-.table.fixed-column th {
+.fhlElement .table.fixed-column td,
+.fhlElement .table.fixed-column th {
     padding-left: 0.2rem;
 	padding-right: 0.2rem;
 }
 
-.table.fixed-column th:first-child,
-.table.fixed-column td:first-child {
+.fhlElement .table.fixed-column th:first-child,
+.fhlElement .table.fixed-column td:first-child {
 	position: sticky;
 	left: 0px;
 }
 
-.table.fixed-column th a
+.fhlElement .table.fixed-column th a
 {
   color:#ffffff;
 }
 
-table.table-sm>thead>tr>th{
+.fhlElement table.table-sm>thead>tr>th{
 	padding-left: 0.2rem;
 	padding-right: 0.2rem;
 }
 
 /* rounded table */
-.table-rounded th:first-of-type,
-.table-rounded-top th:first-of-type {
+.fhlElement .table-rounded th:first-of-type,
+.fhlElement .table-rounded-top th:first-of-type {
   border-top-left-radius: 5px;
 }
-.table-rounded th:last-of-type,
-.table-rounded-top th:last-of-type {
+.fhlElement .table-rounded th:last-of-type,
+.fhlElement .table-rounded-top th:last-of-type {
   border-top-right-radius: 5px;
 }
-.table-rounded tr:last-of-type td:first-of-type,
-.table-rounded-bottom tr:last-of-type td:first-of-type  {
+.fhlElement .table-rounded tr:last-of-type td:first-of-type,
+.fhlElement .table-rounded-bottom tr:last-of-type td:first-of-type  {
   border-bottom-left-radius: 5px;
 }
-.table-rounded tr:last-of-type td:last-of-type,
-.table-rounded-bottom tr:last-of-type td:last-of-type {
+.fhlElement .table-rounded tr:last-of-type td:last-of-type,
+.fhlElement .table-rounded-bottom tr:last-of-type td:last-of-type {
   border-bottom-right-radius: 5px;
 }
 
-.table-rounded-bottom>thead th{
+.fhlElement .table-rounded-bottom>thead th{
 	background:var(--table-header-bg);  
 }
 
 /* needs to be last part of rounded */
-.table-hover>tbody>tr:hover td,
-.table-hover>tbody>tr:hover td>a{
+.fhlElement .table-hover>tbody>tr:hover td,
+.fhlElement .table-hover>tbody>tr:hover td>a{
 	  background-color: var(--table-highlight);
 	  color:var(--color-text-primary-1);
 }
@@ -529,46 +531,46 @@ table.table-sm>thead>tr>th{
 }
 
 /*Datatables overrides*/
-.dataTable > thead > tr > th[class*="sort"]:after{
+.fhlElement .dataTable > thead > tr > th[class*="sort"]:after{
     content: "" !important;
     background-color:var(--table-sort-desc);  
 }
-.dataTable > thead > tr > th[class*="sort"]:before{
+.fhlElement .dataTable > thead > tr > th[class*="sort"]:before{
     content: "" !important;
     background-color:var(--table-sort-desc);  
 }
 
-.dataTable th.sorting_desc{
+.fhlElement .dataTable th.sorting_desc{
   background-color:var(--table-sort-desc);  
 }
 
-.dataTable th.sorting_asc{
+.fhlElement .dataTable th.sorting_asc{
    background-color:var(--table-sort-asc);  
 }
 
-table.dataTable.table-sm>thead>tr>th{
+.fhlElement table.dataTable.table-sm>thead>tr>th{
 	padding-left: 0.25rem;
 	padding-right: 0.25rem;
 }
 
 /* fixes dt alignment issue with table-sm */
-.table-sm-px tr th, .table-sm-px tr td {
+.fhlElement .table-sm-px tr th, .table-sm-px tr td {
 	 padding: 5px;
 }
 
 /* Table hover */
-a.info {
+.fhlElement a.info {
   position:relative;
   text-decoration: none; 
   color:white;
 }
-a:hover.info {
+.fhlElement a:hover.info {
   text-decoration: none;
   background: none;
 /*   color:#FFC741; */
 }
-a.info span {display: none;}
-a:hover.info span {
+.fhlElement a.info span {display: none;}
+.fhlElement a:hover.info span {
   display: inline;
   position: fixed; 
   bottom:15px;
@@ -585,12 +587,12 @@ a:hover.info span {
 }
 
 /* Other table styling*/
-.tableau {
+.fhlElement .tableau {
 	border-collapse: collapse;
 	width:100%;
 }
 
-.tableau-top td{
+.fhlElement .tableau-top td{
 	font-size: 12px;
 	font-weight: 400;
 }

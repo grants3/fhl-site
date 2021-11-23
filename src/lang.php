@@ -739,7 +739,7 @@ if(LEAGUE_LANG == 'EN') {
 	$allOther = "Other";
 	$allNone = "None";
 	$allGMOE = 'OGME';
-	$allStats = 'Statistiques';
+	$allStats = 'Statistics';
 	
 	//main
 	$mainNews = 'Nouvelles';

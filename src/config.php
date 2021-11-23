@@ -11,11 +11,11 @@ $leagueLogo = '';
 
 //CDN support for faster css/js assets 
 //(basically get required javascript and css libraries from the internet on much faster servers closer to your location than your own webserver)
-//uses less bandwith and should be faster. true = use CDN , false = use from your own webserver.
-$cdnSupport = true;
+//uses less bandwith and should be faster. 1 = use CDN , 0 = use from your own webserver.
+$cdnSupport = 1;
 
 // Language | Français: 'FR' | English: 'EN'
-$leagueLang = "FR";
+$leagueLang = "EN";
 
 //1 to enable demo menu (test navs, colors, languages). 0 to disable.
 $demoMode = 1;
@@ -112,7 +112,7 @@ $leagueMode = 0;
 $footerText="FHL TableSim 2.0";
 
 #default color scheme.
-#blue,green,red,teal
+#blue,green,red,ocean
 $siteTheme="blue";
 
 # Whether or not main navbar should be displayed and the type of nav to be displayed.

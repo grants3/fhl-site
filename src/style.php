@@ -46,7 +46,7 @@ else if($siteColorTheme == 'red') {
 ?>
 
 :root {
-   --color-primary-1: #ad2430; 
+   --color-primary-1: #8a1e28; 
    --color-primary-2: #6C1E1E; 
    --color-primary-3: #A75B5B; 
    --color-alternate-1:#FFF5F6; 
@@ -75,7 +75,7 @@ else if($siteColorTheme == 'red') {
 }
 
 <?php 
-}else if($siteColorTheme == 'teal') {
+}else if($siteColorTheme == 'ocean') {
     
     ?>
 
@@ -89,12 +89,11 @@ else if($siteColorTheme == 'red') {
 
    --table-sort-asc:#798777; 
    --table-sort-desc:#BDD2B6; 
+   
+   --nav-link-color-main:var(--color-alternate-3);
 }
 
 <?php 
-}else if($siteColorTheme == 'custom') {
-    
-    include FS_ROOT.'styleCustom.php'; 
 
 } ?>
 
