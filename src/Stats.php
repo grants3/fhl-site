@@ -45,7 +45,7 @@ $scoringHolder = new ScoringHolder($scoringFile);
 $scoringAccumulator = new ScoringAccumulator($scoringHolder);
 
 //figure out how far season has progressed to get min gp amounts for stats
-$maxMinGoalieGames = 33;
+$maxMinGoalieGames = STATS_MIN_GOALIE_APPEARENCES;
 $minGameCount = 2;
 
 //$standingsFile = getCurrentLeagueFile('Standings','Farm');

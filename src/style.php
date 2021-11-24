@@ -83,14 +83,13 @@ else if($siteColorTheme == 'red') {
    --color-primary-1: #006d77; 
    --color-primary-2: #1a535c; 
    --color-primary-3: #83c5be; 
-   --color-alternate-1:#ffddd2; 
-   --color-alternate-2:#edf6f9;
+   --color-alternate-1:#edf6f9;
+   --color-alternate-2:#fce3e1; 
    --color-alternate-3:#fff0eb;
 
    --table-sort-asc:#798777; 
    --table-sort-desc:#BDD2B6; 
-   
-   --nav-link-color-main:var(--color-alternate-3);
+
 }
 
 <?php 

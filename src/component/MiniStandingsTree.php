@@ -33,10 +33,11 @@ nav a:focus {
 
 
 <?php
+echo '<div class="fhlElement">';
 
 if($existRnd){
 
-echo '<div class="fhlElement">';
+
 echo '<div class = "row">';
 echo '<div class = "col">';
 
@@ -50,6 +51,7 @@ echo '</nav>';
 echo '</div>';
 echo '</div>';
 
+$fileFound = false;
 $k = 0;
 $j = $existRnd;
 //for($j=1;$j<=$existRnd;$j++) {
@@ -60,6 +62,7 @@ $j = $existRnd;
 	//$Fnm = $folder.$folderLeagueURL2.'PLF-Round'.$j.'-Schedule.html';
 	$Fnm = getCurrentPlayoffLeagueFile('-Round'.$j.'-Schedule');
 	if(file_exists($Fnm)) {
+	    $fileFound = true;
 		for($x=0;$x<$TeamNumber;$x++) {
 			$tableau = file($Fnm);
 			$k = 0;
@@ -229,6 +232,7 @@ $j = $existRnd;
 </div>
 <script>
 
+<?php if($fileFound){?>
 $(document).ready(function() {
 
 	$('a', $('#tree-nav')).each(function () {
@@ -243,5 +247,6 @@ $(document).ready(function() {
 	});
 
 });
+<?php }?>
 
 </script>

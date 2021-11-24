@@ -1290,7 +1290,12 @@ if(CAREER_STATS_DIR != '0') {
 				}
 			}
 		}
-		else echo $allFileNotFound.' - '.$Fnm;
+		else{
+		    if(DEBUG_MODE){
+		        echo $allFileNotFound.' - '.$Fnm;
+		        error_log($allFileNotFound.' - '.$Fnm);
+		    }
+		}
 	}
 	
 	

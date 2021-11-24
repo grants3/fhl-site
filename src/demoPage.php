@@ -386,7 +386,7 @@ a.article:hover {
                             <tr>
                               <td>Team Roster</td>
                               <td>Team</td>
-                              <td><a href="TeamRoster.php">TeamRoster.php</a></td>
+                              <td><a href="TeamRosters.php">TeamRosters.php</a></td>
                             </tr>
                   			 <tr>
                               <td>Team Scoring</td>

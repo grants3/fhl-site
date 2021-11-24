@@ -6,6 +6,8 @@
 
 <?php
 require_once __DIR__.'/../config.php';
+include_once FS_ROOT.'lang.php';
+include_once FS_ROOT.'fileUtils.php';
 
 include FS_ROOT.'assets.php';
 
