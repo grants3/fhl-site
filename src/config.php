@@ -60,7 +60,7 @@ $folderGmo = "gmo/";
 $enableTransactions = 1;
 
 #Transaction trades support: 1 Show transaction trades pages or 0 : Hide transaction trades pages (if your league does not use)
-$enableTrades = 01;
+$enableTrades = 1;
 
 #Features Support: 1 Show Team Futures page or 0 : Hide Team Futures page (if your league does not use)
 $enableFeatures = 1;

@@ -164,7 +164,7 @@ $goaliesShutoutArray = $scoringAccumulator->getTopGoalies('shutouts',10,$minGame
 }
 </style>
 
-<div class="container-fluid" id="mini-scoring-container">
+<div class="container-fluid fhlElement" id="mini-scoring-container">
   <div class="row">
     <div class="col-12 px-0">
  <!--      <div class= "section-header logo-gradient" style="border-bottom-left-radius:0px;border-bottom-right-radius:0px;">

@@ -1,7 +1,7 @@
 <?php
 
 #Debug Mode. 1 = ON, 0 = OFF
-define('DEBUG_MODE', 1);
+define('DEBUG_MODE', 0);
 
 
 /* DO NOT TOUCH ANYTHING BELOW HERE!! */

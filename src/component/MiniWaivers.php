@@ -23,7 +23,7 @@ if (file_exists($fileName)) {
 
 ?>
 
-<div class="container px-0">
+<div class="container fhlElement px-0">
 	<div class="card px-0">
 		<div class="card-body px-0">
 			<?php  if (isset($waivers) && !empty($waivers)) {?>

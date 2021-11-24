@@ -47,7 +47,7 @@ if(!isset($teamList)){
 
 </style>
 
-<div class="container-fluid team-header-content">
+<div class="container-fluid team-header-content fhlElement">
     <div class="row py-1">
 		<div class="col px-0 center-block text-center">
             <?php

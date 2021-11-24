@@ -11,7 +11,7 @@ include 'lang.php';
 
 include FS_ROOT.'assets.php';
 ?>
-
+<div class="fhlElement">
 <div style="width:555px; margin-left:auto; margin-right:auto; border:solid 1px<?php echo $couleur_contour; ?>">
 <div class="titre"><span class="bold-blanc"><?php echo $transactTitle; ?></span></div>
 <table class="tableau">
@@ -141,5 +141,5 @@ if(file_exists($Fnm)) {
 }
 else echo '<tr><td>'.$allFileNotFound.' - '.$Fnm.'</td></tr>';
 if($d == 0) echo '<tr class="hover2"><td colspan="3" style="font-weight:bold; text-align:center;">'.$transactNo.'</td></tr>';
-echo '</table></div>';
+echo '</table></div></div>';
 ?>

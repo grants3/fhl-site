@@ -55,17 +55,25 @@
     border-color: var(--color-primary-2);
 }
 
-#main-navbar.navbar-dark { font-size: 15px; color: #fff; text-transform: uppercase; }
-#main-navbar.navbar-dark  .nav-link { color: #4C96D7; color: rgba(182,219,251, 0.8); border: 0; }
-#main-navbar.navbar-dark  .nav-link:hover { color: #fff; }
-#main-navbar.navbar-dark  .nav-link:focus { color: #fff; outline: 0; }
+/* #main-navbar.navbar-dark { font-size: 15px; color: #fff; text-transform: uppercase; } */
+/* #main-navbar.navbar-dark  .nav-link { color: #4C96D7; color: rgba(182,219,251, 0.8); border: 0; } */
+/* #main-navbar.navbar-dark  .nav-link:hover { color: #fff; } */
+/* #main-navbar.navbar-dark  .nav-link:focus { color: #fff; outline: 0; } */
 
+<?php
+if(!isset($navbarMode)) $navbarMode = NAVBAR_MODE;
+?>
 
-<?php if((NAVBAR_MODE == 3 || NAVBAR_MODE == 4) && str_starts_with($CurrentPage,'Team')){
+<?php if(($navbarMode == 3) && str_starts_with($CurrentPage,'Team')){
 //need to override color for smaller nav bar as unable to read text.?>
 :root {
+/*   --team-header-background-color-1:var(--color-alternate-2);  */
   --team-header-background-color-1:var(--color-primary-1); 
 }
+
+.team-nav .nav-item{ color: black; border: 0; text-decoration: none;   -webkit-filter: grayscale(100%);
+   -moz-filter: grayscale(100%);
+   filter: grayscale(100%);}
 <?php }?>
 
  /* need to modify size of icon */
@@ -75,6 +83,10 @@
     background-size: 40%;
 }
 
+
+#main-navbar .nav-link {
+    color: var(--nav-link-color-main);
+}
 
 </style>
  
@@ -96,7 +108,7 @@
     			</div>
 			</div>
 			<!-- only display for team pages -->
-			<?php if(NAVBAR_MODE == 3 && str_starts_with($CurrentPage, 'Team')){?>
+			<?php if($navbarMode == 3 && str_starts_with($CurrentPage, 'Team')){?>
 
 			<div>
     			<select class="btn-outline-primary my-1 py-1 pr-4" onchange="location = this.value;">

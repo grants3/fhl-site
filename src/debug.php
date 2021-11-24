@@ -76,6 +76,11 @@ if(file_exists(__DIR__.'/config.php')) {
     if(SALARY_CAP_FLOOR != 0) echo '<br>Salary Cap Floor: '.SALARY_CAP_FLOOR;
     if(SALARY_CAP_FLOOR == 0) echo '<br>No Salary Cap Floor';
     
+    if(CAP_INJ_MODE == 0) echo '<br>Salary Cap Injuries: Injuries count towards cap';
+    if(CAP_INJ_MODE == 1) echo '<br>Salary Cap Injuries: Injuries DONT count towards cap (LTIR Enabled)';
+    
+    if(MIN_ACTIVE_PLAYERS == 0) echo '<br>Min Active Players Disabled';
+    if(MIN_ACTIVE_PLAYERS > 0) echo '<br>Min Active Players : '.MIN_ACTIVE_PLAYERS;
 
     echo '<br><h3 style="margin-bottom:0">Other Settings</h3>';
     
@@ -109,20 +114,30 @@ if(file_exists(__DIR__.'/config.php')) {
         else echo '<br>GM Editor: Not Found!';
     }
     else echo '<br>GM Editor: Unable to determine, $_SERVER[\'DOCUMENT_ROOT\'] not found!';
-    
-//     if($leagueChatBox != 0) echo '<br>ChatBox Enabled';
-//     if($leagueChatBox == 0) echo '<br>ChatBox Disabled';
-    
-//     echo '<br>Chat TimeZone: '.$leagueTimeZone;
-    
-//     if($leagueBackButton != 0) echo '<br>Back Button Enabled';
-//     if($leagueBackButton == 0) echo '<br>Back Button Disabled';
-    
-//     if($leagueHomeButton != 0) echo '<br>Home Button Enabled';
-//     if($leagueHomeButton == 0) echo '<br>Home Button Disabled';
-    
+
+    if(TRANSACTIONS_ENABLED == 1) echo '<br>Transactions Enabled: YES';
+    if(TRANSACTIONS_ENABLED == 0) echo '<br>Transactions Enabled: NO';
+    if(TRANSACTIONS_ENABLED){
+        if(TRANSACTIONS_TRADES_ENABLED == 1) echo '<br>Transactions Trades Enabled: YES';
+        if(TRANSACTIONS_TRADES_ENABLED == 0) echo '<br>Transactions Trades Enabled: NO';
+    }
+ 
+    if(FUTURES_ENABLED == 1) echo '<br>Futures Enabled: YES';
+    if(FUTURES_ENABLED == 0) echo '<br>Futures Enabled: NO';
+    if(FUTURES_ENABLED){
+        echo '<br>Futures Draft years: '.FUTURES_DRAFT_YEARS;
+    }
+
     if(FUTURES_LINK_MODE == 1) echo '<br>Futures Links: hockeyDB selected';
     if(FUTURES_LINK_MODE == 2) echo '<br>Futures Links: EliteProspect selected';
+    
+    if(ROSTERS_LINK_MODE == 1) echo '<br>Rosters Links: hockeyDB selected';
+    if(ROSTERS_LINK_MODE == 2) echo '<br>Rosters Links: EliteProspect selected';
+    if(ROSTERS_LINK_MODE == 3) echo '<br>Rosters Links: TSN selected';
+    
+    if(PLAYER_IMG_SOURCE == 1) echo '<br>Player Bio Image Source: hockeyDB selected';
+    if(PLAYER_IMG_SOURCE == 2) echo '<br>Player Bio Image Source: EliteProspect selected';
+
     
     echo '<br><h3 style="margin-bottom:0">File Check</h3>';
     

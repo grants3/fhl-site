@@ -19,15 +19,6 @@ border-bottom:1px solid blue;
 /* 	font-size: large; */
 }
 
-
-.team-nav {
-   a:hover, a:focus { 
-    color: #856dc0; border: 0; text-decoration: none;   -webkit-filter: grayscale(100%);
-    -moz-filter: grayscale(100%);
-    filter: grayscale(100%);
-   }
-}
-
 .team-nav .nav-link{ color: var(--nav-link-color-main); border-bottom: 1px ; text-decoration: none; transition: all .3; }
 
 .panel-profile-img { 
@@ -85,7 +76,9 @@ border-bottom:1px solid blue;
     
 //team logo links
 
-if(NAVBAR_MODE != 3){ ?>
+if(!isset($navbarMode)) $navbarMode = NAVBAR_MODE;
+
+if($navbarMode != 3){ ?>
    
 	<div class="row py-1">
     	

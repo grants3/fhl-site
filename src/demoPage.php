@@ -108,12 +108,12 @@ body {
 }
 
 #sidebar ul li.active>a,
-#sidebar a[aria-expanded="true"] {
+a[aria-expanded="true"] {
     color: #fff;
     background: rgb(27, 98, 162);
 }
 
-#sidebar a[data-toggle="collapse"] {
+a[data-toggle="collapse"] {
     position: relative;
 }
 
@@ -125,17 +125,17 @@ body {
     transform: translateY(-50%);
 }
 
-#sidebar ul ul a {
+ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
     background: rgb(27, 98, 162);
 }
 
-#sidebar ul.CTAs {
+ul.CTAs {
     padding: 20px;
 }
 
-#sidebar ul.CTAs a {
+ul.CTAs a {
     text-align: center;
     font-size: 0.9em !important;
     display: block;
@@ -189,7 +189,7 @@ a.article:hover {
         display: none;
     }
     
-    /* at mobile breakpoints stretch full screen */
+    /* at mobile breakpoint stretch full components screen */
     #content .article-content {
      width:100% !important;
     }
@@ -235,7 +235,7 @@ a.article:hover {
 						 <li ><a href="Stats.php">Statistics</a></li>
 						  <li ><a href="TeamStats.php">Team Stats</a></li>
 						  <li ><a href="Individual.php">Individual Stats</a></li>
-						  <li ><a href="Leaders.php?s=1">Leaders</a></li>
+						  <li ><a href="Leaders.php?s=1">Farm Leaders</a></li>
 						  <li ><a href="CareerLeaders.php">Career Leaders</a></li>
 						 <li ><a href="CareerStandings.php">Career Standings</a></li>
           
@@ -304,56 +304,228 @@ a.article:hover {
 							<h5>TablePage 2.0 Components</h5>
 						</div>
     					<div class="card-body">
-    					<p>Add Components to your league web page by including the links below<p>
+    					<p>Use the home page provided, or use your own! Add Components to your league web page by including the links below<p>
     					<p>Unless you are using the build-in home page provided with TablePage 2.0, it is recommended to put table sim page 2.0 in a different folder from your main index.html/php to keep the files seperate and making fixes easy. To use the links below just append the table sim location to the link</p>
-    					<p>if http://yourLeague.com/ is your home page and -> Add-on folder: http://yourLeague.com/TablePage/ then including an example component would be: 'include 'TablePage/component/ScoreCarousel.php'</p>
+    					<p>if http://yourLeague.com/ is your home page and -> Add-on folder: http://yourLeague.com/TablePage/ then including an example component would be: include 'TablePage/component/ScoreCarousel.php'</p>
     					</div>
 					</div>
 			
 					</div>			
 				</article>
-				
+
+				<article class="mt-3">
+				<?php echo 'include \'component/TeamBanner.php\';'?>
+					<div class="article-content" style="width:100%"><h5>Team Banner</h5>
+						<?php include 'component/TeamBanner.php'; ?>	
+					</div>			
+				</article>
 				<article class="mt-3">
 				<?php echo 'include \'component/ScoreCarousel.php\';'?>
-					<div class="article-content" style="width:100%">Score Carousel
+					<div class="article-content" style="width:100%"><h5>Score Carousel</h5>
 						<?php //include FS_ROOT.'component/ScoreCarousel.php'; ?>	
 						<?php include 'component/ScoreCarousel.php'; ?>	
 					</div>			
 				</article>
 				<article class="mt-3">
 					<?php echo 'include \'component/MiniWaivers.php\';'?>
-					<div class="article-content" style="width:60%">Waivers Mini
+					<div class="article-content" style="width:60%"><h5>Waivers Mini</h5>
 						<?php include 'component/MiniWaivers.php'; ?>	
 					</div>					
 				</article>
 				<article class="mt-3">
 				<?php echo 'include \'component/News.php\';'?>
-					<div class="article-content" style="width:50%">News
+					<div class="article-content" style="width:50%"><h5>News</h5>
 						<?php include 'component/News.php'; ?>	
 					</div>		
 				</article>
 				<article class="mt-3">
 					<?php echo 'include \'component/MiniNextGames.php\';'?>
-					<div class="article-content" style="width:50%">Next Games Mini 
+					<div class="article-content" style="width:50%"><h5>Next Games Mini</h5>
 						<?php include 'component/MiniNextGames.php'; ?>	
 					</div>						
 				</article>
 				<article class="mt-3">
 				<?php echo 'include \'component/MiniLeaders.php\';'?>
-					<div class="article-content" style="width:50%">Scoring Leaders Mini
+					<div class="article-content" style="width:50%"><h5>Scoring Leaders Mini</h5>
 						<?php include 'component/MiniLeaders.php'; ?>	
 					</div>	
 				</article>
 				<article class="mt-3">
 				<?php echo 'include \'component/MiniStandings.php\';'?>
-					<div class="article-content" style="width:40%">Full Standings Mini
+					<div class="article-content" style="width:40%"><h5>Full Standings Mini</h5>
                         <?php include 'component/MiniStandings.php';?>
 					</div>
 				</article>
 				<article class="mt-3">
 				<?php echo 'include \'component/MiniStandingsTree.php\';'?>
-					<div class="article-content" style="width:50%">Playoff Tree Mini
+					<div class="article-content" style="width:50%"><h5>Playoff Tree Mini</h5>
 						<?php include 'component/MiniStandingsTree.php';?>
+					</div>
+				</article>
+				
+				<article class="mt-3">
+					<div class="article-content" style="width:100%"><h5>Links</h5>
+					<div class="card">
+						<div class="card-header">
+							<h5>TablePage 2.0 Links</h5>
+						</div>
+    					<div class="card-body">
+    					<p>Use the home page provided, or use your own! Add Components to your league web page by including the links below<p>
+    					<p>Link to TablePage 2.0 Pages. Like components you can have table page 2.0 in another directory. or you can put it all in the same directory and use the links as shown.</p>
+    					<p>if http://yourLeague.com/ is your home page and -> Add-on folder: http://yourLeague.com/TablePage/ then linking to a page would require a link as follows &lt;a href="TablePage/TeamRosters.php"&gt;Rosters&lt;/a&gt;</p>
+    			
+						<table class="table table-sm">
+                          <thead>
+                            <tr>
+                              <th>Page</th>
+                              <th>Type</th>
+                              <th>Link</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Team Roster</td>
+                              <td>Team</td>
+                              <td><a href="TeamRoster.php">TeamRoster.php</a></td>
+                            </tr>
+                  			 <tr>
+                              <td>Team Scoring</td>
+                              <td>Team</td>
+                              <td><a href="TeamScoring.php">TeamScoring.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Team Finance</td>
+                              <td>Team</td>
+                              <td><a href="TeamFinance.php">TeamFinance.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Team Lines</td>
+                              <td>Team</td>
+                              <td><a href="TeamLines.php">TeamLines.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Team Futures</td>
+                              <td>Team</td>
+                              <td><a href="TeamFutures.php">TeamFutures.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Team Transactions</td>
+                              <td>Team</td>
+                              <td><a href="TeamTransactions.php">TeamTransactions.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Team Overview</td>
+                              <td>Team</td>
+                              <td><a href="TeamOverview.php">TeamOverview.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Team Schedule</td>
+                              <td>Team</td>
+                              <td><a href="TeamSchedule.php">TeamSchedule.php</a></td>
+                            </tr>
+                            
+                            <tr>
+                              <td>Statistics</td>
+                              <td>Stats</td>
+                              <td><a href="Stats.php">Stats.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Team Stats</td>
+                              <td>Stats</td>
+                              <td><a href="TeamStats.php">TeamStats.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Individual Stats</td>
+                              <td>Stats</td>
+                              
+                              <td><a href="Individual.php">Individual.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Farm Leaders</td>
+                              <td>Stats</td>
+                            
+                              <td><a href="Leaders.php?s=1">Leaders.php?s=1</a></td>
+                            </tr>
+                            <tr>
+                              <td>Career Leaders</td>
+                              <td>Stats</td>
+                            
+                              <td><a href="CareerLeaders.php">CareerLeaders.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Career Standings</td>
+                              <td>Stats</td>
+                           
+                              <td><a href="CareerStandings.php">CareerStandings.php</a></td>
+                            </tr>
+
+                            <tr>
+                              <td>League Schedule</td>
+                              <td>League</td>
+                             
+                              <td><a href="Schedule.php">Schedule.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>League Transactions</td>
+                              <td>League</td>
+                            
+                              <td><a href="Transact.php">Transact.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Free Agents</td>
+                              <td>League</td>
+                              
+                              <td><a href="FreeAgents.php">FreeAgents.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Unassigned</td>
+                              <td>League</td>
+                              
+                              <td><a href="Unassigned.php">Unassigned.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Waivers</td>
+                              <td>League</td>
+                            
+                              <td><a href="Waivers.php">Waivers.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Coaches</td>
+                              <td>League</td>
+                              <td><a href="Coaches.php">Coaches.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Injuries and Suspensions</td>
+                              <td>League</td>
+
+                              <td><a href="Injury.php">Injury.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>GM Page</td>
+                              <td>League</td>
+                              <td><a href="GMs.php">GMs.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>PlayerSearch</td>
+                              <td>League</td>
+                              <td><a href="PlayerSearch.php">PlayerSearch.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Compare Players</td>
+                              <td>League</td>
+                              <td><a href="ComparePlayers.php">ComparePlayers.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Salary Cop</td>
+                              <td>League</td>
+                              <td><a href="SalaryCop.php">SalaryCop.php</a></td>
+                            </tr>
+                            
+               
+                          </tbody>
+                        </table>
+                       </div>
+					</div>
 					</div>
 				</article>
 				
