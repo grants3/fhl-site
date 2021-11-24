@@ -286,7 +286,7 @@ a.article:hover {
         
            
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-0 ">
                 <div class="container-fluid d-flex justify-content-end">
 
 				    <button type="button" id="sidebarCollapse" class="btn btn-info">
@@ -304,7 +304,7 @@ a.article:hover {
 							<h5>TablePage 2.0 Components</h5>
 						</div>
     					<div class="card-body">
-    					<p>Use the home page provided, or use your own! Add Components to your league web page by including the links below<p>
+    					<p>Use the home page provided, or use your own! Add Components to your php based league web page by using the php include examples below<p>
     					<p>Unless you are using the build-in home page provided with TablePage 2.0, it is recommended to put table sim page 2.0 in a different folder from your main index.html/php to keep the files seperate and making fixes easy. To use the links below just append the table sim location to the link</p>
     					<p>if http://yourLeague.com/ is your home page and -> Add-on folder: http://yourLeague.com/TablePage/ then including an example component would be: include 'TablePage/component/ScoreCarousel.php'</p>
     					</div>
@@ -365,7 +365,7 @@ a.article:hover {
 				
 				<article class="mt-3">
 					<div class="article-content" style="width:100%"><h5>Links</h5>
-					<div class="card">
+					<div class="card fhlElement">
 						<div class="card-header">
 							<h5>TablePage 2.0 Links</h5>
 						</div>
@@ -374,7 +374,7 @@ a.article:hover {
     					<p>Link to TablePage 2.0 Pages. Like components you can have table page 2.0 in another directory. or you can put it all in the same directory and use the links as shown.</p>
     					<p>if http://yourLeague.com/ is your home page and -> Add-on folder: http://yourLeague.com/TablePage/ then linking to a page would require a link as follows &lt;a href="TablePage/TeamRosters.php"&gt;Rosters&lt;/a&gt;</p>
     			
-						<table class="table table-sm">
+						<table class="table table-sm table-striped">
                           <thead>
                             <tr>
                               <th>Page</th>
