@@ -107,6 +107,24 @@ padding-right:30px;
     margin-top:10px;
 }
 
+.slick-dots {
+    position: absolute;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    margin-top: 0px;
+    list-style: none;
+    list-style-type: none;
+    text-align: center;
+    margin-top: 40px;
+}
+
+
+@media (max-width: 768px) {
+
+}
+
 /* .slick-dots li.slick-active button:before {  */
 /*     opacity: .75;  */
 /*      color: var(--color-alternate-1);  */
@@ -378,6 +396,7 @@ $(function() {
 		  variableWidth: true,
 		  slidesToShow: 9,
 		  slidesToScroll: 9,
+
 		  mobileFirst: true,
 		 // prevArrow:"<img class='a-left control-c prev slick-prev' src='../images/shoe_story/arrow-left.png'>",
           //nextArrow:"<i class="a-left control-c prev slick-prev fas fa-angle-right">",

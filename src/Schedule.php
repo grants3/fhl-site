@@ -30,7 +30,7 @@ if($seasonId || $round){
     $seasonTitle = '';
     $roundTitle = '';
     if($seasonId){
-        $seasonTitle = ' Season '.$seasonId;
+        $seasonTitle = ''.$homeSeason.' '.$seasonId;
     }
     //assumes playoffs
     if($round){
@@ -38,9 +38,9 @@ if($seasonId || $round){
         $seasonType = 'PLF';
         $currentRound = getPlayoffRound($seasonId);
         if($round == 4){
-            $roundTitle = ' Cup Finals';
+            $roundTitle = ' '.$StandingsTreeFinals;
         }else{
-            $roundTitle = ' Round '.$round;
+            $roundTitle = ' '.$StandingsTreeRound.' '.$round;
         }
         
     }
@@ -57,7 +57,7 @@ if($seasonId || $round){
        // $currentRound = getPlayoffRound();
         $currentRound = $round;
         
-        $CurrentTitle = $schedTitle.' - Round '.$round;
+        $CurrentTitle = $schedTitle.' - '.$StandingsTreeRound.' '.$round;
     }
     
     $fileName = getCurrentLeagueFile($baseFileName);
@@ -99,7 +99,7 @@ include 'head.php';
             	    echo '<div class = "col">';
             	    
             	    echo '<nav id ="playoff-header-nav" class="nav justify-content-center">';
-            	    if($currentRound >= 4)echo'<a class="nav-item nav-link '.(4 == $round ? 'active font-weight-bold' : '').'" href="'.$CurrentPage.'.php?rnd=4">Cup Finals</a>';
+            	    if($currentRound >= 4)echo'<a class="nav-item nav-link '.(4 == $round ? 'active font-weight-bold' : '').'" href="'.$CurrentPage.'.php?rnd=4">'.$StandingsTreeFinals.'</a>';
             	    if($currentRound >= 3)echo'<a class="nav-item nav-link '.(3 == $round ? 'active font-weight-bold' : '').'" href="'.$CurrentPage.'.php?rnd=3">'.$scheldRound.' 3</a>';
             	    if($currentRound >= 2)echo'<a class="nav-item nav-link '.(2 == $round ? 'active font-weight-bold' : '').'" href="'.$CurrentPage.'.php?rnd=2">'.$scheldRound.' 2</a>';
             	    if($currentRound >= 1)echo'<a class="nav-item nav-link '.(1 == $round ? 'active font-weight-bold' : '').'" href="'.$CurrentPage.'.php?rnd=1">'.$scheldRound.' 1</a>';

@@ -21,8 +21,6 @@ if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
 
 if(isset($_GET['seasonType']) || isset($_POST['seasonType'])) {
     $seasonType = ( isset($_GET['seasonType']) ) ? $_GET['seasonType'] : $_POST['seasonType'];
-
-    //$playoff = $seasonType;
 }
 
 if(isset($_GET['team']) || isset($_POST['team'])) {
@@ -35,19 +33,22 @@ if(isset($_GET['team']) || isset($_POST['team'])) {
 
 <?php
 
-$fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
-
-if(!file_exists($fileName) && $seasonType == "PLF") {
-    echo
-    '<div class = "row">
-        <div class="col">
-        <h5 class = "text-center">Playoffs have not started</h5> 
-        </div>
-    </div>';
-    
-    return;
+if(empty($currentTeam)){
+    http_response_code(400);
+    exit('team not found');
 }
 
+$fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
+
+if(!file_exists($fileName)) {
+    if($seasonType == "PLF"){
+        echo '<div class="card"><div class="card-body"><h6 class="text-center">'.$allPlayoffsNotStarted.'</h6></div></div>';
+    }else{
+        echo '<div class="card"><div class="card-body"><h6 class="text-center">'.$allNoSeasonDataFound.'</h6></div></div>';
+    }
+
+    exit;
+}
 $scoringHolder = new ScoringHolder($fileName, $currentTeam);
 //$teamAbbrHolder = new TeamAbbrHolder($fileName);
 

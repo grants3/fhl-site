@@ -22,6 +22,8 @@ if(LEAGUE_LANG == 'FR') {
 	$allNone = "None";
 	$allGMOE = 'OGME';
 	$allStats = 'Statistiques';
+	$allNoSeasonDataFound = 'Le saison demandé est inexistant!';
+	$allPlayoffsNotStarted = 'La séries ne sont pas commancée!';
 	
 	//main
 	$mainNews = 'Nouvelles';
@@ -79,7 +81,7 @@ if(LEAGUE_LANG == 'FR') {
 	$ScheldMatchups = 'Partie Vs';
 	$ScheldTeam = "Calendrier de l'équipe";
 	$ScheldRemaining='Restant';
-	$ScheldCompleted='Fini';
+	$ScheldCompleted='Terminé';
 	$ScheldAt='à';
 	$ScheldNoGames = 'Aucun partie planifiée';
 	$ScheldNoGamesComp = 'Aucun partie terminé';
@@ -190,8 +192,11 @@ if(LEAGUE_LANG == 'FR') {
 	$gameWinLoss="W/L";
 	$gameWinLossF="Résultat";
 	$gameRecord="REC";
-	$gameRecordF="Win-Loss Record";
+	$gameRecordF="Fiche cette saison";
 	$gameShot='Tir';
+	$gameGoaltenders='Gardiens de but';
+	$gameFinancials='Finances';
+	$gameNoPenalties='Aucun Punition';
 	
 	// Liste des DGs
 	$GMsTitle = 'Directeurs Généraux';
@@ -279,7 +284,7 @@ if(LEAGUE_LANG == 'FR') {
 	$financeAVGAttendance = 'Foule moyenne';
 	$financeAVGRevenueParGame = 'Revenu par partie';
 	$financeProjectedRevenue = 'Revenu Projeté';
-	$financeSalaryCommitment = 'SALAIRE DES ENGAGÉS';
+	$financeSalaryCommitment = 'ENAGEMENT SALARIAL';
 	$financeYear = 'Année';
 	$financeProPayroll2 = 'CONTRAT DES PROS';
 	$financeFarmPayroll2 = 'CONTRAT DU CLUB-ÉCOLE';
@@ -290,6 +295,8 @@ if(LEAGUE_LANG == 'FR') {
 	// Prospect
 	$prospectsTitle = 'Espoirs';
 	$prospectsDraft = 'Choix de repêchage';
+	$prospectYear = 'Année';
+	$prospectPicks = 'Choix';
 	
 	// Stats Individuels
 	$individualTitle = 'Statistiques Individuels';
@@ -425,7 +432,7 @@ if(LEAGUE_LANG == 'FR') {
 	$rostersLink = "Lien";
 	
 	// Pointeurs
-	$scoringTitle = 'Pointeurs';
+	$scoringTitle = 'Pointage';
 	$scoringScoring = 'Avants';
 	$scoringGoalie = 'Gardiens de buts';
 	$scoringNumber = 'Numéro';
@@ -614,6 +621,8 @@ if(LEAGUE_LANG == 'FR') {
 	
 	// Standings Tree
 	$StandingsTreeTitle = 'Tableau des Séries';
+	$StandingsTreeFinals = 'Finale';
+	$StandingsTreeRound = 'Tour';
 	
 	// Career Stats
 	$careerStatsTitle = 'Stats en Carrière';
@@ -740,6 +749,8 @@ if(LEAGUE_LANG == 'EN') {
 	$allNone = "None";
 	$allGMOE = 'OGME';
 	$allStats = 'Statistics';
+	$allNoSeasonDataFound = 'No season data found';
+	$allPlayoffsNotStarted = 'Playoffs have not started';
 	
 	//main
 	$mainNews = 'Nouvelles';
@@ -909,6 +920,9 @@ if(LEAGUE_LANG == 'EN') {
 	$gameRecord="REC";
 	$gameRecordF="Win-Loss Record";
 	$gameShot='Shot';
+	$gameGoaltenders='Goaltenders';
+	$gameFinancials='Financials';
+	$gameNoPenalties='No Penalties';
 	
 	// GMs List
 	$GMsTitle = 'General Managers';
@@ -1007,6 +1021,8 @@ if(LEAGUE_LANG == 'EN') {
 	// Prospects
 	$prospectsTitle = 'Futures';
 	$prospectsDraft = 'Draft Picks';
+	$prospectYear = 'Year';
+	$prospectPicks = 'Picks';
 	
 	// Individuals Stats
 	$individualTitle = 'Individual Statistics';
@@ -1331,6 +1347,8 @@ if(LEAGUE_LANG == 'EN') {
 	
 	// Standings Tree
 	$StandingsTreeTitle = 'Standings Tree';
+	$StandingsTreeFinals = 'Cup Final';
+	$StandingsTreeRound = 'Round';
 	
 	// Career Stats
 	$careerStatsTitle = 'Career Stats';

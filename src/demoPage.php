@@ -370,7 +370,6 @@ a.article:hover {
 							<h5>TablePage 2.0 Links</h5>
 						</div>
     					<div class="card-body">
-    					<p>Use the home page provided, or use your own! Add Components to your league web page by including the links below<p>
     					<p>Link to TablePage 2.0 Pages. Like components you can have table page 2.0 in another directory. or you can put it all in the same directory and use the links as shown.</p>
     					<p>if http://yourLeague.com/ is your home page and -> Add-on folder: http://yourLeague.com/TablePage/ then linking to a page would require a link as follows &lt;a href="TablePage/TeamRosters.php"&gt;Rosters&lt;/a&gt;</p>
     			
@@ -439,6 +438,12 @@ a.article:hover {
                               <td>Stats</td>
                               
                               <td><a href="Individual.php">Individual.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Pro Leaders (old)</td>
+                              <td>Stats</td>
+                            
+                              <td><a href="Leaders.php?s=1">Leaders.php</a></td>
                             </tr>
                             <tr>
                               <td>Farm Leaders</td>
@@ -538,14 +543,14 @@ a.article:hover {
     
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
-            });
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar, #content').toggleClass('active');
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
+//             $("#sidebar").mCustomScrollbar({
+//                 theme: "minimal"
+//             });
+//             $('#sidebarCollapse').on('click', function () {
+//                 $('#sidebar, #content').toggleClass('active');
+//                 $('.collapse.in').toggleClass('in');
+//                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+//             });
         });
     </script>
     

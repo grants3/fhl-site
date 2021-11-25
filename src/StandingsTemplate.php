@@ -286,7 +286,7 @@ if (file_exists($Fnm)) {
     
     
 } else {
-    echo '<div class="card"><div class="card-body"><h6>No season data found</h6></div></div>';
+    echo '<div class="card"><div class="card-body"><h6 class="text-center">'.$allNoSeasonDataFound.'</h6></div></div>';
 }
 
 

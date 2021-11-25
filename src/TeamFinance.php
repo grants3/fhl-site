@@ -78,6 +78,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
     //need to find a different way to do this.. will not work once players hit the 2 way threshold.
     $farmSalary = $farmSalary / 10;
     $totalSalaryAdjusted = $totalSalary - $injurySalary;
+    
 
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
@@ -287,8 +288,8 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
             <tbody>
             <tr><td class="text-left">'.$financeProPayroll.'</td><td class="text-right"">'.$propayroll.'</td></tr>';
 		    if(CAP_INJ_MODE){
-		        echo'<tr><td class="text-left">Injury Reserve</td><td class="text-right"">'.$injurySalary.'</td></tr>
-              <tr><td class="text-left">Effective Caphit</td><td class="text-right"">'.$totalSalaryAdjusted.'</td></tr>';
+		        echo'<tr><td class="text-left">Injury Reserve</td><td class="text-right"">'.format_money_no_dec($injurySalary,true).'</td></tr>
+              <tr><td class="text-left">Effective Caphit</td><td class="text-right"">'.format_money_no_dec($totalSalaryAdjusted,true).'</td></tr>';
 		    }
 		    echo '<tr><td class="text-left">'.$financeFarmPayroll.'</td><td class="text-right"">'.$farmpayroll.'</td></tr>
 			<tr><td class="text-left">'.$financeProspectFees.'</td><td class="text-right"">'.$prospectfees.'</td></tr>
@@ -355,7 +356,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 		<th>'.$financeYear2.'</th>
 		<th class="text-right">'.$financeContract.'</tr>';
 		echo '<thead><tbody>';
-		if($joueursf) {
+		if(isset($joueursf) && $joueursf) {
 
 		    $tableauf = $joueursf;
 		    

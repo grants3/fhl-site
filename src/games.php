@@ -626,7 +626,7 @@ else {
 					<table class="table-dark2 table-sm">
 						<thead>
 							<tr>
-								<th>GOALTENDERS</th>
+								<th class="text-uppercase"><?php echo $gameGoaltenders;?></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -677,7 +677,7 @@ else {
 					<table class="table-dark2 table-sm">
 						<thead>
 							<tr>
-								<th colspan="2">FINANCIALS</th>
+								<th colspan="2" class="text-uppercase"><?php echo $gameFinancials;?></th>
 								<th></th>
 							</tr>
 						</thead>
@@ -733,7 +733,7 @@ else {
                                         </tr>';
                                     }
                                 }else{
-                                    echo '<tr><td class="text-center" colspan="4">NO PENALTIES</td></tr>';
+                                    echo '<tr><td class="text-center text-uppercase" colspan="4">'.$gameNoPenalties.'</td></tr>';
                                 }
                                 ?>
                                 </tbody>
@@ -758,7 +758,7 @@ else {
                                         </tr>';
                                     }
                                 }else{
-                                    echo '<tr><td class="text-center" colspan="4">NO PENALTIES</td></tr>';
+                                    echo '<tr><td class="text-center text-uppercase" colspan="4">'.$gameNoPenalties.'</td></tr>';
                                 }
                                 ?>
                                 </tbody>
@@ -785,7 +785,7 @@ else {
                                         </tr>';
                                     }
                                 }else{
-                                    echo '<tr><td class="text-center" colspan="4">NO PENALTIES</td></tr>';
+                                    echo '<tr><td class="text-center text-uppercase" colspan="4">'.$gameNoPenalties.'</td></tr>';
                                 }
                                 ?>
                                 </tbody>
@@ -811,7 +811,7 @@ else {
                                         </tr>';
                                     }
                                 }else{
-                                    echo '<tr><td class="text-center" colspan="4">NO PENALTIES</td></tr>';
+                                    echo '<tr><td class="text-center text-uppercase" colspan="4">'.$gameNoPenalties.'</td></tr>';
                                 }
                                 ?>
                                 </tbody>

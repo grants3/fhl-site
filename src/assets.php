@@ -113,19 +113,21 @@ if($LOAD_SLICK_SCRIPTS && !$SLICK_SCRIPTS_LOADED){
 	//site js/css. needs to be loaded last
 if($LOAD_BASE_SCRIPTS && !$BASE_SCRIPTS_LOADED){
     	//cache bust css.(should evade caching same filename when contents changes)
-    	$cssHash = hash_file('crc32',FS_ROOT.'assets/css/style-1.css');
-    	$cssMediaHash = hash_file('crc32',FS_ROOT.'assets/css/media-queries-1.css');
-    	$jsHash = hash_file('crc32',FS_ROOT.'assets/js/scripts-1.js');
+//     	$cssHash = hash_file('crc32',FS_ROOT.'assets/css/style-1.css');
+//     	$cssMediaHash = hash_file('crc32',FS_ROOT.'assets/css/media-queries-1.css');
+//     	$jsHash = hash_file('crc32',FS_ROOT.'assets/js/scripts-1.js');
     
-    	$cssHashUrl= '?m='.$cssHash;
-    	$jsHashUrl= '?m='.$jsHash;
-    	$cssMediaHashUrl= '?m='.$cssMediaHash;
+//     	$cssHashUrl= '?m='.$cssHash;
+//     	$jsHashUrl= '?m='.$jsHash;
+//     	$cssMediaHashUrl= '?m='.$cssMediaHash;
+    $cssVersion='?v=1.0.0';
+    $jsVersion='?v=1.0.0';
     	?>
     
 	<!-- Custom scripts and styling and overrides (load last)-->
-	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/style-1.css<?php echo $cssHashUrl;?>"/>
-	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/media-queries-1.css<?php echo $cssMediaHashUrl;?>"/>
-	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/scripts-1.js<?php echo $jsHashUrl;?>"></script>
+	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/style-1.css<?php echo $cssVersion;?>"/>
+	<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/media-queries-1.css<?php echo $cssVersion;?>"/>
+	<script type="text/javascript" src="<?php echo BASE_URL?>assets/js/scripts-1.js<?php echo $jsVersion;?>"></script>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141959083-1"></script>

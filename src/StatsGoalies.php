@@ -46,8 +46,13 @@ $goaliesActive = 'active';
 
 $fileName = _getLeagueFile('TeamScoring', $seasonType, $seasonId);
 $OrigHTML = $fileName;
-$scoringHolder = new ScoringHolder($fileName);
-$shootoutMode = $scoringHolder->isShootoutMode();
+
+$shootoutMode = false;
+if(file_exists($fileName)) {
+    $scoringHolder = new ScoringHolder($fileName);
+    $shootoutMode = $scoringHolder->isShootoutMode();
+}
+
 $tieLabel = $shootoutMode ? $scoringOTLm : $scoringTm;
 $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
 

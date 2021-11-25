@@ -73,7 +73,7 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
                 $Fnm = _getLeagueFile('TeamScoring', 'REG', $workSeason);
             }
             if($z == 1) {
-                _getLeagueFile('TeamScoring', 'PLF', $workSeason);
+                $Fnm = _getLeagueFile('TeamScoring', 'PLF', $workSeason);
             }
         }
         $b = 0;

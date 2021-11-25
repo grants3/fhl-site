@@ -72,9 +72,9 @@ for($j=1;$j<=$existRnd;$j++) {
 	//echo '<td>';
     
     if($j == 4){
-        $roundName = "Cup Finals";
+        $roundName = $StandingsTreeFinals;
     }else{
-        $roundName = "Round ".$j;
+        $roundName = $StandingsTreeRound.' '.$j;
     }
     
     $order = $existRnd - $j;

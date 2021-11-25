@@ -206,6 +206,8 @@ unset($footerText);
 unset($siteTheme);
 unset($enableTransactions);
 unset($enableFeatures);
+unset($navBarLoc);
+
 
 
 ?>

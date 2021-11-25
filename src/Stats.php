@@ -41,6 +41,19 @@ $leadersActive = 'active';
 //$scoringFile = getCurrentLeagueFile('TeamScoring');
 $scoringFile = _getLeagueFile('TeamScoring',$seasonType,$seasonId);
 $OrigHTML = $scoringFile;
+
+if(!file_exists($scoringFile)) {
+    echo '<div class="container px-0">';
+    echo '	<div class="card">';
+		include 'SectionHeader.php';
+	echo '<div class="card-header pt-0">';
+        include 'StatsHeader.php';
+    echo '   </div><div class="card-body"><h6 class="text-center">'.$allNoSeasonDataFound.'</h6></div></div>';
+    echo '</div>';
+    
+    exit;
+}
+
 $scoringHolder = new ScoringHolder($scoringFile);
 $scoringAccumulator = new ScoringAccumulator($scoringHolder);
 

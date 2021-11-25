@@ -42,7 +42,7 @@ echo '<div class = "row">';
 echo '<div class = "col">';
 
 echo '<nav id ="tree-nav" class="nav nav-justified-center justify-content-center">';
-if($existRnd >= 4)echo'<a class="nav-item nav-link" href="'.BASE_URL.'Schedule.php?rnd=4">Cup Finals</a>';
+if($existRnd >= 4)echo'<a class="nav-item nav-link" href="'.BASE_URL.'Schedule.php?rnd=4">'.$StandingsTreeFinals.'</a>';
 if($existRnd >= 3)echo'<a class="nav-item nav-link" href="'.BASE_URL.'Schedule.php?rnd=3">'.$scheldRound.' 3</a>';
 if($existRnd >= 2)echo'<a class="nav-item nav-link" href="'.BASE_URL.'Schedule.php?rnd=2">'.$scheldRound.' 2</a>';
 if($existRnd >= 1)echo'<a class="nav-item nav-link" href="'.BASE_URL.'Schedule.php?rnd=1">'.$scheldRound.' 1</a>';

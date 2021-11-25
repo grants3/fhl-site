@@ -34,33 +34,7 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
     	
     	</div>
     	<div class="card-body p-1">
-    			<div class="row pb-1">
-            		
-            		<div class="col-sm-12 col-md-8 col-lg-6">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<label class="input-group-text" for="contractsMenu"><?php echo $homeSeason;?></label>
-								</div>
-
-    							<select id="contractsMenu" class="col custom-select">
-            						<option value="Current"><?php echo $allCurrent;?></option>
-            						<?php 
-                                    //set dropdown dynamically from prev season dirs
-            						if (!empty($previousSeasons)) {
-            						    foreach ($previousSeasons as $prevSeason) {
-            						        echo '<option value='.$prevSeason.'>'.$prevSeason.'</option>';
-            						    }
-            						}
-            					
-            						?>
-								</select>
-								
-								
-							</div>
-						</div>
-            		
-    			
-    			</div>
+    			<?php include 'component/SeasonSelect.php';?>
     			
     			<div class="row">
     				
@@ -97,24 +71,35 @@ $previousSeasons = getPreviousSeasons(CAREER_STATS_DIR);
 		); 
 
 
-        $('#contractsMenu').on('change', function() {
+        $('#typeMenu').on('change', function() {
+
+        	$("#contracts").hide();
+        	$('#loaderImage').show();
+
+        	var seasonType = this.value;
+			var seasonId = $('#seasonMenu').find(":selected").val();
+
+        	load(seasonId,seasonType);
+
+        });
+        
+        $('#seasonMenu').on('change', function() {
 
         	$("#contracts").hide();
         	$('#loaderImage').show();
 
         	var seasonId = this.value;
+        	var seasonType = $('#typeMenu').find(":selected").val();
 
-        	//window.location.hash = seasonId;
-
-        	load(seasonId);
+        	load(seasonId,seasonType);
 
         });
 
-        function load(seasonId){
+        function load(seasonId, seasonType){
             
           	 $.ajax({
         	    url: 'TeamTransactionsTemplate.php',
-        	    data: {seasonId: seasonId, team: currentTeam},
+        	    data: {seasonId: seasonId, seasonType: seasonType, team: currentTeam},
       		    cache: false,
       		    dataType: "html",
       		    success: function(data) {

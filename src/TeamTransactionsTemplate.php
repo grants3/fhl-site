@@ -10,10 +10,15 @@ include_once 'classes/TransactionEventObj.php';
 include_once 'classes/TeamAbbrHolder.php';
 
 $seasonId = '';
+$seasonType= null;
 
 if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
     $seasonId = ( isset($_GET['seasonId']) ) ? $_GET['seasonId'] : $_POST['seasonId'];
     $seasonId = filter_var($seasonId, FILTER_VALIDATE_INT);
+}
+
+if(isset($_GET['seasonType']) || isset($_POST['seasonType'])) {
+    $seasonType = ( isset($_GET['seasonType']) ) ? $_GET['seasonType'] : $_POST['seasonType'];
 }
 
 if(isset($_GET['team']) || isset($_POST['team'])) {
@@ -21,12 +26,18 @@ if(isset($_GET['team']) || isset($_POST['team'])) {
     //$team = filter_var($seasonId, FILTER_SANITIZE_STRING);
 }
 
-$fileName = _getLeagueFile('Transact', $seasonId);
-$scoringFile = _getLeagueFile('TeamScoring', $seasonId);
+$fileName = _getLeagueFile('Transact', $seasonType,$seasonId);
+$scoringFile = _getLeagueFile('TeamScoring', $seasonType,$seasonId);
 
 if(empty($team)){
     http_response_code(400);
-    exit();
+    exit('team not found');
+}
+
+if(!file_exists($fileName)) {
+    echo '<div class="card"><div class="card-body"><h6 class="text-center">'.$allNoSeasonDataFound.'</h6></div></div>';
+    
+    exit;
 }
 
 $transactionHolder = new TransactionHolder($fileName);

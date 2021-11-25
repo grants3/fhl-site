@@ -163,8 +163,8 @@ if(file_exists($Fnm)) {
     				<table class="table table-sm table-striped table-rounded-bottom" style="white-space:normal;">
     					<thead>
     						<tr class="tableau-top">
-    							<th class="text-center">Year</th>
-    							<th class="text-left">Picks</th>
+    							<th class="text-center"><?php echo $prospectYear;?></th>
+    							<th class="text-left"><?php echo $prospectPicks;?></th>
     						</tr>
     					</thead>
     					<tbody>
