@@ -1,7 +1,7 @@
 <?php
 
 #Session attributes
-$sessionName = 'FHL';
+$sessionName = 'FHLTBL';
 
 #Site name - will be used as title (text on top of browser/tab)
 $leagueName = 'FHL League';
