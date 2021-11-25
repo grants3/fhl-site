@@ -1315,7 +1315,7 @@ if(LEAGUE_LANG == 'EN') {
 	$transactStatus = 'STATUS';
 	$transactInj = 'Injuries';
 	$transactTrades = 'Trades';
-	$transactDetails = 'Détails';
+	$transactDetails = 'Details';
 	$transactReceiving= 'Receiving';
 	$transactTraded = 'Traded';
 	
