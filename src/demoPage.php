@@ -236,6 +236,7 @@ a.article:hover {
 						  <li><a  href="Standings.php">Pro Standings</a></li>
 						  <li><a href="FarmStandings.php?s=1">Farm Standings</a></li>
 						  <li><a href="OverallStandings.php">Overall Standings</a></li>
+						  <li ><a href="CareerStandings.php">Career Standings</a></li>
           
                     </ul>
                 </li>
@@ -249,8 +250,7 @@ a.article:hover {
 						  <li ><a href="Individual.php">Individual Stats</a></li>
 						  <li ><a href="Leaders.php?s=1">Farm Leaders</a></li>
 						  <li ><a href="CareerLeaders.php">Career Leaders</a></li>
-						 <li ><a href="CareerStandings.php">Career Standings</a></li>
-          
+
                     </ul>
                 </li>
                 
@@ -450,6 +450,12 @@ a.article:hover {
                               <td>Standings</td>
                               <td><a href="OverallStandings.php">OverallStandings.php</a></td>
                             </tr>
+                            <tr>
+                              <td>Career Standings</td>
+                              <td>Standings</td>
+                           
+                              <td><a href="CareerStandings.php">CareerStandings.php</a></td>
+                            </tr>
 				
                             <tr>
                               <td>Statistics</td>
@@ -485,12 +491,7 @@ a.article:hover {
                             
                               <td><a href="CareerLeaders.php">CareerLeaders.php</a></td>
                             </tr>
-                            <tr>
-                              <td>Career Standings</td>
-                              <td>Stats</td>
-                           
-                              <td><a href="CareerStandings.php">CareerStandings.php</a></td>
-                            </tr>
+                
 
                             <tr>
                               <td>League Schedule</td>
