@@ -56,6 +56,8 @@
 						  <li class="nav-item"><a class="nav-link-inner" href="FarmStandings.php?s=1"><?php echo formatHtmlText($homeStandingsFarm)?></a></li>
 						  <li class="dropdown-divider"></li>
 						  <li class="nav-item"><a class="nav-link-inner" href="OverallStandings.php"><?php echo formatHtmlText($standingOVTitle)?></a></li>
+						  <li class="dropdown-divider"></li>
+						  <li class="nav-item"><a class="nav-link-inner" href="CareerStandings.php"><?php echo formatHtmlText($careerStandingsTitle)?></a></li>
 						</ul>
 					  </li>
 
@@ -71,8 +73,6 @@
 						  <li class="nav-item"><a class="nav-link-inner" href="Leaders.php?s=1"><?php echo formatHtmlText($leaderTitleFarm)?></a></li>
 						  <li class="dropdown-divider"></li>
 						  <li class="nav-item"><a class="nav-link-inner" href="CareerLeaders.php"><?php echo formatHtmlText($langCareerLeadersTitle)?></a></li>
-						  <li class="dropdown-divider"></li>
-						  <li class="nav-item"><a class="nav-link-inner" href="CareerStandings.php"><?php echo formatHtmlText($careerStandingsTitle)?></a></li>
 						</ul>
 					  </li>
 					  <li class="dropdown">

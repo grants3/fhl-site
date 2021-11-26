@@ -30,9 +30,6 @@ if(CAREER_STATS_DIR) {
 // Recherche de la saison en cours (latest regular)
 $FnmCurrentSeason = getCurrentRegSeasonFile('Standings','Farm');
 
-//hardcode to current regular season
-//$FnmCurrentSeason = getLeagueFile2($folder, '', 'Standings.html', 'Standings','Farm');
-
 for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
 	$s = $workSeason;
 	$Fnm = '';
@@ -40,9 +37,11 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
 		$Fnm = $FnmCurrentSeason;
 	}
 	else {
-	    $Fnm = _getLeagueFile('Standings','REG',$NumberSeason,'Farm');
+	    $Fnm = _getLeagueFile('Standings','REG',$workSeason,'Farm');
 	}
+
 	if(file_exists($Fnm)) { 
+	    
 		$d = 0;
 		$overtime = 0;
 		$f = 0;
@@ -110,7 +109,8 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
 	}
 	else { 
 	    if(DEBUG_MODE){
-	        echo '<tr><td>'.$allFileNotFound.' Standings Season - '.$NumberSeason.'</td></tr>'; 
+	       // echo '<tr><td>'.$allFileNotFound.' Standings Season - '.$NumberSeason.'</td></tr>'; 
+	        error_log($allFileNotFound.' Standings Season - '.$NumberSeason);
 	    }
 		//echo '<tr><td>'.$allFileNotFound.' - '.$Fnm.'</td></tr>'; 
 	}

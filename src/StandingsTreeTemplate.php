@@ -58,7 +58,7 @@ if(file_exists($baseFolder.$folderLeagueURL2.'PLF-Round1-Schedule.html')) {
 <?php 
 if(trim($seasonId) == false && $existRnd == 0){
     echo '<col>';
-    echo '<h5>Playoffs have not started</h5>';
+    echo '<h5 class="text-center">Playoffs have not started</h5>';
     echo '</col>';
 }
 ?>
