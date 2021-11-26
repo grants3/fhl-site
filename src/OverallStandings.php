@@ -320,7 +320,7 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
                 		echo '<tr>';
                 		echo '<td>'.$pos.'</td>';
                 		if($currentFarm == 0) echo '<td>'.$serie[$key].'</td>';
-                		if($currentFarm == 0) echo '<td class="text-left"><a style="display:block;" href="LinkedRosters.php?team='.$equipe[$key].'">'.$equipe[$key].'</a></td>';
+                		if($currentFarm == 0) echo '<td class="text-left"><a style="display:block;" href="TeamRosters.php?team='.$equipe[$key].'">'.$equipe[$key].'</a></td>';
                 		if($currentFarm == 1) echo '<td class="text-left">'.$equipe[$key].'</td>';
                 		echo '<td>'.$pj[$key].'</td>';
                 		echo '<td>'.$standingsW[$key].'</td>';
