@@ -1501,8 +1501,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 /*alternate override for selection*/
-a.compare-selection,
-.table-striped>tbody>tr>td.compare-selection{
+.fhlElement a.compare-selection,
+.fhlElement .table-striped>tbody>tr>td.compare-selection{
      background-color:var(--color-primary-2);
     color:#fff;
 }
