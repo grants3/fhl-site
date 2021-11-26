@@ -252,9 +252,9 @@ for($j=1;$j<=$existRnd;$j++) {
 	else { 
 	    
 	    if(trim($seasonId) == false){
-	        echo '<div class="card"><div class="card-body"><h6>Playoffs have not started or data not found</h6></div></div>';
+	        echo '<div class="card"><div class="card-body"><h6 class="text-center">Playoffs have not started or data not found</h6></div></div>';
 	    }else{
-	        echo '<div class="card"><div class="card-body"><h6>'.$allFileNotFound.' - '.$Fnm.'</h6></div></div>';
+	        echo '<div class="card"><div class="card-body"><h6 class="text-center">'.$allFileNotFound.' - '.$Fnm.'</h6></div></div>';
 	    }
 	    
 		
