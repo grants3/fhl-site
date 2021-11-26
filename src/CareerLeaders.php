@@ -1613,7 +1613,7 @@ function initHeaders(){
 		var currentValue = $(this).text();
 		if(currentSearch != null){
 		     $(this).text("");
-       		 $(this).append('<a class="info" href="javascript:search(\'' + currentSearch + '\');">'+currentValue+'</a>');
+       		 $(this).append('<a class="info" href="javascript:search(\'' + currentSearch + '\');" style="display:block">'+currentValue+'</a>');
 		}
 
 
