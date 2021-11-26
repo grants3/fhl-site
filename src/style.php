@@ -1,5 +1,5 @@
 <?php 
-require_once 'config.php';
+//require_once 'config.php';
 
 //override colour
 //dont need to check if it is valid. will fallback to default colour scheme.

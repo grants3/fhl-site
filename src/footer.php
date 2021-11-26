@@ -1,7 +1,7 @@
 
 </div> <!-- end site container -->
 
-<?php require_once 'config.php'?>
+<?php include_once 'config.php'?>
 
 <style>
 

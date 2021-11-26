@@ -6,8 +6,8 @@ ob_start();
 if(isset($_COOKIE['team'])) $currentTeam = $_COOKIE['team'];
 ob_end_flush();
 
-require_once 'config.php';
-include 'lang.php';
+require_once __DIR__.'/../config.php';
+include_once FS_ROOT.'lang.php';
 
 include FS_ROOT.'assets.php';
 ?>

@@ -138,7 +138,7 @@ $navBarLoc="nav.php";
 #DO NOT TOUCH ANYTHING BELOW HERE.
 #-----------------------------------------
 #base configuration. do not touch
-require_once 'baseConfig.php';
+require_once __DIR__.'/baseConfig.php';
 
 define("APP_VERSION",'2.0-alpha-1');
 define("SESSION_NAME",$sessionName);

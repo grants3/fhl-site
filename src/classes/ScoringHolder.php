@@ -1,8 +1,5 @@
 <?php
 
-//namespace classes;
-
-//include_once 'common.php';
 require_once __DIR__.'/../baseConfig.php';
 
 require_once FS_ROOT.'classes/ScoringObj.php';

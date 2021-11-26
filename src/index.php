@@ -1,8 +1,9 @@
 <?php 
-require_once 'config.php';
-include 'lang.php';
-include 'common.php';
-include 'fileUtils.php';
+error_log('DIR='.__DIR__);
+require_once __DIR__.'/config.php';
+include_once __DIR__.'/lang.php';
+include_once __DIR__.'/common.php';
+include_once __DIR__.'/fileUtils.php';
 
 $CurrentHTML = 'index.php';
 $CurrentTitle = 'Home';
@@ -10,7 +11,7 @@ $CurrentPage = 'Home';
 
 $LOAD_SLICK_SCRIPTS=true;
 
-include 'head.php';
+include FS_ROOT.'head.php';
 
 ?>
 
@@ -111,4 +112,4 @@ include 'head.php';
 	</div> <!-- main content end -->
 
 
-<?php include 'footer.php'; ?>
+<?php include FS_ROOT.'footer.php'; ?>

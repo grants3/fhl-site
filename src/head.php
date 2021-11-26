@@ -8,17 +8,17 @@ mb_http_input('UTF-8');
 mb_language('uni');
 mb_regex_encoding('UTF-8');
 
-require_once 'config.php';
+require_once __DIR__.'/config.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_name(SESSION_NAME);
     session_start();
 }
 
-include_once 'lang.php';
-include_once 'common.php';
-include_once 'fileUtils.php';
-include_once 'classes/TeamHolder.php';
+include_once FS_ROOT.'lang.php';
+include_once FS_ROOT.'common.php';
+include_once FS_ROOT.'fileUtils.php';
+include_once FS_ROOT.'classes/TeamHolder.php';
 
 
 if(!isset($CurrentPage)){
