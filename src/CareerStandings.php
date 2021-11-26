@@ -10,11 +10,11 @@ include 'head.php';
 ?>
 
 <div class="container px-0">
-<div class="row no-gutters">
-<div class="col-sm-12 col-lg-8 offset-lg-2">
 <div class="card">
 <?php include 'SectionHeader.php';?>
 <div class="card-body px-1 px-md-2 pt-1">
+<div class="row no-gutters">
+<div class="col col-lg-8 offset-lg-2">
 <div class="table-responsive"> 
 <!-- <table class="table table-sm table-striped"> -->
 
@@ -539,6 +539,6 @@ document.addEventListener('DOMContentLoaded', result('PTS'), false);
 //-->
 </script>
 
-</div></div></div></div></div></div>
+</div></div></div></div></div></div></div>
 
 <?php include 'footer.php'; ?>

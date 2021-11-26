@@ -58,7 +58,7 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
 		<div class="card-body p-1">
 
 			<div class="row no-gutters justify-content-left ">
-            	<div class="col col-md-8 col-lg-6">
+            	<div class="col col-lg-8 offset-lg-2">
             		<div class="row no-gutters">
             			<div class="col py-1 pr-1">
             				<div class="input-group">
@@ -107,8 +107,8 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
             </div>
 
 
-			<div id="SeasonInner">
-				
+			<div id="SeasonInner" class="row no-gutters">
+				<div class="col col-lg-8 offset-lg-2 ">
 				<?php 
 				
 				$tableCol = 15;
@@ -352,7 +352,7 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
                 ?>
                
                 
-                
+                </div>
 			</div>
 		</div>
 	</div>

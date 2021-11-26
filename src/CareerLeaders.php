@@ -1551,39 +1551,58 @@ function showPlayerGoalPLF(i,c,d,currentSearch) {
 
 <div class = "container px-0">
 
-    <div class = "card">
+    <div class = "card p-1">
 		<?php include 'SectionHeader.php';?>
 		<div class = "card-body p-1">
-			<div class="container">
-			
-				<div id="windowSearch" class = "row">
-        			<div class="col-sm-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
-        			  <select onchange="javascript:search('X');" class="form-control mb-3" id="position">
-        				  <option value="0" selected><?php echo $langCareerLeadersAllFoward; ?></option>
-        				  <option value="C"><?php echo $langCareerLeadersCenter; ?></option>
-        				  <option value="L"><?php echo $langCareerLeadersLeft; ?></option>
-        				  <option value="R"><?php echo $langCareerLeadersRight; ?></option>
-        				  <option value="D"><?php echo $langCareerLeadersDef; ?></option>
-        				  <option value="G"><?php echo $langCareerLeadersGoalies; ?></option>
-        			  </select>
-        			</div>
-        			
-        			<div class="col-sm-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
-        			  <select onchange="javascript:search('X');" class="form-control mb-3" id="season">
-        				  <option value="0" selected><?php echo $langCareerLeadersSeasons; ?></option>
-        				  <option value="1"><?php echo $langCareerLeadersPlayoffs; ?></option>
-        			  </select>
-        			</div>
-        	
-        			<div style="clear:both;"></div>
-            	</div>
-				
-			
-				<div class = "row">
-            	          
-            		<div class = "table-responsive">
-            				<div id="windowResult">
-            		</div>
+			<div class="row">
+				<div class="col col-lg-8 offset-lg-2">
+    				<div id="windowSearch" class="row no-gutters justify-content-left ">
+                    	<div class="col col-md-8">
+                    		<div class="row no-gutters">
+                    			<div class="col py-1 pr-1">
+                    				<div class="input-group">
+                    					<div class="input-group-prepend">
+                    						<label class="input-group-text" for="position">Pos</label>
+                    					</div>
+                    					
+                    					 <select onchange="javascript:search('X');" class="form-control" id="position">
+                            				  <option value="0" selected><?php echo $langCareerLeadersAllFoward; ?></option>
+                            				  <option value="C"><?php echo $langCareerLeadersCenter; ?></option>
+                            				  <option value="L"><?php echo $langCareerLeadersLeft; ?></option>
+                            				  <option value="R"><?php echo $langCareerLeadersRight; ?></option>
+                            				  <option value="D"><?php echo $langCareerLeadersDef; ?></option>
+                            				  <option value="G"><?php echo $langCareerLeadersGoalies; ?></option>
+                            			  </select>
+                    
+                    				</div>
+                    			</div>
+                    
+                    
+                    			<div class="col py-1">
+                    				<div class="input-group">
+                    					<div class="input-group-prepend">
+                    						<label class="input-group-text" for="season">Type</label>
+                    					</div>
+                    					 <select onchange="javascript:search('X');" class="form-control" id="season">
+                            				  <option value="0" selected><?php echo $langCareerLeadersSeasons; ?></option>
+                            				  <option value="1"><?php echo $langCareerLeadersPlayoffs; ?></option>
+                            			  </select>
+                    				</div>
+                    			</div>
+                    
+                    		</div>
+                    	</div>
+                    </div>
+                	
+                	
+    				
+    			
+    				<div class = "row no-gutters">
+                	          
+                		<div class = "table-responsive">
+                				<div id="windowResult">
+                		</div>
+                	</div>
             	</div>
 			</div>
 		</div>
