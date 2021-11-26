@@ -260,14 +260,17 @@ function result(x) {
 			td.appendChild(document.createTextNode(''));
 			tr.appendChild(td);
 			var td = document.createElement('th');
-				var a = document.createElement('a');
-					a.href = "javascript:return;";
-					a.className = "lien-blanc";
-					a.appendChild(document.createTextNode('<?php echo $standingTeam; ?>'));
-				td.appendChild(a);
+			    td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingTeam?>");
+    			td.innerHTML = '<?php echo $standingTeam; ?>';
+			
 			tr.appendChild(td);
 			var td = document.createElement('th');
 				td.style.textAlign = "right";
+    			td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingGPFull?>");
 				if(type == 'GPS') td.style.fontWeight = "bold";
 					var a = document.createElement('a');
 						a.href = "javascript:result('GPS');";
@@ -275,13 +278,14 @@ function result(x) {
 						a.style.width = "100%";
 						a.style.display = "block";
 						a.appendChild(document.createTextNode('<?php echo $standingGP; ?>'));
-					var span = document.createElement('span');
-						span.appendChild(document.createTextNode('<?php echo $standingGPFull; ?>'));
-					a.appendChild(span);
+
 				td.appendChild(a);
 			tr.appendChild(td);
 			var td = document.createElement('th');
 				td.style.textAlign = "right";
+    			td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingWFull?>");
 				if(type == 'WIN') td.style.fontWeight = "bold";
 					var a = document.createElement('a');
 						a.href = "javascript:result('WIN');";
@@ -289,13 +293,14 @@ function result(x) {
 						a.style.width = "100%";
 						a.style.display = "block";
 						a.appendChild(document.createTextNode('<?php echo $standingW; ?>'));
-					var span = document.createElement('span');
-						span.appendChild(document.createTextNode('<?php echo $standingWFull; ?>'));
-					a.appendChild(span);
+
 				td.appendChild(a);
 			tr.appendChild(td);
 			var td = document.createElement('th');
 				td.style.textAlign = "right";
+    			td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingLFull?>");
 				if(type == 'LOS') td.style.fontWeight = "bold";
 					var a = document.createElement('a');
 						a.href = "javascript:result('LOS');";
@@ -303,13 +308,14 @@ function result(x) {
 						a.style.width = "100%";
 						a.style.display = "block";
 						a.appendChild(document.createTextNode('<?php echo $standingL; ?>'));
-					var span = document.createElement('span');
-						span.appendChild(document.createTextNode('<?php echo $standingLFull; ?>'));
-					a.appendChild(span);
+
 				td.appendChild(a);
 			tr.appendChild(td);
 			var td = document.createElement('th');
 				td.style.textAlign = "right";
+    			td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingEFull?>");
 				if(type == 'TIE') td.style.fontWeight = "bold";
 					var a = document.createElement('a');
 						a.href = "javascript:result('TIE');";
@@ -317,15 +323,16 @@ function result(x) {
 						a.style.width = "100%";
 						a.style.display = "block";
 						a.appendChild(document.createTextNode('<?php echo $standingE; ?>'));
-					var span = document.createElement('span');
-						span.appendChild(document.createTextNode('<?php echo $standingEFull; ?>'));
-					a.appendChild(span);
+	
 				td.appendChild(a);
 			tr.appendChild(td);
 			
 			if(<?php echo $overtime; ?> == 1) {
 				var td = document.createElement('th');
-					td.style.textAlign = "right";
+				td.style.textAlign = "right";
+    			td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingOTFull?>");
 					if(type == 'OTL') td.style.fontWeight = "bold";
 						var a = document.createElement('a');
 							a.href = "javascript:result('OTL');";
@@ -333,14 +340,15 @@ function result(x) {
 							a.style.width = "100%";
 							a.style.display = "block";
 							a.appendChild(document.createTextNode('<?php echo $standingOT; ?>'));
-						var span = document.createElement('span');
-							span.appendChild(document.createTextNode('<?php echo $standingOTFull; ?>'));
-						a.appendChild(span);
+
 					td.appendChild(a);
 				tr.appendChild(td);
 			}
 			var td = document.createElement('th');
 				td.style.textAlign = "right";
+    			td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingPTSFull?>");
 				if(type == 'PTS') td.style.fontWeight = "bold";
 					var a = document.createElement('a');
 						a.href = "javascript:result('PTS');";
@@ -348,13 +356,14 @@ function result(x) {
 						a.style.width = "100%";
 						a.style.display = "block";
 						a.appendChild(document.createTextNode('<?php echo $standingPTS; ?>'));
-					var span = document.createElement('span');
-						span.appendChild(document.createTextNode('<?php echo $standingPTSFull; ?>'));
-					a.appendChild(span);
+
 				td.appendChild(a);
 			tr.appendChild(td);
 			var td = document.createElement('th');
 				td.style.textAlign = "right";
+				td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingGFFull?>");
 				if(type == 'GFS') td.style.fontWeight = "bold";
 					var a = document.createElement('a');
 						a.href = "javascript:result('GFS');";
@@ -362,13 +371,14 @@ function result(x) {
 						a.style.width = "100%";
 						a.style.display = "block";
 						a.appendChild(document.createTextNode('<?php echo $standingGF; ?>'));
-					var span = document.createElement('span');
-						span.appendChild(document.createTextNode('<?php echo $standingGFFull; ?>'));
-					a.appendChild(span);
+
 				td.appendChild(a);
 			tr.appendChild(td);
 			var td = document.createElement('th');
 				td.style.textAlign = "right";
+    			td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingGAFull?>");
 				if(type == 'GAS') td.style.fontWeight = "bold";
 					var a = document.createElement('a');
 						a.href = "javascript:result('GAS');";
@@ -376,13 +386,14 @@ function result(x) {
 						a.style.width = "100%";
 						a.style.display = "block";
 						a.appendChild(document.createTextNode('<?php echo $standingGA; ?>'));
-					var span = document.createElement('span');
-						span.appendChild(document.createTextNode('<?php echo $standingGAFull; ?>'));
-					a.appendChild(span);
+
 				td.appendChild(a);
 			tr.appendChild(td);
 			var td = document.createElement('th');
 				td.style.textAlign = "right";
+    			td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingDiffFull?>");
 				if(type == 'DIF') td.style.fontWeight = "bold";
 					var a = document.createElement('a');
 						a.href = "javascript:result('DIF');";
@@ -390,13 +401,14 @@ function result(x) {
 						a.style.width = "100%";
 						a.style.display = "block";
 						a.appendChild(document.createTextNode('<?php echo $standingDiff; ?>'));
-					var span = document.createElement('span');
-						span.appendChild(document.createTextNode('<?php echo $standingDiffFull; ?>'));
-					a.appendChild(span);
+
 				td.appendChild(a);
 			tr.appendChild(td);
 			var td = document.createElement('th');
 				td.style.textAlign = "right";
+    			td.setAttribute("data-toggle","tooltip");
+    			td.setAttribute("data-placement","top");
+    			td.setAttribute("title","<?php echo $standingPCTFull?>");
 				if(type == 'PCT') td.style.fontWeight = "bold";
 					var a = document.createElement('a');
 						a.href = "javascript:result('PCT');";
@@ -404,9 +416,7 @@ function result(x) {
 						a.style.width = "100%";
 						a.style.display = "block";
 						a.appendChild(document.createTextNode('<?php echo $standingPCT; ?>'));
-					var span = document.createElement('span');
-						span.appendChild(document.createTextNode('<?php echo $standingPCTFull; ?>'));
-					a.appendChild(span);
+
 				td.appendChild(a);
 			tr.appendChild(td);
 		thead.appendChild(tr);
