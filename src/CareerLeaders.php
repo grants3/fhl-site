@@ -952,7 +952,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'GP') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('GP');";
+				a.href = "javascript:search('GP');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -966,7 +966,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'MN') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('MN');";
+				a.href = "javascript:search('MN');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -980,7 +980,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'AV') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('AV');";
+				a.href = "javascript:search('AV');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -994,7 +994,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'WI') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('WI');";
+				a.href = "javascript:search('WI');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -1008,7 +1008,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'LO') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('LO');";
+				a.href = "javascript:search('LO');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -1022,7 +1022,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'TI') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('TI');";
+				a.href = "javascript:search('TI');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -1036,7 +1036,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'SO') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('SO');";
+				a.href = "javascript:search('SO');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -1050,7 +1050,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'GA') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('GA');";
+				a.href = "javascript:search('GA');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -1064,7 +1064,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'SA') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('SA');";
+				a.href = "javascript:search('SA');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -1078,7 +1078,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'PC') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('PC');";
+				a.href = "javascript:search('PC');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -1092,7 +1092,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'PM') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('PM');";
+				a.href = "javascript:search('PM');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -1106,7 +1106,7 @@ function result(tmpSearch) {
 			td.style.textAlign = "center";
 			if(currentSearch == 'AS') td.style.fontWeight = "bold";
 			var a = document.createElement('a');
-				a.href = "javascript:result('AS');";
+				a.href = "javascript:search('AS');";
 				a.className = "info";
 				a.style.width = "100%";
 				a.style.display = "block";
@@ -1543,7 +1543,7 @@ function showPlayerGoalPLF(i,c,d,currentSearch) {
 
 
 // document.addEventListener("DOMContentLoaded", function() { 
-// 	result('PT');
+// 	search('PT');
 // });
 
 //-->
@@ -1558,7 +1558,7 @@ function showPlayerGoalPLF(i,c,d,currentSearch) {
 			
 				<div id="windowSearch" class = "row">
         			<div class="col-sm-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
-        			  <select onchange="javascript:result('X');" class="form-control mb-3" id="position">
+        			  <select onchange="javascript:search('X');" class="form-control mb-3" id="position">
         				  <option value="0" selected><?php echo $langCareerLeadersAllFoward; ?></option>
         				  <option value="C"><?php echo $langCareerLeadersCenter; ?></option>
         				  <option value="L"><?php echo $langCareerLeadersLeft; ?></option>
@@ -1569,7 +1569,7 @@ function showPlayerGoalPLF(i,c,d,currentSearch) {
         			</div>
         			
         			<div class="col-sm-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
-        			  <select onchange="javascript:result('X');" class="form-control mb-3" id="season">
+        			  <select onchange="javascript:search('X');" class="form-control mb-3" id="season">
         				  <option value="0" selected><?php echo $langCareerLeadersSeasons; ?></option>
         				  <option value="1"><?php echo $langCareerLeadersPlayoffs; ?></option>
         			  </select>
