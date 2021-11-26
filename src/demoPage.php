@@ -228,6 +228,18 @@ a.article:hover {
                     </ul>
                 </li>
   				<li ><a class="nav-link" href="Scores.php">Scores</a></li>
+  				
+  				<li>
+                    <a href="#standingsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Standings Pages</a>
+                    <ul class="collapse list-unstyled" id="standingsSubmenu">
+ 
+						  <li><a  href="Standings.php">Pro Standings</a></li>
+						  <li><a href="FarmStandings.php?s=1">Farm Standings</a></li>
+						  <li><a href="OverallStandings.php">Overall Standings</a></li>
+          
+                    </ul>
+                </li>
+  				
   				<li>
                     <a href="#statsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Stats Pages</a>
                     <ul class="collapse list-unstyled" id="statsSubmenu">
@@ -423,6 +435,22 @@ a.article:hover {
                               <td><a href="TeamSchedule.php">TeamSchedule.php</a></td>
                             </tr>
                             
+                            <tr>
+                              <td>Pro Standings</td>
+                              <td>Standings</td>
+                              <td><a href="Standings.php">Standings.php</a></td>
+                            </tr>
+                            <tr>
+                              <td>Farm Standings</td>
+                              <td>Standings</td>
+                              <td><a href="FarmStandings.php?s=1">FarmStandings.php?s=1</a></td>
+                            </tr>
+                             <tr>
+                              <td>Overall Standings</td>
+                              <td>Standings</td>
+                              <td><a href="OverallStandings.php">OverallStandings.php</a></td>
+                            </tr>
+				
                             <tr>
                               <td>Statistics</td>
                               <td>Stats</td>

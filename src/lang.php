@@ -24,6 +24,8 @@ if(LEAGUE_LANG == 'FR') {
 	$allStats = 'Statistiques';
 	$allNoSeasonDataFound = 'Le saison demandé est inexistant!';
 	$allPlayoffsNotStarted = 'La séries ne sont pas commancée!';
+	$allPro = 'Professionnel';
+	$allFarm = 'Club-École';
 	
 	//main
 	$mainNews = 'Nouvelles';
@@ -751,7 +753,8 @@ if(LEAGUE_LANG == 'EN') {
 	$allStats = 'Statistics';
 	$allNoSeasonDataFound = 'No season data found';
 	$allPlayoffsNotStarted = 'Playoffs have not started';
-	
+	$allPro = 'Pro';
+	$allFarm = 'Farm';
 	//main
 	$mainNews = 'Nouvelles';
 	
