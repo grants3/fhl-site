@@ -74,7 +74,7 @@ $tieTitle = $shootoutMode ? $scoringOTL : $scoringT;
         			            <th data-toggle="tooltip" data-placement="top" title="<?php echo $scoringGP?>"><?php echo $scoringGPm ?></th>
                     			<th data-toggle="tooltip" data-placement="top" title="<?php echo $scoringG?>"><?php echo $scoringGm?></th>
                     			<th data-toggle="tooltip" data-placement="top" title="<?php echo $scoringAssits?>">A</th>
-                    			<th data-toggle="tooltip" data-placement="top" title="<?php echo $rostersPosition?>">P</th>
+                    			<th data-toggle="tooltip" data-placement="top" title="Points">P</th>
                     			<th data-toggle="tooltip" data-placement="top" title="<?php echo $scoringDiff?>">+/-</th>
                     			<th data-toggle="tooltip" data-placement="top" title="<?php echo $scoringPIM?>"><?php echo $scoringPIMm?></th>
                     			<th data-toggle="tooltip" data-placement="top" title="<?php echo $scoringPP?>"><?php echo $scoringPPm?></th>

@@ -9,16 +9,24 @@
 
     <title>TablePage 2.0 Demo</title>
     
-<!--     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/> -->
-<!--     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
-<!--     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script> -->
-<!--     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
+ 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
+<?php 
+//if using jquery or bootstrap, you must set the variable below or some components will attempt to pull it in again.
+//only jquery3 and bootstrap 4 are supported.
+$JQUERY_LOADED = true;
+$BOOTSTRAP_LOADED = true;
+?>
+
 	<style>
 	
+
 	
 
 body {
@@ -227,8 +235,7 @@ a.article:hover {
           
                     </ul>
                 </li>
-  				<li ><a class="nav-link" href="Scores.php">Scores</a></li>
-  				
+
   				<li>
                     <a href="#standingsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Standings Pages</a>
                     <ul class="collapse list-unstyled" id="standingsSubmenu">
@@ -257,29 +264,19 @@ a.article:hover {
                 <li>
                     <a href="#leagueSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">League Pages</a>
                     <ul class="collapse list-unstyled" id="leagueSubmenu">
-                    
+                    		<li ><a class="nav-link" href="Scores.php">Scores</a></li>
 							<li ><a  href="Schedule.php">Schedule</a></li>
-							
 							<li ><a  href="Transact.php">Transactions</a></li>
-							
 							<li ><a  href="FreeAgents.php">Free Agents</a></li>
-							
 							<li ><a  href="Unassigned.php">Unassigned</a></li>
-							
 							<li ><a  href="Waivers.php">Waivers</a></li>
-							
 							<li ><a  href="Coaches.php">Coaches</a></li>
-							
 							<li ><a  href="Injury.php">Injury</a></li>
-							
 							<li ><a  href="GMs.php">GMs</a></li>
-							
 							<li ><a  href="PlayerSearch.php">Player Search</a></li>
-							
 							<li ><a  href="ComparePlayers.php">Compare</a></li>
-							
 							<li ><a  href="SalaryCop.php">Salary&nbspCop</a></li>
-          
+
                     </ul>
                 </li>
       
@@ -492,7 +489,12 @@ a.article:hover {
                               <td><a href="CareerLeaders.php">CareerLeaders.php</a></td>
                             </tr>
                 
-
+               				<tr>
+                              <td>Scores</td>
+                              <td>League</td>
+                             
+                              <td><a href="Scores.php">Scores.php</a></td>
+                            </tr>
                             <tr>
                               <td>League Schedule</td>
                               <td>League</td>

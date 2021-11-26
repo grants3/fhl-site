@@ -124,6 +124,7 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
 				if(file_exists($standingsFile)) {
                 	$tableau = file($standingsFile);
                 	
+                	echo '<div class="table-responsive">';
                 	echo '<table id="OverallStandings" class="table table-sm table-striped text-center table-rounded-bottom">';
                 	
                 	//check playoff mode first if in shootoutmode
@@ -343,6 +344,7 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
                 		echo '</tr>';
                 	}
                 	echo '</table>';
+                	echo '</div>';
                 	echo '<h6 class = "text-center">'.$allLastUpdate.' '. $lastUpdated.'</h6>';
 				}else{
 				    echo '<div class="card"><div class="card-body"><h6 class="text-center">'.$allNoSeasonDataFound.'</h6></div></div>';

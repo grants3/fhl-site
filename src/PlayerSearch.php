@@ -1,5 +1,5 @@
 <?php
-$dataTablesRequired = 1; //require datatables import
+$LOAD_DT_SCRIPTS = 1; //require datatables import
 
 require_once 'config.php';
 include 'lang.php';

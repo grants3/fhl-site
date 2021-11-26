@@ -14,7 +14,7 @@ $CurrentHTML = 'StatsGoalies.php';
 $CurrentTitle = $allStats;
 $CurrentPage = 'StatsGoalies';
 
-$dataTablesRequired = 1; //require datatables import
+$LOAD_DT_SCRIPTS = 1; //require datatables import
 
 $seasonId='';
 $seasonType='';

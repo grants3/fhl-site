@@ -5,7 +5,7 @@ require_once 'lang.php';
 require_once 'common.php';
 include_once 'fileUtils.php';
 
-$dataTablesRequired = 1;
+$LOAD_DT_SCRIPTS = 1;
 
 $CurrentHTML = 'Transact.php';
 $CurrentTitle = $transactTitle;
