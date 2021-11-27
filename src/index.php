@@ -1,9 +1,10 @@
 <?php 
-error_log('DIR='.__DIR__);
-require_once __DIR__.'/config.php';
-include_once __DIR__.'/lang.php';
-include_once __DIR__.'/common.php';
-include_once __DIR__.'/fileUtils.php';
+$TABLE_PAGE_LOCATION = '/'; //ex:/TablePage/ 
+
+require_once __DIR__.$TABLE_PAGE_LOCATION.'config.php';
+include_once FS_ROOT.'/lang.php';
+include_once FS_ROOT.'/common.php';
+include_once FS_ROOT.'/fileUtils.php';
 
 $CurrentHTML = 'index.php';
 $CurrentTitle = 'Home';
