@@ -474,7 +474,7 @@ a.article:hover {
                               <td>Pro Leaders (old)</td>
                               <td>Stats</td>
                             
-                              <td><a href="Leaders.php?s=1">Leaders.php</a></td>
+                              <td><a href="Leaders.php">Leaders.php</a></td>
                             </tr>
                             <tr>
                               <td>Farm Leaders</td>
