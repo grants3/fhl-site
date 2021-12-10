@@ -20,17 +20,12 @@ include_once FS_ROOT.'common.php';
 include_once FS_ROOT.'fileUtils.php';
 include_once FS_ROOT.'classes/TeamHolder.php';
 
-
+//page info
 if(!isset($CurrentPage)){
     $CurrentPage = '';
 }
-
-if(!isset($SecurePage)){
-    $SecurePage = false;
-}
-
-if(!isset($navbarEnabled)){
-    $navbarEnabled = true;
+if(!isset($_COOKIE['currentPage']) || $CurrentPage != $_COOKIE['currentPage']){
+    setcookie('currentPage',$CurrentPage);
 }
 
 //set theme
@@ -39,6 +34,10 @@ if(isset($_GET['theme'])) {
 }
 
 //set nav type
+if(!isset($navbarEnabled)){
+    $navbarEnabled = true;
+}
+
 if(!isset($navbarMode)) $navbarMode = NAVBAR_MODE;
 if(isset($_GET['navbarMode'])) {
     $_SESSION["navbarMode"] = $_GET['navbarMode'];
@@ -46,11 +45,6 @@ if(isset($_GET['navbarMode'])) {
 }
 else if(isset($_SESSION['navbarMode'])){
     $navbarMode = $_SESSION["navbarMode"];
-}
-
-//page info
-if ($CurrentPage !== ''){
-    setcookie('currentPage',$CurrentPage);
 }
 
 // // CREATE TEAM LIST
@@ -61,7 +55,7 @@ $teamList = $teamHolder->get_teams();
 
 
 //TRACK TEAM STATE
-if($teamList) $currentTeam = $teamList[0]; //default to first team on list.
+$currentTeam = '';
 if(isset($_GET['team']) || isset($_POST['team'])) {
     $currentTeam = ( isset($_GET['team']) ) ? $_GET['team'] : $_POST['team'];
     $currentTeam = htmlspecialchars($currentTeam);
@@ -71,9 +65,9 @@ if(isset($_GET['team']) || isset($_POST['team'])) {
 
 if(isset($_SESSION["team"])){
     $currentTeam = $_SESSION["team"];
+}else{
+    if($teamList) $currentTeam = $teamList[0]; //default to first team on list.
 }
-
-
 
 
 ?>
@@ -81,7 +75,6 @@ if(isset($_SESSION["team"])){
 <html lang="en">
 <head>
   	<meta charset="UTF-8"/>
-<!--   	<meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1"> -->
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
   	<meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=3.0, minimum-scale=0.85"/>
   	<title><?php echo LEAGUE_NAME;?></title>
@@ -125,17 +118,9 @@ if(isset($_SESSION["team"])){
 <?php 
 
 if($navbarEnabled){
-//     if(isset($navbarMode) && $navbarMode != 0){
-//         if($navbarMode == 1){
-//             include FS_ROOT.NAV_LOC;
-//         }else if($navbarMode == 2 || $navbarMode == 3){
-//             include FS_ROOT.'navSimple.php';
-//         }else{
-//             echo '<h5>Unsupported Nav</h5>';
-//         }
-//     }
     $navBarLocation = initNav($navbarMode,NAV_LOC);
     if($navBarLocation) include $navBarLocation;
+    
 }
 
 

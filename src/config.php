@@ -115,7 +115,7 @@ $leagueMode = 0;
 $footerText="FHL TableSim 2.0";
 
 #default color scheme.
-#blue,green,red,ocean
+#blue,green,red,ocean,dark
 $siteTheme="blue";
 
 # Whether or not main navbar should be displayed and the type of nav to be displayed.

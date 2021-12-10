@@ -65,8 +65,8 @@ $teams = new TeamHolder($gmFile);
 									<label class="input-group-text" for="teamInputField"><?php echo $allTeam;?></label>
 								</div>
 								<select class="custom-select" id="teamInputField">
-									<option value="" selected><?php echo $langCareerTeamLeadersAllTeam;?></option>
-									<option value="Unassigned"><?php echo $langUnassignedPlayers?></option>
+									<option value="ALL" selected><?php echo $langCareerTeamLeadersAllTeam;?></option>
+									<option value="UNA"><?php echo $langUnassignedPlayers?></option>
                       				<?php
                                         foreach ($teams->get_teams() as $team) {
                                             echo '<option value="' . $team . '">' . $team . '</option>';

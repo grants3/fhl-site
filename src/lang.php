@@ -756,7 +756,7 @@ if(LEAGUE_LANG == 'EN') {
 	$allPro = 'Pro';
 	$allFarm = 'Farm';
 	//main
-	$mainNews = 'Nouvelles';
+	$mainNews = 'News';
 	
 	//season
 	$seasonType = "Type";

@@ -3,7 +3,6 @@
 #Debug Mode. 1 = ON, 0 = OFF
 define('DEBUG_MODE', 0);
 
-
 /* DO NOT TOUCH ANYTHING BELOW HERE!! */
 define("BASE_URL",getBaseContext());
 define("FS_ROOT",getFsRoot());
@@ -18,10 +17,6 @@ if(DEBUG_MODE){
 }
 
 function initLeagueMode($searchDir, $leagueMode) :string{
-    
-    //only run this logic once. cache result.
-    //if(isset($GLOBALS["GLOB_LEAGUE_MODE"])) return $GLOBALS["GLOB_LEAGUE_MODE"];
-    
     //regular season
     $result = 'REG';
     
@@ -67,6 +62,8 @@ function initLang($leagueLang) :string{
 
 //must be called inside active session
 function initNav($navbarMode, $navBarLoc = 'nav.php') :string{
+    
+    if(!isset($navBarLoc)) $navBarLoc = 'nav.php';
     
     if($navbarMode == 1){
         $navBarLoc =  FS_ROOT.$navBarLoc;

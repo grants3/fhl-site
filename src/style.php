@@ -13,14 +13,6 @@ if(isset($_SESSION["theme"])){
 
 <style type="text/css">
 
-<?php if(LEAGUE_LOGO){ ?>
-
-:root {
-	--nav-logo-url:url(<?php echo LEAGUE_LOGO;?>) left center no-repeat;
-}
-
-<?php } ?>
-
 /* site color overrides. blue is default*/
 
 <?php 

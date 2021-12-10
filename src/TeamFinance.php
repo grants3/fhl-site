@@ -47,6 +47,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
     $injurySalary = 0;
     $totalSalaryAdjusted = 0;
     $farmSalary = 0;
+    $proPayroll = 0;
     
     //LTIR count
     $rosters = new RostersHolder($rosterFileName, $currentTeam);
@@ -57,6 +58,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
         $vital = $playerVitals->findVital($roster->getNumber(), $roster->getName());
         
         if($roster->getInjStatus() != 'HO' && $vital->getContractLength() > 0){
+            $proPayroll+=$vital->getSalary();
             $totalSalary+=$vital->getSalary();
             
             if($roster->getInjStatus() != ''){
@@ -71,12 +73,16 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
         $vital = $playerVitals->findVital($roster->getNumber(), $roster->getName());
         
         if($roster->getInjStatus() != 'HO' && $vital->getContractLength() > 0){
+            
+            //only include if farm is included in cap.
+            if(CAP_MODE == 1)  $totalSalary+=($vital->getSalary() ?  $vital->getSalary() / 10 : 0);
+            
             $farmSalary+=$vital->getSalary();
         }
         
     }
     //need to find a different way to do this.. will not work once players hit the 2 way threshold.
-    $farmSalary = $farmSalary / 10;
+    $farmSalary = ($farmSalary ?  $farmSalary / 10 : 0);
     $totalSalaryAdjusted = $totalSalary - $injurySalary;
     
 
@@ -126,7 +132,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 				$tmpNeg = '';
 				if(substr_count($val, '-')) $tmpNeg = '-';
 				$currentfunds = $tmpNeg.substr($reste, 0, strpos($reste, '</B>'));
-				$currentfunds = format_number($currentfunds, 0, true);
+				$currentfunds = format_money_no_dec($currentfunds, true);
 			}
 			if(substr_count($val, 'Home Games Remaining') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');
@@ -153,8 +159,8 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 				//$propayroll = substr($val, 69, $pos);
 				//changed so that we don't include 0 contract and holdouts.
 				//count from roster/vitals instead.
-				$propayroll = $totalSalary;
-				$propayroll = format_money_no_dec($propayroll);
+				//$propayroll = $totalSalary;
+				$propayroll = format_money_no_dec($proPayroll);
 			}
 			if(substr_count($val, '<TD>Farm Payroll</TD>') && $b && $d) {
 				$pos = strpos($val, '</TD></TR>');

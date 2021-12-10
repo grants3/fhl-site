@@ -45,7 +45,7 @@ class TransactionHolder implements \JsonSerializable{
                     $transType = TransactionHolder::$typeInjury;
                 }
                 // returns from injury
-                if(substr_count($reste, '(') && substr_count($reste, 'returns from injury')) {
+                else if(substr_count($reste, '(') && substr_count($reste, 'returns from injury')) {
                     $transPlayer = substr($reste, 0, strpos($reste, '(')-1);
                     $reste = trim(substr($reste, strpos($reste, '(')+1));
                     $transTeam = substr($reste, 0, strpos($reste, ')'));
@@ -54,7 +54,7 @@ class TransactionHolder implements \JsonSerializable{
                     $transType = TransactionHolder::$typeInjury;
                 }
                 // promote to pro roster
-                if(substr_count($reste, ' to pro roster')){
+                else if(substr_count($reste, ' to pro roster')){
                     $transTeam = substr($reste, 0, strpos($reste, ' promote '));
                     $reste = trim(substr($reste, strpos($reste, ' promote ')));
                     $transStatus = ucfirst(substr($reste, 0, strpos($reste, ' ')));
@@ -63,8 +63,20 @@ class TransactionHolder implements \JsonSerializable{
                     $reste = trim(substr($reste, strpos($reste, ' to ')));
                     $transStatus .= ' '.substr($reste, 0);
                 }
+                
+                // waivers
+                else if(substr_count($reste, ' place ')){
+                    $transTeam = substr($reste, 0, strpos($reste, ' place '));
+                    $reste = trim(substr($reste, strpos($reste, ' place ')));
+                    $transStatus = ucfirst(substr($reste, 0, strpos($reste, ' ')));
+                    $reste = trim(substr($reste, strpos($reste, ' ')));
+                    $transPlayer = substr($reste, 0, strpos($reste, ' on '));
+                    $reste = trim(substr($reste, strpos($reste, ' on ')));
+                    $transStatus .= ' '.substr($reste, 0);
+                }
+                
                 // assign to minor
-                if(substr_count($reste, ' to minors')){
+                else if(substr_count($reste, ' to minors')){
                     $transTeam = substr($reste, 0, strpos($reste, ' assign '));
                     $reste = trim(substr($reste, strpos($reste, ' assign ')));
                     $transStatus = ucfirst(substr($reste, 0, strpos($reste, ' ')));
@@ -74,7 +86,7 @@ class TransactionHolder implements \JsonSerializable{
                     $transStatus .= ' '.substr($reste, 0);
                 }
                 // Signature
-                if(substr_count($reste, ' sign ')){
+                else if(substr_count($reste, ' sign ')){
                     $transTeam = substr($reste, 0, strpos($reste, ' sign '));
                     $reste = trim(substr($reste, strpos($reste, ' sign ')));
                     $transStatus = ucfirst(substr($reste, 0, strpos($reste, ' ')));
@@ -82,7 +94,7 @@ class TransactionHolder implements \JsonSerializable{
                     $transPlayer = substr($reste, 0);
                 }
                 // Coatch Fire
-                if(substr_count($reste, ' fire Head Coach ')){
+                else if(substr_count($reste, ' fire Head Coach ')){
                     $transTeam = substr($reste, 0, strpos($reste, ' fire '));
                     $reste = trim(substr($reste, strpos($reste, ' fire ')));
                     $transStatus = ucfirst(substr($reste, 0, strpos($reste, 'Coach') + 5));
@@ -90,7 +102,7 @@ class TransactionHolder implements \JsonSerializable{
                     $transPlayer = substr($reste, 0);
                 }
                 // Coatch Hire
-                if(substr_count($reste, ' hire Head Coach ')){
+                else if(substr_count($reste, ' hire Head Coach ')){
                     $transTeam = substr($reste, 0, strpos($reste, ' hire '));
                     $reste = trim(substr($reste, strpos($reste, ' hire ')));
                     $transStatus = ucfirst(substr($reste, 0, strpos($reste, 'Coach') + 5));
@@ -98,12 +110,14 @@ class TransactionHolder implements \JsonSerializable{
                     $transPlayer = substr($reste, 0);
                 }
                 // completes suspension
-                if(substr_count($reste, 'completes suspension')){
+                else if(substr_count($reste, 'completes suspension')){
                     $transPlayer = substr($reste, 0, strpos($reste, '(')-1);
                     $reste = trim(substr($reste, strpos($reste, '(')+1));
                     $transTeam = substr($reste, 0, strpos($reste, ')'));
                     $reste = trim(substr($reste, strpos($reste, ')')+1));
                     $transStatus = ucfirst($reste);
+                }else{
+                    
                 }
 
                 //$transTeam = trim($transTeam);
@@ -148,6 +162,10 @@ class TransactionHolder implements \JsonSerializable{
 
             }
         }
+        
+        //reverse from newst to oldest by default
+        $this->trades = array_reverse($this->trades);
+        $this->events = array_reverse($this->events);
         
     }
     

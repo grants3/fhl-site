@@ -1,5 +1,5 @@
 <?php
-if(count(get_included_files()) ==1) die(header('HTTP/1.1 404 Not Found')); //must be included 
+if(count(get_included_files()) ==1) die(header('HTTP/1.1 404 Not Found')); //must be included
 
 require_once __DIR__.'/../config.php';
 include_once FS_ROOT.'common.php';
@@ -23,8 +23,12 @@ class PlayerSearchModel {//implements Model{
         
     }
     
-    function findBySeason($seasonId = null, $seasonType = null, $type = 'ALL', $searchTeam = null) : array{
-
+    function findBySeason($seasonId = null, $seasonType = null, $type = null, $searchTeam = null) : array{
+        
+        //set defaults
+        if(!isset($type) || !$type) $type = 'ALL';
+        if(!isset($searchTeam) || !$searchTeam) $searchTeam = 'ALL';
+        
         $gmFile = _getLeagueFile('GMs',$seasonType,$seasonId);
         $rosterFile = _getLeagueFile('Rosters',$seasonType,$seasonId);
         $unassignedFile = _getLeagueFile('Unassigned',$seasonType,$seasonId);
@@ -44,13 +48,15 @@ class PlayerSearchModel {//implements Model{
             throw new SimFileNotFoundException('PlayerVitals not found. seasonType='.$seasonType.' seasonId='.$seasonId);
         }
         
-        if(file_exists($unassignedFile)) {
+        // if(($this->isAll($type) || 'UNA' == $type )  && $this->isAll($searchTeam) && file_exists($unassignedFile)){
+        if($type == 'ALL' && ($searchTeam == 'ALL' || 'UNA' == $searchTeam) && file_exists($unassignedFile)){
             $unassignedHolder = new UnassignedHolder($unassignedFile);
         }
-        if(file_exists($futuresFile)) {
-            $prospectHolder = new ProspectHolder($futuresFile, $searchTeam);
+        
+        if(($type == 'ALL' || 'PCT' == $type ) && file_exists($futuresFile)){
+            $prospectHolder = new ProspectHolder($futuresFile, $searchTeam == 'ALL' ? null : $searchTeam);
         }
-
+        
         $teams = new TeamHolder($gmFile);
         
         $allPlayers = array();
@@ -59,7 +65,7 @@ class PlayerSearchModel {//implements Model{
         if(('ALL' == $type || 'PRO' == $type || 'FRM' == $type|| 'PROFRM' == $type)){
             foreach($teams->get_teams() as $team){
                 
-                if(isset($searchTeam) && $searchTeam && strcasecmp($team,$searchTeam) != 0) continue;
+                if(isset($searchTeam) && $searchTeam && $searchTeam != 'ALL' &&strcasecmp($team,$searchTeam) != 0) continue;
                 
                 $rosterHolder = new RostersHolder($rosterFile, $team, false);
                 $playerVitals = new PlayerVitalsHolder($vitalsFileName, $team);
@@ -98,7 +104,7 @@ class PlayerSearchModel {//implements Model{
                         array_push($allPlayers, $wrapper);
                     }
                 }
-             
+                
                 if('ALL' == $type || 'FRM' == $type || 'PROFRM' == $type){
                     foreach($rosterHolder->getFarmRosters() as $roster){
                         $wrapper = new PlayerSearchWrapper();
@@ -133,12 +139,12 @@ class PlayerSearchModel {//implements Model{
                         array_push($allPlayers, $wrapper);
                     }
                 }
-
+                
                 
             }
         }
         //add unassigned players
-        if(isset($unassignedHolder) && ('ALL' == $type && (!isset($searchTeam) || strcasecmp('Unassigned',$searchTeam) == 0) )){
+        if(isset($unassignedHolder)){
             foreach($unassignedHolder->getUnassigned() as $roster){
                 $wrapper = new PlayerSearchWrapper();
                 
@@ -165,7 +171,7 @@ class PlayerSearchModel {//implements Model{
         }
         
         //add prospects
-        if(isset($prospectHolder) && ('ALL' == $type || 'PCT' == $type )){
+        if(isset($prospectHolder)){
             foreach($prospectHolder->getProspects() as $prospect){
                 $wrapper = new PlayerSearchWrapper();
                 
@@ -195,12 +201,11 @@ class PlayerSearchModel {//implements Model{
                 array_push($allPlayers, $wrapper);
             }
         }
-
+        
         
         return $allPlayers;
     }
-
-   
-
+    
+    
 }
 

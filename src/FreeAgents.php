@@ -6,7 +6,7 @@ include 'lang.php';
 $CurrentHTML = 'FreeAgents.php';
 $CurrentTitle = $allFreeAgents;
 $CurrentPage = 'FreeAgents';
-//$SecurePage = true;
+
 include 'head.php';
 
 $fileName = getCurrentLeagueFile('FreeAgents');

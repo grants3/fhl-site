@@ -20,11 +20,11 @@ include 'head.php';
 
 <style>
 
-#TransactInjuries td, 
-#TransactEvents td, 
-#TransactTrades td {
-  white-space: normal !important; 
-  word-wrap: break-word;  
+#TransactInjuries td:nth-child(even), 
+#TransactEvents td:nth-child(even), 
+#TransactTrades td:nth-child(even) {
+    white-space: normal !important;  
+    word-wrap: break-word;
 }
 
 #TransactInjuries table, 

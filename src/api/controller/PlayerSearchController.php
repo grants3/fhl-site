@@ -23,8 +23,9 @@ class PlayerSearchController extends BaseSearchController
         
         $seasonType = null;
         $seasonId = null;
-        $type = 'ALL';
+        $type = null;
         $team = null;
+        
         if(isset($_GET['seasonId']) || isset($_POST['seasonId'])) {
             $seasonId = (int)( isset($_GET['seasonId']) ) ? $_GET['seasonId'] : $_POST['seasonId'];
         }

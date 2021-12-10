@@ -5,7 +5,6 @@ include 'lang.php';
 $CurrentHTML = 'GMs.php';
 $CurrentTitle = $GMsTitle;
 $CurrentPage = 'GMs';
-$SecurePage=false;
 
 include 'head.php';
 ?>

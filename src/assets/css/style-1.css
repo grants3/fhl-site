@@ -34,7 +34,7 @@
   --team-header-background-color-1:rgba(206,220,231,1); /*grey*/
   --team-header-background-color-2:var(--color-primary-2);
 
-  --nav-logo-url:url(../img/nav-logo.png) left center no-repeat;
+  --nav-logo-url:url(../img/nav-logo.png);
  
 }
 
@@ -222,8 +222,9 @@ color:#ffffff;
 #main-navbar.navbar-expand-lg .navbar-nav .nav-link-inner { padding-left: 1rem; padding-right: 1rem; }
 
 #main-navbar .navbar-brand {
-/* 	background: url(../img/nav-logo.png) left center no-repeat; */
 	background: var(--nav-logo-url);
+	background-repeat: no-repeat;
+    background-position: left center;
 	max-height: 35px;
 	max-width: 150px;
 	height: 35px;

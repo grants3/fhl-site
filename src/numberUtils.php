@@ -68,7 +68,7 @@ function getLocale(){
 //format_money_clean
 function format_money($value, $format = '%n', bool $clean = false){
     
-    if($clean) $value = preg_replace("/[^0-9.]/", "", $value);
+    if($clean) $value = preg_replace("/[^-0-9.]/", "", $value);
 
     return _format_money($format, $value);
 }
@@ -79,7 +79,7 @@ function format_money_no_dec($value, bool $clean = false){
 
 function format_number($value, $decimals=2, bool $clean = false){
 
-    if($clean) $value = preg_replace("/[^0-9.]/", "", $value);
+    if($clean) $value = preg_replace("/[^-0-9.]/", "", $value);
 
     return _format_number($value,$decimals);
 }

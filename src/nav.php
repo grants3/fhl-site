@@ -27,6 +27,18 @@
         }
       
     }
+    
+    <?php if(LEAGUE_LOGO){ ?>
+
+    #main-navbar.navbar .navbar-brand{
+	   background: url(<?php echo BASE_URL.LEAGUE_LOGO ?>);
+	   	background-repeat: no-repeat;
+        background-size: contain;
+        background-position: left center;
+	}
+    
+    <?php } ?>
+    
 
 </style>
 <nav class="navbar navbar-dark fixed-top navbar-expand-lg navbar-no-bg scrollable" id="main-navbar"> 
@@ -78,36 +90,37 @@
 					  <li class="dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo formatHtmlText($allLeague) ?><span class="caret"></span></a>
 						<ul class="dropdown-menu">
+							<li class="nav-item"><a class="nav-link-inner" href="Coaches.php"><?php echo formatHtmlText($CoachesTitle)?></a></li>
+							<li class="dropdown-divider"></li>
+							<li class="nav-item"><a class="nav-link-inner" href="FreeAgents.php"><?php echo formatHtmlText($allFreeAgents)?></a></li>
+							<li class="dropdown-divider"></li>
+							<li class="nav-item"><a class="nav-link-inner" href="Injury.php"><?php echo formatHtmlText($injuryTitle)?></a></li>
+							<li class="dropdown-divider"></li>
 							<li class="nav-item"><a class="nav-link-inner" href="Schedule.php"><?php echo formatHtmlText($schedTitle)?></a></li>
 							<li class="dropdown-divider"></li>
 							<?php if(TRANSACTIONS_ENABLED){?>
 							<li class="nav-item"><a class="nav-link-inner" href="Transact.php"><?php echo formatHtmlText($alltransact)?></a></li>
 							<li class="dropdown-divider"></li>
 							<?php }?>
-							<li class="nav-item"><a class="nav-link-inner" href="FreeAgents.php"><?php echo formatHtmlText($allFreeAgents)?></a></li>
-							<li class="dropdown-divider"></li>
+
 							<li class="nav-item"><a class="nav-link-inner" href="Unassigned.php"><?php echo formatHtmlText($langUnassignedPlayers)?></a></li>
 							<li class="dropdown-divider"></li>
 							<li class="nav-item"><a class="nav-link-inner" href="Waivers.php"><?php echo formatHtmlText($waiversTitle)?></a></li>
-							<li class="dropdown-divider"></li>
-							<li class="nav-item"><a class="nav-link-inner" href="Coaches.php"><?php echo formatHtmlText($CoachesTitle)?></a></li>
-							<li class="dropdown-divider"></li>
-							<li class="nav-item"><a class="nav-link-inner" href="Injury.php"><?php echo formatHtmlText($injuryTitle)?></a></li>
+						
+							
 			
 						</ul>
 					  </li>
 					  <li class="dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo$allOther?>&nbsp;<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
+							<li class="nav-item"><a class="nav-link-inner" href="ComparePlayers.php"><?php echo formatHtmlText($compareTitle)?></a></li>
+							<li class="dropdown-divider"></li>
 							<li class="nav-item"><a class="nav-link-inner" href="GMs.php"><?php echo formatHtmlText($GMsTitle)?></a></li>
 							<li class="dropdown-divider"></li>
 							<li class="nav-item"><a class="nav-link-inner" href="PlayerSearch.php"><?php echo formatHtmlText($searchPlayerTitle)?></a></li>
 							<li class="dropdown-divider"></li>
-							<li class="nav-item"><a class="nav-link-inner" href="ComparePlayers.php"><?php echo formatHtmlText($compareTitle)?></a></li>
-							<li class="dropdown-divider"></li>
 							<li class="nav-item"><a class="nav-link-inner" href="SalaryCop.php"><?php echo formatHtmlText($salaryCopTitle)?></a></li>
-						
-							
 						</ul>
 					  </li>
 				</ul>
