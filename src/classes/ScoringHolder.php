@@ -94,7 +94,7 @@ class ScoringHolder implements \JsonSerializable{
                         $reste = trim(substr($reste, 1));
                     } else
                         $tmpFwdRookie = '';
-                    $tmpFwdHT2 = 0;
+                    //$tmpFwdHT2 = 0;
                 }
                 $tmpFwdPS = substr($reste, strrpos($reste, ' '));
                 $reste = trim(substr($reste, 0, strrpos($reste, ' ')));
@@ -134,11 +134,11 @@ class ScoringHolder implements \JsonSerializable{
                         $tmpFwdName = trim(substr($tmpFwdName, strpos($tmpFwdName, '"') + 1, strpos($tmpFwdName, '>') - 1 - strpos($tmpFwdName, '"') - 1));
                     }
                 }
-                $tmpVal = $contents[$cle + 1];
-                if (substr_count($tmpVal, '                         ') || (! substr_count($val, '                         ') && ! substr_count($tmpVal, '                         '))) {
-                    $tmpFwdHT2 += $tmpFwdHT;
-                } else
-                    $tmpFwdHT = $tmpFwdHT2;
+//                 $tmpVal = $contents[$cle + 1];
+//                 if (substr_count($tmpVal, '                         ') || (! substr_count($val, '                         ') && ! substr_count($tmpVal, '                         '))) {
+//                     $tmpFwdHT2 += $tmpFwdHT;
+//                 } else
+//                     $tmpFwdHT = $tmpFwdHT2;
 
                 //fix position
                 if('R' == $tmpFwdPosition) $tmpFwdPosition = 'RW';
@@ -167,6 +167,20 @@ class ScoringHolder implements \JsonSerializable{
                 $scoring->setShotPct($tmpFwdPCTG);
                 $scoring->setGoalStreak($tmpFwdGS);
                 $scoring->setPointStreak($tmpFwdPS);
+                
+                //hits count fix (latest team being total)
+                if(isNullOrEmptyString($scoring->getName()) && $scoring->getTeamAbbr() != 'TOT' ){
+                    
+                    for($i = count($this->skaters)-1; $i >= 0; $i--) {
+                        $sc = $this->skaters[$i];
+                        if(!IsNullOrEmptyString($sc->getName())){
+                            $newHitCount = $sc->getHits() - $scoring->getHits();
+                            $sc->setHits($newHitCount);
+                            break;
+                        }
+                    }
+                    
+                }
                 
                 array_push($this->skaters, $scoring);
                 

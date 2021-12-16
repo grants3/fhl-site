@@ -198,7 +198,7 @@ if($csName != '') {
 					$statsPosition[$i] = '';
 					$statsNumber[$i] = '';
 					$statsRookie[$i] = '';
-					//$statsName[$i] = '';
+					$statsName[$i] = '';
 					$bold[$i] = '';
 				}
 				else {
@@ -212,7 +212,7 @@ if($csName != '') {
 					}
 					else $statsRookie[$i] = '';
 					//$reste = trim(substr($reste, strpos($reste, '  ')));
-					$tmpFwdHT2 = 0;
+					//$tmpFwdHT2 = 0;
 				}
 				$statsPS[$i] = substr($reste, strrpos($reste, ' '));
 				$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
@@ -247,18 +247,32 @@ if($csName != '') {
 				$statsTeam[$i] = trim(substr($reste, strrpos($reste, ' ')));
 				if(!substr_count($val, '                         ')) {
 					$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-					/*
+					
 					$statsName[$i] = $reste;
+					/*
 					if(substr_count($statsName[$i], 'xtrastats.html')) {
 						$statsName[$i] = trim(substr($statsName[$i], strpos($statsName[$i], '"')+1, strpos($statsName[$i], '>')-1-strpos($statsName[$i], '"')-1));
 					}
 					*/
 				}
-				$tmpVal = $tableau[$cle+1];
-				if(substr_count($tmpVal, '                         ') || (!substr_count($val, '                         ') && !substr_count($tmpVal, '                         '))) {
-					$tmpFwdHT2 += $statsHT[$i];
+// 				$tmpVal = $tableau[$cle+1];
+// 				if(substr_count($tmpVal, '                         ') || (!substr_count($val, '                         ') && !substr_count($tmpVal, '                         '))) {
+// 					$tmpFwdHT2 += $statsHT[$i];
+// 				}
+// 				else $statsHT[$i] = $tmpFwdHT2;
+				
+				//hits fix. Will decrement from 'first' team entry which incorrectly has the total.
+				if(isNullOrEmptyString($statsName[$i]) && $statsTeam[$i] != 'TOT' ){
+				    for($x = count($statsName)-1; $x >= 0; $x--) {
+				        
+				        if(!IsNullOrEmptyString($statsName[$x])){
+				            $newHitCount = $statsHT[$x] - $statsHT[$i];
+				            $statsHT[$x] = $newHitCount;
+				            break;
+				        }
+				    }
 				}
-				else $statsHT[$i] = $tmpFwdHT2;
+				
 				$statsSeason[$i] = $workSeason;
 				$i++;
 			}
@@ -375,7 +389,7 @@ if($csName != '') {
 							$statsPosition[$i] = '';
 							$statsNumber[$i] = '';
 							$statsRookie[$i] = '';
-							//$statsName[$i] = '';
+							$statsName[$i] = '';
 							$bold[$i] = '';
 						}
 						else {
@@ -389,7 +403,7 @@ if($csName != '') {
 							}
 							else $statsRookie[$i] = '';
 							//$reste = trim(substr($reste, strpos($reste, '  ')));
-							$tmpFwdHT2 = 0;
+							//$tmpFwdHT2 = 0;
 						}
 						$statsPS[$i] = substr($reste, strrpos($reste, ' '));
 						$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
@@ -424,18 +438,32 @@ if($csName != '') {
 						$statsTeam[$i] = trim(substr($reste, strrpos($reste, ' ')));
 						if(!substr_count($val, '                         ')) {
 							$reste = trim(substr($reste, 0, strrpos($reste, ' ')));
-							/*
+							
 							$statsName[$i] = $reste;
+							/*
 							if(substr_count($statsName[$i], 'xtrastats.html')) {
 								$statsName[$i] = trim(substr($statsName[$i], strpos($statsName[$i], '"')+1, strpos($statsName[$i], '>')-1-strpos($statsName[$i], '"')-1));
 							}
 							*/
 						}
-						$tmpVal = $tableau[$cle+1];
-						if(substr_count($tmpVal, '                         ') || (!substr_count($val, '                         ') && !substr_count($tmpVal, '                         '))) {
-							$tmpFwdHT2 += $statsHT[$i];
+// 						$tmpVal = $tableau[$cle+1];
+// 						if(substr_count($tmpVal, '                         ') || (!substr_count($val, '                         ') && !substr_count($tmpVal, '                         '))) {
+// 							$tmpFwdHT2 += $statsHT[$i];
+// 						}
+// 						else $statsHT[$i] = $tmpFwdHT2;
+						
+						//hits fix. Will decrement from 'first' team entry which incorrectly has the total.
+						if(isNullOrEmptyString($statsName[$i]) && $statsTeam[$i] != 'TOT' ){
+						    for($x = count($statsName)-1; $x >= 0; $x--) {
+						        
+						        if(!IsNullOrEmptyString($statsName[$x])){
+						            $newHitCount = $statsHT[$x] - $statsHT[$i];
+						            $statsHT[$x] = $newHitCount;
+						            break;
+						        }
+						    }
 						}
-						else $statsHT[$i] = $tmpFwdHT2;
+
 						$statsSeason[$i] = $workSeason;
 						$i++;
 					}
