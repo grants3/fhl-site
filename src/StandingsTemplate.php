@@ -168,17 +168,16 @@ if (file_exists($Fnm)) {
                 }
 
                 if ($e == 1){
-
                     echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingOTFull.'">' . $standingOT . '</th>';
-                    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingPTSFull.'">' . $standingPTS . '</th>';
-                    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingGFFull.'">' . $standingGF . '</th>';
-                    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingGAFull.'">' . $standingGA . '</th>';
-                    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingDiffFull.'">' . $standingDiff . '</th>';
-                    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingPCTFull.'">' . $standingPCT . '</th>';
-                    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingL10Full.'">' . $standingL10 . '</th>';
-                    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingSTRKFull.'">' . $standingSTRK . '</th>';
-                    
                 }
+                echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingPTSFull.'">' . $standingPTS . '</th>';
+                echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingGFFull.'">' . $standingGF . '</th>';
+                echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingGAFull.'">' . $standingGA . '</th>';
+                echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingDiffFull.'">' . $standingDiff . '</th>';
+                echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingPCTFull.'">' . $standingPCT . '</th>';
+                echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingL10Full.'">' . $standingL10 . '</th>';
+                echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingSTRKFull.'">' . $standingSTRK . '</th>';
+                
                 echo '</tr>';
                 echo '</thead>';
                 echo '<tbody>';
@@ -255,14 +254,14 @@ if (file_exists($Fnm)) {
                                 echo '<td>' . $standingsT . '</td>';
                             }
                             if ($e == 1){
-
                                 echo '<td>' . $standingsOL . '</td>';
-                                echo '<td>' . $standingsPts . '</td>';
-                                echo '<td>' . $standingsGF . '</td>';
-                                echo '<td>' . $standingsGA . '</td>';
-                                echo '<td>' . $standingsDiff . '</td>';
-                                echo '<td>' . $standingsPCT . '</td>';
                             }
+                            echo '<td>' . $standingsPts . '</td>';
+                            echo '<td>' . $standingsGF . '</td>';
+                            echo '<td>' . $standingsGA . '</td>';
+                            echo '<td>' . $standingsDiff . '</td>';
+                            echo '<td>' . $standingsPCT . '</td>';
+                            
                             echo '<td>' . $standingsL10 . '</td>';
                             echo '<td>' . $standingsSTK . '</td>';
                             echo '</tr>';
