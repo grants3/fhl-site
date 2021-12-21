@@ -120,7 +120,7 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
 				$e = 0;
 				$lastUpdated = '';
 				$shootoutMode = false;
-				$e=1;
+				//$e = 1;
 				if(file_exists($standingsFile)) {
                 	$tableau = file($standingsFile);
                 	
@@ -277,17 +277,16 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
                 	}
                 	
                 	if ($e == 1){
-                	    
                 	    if($currentFarm == 0) echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingOTFull.'">' . $standingOT . '</th>';
-                	    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingPTSFull.'">' . $standingPTS . '</th>';
-                	    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingGFFull.'">' . $standingGF . '</th>';
-                	    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingGAFull.'">' . $standingGA . '</th>';
-                	    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingDiffFull.'">' . $standingDiff . '</th>';
-                	    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingPCTFull.'">' . $standingPCT . '</th>';
-                	    if($currentFarm == 0) echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingL10Full.'">' . $standingL10 . '</th>';
-                	    if($currentFarm == 0) echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingSTRKFull.'">' . $standingSTRK . '</th>';
-                	    
-                	}
+			}
+                	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingPTSFull.'">' . $standingPTS . '</th>';
+                	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingGFFull.'">' . $standingGF . '</th>';
+                	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingGAFull.'">' . $standingGA . '</th>';
+                	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingDiffFull.'">' . $standingDiff . '</th>';
+                	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingPCTFull.'">' . $standingPCT . '</th>';
+                	if($currentFarm == 0) echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingL10Full.'">' . $standingL10 . '</th>';
+			if($currentFarm == 0) echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingSTRKFull.'">' . $standingSTRK . '</th>';
+
                 	echo '</tr>';
                 	echo '</thead>';
                 	echo '<tbody>';
@@ -332,13 +331,14 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
                 		}
                 		
                 		if ($e == 1){
-                    		if($currentFarm == 0) echo '<td>'.$standingsOL[$key].'</td>';
+                    			if($currentFarm == 0) echo '<td>'.$standingsOL[$key].'</td>';
+				}
                     		echo '<td><b>'.$standingsPts[$key].'</b></td>';
                     		echo '<td>'.$standingsGF[$key].'</td>';
                     		echo '<td>'.$standingsGA[$key].'</td>';
                     		echo '<td>'.$standingsDiff[$key].'</td>';
                     		echo '<td>'.$standingsPCT[$key].'</td>';
-                		}
+
                 		if($currentFarm == 0) echo '<td>'.$standingsL10[$key].'</td>';
                 		if($currentFarm == 0) echo '<td>'.$standingsSTK[$key].'</td>';
                 		echo '</tr>';
