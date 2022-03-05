@@ -10,9 +10,14 @@ mb_regex_encoding('UTF-8');
 
 require_once __DIR__.'/config.php';
 
+// Detect if there is an error before this point and header already sent.
+if (headers_sent($file, $line)) {
+	echo "Headers sent in $file on line $line";
+}
+
 if (session_status() == PHP_SESSION_NONE) {
-    session_name(SESSION_NAME);
-    session_start();
+	session_name(SESSION_NAME);
+	session_start();
 }
 
 include_once FS_ROOT.'lang.php';
