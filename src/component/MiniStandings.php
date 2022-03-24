@@ -1,4 +1,3 @@
-
 <!-- <div class="col"> -->
 <div class="fhlElement">
 <div class = "table-responsive scrollable-table">
@@ -32,7 +31,6 @@ if(file_exists($Fnm)) {
 	    }
 	    
 	}
-	
 	
 	while(list($cle,$val) = myEach($tableau)) {
 		$val = utf8_encode($val);
@@ -76,8 +74,10 @@ if(file_exists($Fnm)) {
 			    $standingsT[$d] = substr($reste, 0, strpos($reste, ' '));
 			    $reste = trim(substr($reste, strpos($reste, ' ')));
 			}
-			$standingsOL[$d] = substr($reste, 0, strpos($reste, ' '));
-			$reste = trim(substr($reste, strpos($reste, ' ')));
+			if($e == 1) {
+				$standingsOL[$d] = substr($reste, 0, strpos($reste, ' '));
+				$reste = trim(substr($reste, strpos($reste, ' ')));
+			}
 			$standingsPts[$d] = substr($reste, 0, strpos($reste, ' '));
 			$reste = trim(substr($reste, strpos($reste, ' ')));
 			$reste = trim(substr($reste, strpos($reste, ' ')));
@@ -103,7 +103,8 @@ if(file_exists($Fnm)) {
 	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingLFull.'">' . $standingL . '</th>';
 	if(!$shootoutMode){
 	    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingEFull.'">' . $standingE . '</th>';
-	}else{
+	}
+	if($e == 1) {
 	    echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingOTFull.'">' . $standingOT . '</th>';
 	}
 	echo '<th data-toggle="tooltip" data-placement="top" title="'.$standingPTSFull.'">' . $standingPTS . '</th>';
@@ -140,7 +141,8 @@ if(file_exists($Fnm)) {
 		echo '<td>'.$standingsL[$key].'</td>';
 		if(!$shootoutMode){
 		    echo '<td>'.$standingsT[$key].'</td>';
-		}else{
+		}
+		if($e == 1) {
 		    echo '<td>'.$standingsOL[$key].'</td>';
 		}
 		echo '<td>'.$standingsPts[$key].'</td>';
@@ -180,4 +182,3 @@ $(document).ready(function()
 }
 </style>
 </div>
-
