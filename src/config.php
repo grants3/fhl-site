@@ -35,7 +35,7 @@ $folder = "transfer/";
 $folderGames = "";
 
 # CAREER STATS
-# Needed Files in each season folders : GMs, PlayerVitals, TeamScoring, PLFTeamScoring, Standings, Schedule. Optional: Transactions
+# Needed Files in each season folders : GMs, PLFGMs, PlayerVitals, PLFPlayerVitals, TeamScoring, PLFTeamScoring, Standings, PLFStandings, PLFStandingsTree, Schedule, PLF-Round1-Schedule, PLF-Round2-Schedule, PLF-Round3-Schedule, PLF-Round4-Schedule. Optional: Transactions, PLFTransactions
 # Enter where your backup HTML files are located in your website. Unabled : 0;
 # This folder MUST have the same name and at the end, the number of the season. Ex: Season 1, Season 2, Season 3. Put # to replace the number!
 # Full example: ../backup/Season #/

@@ -78,4 +78,3 @@ function getMaxGp($standingsFile) :int{
 }
 
 ?>
-
