@@ -370,7 +370,7 @@ class ScoringPlayerObj implements \JsonSerializable, ScoringObj{
         $this->pointStreak = $pointStreak;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }
