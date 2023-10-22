@@ -180,7 +180,7 @@ class RosterAvgObj implements \JsonSerializable
         return $this->avgOv;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }
