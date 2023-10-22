@@ -121,7 +121,7 @@ class UnassignedHolder implements \JsonSerializable{
         return $this->unassigned;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }

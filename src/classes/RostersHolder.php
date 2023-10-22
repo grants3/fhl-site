@@ -305,7 +305,7 @@ class RostersHolder implements \JsonSerializable{
         return $this->proRosters;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }

@@ -149,7 +149,7 @@ class ScheduleHolder2  implements \JsonSerializable{
         return null;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }

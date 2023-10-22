@@ -291,11 +291,13 @@ include 'head.php';
                                       		    
                                       		    $gameTitle = $schedule->getGameTitle();
                                       		    if(LEAGUE_LANG =='FR'){
-                                      		        if(substr_count($gameTitle, '(OT)')){
-                                      		            $gameTitle = str_replace('(OT)',$gameTitle,'('.$schedOT.')');
-                                      		        }else if(substr_count($schedule->getGameTitle(), '(SO)')){
-                                      		            $gameTitle = str_replace('(SO)',$gameTitle,'('.$schedSO.')');
-                                      		        }
+							if($gameTitle != null) {
+                                      		        	if(substr_count($gameTitle, '(OT)')){
+									$gameTitle = str_replace('(OT)',$gameTitle,'('.$schedOT.')');
+                                      		        	}else if(substr_count($schedule->getGameTitle(), '(SO)')){
+                                      					$gameTitle = str_replace('(SO)',$gameTitle,'('.$schedSO.')');
+                                      		        	}
+							}
                                       		        
                                       		        
                                       		    }

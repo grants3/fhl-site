@@ -329,7 +329,7 @@ class ScheduleHolder implements \JsonSerializable{
         $filtered_array = array();
     }
     
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }
