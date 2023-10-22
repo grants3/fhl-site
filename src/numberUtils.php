@@ -154,6 +154,8 @@ function _format_money($format, $value) {
         $currency_symbol = $opcoes['conversion'] == 'n' ? $locale['currency_symbol']
         : $locale['int_curr_symbol'];
     }
+        
+    if(substr($value,-3,1) == ",") $value = substr($value,0,-3).".".substr($value,-2); // For French comma! (55,00)
     $number = number_format(abs($value), $locale['frac_digits'], $locale['mon_decimal_point'], $locale['mon_thousands_sep']);
     
     
