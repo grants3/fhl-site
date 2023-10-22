@@ -112,7 +112,7 @@ $minGoaliesAppearances = 33;
 $leagueMode = 0;
 
 #text to display in footer(bottom) of each page.
-$footerText="FHL TableSim 2.0";
+$footerText="FHL TableSim 2.1";
 
 #default color scheme.
 #blue,green,red,ocean,dark
