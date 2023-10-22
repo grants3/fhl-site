@@ -140,7 +140,7 @@ $navBarLoc="nav.php";
 #base configuration. do not touch
 require_once __DIR__.'/baseConfig.php';
 
-define("APP_VERSION",'2.0-alpha-1');
+define("APP_VERSION",'2.1');
 define("SESSION_NAME",$sessionName);
 define("LEAGUE_NAME",$leagueName);
 define("LEAGUE_LOGO",$leagueLogo);
