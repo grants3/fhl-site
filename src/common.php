@@ -72,8 +72,10 @@ function includeWithVariables($filePath, $variables = array(), $print = true)
 }
 
 /*starts with*/
-function str_starts_with ( $haystack, $needle ) {
-    return strpos( $haystack , $needle ) === 0;
+if(!function_exists('str_starts_with')) {
+    function str_starts_with ( $haystack, $needle ) {
+        return strpos( $haystack , $needle ) === 0;
+    }
 }
 
 /*starts with with position*/
