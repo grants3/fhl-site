@@ -197,8 +197,8 @@ $teams = new TeamHolder($gmFile);
         								<div class="input-group-prepend">
         									<span class="input-group-text" id="">EN</span>
         								</div> 
-        								<input id="enMin" type="text" class="form-control" value = 0> 
-        								<input id="enMax" type="text" class="form-control" value = 99>
+        								<input id="exMin" type="text" class="form-control" value = 0> 
+        								<input id="exMax" type="text" class="form-control" value = 99>
         							</div>
         						</div>
         						<div class="row pt-1">
@@ -338,7 +338,7 @@ $teams = new TeamHolder($gmFile);
 								{data:"pc", "min":getMinValue('pc'), "max":getMaxValue('pc')},
 								{data:"df", "min":getMinValue('df'), "max":getMaxValue('df')},
 								{data:"sc", "min":getMinValue('sc'), "max":getMaxValue('sc')},
-								{data:"en", "min":getMinValue('en'), "max":getMaxValue('en')},
+								{data:"ex", "min":getMinValue('ex'), "max":getMaxValue('ex')},
 								{data:"ld", "min":getMinValue('ld'), "max":getMaxValue('ld')},
 								{data:"ov", "min":getMinValue('ov'), "max":getMaxValue('ov')},
 								{data:"ct", "min":getMinValue('ct'), "max":getMaxValue('ct',5)},
@@ -429,7 +429,7 @@ $teams = new TeamHolder($gmFile);
             	resetSimAttrib('pc');
             	resetSimAttrib('df');
             	resetSimAttrib('sc');
-            	resetSimAttrib('en');
+            	resetSimAttrib('ex');
             	resetSimAttrib('ld');
             	resetSimAttrib('ov');
             	resetSimAttrib('ct', 0, 5);
