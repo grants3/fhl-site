@@ -18,7 +18,7 @@ class TeamAbbrHolder {
         $contents = file($teamScoringFile);
         foreach ($contents as $cle => $val) {
             
-            $val = utf8_encode($val);
+            $val = encodeToUtf8($val);
             //signifies the start of new team line. (but not the first team)
             if (substr_count($val, '</PRE><BR>') && $b) {
                 $d = 0;
