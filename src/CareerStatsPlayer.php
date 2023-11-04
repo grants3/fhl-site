@@ -32,7 +32,7 @@ if($csName != '') {
 	if(file_exists($Fnm)) {
 		$tableau = file($Fnm);
 		while(list($cle,$val) = myEach($tableau)) {
-			$val = utf8_encode($val);
+			$val = encodeToUtf8($val);
 			if(substr_count($val, '------------------')) {
 				$a = 0;
 			}
@@ -104,7 +104,7 @@ if($csName != '') {
 			if(file_exists($Fnm)) {
 				$tableau = file($Fnm);
 				while(list($cle,$val) = myEach($tableau)) {
-					$val = utf8_encode($val);
+					$val = encodeToUtf8($val);
 					if(substr_count($val, '------------------')) {
 						$a = 0;
 					}
@@ -175,7 +175,7 @@ if($csName != '') {
 	if(file_exists($Fnm)) {
 		$tableau = file($Fnm);
 		while(list($cle,$val) = myEach($tableau)) {
-			$val = utf8_encode($val);
+			$val = encodeToUtf8($val);
 			if(substr_count($val, 'A NAME=')) {
 				$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
 				$lastTeam = trim(substr($reste, strpos($reste, '>')+1));
@@ -366,7 +366,7 @@ if($csName != '') {
 			if(file_exists($Fnm)) {
 				$tableau = file($Fnm);
 				while(list($cle,$val) = myEach($tableau)) {
-					$val = utf8_encode($val);
+					$val = encodeToUtf8($val);
 					if(substr_count($val, 'A NAME=')) {
 						$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
 						//if($lastTeam == '') $lastTeam = trim(substr($reste, strpos($reste, '>')+1));
@@ -562,7 +562,7 @@ if($csName != '') {
 	if(file_exists($Fnm)) {
 		$tableau = file($Fnm);
 		while(list($cle,$val) = myEach($tableau)) {
-			$val = utf8_encode($val);
+			$val = encodeToUtf8($val);
 			if(substr_count($val, 'A NAME=')) {
 				$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
 				if($lastTeam == '-') $lastTeamtmp = trim(substr($reste, strpos($reste, '>')+1));
@@ -739,7 +739,7 @@ if($csName != '') {
 			if(file_exists($Fnm)) {
 				$tableau = file($Fnm);
 				while(list($cle,$val) = myEach($tableau)) {
-					$val = utf8_encode($val);
+					$val = encodeToUtf8($val);
 					if(substr_count($val, 'A NAME=')) {
 						$b = 1;
 					}
@@ -967,7 +967,7 @@ if($csName != '' && $lastTeam != '-') {
 		if (file_exists($Fnm)) {
 			$tableau = file($Fnm);
 			while(list($cle,$val) = myEach($tableau)) {
-				$val = utf8_encode($val);
+				$val = encodeToUtf8($val);
 				if(substr_count($val, 'A HREF=') && substr_count($val, $lastTeam)){
 					$reste = trim(substr($val, strpos($val, '> ')+1));
 					$scheduleNumber[$i] = substr($reste, 0, strpos($reste, ' '));
@@ -1030,7 +1030,7 @@ if($csName != '' && $lastTeam != '-') {
 						//echo $Fnm2.'<br>';
 						$tableau2 = file($Fnm2);
 						while(list($cle2,$val2) = myEach($tableau2)) {
-							$val2 = utf8_encode($val2);
+							$val2 = encodeToUtf8($val2);
 							if(substr_count($val2, '</TD><TD><PRE>')) {
 								$a = 4;
 							}
