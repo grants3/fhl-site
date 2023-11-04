@@ -88,7 +88,7 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, 'A NAME=') && $b) {
 			$d = 0;
 		}
