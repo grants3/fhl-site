@@ -15,7 +15,7 @@ class ProspectHolder implements \JsonSerializable{
             $teamFound = 0;
             $contents = file($file);
             foreach ($contents as $cle => $val) {
-                $val = utf8_encode($val);
+                $val = encodeToUtf8($val);
                 
 //                 if(substr_count($val, 'A NAME=')) {
 //                     $d = 1;
