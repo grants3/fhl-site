@@ -20,7 +20,7 @@ class WaiversHolder {
         $contents = file($file);
         
         foreach ($contents as $cle => $val) {
-            $val = utf8_encode($val);
+            $val = encodeToUtf8($val);
             //no players on waivers
             if(substr_count($val, 'NO PLAYERS ON WAIVERS')){
                 break;
