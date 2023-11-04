@@ -26,7 +26,7 @@ $d = 0;
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = each($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, '<BR><BR>') && $d < 10){
 			if($d == 0) {
 				echo '<tr class="tableau-top">';
