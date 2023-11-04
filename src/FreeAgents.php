@@ -61,7 +61,7 @@ $OrigHTML = $fileName;
                 		if (file_exists($Fnm)) {
                 		    $tableau = file($Fnm);
                 		    while(list($cle,$val) = myEach($tableau)) {
-                		        $val = utf8_encode($val);
+                		        $val = encodeToUtf8($val);
                 		        
                 		        //get current team
                 		        if(substr_count($val, '<H3>')) {
