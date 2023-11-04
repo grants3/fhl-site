@@ -21,7 +21,7 @@ class TransactionHolder implements \JsonSerializable{
         
         $lastTrade = null;
         foreach ($contents as $cle => $val) {
-            $val = utf8_encode($val);
+            $val = encodeToUtf8($val);
             if(substr_count($val, '<P>(As of')){
                 $this->lastUpdated = substr($val, strpos($val, '(')+7, strpos($val, ')')-strpos($val, '(')-7);
             }
