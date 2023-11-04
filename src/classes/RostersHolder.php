@@ -49,7 +49,7 @@ class RostersHolder implements \JsonSerializable{
         $ov = 0;
 
         foreach ($contents as $cle => $val) {
-            $val = utf8_encode($val);
+            $val = encodeToUtf8($val);
             if(substr_count($val, '<P>(As of')){
                 $pos = strpos($val, ')');
                 $pos = $pos - 10;
