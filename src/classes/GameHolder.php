@@ -90,7 +90,7 @@ class GameHolder implements \JsonSerializable
         if(file_exists($file)) {
             $tableau = file($file);
             while(list($cle,$val) = myEach($tableau)) {
-                $val = utf8_encode($val);
+                $val = encodeToUtf8($val);
                      
                 if(substr_count($val, ' at ') && $a == 0){
                     $pos = strpos($val, ' at ');
