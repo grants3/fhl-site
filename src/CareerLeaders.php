@@ -86,7 +86,7 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
             $tableau = file($Fnm);
             foreach ($tableau as $cle => $val) {
                 //while(list($cle,$val) = each($tableau)) {
-                $val = utf8_encode($val);
+                $val = encodeToUtf8($val);
                 if(substr_count($val, 'A NAME=') || substr_count($val, 'a name=')) {
                     //$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
                     //$lastTeam = trim(substr($reste, strpos($reste, '>')+1));
