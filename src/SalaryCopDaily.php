@@ -54,7 +54,7 @@ if(file_exists($Fnm)) {
 	$i = 0;
 	$tableau = file($Fnm);
 	while(list($cle,$val) = each($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, '<P>(As of')){
 			$pos = strpos($val, ')');
 			$pos = $pos - 10;
