@@ -31,7 +31,7 @@ $standingFarmFileFound = 1000;
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, '<PRE>')) {
 			$b = 0;
 			if($standingFarmFileFound == 1000) $d = 1;
@@ -65,7 +65,7 @@ $Fnm = getLeagueFile('GMs');
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, 'HREF') && !substr_count($val, '<BR>') && substr_count($val, $currentTeam.' ')) {
 			$gm = substr($val, 16, 26);
 			if(substr_count($gm, 'LHSX')) $libre = 1;
@@ -87,7 +87,7 @@ $standingFileDivisionFound = 1000;
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, 'STK') && (substr_count($val, 'OL') || substr_count($val, 'OTL'))) {
 			$standingFileOLDetect = 1;
 		}
@@ -361,7 +361,7 @@ $entraineur = '';
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if($a == 1 && substr_count($val, '('.$currentTeam)) {
 			$pos = strpos($val, '(');
 			$pos++;
@@ -388,7 +388,7 @@ $farmpayroll = 0;
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, 'A NAME=') && $b) {
 			$d = 0;
 		}
@@ -433,7 +433,7 @@ $npropect = 0;
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, 'A NAME=') && $b) {
 			$d = 0;
 		}
@@ -467,7 +467,7 @@ $vitalsSalaire = 0;
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, 'A NAME=') && $b) {
 			$d = 0;
 		}
@@ -515,7 +515,7 @@ while($d == 1) {
 	if(file_exists($Fnm)) {
 		$tableau = file($Fnm);
 		while(list($cle,$val) = myEach($tableau)) {
-			$val = utf8_encode($val);
+			$val = encodeToUtf8($val);
 			if(substr_count($val, '</PRE><BR>') && $b) {
 				$d = 0;
 			}
@@ -658,7 +658,7 @@ $i = 0;
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, '</PRE>')){
 			$a++;
 		}
@@ -1153,7 +1153,7 @@ if(CAREER_STATS_DIR != '0') {
 
 			$tableau = file($Fnm);
 			while(list($cle,$val) = myEach($tableau)) {
-				$val = utf8_encode($val);
+				$val = encodeToUtf8($val);
 				if(substr_count($val, 'A NAME=')) {
 					//$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
 					//$lastTeam = trim(substr($reste, strpos($reste, '>')+1));
