@@ -167,7 +167,7 @@ if(CAP_MODE == 1) $colspan = (CAP_INJ_MODE == 1) ? 11 : 10;
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, '<P>(As of')){
 			$pos = strpos($val, ')');
 			$pos = $pos - 10;
