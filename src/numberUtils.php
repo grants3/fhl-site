@@ -86,7 +86,7 @@ function format_number($value, $decimals=2, bool $clean = false){
 
 function _format_number($value, $decimals=2){
     $locale = getLocale();
-    return utf8_encode(number_format($value,$decimals,
+    return encodeToUtf8(number_format($value,$decimals,
         $locale['decimal_point'],
         $locale['thousands_sep']));
 }
@@ -210,7 +210,7 @@ function _format_money($format, $value) {
         $formatted = str_pad($formatted, $opcoes['field_width'], $opcoes['filler'], $alinhamento);
     }
     
-    return utf8_encode($formatted);
+    return encodeToUtf8($formatted);
 } 
 
 
