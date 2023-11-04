@@ -10,7 +10,7 @@ function getMaxGp($standingsFile) :int{
         // $placeCount = 1;
         
         foreach ($contents as $cle => $val) {
-            $val = utf8_encode($val);
+            $val = encodeToUtf8($val);
             
             
             if (substr_count($val, 'Conference') && !substr_count($val, 'By Conference')) {
