@@ -26,7 +26,7 @@ class TeamInfo
             $placeCount = 1;
 
             foreach ($contents as $cle => $val) {
-                $val = utf8_encode($val);
+                $val = encodeToUtf8($val);
                 
                 
                 if (substr_count($val, 'Conference') && !substr_count($val, 'By Conference')) {
@@ -127,7 +127,7 @@ class TeamInfo
             $tableau = file($financeFileName);
 
             while (list ($cle, $val) = myEach($tableau)) {
-                $val = utf8_encode($val);
+                $val = encodeToUtf8($val);
                 
                 if(substr_count($val, 'A NAME='.$team) && $d) {
                     $pos = strpos($val, '</A>');
