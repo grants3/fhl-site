@@ -89,7 +89,7 @@ for($j=1;$j<=$round;$j++) {
 				if(file_exists($Fnm)) {
 					$tableau = file($Fnm);
 					while(list($cle,$val) = myEach($tableau)) {
-						$val = utf8_encode($val);
+						$val = encodeToUtf8($val);
 						if(substr_count($val, ' at ') && $a == 0){
 							$pos = strpos($val, ' at ');
 							$pos_apres = strpos($val, '</H3>');
@@ -172,7 +172,7 @@ $lastUpdated = '';
 if(file_exists($teamStatsFile)) {
     $tableau = file($teamStatsFile);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, '<P>(As of')){
 			$pos = strpos($val, ')');
 			$pos = $pos - 10;
