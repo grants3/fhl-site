@@ -31,7 +31,7 @@ $lastUpdated = '';
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
 	while(list($cle,$val) = myEach($tableau)) {
-		$val = utf8_encode($val);
+		$val = encodeToUtf8($val);
 		if(substr_count($val, '(As of')){
 		    $lastUpdated = substr($val, strpos($val, '(')+7, strpos($val, ')')-strpos($val, '(')-7);
 			//echo '<tr><td colspan="4" style="padding-bottom:20px;">'.$allLastUpdate.' '.$date.'</td></tr>';
