@@ -10,13 +10,9 @@ function jsonPrettify($json)
 function json_response($json=null, $httpStatus=200)
 {
     header_remove();
-    
     header("Content-Type: application/json");
-    
     http_response_code($httpStatus);
-    
     echo $json;
-    
     exit();
 }
 
@@ -82,7 +78,8 @@ if(!function_exists('str_starts_with')) {
 function strposX($haystack, $needle, $number)
 {
     // decode utf8 because of this behaviour: https://bugs.php.net/bug.php?id=37391
-    preg_match_all("/$needle/", utf8_decode($haystack), $matches, PREG_OFFSET_CAPTURE);
+    $haystack = mb_convert_encoding($haystack, 'Windows-1252', 'UTF-8'); // utf8_decode (decapreted)
+    preg_match_all("/$needle/", $haystack, $matches, PREG_OFFSET_CAPTURE);
     return $matches[0][$number-1][1];
 }
 
@@ -176,7 +173,11 @@ function ordinalFrench($number) {
     else return $number. 'e';
 }
 
-
-
+// Encode to UTF-8 new way!
+if(!function_exists('encodeToUtf8')){
+	function encodeToUtf8($string) {
+		return mb_convert_encoding($string, "UTF-8", mb_detect_encoding($string, "Windows-1252, ISO-8859-1, ISO-8859-15", true));
+	}
+}
 
 ?>
