@@ -25,7 +25,7 @@ if(file_exists($Fnm) && file_exists($Fnm2)) {
 		$tableau = file($Fnm);
 		foreach ($tableau as $cle => $val) {
 		//while(list($cle,$val) = each($tableau)) {
-			$val = utf8_encode($val);
+			$val = encodeToUtf8($val);
 			if(substr_count($val, 'A NAME=')) {
 				$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
 				$lastTeam = trim(substr($reste, strpos($reste, '>')+1));
@@ -196,7 +196,7 @@ if(file_exists($Fnm) && file_exists($Fnm2)) {
 		$tableau = file($Fnm2);
 		foreach ($tableau as $cle => $val) {
 		//while(list($cle,$val) = each($tableau)) {
-			$val = utf8_encode($val);
+			$val = encodeToUtf8($val);
 			if(substr_count($val, 'A NAME=')) {
 				$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
 				$lastTeam = trim(substr($reste, strpos($reste, '>')+1));
