@@ -38,7 +38,7 @@ class ScheduleHolder implements \JsonSerializable{
 
         $contents = file($file);
         foreach ($contents as $cle => $val) {
-            $val = utf8_encode($val);
+            $val = encodeToUtf8($val);
             if(substr_count($val, 'Day')){
               
                 $reste = trim(substr($val, strpos($val, 'Day')));
