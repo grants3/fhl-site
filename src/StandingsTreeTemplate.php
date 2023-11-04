@@ -104,7 +104,7 @@ for($j=1;$j<=$existRnd;$j++) {
 			unset($score2);
 			unset($day);
 			while(list($cle,$val) = myEach($tableau)) {
-				$val = utf8_encode($val);
+				$val = encodeToUtf8($val);
 				if(substr_count($val, 'Day ')){
 					$l = 0;
 					$m++;
