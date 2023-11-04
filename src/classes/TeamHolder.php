@@ -9,7 +9,7 @@ class TeamHolder {
         if(file_exists($gmFile)) {
             $contents = file($gmFile);
             foreach ($contents as $cle => $val) {
-                $val = utf8_encode($val);
+                $val = encodeToUtf8($val);
                 if(substr_count($val, 'HREF') && !substr_count($val, '<BR>')) {
                     $team = trim(substr($val, 0, 10));
                     
