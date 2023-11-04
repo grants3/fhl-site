@@ -33,7 +33,7 @@ $picks = array();
 if(file_exists($Fnm)) {
     $tableau = file($Fnm);
     while(list($cle,$val) = myEach($tableau)) {
-        $val = utf8_encode($val);
+        $val = encodeToUtf8($val);
         if(substr_count($val, '<P>(As of')){
             $pos = strpos($val, ')');
             $pos = $pos - 10;
