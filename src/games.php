@@ -363,7 +363,7 @@ else {
                         	<?php
                         	//$teamCardLogoSrc = glob($folderTeamLogos . strtolower($awayTeam) . '.*');
                         	$teamCardLogoSrc = getTeamLogoUrl($awayTeam);
-                        	error_log($teamCardLogoSrc);
+                        	//error_log($teamCardLogoSrc);
                         ?>
                          	<div class="team-logo gloss logo-gradient">
                                 <?php
