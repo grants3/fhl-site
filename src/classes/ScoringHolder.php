@@ -413,7 +413,7 @@ class ScoringHolder implements \JsonSerializable{
         return array_search($name, $this->getGoalies());
     }
     
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }
