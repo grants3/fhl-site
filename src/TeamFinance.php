@@ -123,7 +123,8 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 				$valCapacity = format_number($valCapacity,0, true);
 			}
 			if(substr_count($val, 'Ticket Price') && $b && $d) {
-				$valTicket = substr($val, 30, 5);
+				$pos = strpos($val, '</TD>', strpos($val, '</TD>')+5);
+				$valTicket = substr($val, 30, $pos-30);
 				$valTicket = format_money_no_dec($valTicket);
 			}
 			if(substr_count($val, 'Current Funds') && $b && $d) {
