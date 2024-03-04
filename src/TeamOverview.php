@@ -404,7 +404,8 @@ if (file_exists($Fnm)) {
 			$sieges = format_number($sieges,0,true);
 		}
 		if(substr_count($val, 'Ticket Price') && $b && $d) {
-			$billets = substr($val, 30, 5);
+			$pos = strpos($val, '</TD>', strpos($val, '</TD>')+5);
+			$billets = substr($val, 30, $pos-30);
 			$billets = format_money_no_dec($billets);
 		}
 		if(substr_count($val, '<TD>Pro Payroll</TD>') && $b && $d) {
