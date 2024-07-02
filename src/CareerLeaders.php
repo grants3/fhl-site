@@ -347,7 +347,7 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
                         }
                     }
                     
-                    if((isset($TSabbr) && $TSabbr == $tmpGoalTeam) || ($ctlOneTeams == '' && $tmpFwdTeam != 'TOT')) {
+                    if((isset($TSabbr) && $TSabbr == $tmpGoalTeam) || ($ctlOneTeams == '' && $tmpGoalTeam != 'TOT')) {
                         //if($ctlOneTeams != '') echo 'Key:'.$cle.' - Season #'.$workSeason.' - Team Abbr:'.$TSabbr.' - Team Found:'.$tmpGoalTeam.' - Player:'.$tmpGoalName.'<br>';
                         $tmpCle = $cle + 1;
                         $tmpVal = $tableau[$tmpCle];
