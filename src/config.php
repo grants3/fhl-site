@@ -112,7 +112,7 @@ $minGoaliesAppearances = 33;
 $leagueMode = 0;
 
 #text to display in footer(bottom) of each page.
-$footerText="FHL TableSim 2.1";
+$footerText="FHL TableSim 2.2";
 
 #default color scheme.
 #blue,green,red,ocean,dark
@@ -140,7 +140,7 @@ $navBarLoc="nav.php";
 #base configuration. do not touch
 require_once __DIR__.'/baseConfig.php';
 
-define("APP_VERSION",'2.1');
+define("APP_VERSION",'2.2');
 define("SESSION_NAME",$sessionName);
 define("LEAGUE_NAME",$leagueName);
 define("LEAGUE_LOGO",$leagueLogo);
