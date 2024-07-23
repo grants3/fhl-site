@@ -78,14 +78,6 @@ class RostersHolder implements \JsonSerializable{
                 $reste = trim($val);
                 $number = substr($reste, 0, strpos($reste, ' '));
                 $reste = trim(substr($reste, strpos($reste, ' ')));
-//                 $tmpPos = '';
-//                 if(substr_count($reste, ' C ')) $tmpPos = ' C ';
-//                 if(substr_count($reste, ' LW ')) $tmpPos = ' LW ';
-//                 if(substr_count($reste, ' RW ')) $tmpPos = ' RW ';
-//                 if(substr_count($reste, ' D ')) $tmpPos = ' D ';
-//                 if(substr_count($reste, ' G ')) $tmpPos = ' G ';
-//                 $name = trim(substr($reste, 0,  strpos($reste, $tmpPos)));
-//                 $reste = trim(substr($reste, strpos($reste, $tmpPos)));
                 $name = trim(mb_substr($reste, 0, 22, 'UTF-8'));
                 $reste = trim(mb_substr($reste, 22, mb_strlen($reste)-22, 'UTF-8'));
                 
@@ -94,45 +86,28 @@ class RostersHolder implements \JsonSerializable{
                 $hand = substr($reste, 0, strpos($reste, '  '));
                 $reste = trim(substr($reste, strpos($reste, ' ')));
                 $condition = substr($reste, 0, strpos($reste, ' '));
-                $reste = substr($reste, strpos($reste, ' '));
-                $count = strlen($reste);
-                $j = 3;
-                while( $j < $count ) {
-                    if( ctype_digit($reste[$j]) ) {
-                        $pos = $j;
-                        $j = 1000;
-                    }
-                    $j++;
-                }
-                $injStatus = trim(substr($reste, 0, $pos));
-                $reste = trim(substr($reste, $pos));
-                $it = substr($reste, 0, strpos($reste, ' '));
                 $reste = trim(substr($reste, strpos($reste, ' ')));
-                $sp = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $st = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $en = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $du = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $di = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $sk = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $pa = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $pc = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $df = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $sc = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $ex = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $ld = substr($reste, 0, strpos($reste, ' '));
-                $reste = trim(substr($reste, strpos($reste, ' ')));
-                $ov = substr($reste, strpos($reste, ' '));
+				$statsTemp = explode(" ", $reste);
+				if(count($statsTemp) == 15) {
+					$injStatus = $statsTemp[0];
+					unset($statsTemp[0]);
+					$statsTemp = array_values($statsTemp);
+				}
+				else $injStatus = "";
+                $it = $statsTemp[0];
+                $sp = $statsTemp[1];
+                $st = $statsTemp[2];
+                $en = $statsTemp[3];
+                $du = $statsTemp[4];
+                $di = $statsTemp[5];
+                $sk = $statsTemp[6];
+                $pa = $statsTemp[7];
+                $pc = $statsTemp[8];
+                $df = $statsTemp[9];
+                $sc = $statsTemp[10];
+                $ex = $statsTemp[11];
+                $ld = $statsTemp[12];
+                $ov = $statsTemp[13];
                 
                 $roster = new RosterObj();
                 $roster->setTeam($curTeam);
