@@ -24,7 +24,6 @@ if(file_exists($Fnm) && file_exists($Fnm2)) {
 	if(file_exists($Fnm)) {
 		$tableau = file($Fnm);
 		foreach ($tableau as $cle => $val) {
-		//while(list($cle,$val) = each($tableau)) {
 			$val = encodeToUtf8($val);
 			if(substr_count($val, 'A NAME=')) {
 				$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
@@ -43,16 +42,6 @@ if(file_exists($Fnm) && file_exists($Fnm2)) {
 				$reste = trim($val);
 				$numero[$m][$i] = substr($reste, 0, strpos($reste, ' '));
 				$reste = trim(substr($reste, strpos($reste, ' ')));
-				/*
-				$tmpPos = '';
-				if(substr_count($reste, ' C ')) $tmpPos = ' C ';
-				if(substr_count($reste, ' LW ')) $tmpPos = ' LW ';
-				if(substr_count($reste, ' RW ')) $tmpPos = ' RW ';
-				if(substr_count($reste, ' D ')) $tmpPos = ' D ';
-				if(substr_count($reste, ' G ')) $tmpPos = ' G ';
-				$name[$m][$i] = trim(substr($reste, 0,  strpos($reste, $tmpPos)));
-				$reste = trim(substr($reste, strpos($reste, $tmpPos)));
-				*/
 				$name[$m][$i] = trim(mb_substr($reste, 0, 22, 'UTF-8'));
 				$reste = trim(mb_substr($reste, 22, mb_strlen($reste)-22, 'UTF-8'));
 				$aremplacer = array('L ', 'R ', 'LW ', 'RW ');
@@ -68,45 +57,28 @@ if(file_exists($Fnm) && file_exists($Fnm2)) {
 				$lance[$m][$i] = substr($reste, 0, strpos($reste, '  '));
 				$reste = trim(substr($reste, strpos($reste, ' ')));
 				$condition[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = substr($reste, strpos($reste, ' '));
-				$count = strlen($reste);
-				$j = 3;
-				while( $j < $count ) {
-					if( ctype_digit($reste[$j]) ) {
-						$pos = $j;
-						break 1;
-					}
-					$j++;
+				$reste = trim(substr($reste, strpos($reste, ' ')));
+				$statsTemp = explode(" ", $reste);
+				if(count($statsTemp) == 15) {
+					$blessure[$m][$i] = $statsTemp[0];
+					unset($statsTemp[0]);
+					$statsTemp = array_values($statsTemp);
 				}
-				$blessure[$m][$i] = trim(substr($reste, 0, $pos));
-				$reste = trim(substr($reste, $pos));
-				$intensite[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$vitesse[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$force[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$endurance[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$durabilite[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$discipline[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$patinage[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$passe[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$controle[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$defense[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$offense[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$experience[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$leadership[$m][$i] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$total[$m][$i] = substr($reste, strpos($reste, ' '));
+				else $blessure[$m][$i] = "";
+				$intensite[$m][$i] = $statsTemp[0];
+				$vitesse[$m][$i] = $statsTemp[1];
+				$force[$m][$i] = $statsTemp[2];
+				$endurance[$m][$i] = $statsTemp[3];
+				$durabilite[$m][$i] = $statsTemp[4];
+				$discipline[$m][$i] = $statsTemp[5];
+				$patinage[$m][$i] = $statsTemp[6];
+				$passe[$m][$i] = $statsTemp[7];
+				$controle[$m][$i] = $statsTemp[8];
+				$defense[$m][$i] = $statsTemp[9];
+				$offense[$m][$i] = $statsTemp[10];
+				$experience[$m][$i] = $statsTemp[11];
+				$leadership[$m][$i] = $statsTemp[12];
+				$total[$m][$i] = $statsTemp[13];
 				$i++;
 				
 			}
@@ -115,16 +87,6 @@ if(file_exists($Fnm) && file_exists($Fnm2)) {
 				$reste = trim($val);
 				$numero2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
 				$reste = trim(substr($reste, strpos($reste, ' ')));
-				/*
-				$tmpPos = '';
-				if(substr_count($reste, ' C ')) $tmpPos = ' C ';
-				if(substr_count($reste, ' LW ')) $tmpPos = ' LW ';
-				if(substr_count($reste, ' RW ')) $tmpPos = ' RW ';
-				if(substr_count($reste, ' D ')) $tmpPos = ' D ';
-				if(substr_count($reste, ' G ')) $tmpPos = ' G ';
-				$name2[$m][$k] = trim(substr($reste, 0, strpos($reste, $tmpPos)));
-				$reste = trim(substr($reste, strpos($reste, $tmpPos)));
-				*/
 				$name2[$m][$k] = trim(mb_substr($reste, 0, 22, 'UTF-8'));
 				$reste = trim(mb_substr($reste, 22, mb_strlen($reste)-22, 'UTF-8'));
 				$aremplacer = array('L ', 'R ', 'LW ', 'RW ');
@@ -140,45 +102,28 @@ if(file_exists($Fnm) && file_exists($Fnm2)) {
 				$lance2[$m][$k] = substr($reste, 0, strpos($reste, '  '));
 				$reste = trim(substr($reste, strpos($reste, ' ')));
 				$condition2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = substr($reste, strpos($reste, ' '));
-				$count = strlen($reste);
-				$j = 3;
-				while( $j < $count ) {
-					if( ctype_digit($reste[$j]) ) {
-						$pos = $j;
-						break 1;
-					}
-					$j++;
+				$reste = trim(substr($reste, strpos($reste, ' ')));
+				$statsTemp = explode(" ", $reste);
+				if(count($statsTemp) == 15) {
+					$blessure2[$m][$k] = $statsTemp[0];
+					unset($statsTemp[0]);
+					$statsTemp = array_values($statsTemp);
 				}
-				$blessure2[$m][$k] = trim(substr($reste, 0, $pos));
-				$reste = trim(substr($reste, $pos));
-				$intensite2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$vitesse2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$force2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$endurance2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$durabilite2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$discipline2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$patinage2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$passe2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$controle2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$defense2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$offense2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$experience2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$leadership2[$m][$k] = substr($reste, 0, strpos($reste, ' '));
-				$reste = trim(substr($reste, strpos($reste, ' ')));
-				$total2[$m][$k] = substr($reste, strpos($reste, ' '));
+				else $blessure2[$m][$k] = "";
+				$intensite2[$m][$k] = $statsTemp[0];
+				$vitesse2[$m][$k] = $statsTemp[1];
+				$force2[$m][$k] = $statsTemp[2];
+				$endurance2[$m][$k] = $statsTemp[3];
+				$durabilite2[$m][$k] = $statsTemp[4];
+				$discipline2[$m][$k] = $statsTemp[5];
+				$patinage2[$m][$k] = $statsTemp[6];
+				$passe2[$m][$k] = $statsTemp[7];
+				$controle2[$m][$k] = $statsTemp[8];
+				$defense2[$m][$k] = $statsTemp[9];
+				$offense2[$m][$k] = $statsTemp[10];
+				$experience2[$m][$k] = $statsTemp[11];
+				$leadership2[$m][$k] = $statsTemp[12];
+				$total2[$m][$k] = $statsTemp[13];
 				$k++;
 			}
 			if(substr_count($val, '<PRE>') && $d) {
@@ -195,7 +140,6 @@ if(file_exists($Fnm) && file_exists($Fnm2)) {
 	if(file_exists($Fnm2)) {
 		$tableau = file($Fnm2);
 		foreach ($tableau as $cle => $val) {
-		//while(list($cle,$val) = each($tableau)) {
 			$val = encodeToUtf8($val);
 			if(substr_count($val, 'A NAME=')) {
 				$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
