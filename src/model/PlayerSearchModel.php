@@ -98,6 +98,7 @@ class PlayerSearchModel {//implements Model{
                         $wrapper->setEx($roster->getEx());
                         $wrapper->setLd($roster->getLd());
                         $wrapper->setOv($roster->getOv());
+                        $wrapper->setAge($vitals->getAge());
                         $wrapper->setCt($vitals->getContractLength());
                         $wrapper->setSalary($vitals->getSalary());
                         
@@ -133,6 +134,7 @@ class PlayerSearchModel {//implements Model{
                         $wrapper->setEx($roster->getEx());
                         $wrapper->setLd($roster->getLd());
                         $wrapper->setOv($roster->getOv());
+                        $wrapper->setAge($vitals->getAge());
                         $wrapper->setCt($vitals->getContractLength());
                         $wrapper->setSalary($vitals->getSalary());
                         
@@ -202,10 +204,7 @@ class PlayerSearchModel {//implements Model{
             }
         }
         
-        
         return $allPlayers;
     }
     
-    
 }
-
