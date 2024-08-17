@@ -225,13 +225,13 @@ $teams = new TeamHolder($gmFile);
         								<input id="ctMin" type="text" class="form-control" value = 0> 
         								<input id="ctMax" type="text" class="form-control" value = 5>
         							</div>
-<!--         							<div class="input-group col-6 col-lg-4"> -->
-<!--         								<div class="input-group-prepend"> -->
-<!--         									<span class="input-group-text" id="">SAL</span> -->
-<!--         								</div>  -->
-<!--         								<input id="salaryMin" type="text" class="form-control" value = 400000>  -->
-<!--         								<input id="salaryMax" type="text" class="form-control" value = 15000000> -->
-<!--         							</div> -->
+								<div class="input-group col-6 col-lg-3">
+        								<div class="input-group-prepend">
+        									<span class="input-group-text" id="">AGE</span>
+        								</div> 
+        								<input id="ageMin" type="text" class="form-control" value = 0> 
+        								<input id="ageMax" type="text" class="form-control" value = 99>
+        							</div>
         						</div>
         						
         						<div class="row pt-1">
@@ -280,6 +280,7 @@ $teams = new TeamHolder($gmFile);
 								<th><?php echo $rostersLD ?> </th>
 								<th><?php echo $rostersOV ?> </th>	 	
 								<th>#</th>
+								<th>AGE</th>
 								<th>CT</th>
 								<th><?php echo $joueursSalary;?></th>
                             </tr>
@@ -341,6 +342,7 @@ $teams = new TeamHolder($gmFile);
 								{data:"ex", "min":getMinValue('ex'), "max":getMaxValue('ex')},
 								{data:"ld", "min":getMinValue('ld'), "max":getMaxValue('ld')},
 								{data:"ov", "min":getMinValue('ov'), "max":getMaxValue('ov')},
+								{data:"age", "min":getMinValue('age'), "max":getMaxValue('age')},
 								{data:"ct", "min":getMinValue('ct'), "max":getMaxValue('ct',5)},
 								{data:"salary", "min":getMinValue('salary',400000), "max":getMaxValue('salary',15000000)},
 							];
@@ -383,6 +385,7 @@ $teams = new TeamHolder($gmFile);
                         { "name": "ld", "data": "ld", "orderSequence": [ "desc","asc" ]},
                         { "name": "ov", "data": "ov", "orderSequence": [ "desc","asc" ] },
                         { "data": "number", "orderSequence": [ "desc","asc" ] },
+						{ "name": "age", "data": "age", "orderSequence": [ "desc","asc" ] },
                         { "data": "ct", "orderSequence": [ "desc","asc" ] },
                         { "name": "salary", "data": "salary", "orderSequence": [ "desc","asc" ], render: function (data, type, row, meta) {
                         	var sal = row.salary != null ? row.salary : 0;
@@ -432,6 +435,7 @@ $teams = new TeamHolder($gmFile);
             	resetSimAttrib('ex');
             	resetSimAttrib('ld');
             	resetSimAttrib('ov');
+				resetSimAttrib('age');
             	resetSimAttrib('ct', 0, 5);
             	resetSimAttrib('salary', 400000,15000000);
             	
@@ -451,9 +455,6 @@ $teams = new TeamHolder($gmFile);
                 }    
                 
             } );
-
-
-
             
         } );
 
