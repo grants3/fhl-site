@@ -297,6 +297,7 @@ function getPlayoffRound($seasonId = null) : int{
     arsort($matchesDate);
     foreach ($matchesDate as $j => $val) {
         if(substr_count($matches[$j], 'PLF')) {
+            if(!substr_count($matches[$j], '/')) $matches[$j] = '/'.$matches[$j];
             $folderLeagueURL2 = substr($matches[$j], strrpos($matches[$j], '/')+1,  strpos($matches[$j], 'PLF-Round1-Schedule.html')-strrpos($matches[$j], '/')-1);
             break 1;
         }
