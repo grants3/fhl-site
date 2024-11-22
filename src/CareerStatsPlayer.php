@@ -1109,6 +1109,131 @@ if($csName != '' && $lastTeam != '-') {
 		}
 	}
 }
+	
+// Get all attributes of each season for one player
+if($csName != '') {
+	// Seasons Rosters - Current Season
+	$rostersHistoryIT = [];
+	$rostersHistorySP = [];
+	$rostersHistoryST = [];
+	$rostersHistoryEN = [];
+	$rostersHistoryDU = [];
+	$rostersHistoryDI = [];
+	$rostersHistorySK = [];
+	$rostersHistoryPA = [];
+	$rostersHistoryCT = [];
+	$rostersHistoryDF = [];
+	$rostersHistorySC = [];
+	$rostersHistoryEX = [];
+	$rostersHistoryLD = [];
+	$rostersHistoryOV = [];
+	$rostersHistorySE = [];
+	
+	$Fnm = getCurrentRegSeasonFile('Rosters');
+	if(file_exists($Fnm)) {
+		$a = 0;
+		$stop = 0;
+		$workSeason = $NumberSeason + 1;
+		$tableau = file($Fnm);
+		foreach ($tableau as $cle => $val) {
+			$val = encodeToUtf8($val);
+			if(substr_count($val, 'AGE CT SALARY')) {
+				$stop = 1;
+				break 1;
+			}
+			if(substr_count($val, '</PRE>')) {
+				$a = 0;
+			}
+			if($a == 1 && substr_count($val, $csName)) {
+				$reste = trim($val);
+				$reste = trim(substr($reste, strpos($reste, ' ')));
+				$reste = trim(mb_substr($reste, 22, mb_strlen($reste)-22, 'UTF-8'));
+				$reste = trim(substr($reste, strpos($reste, ' ')));
+				$reste = trim(substr($reste, strpos($reste, ' ')));
+				$reste = trim(substr($reste, strpos($reste, ' ')));
+				$statsTemp = preg_split('/ +/', $reste);
+				if(count($statsTemp) == 15) {
+					unset($statsTemp[0]);
+					$statsTemp = array_values($statsTemp);
+				}
+				$rostersHistoryIT[] = $statsTemp[0];
+				$rostersHistorySP[] = $statsTemp[1];
+				$rostersHistoryST[] = $statsTemp[2];
+				$rostersHistoryEN[] = $statsTemp[3];
+				$rostersHistoryDU[] = $statsTemp[4];
+				$rostersHistoryDI[] = $statsTemp[5];
+				$rostersHistorySK[] = $statsTemp[6];
+				$rostersHistoryPA[] = $statsTemp[7];
+				$rostersHistoryCT[] = $statsTemp[8];
+				$rostersHistoryDF[] = $statsTemp[9];
+				$rostersHistorySC[] = $statsTemp[10];
+				$rostersHistoryEX[] = $statsTemp[11];
+				$rostersHistoryLD[] = $statsTemp[12];
+				$rostersHistoryOV[] = $statsTemp[13];
+				$rostersHistorySE[] = $workSeason;
+			}
+			if(substr_count($val, '<PRE>')) {
+				$a = 1;
+			}
+		}
+	}
+	else echo $allFileNotFound.' - '.$Fnm;
+	
+	// Seasons Rosters - Past Seasons
+	for($n=0;$n<$NumberSeason;$n++) {
+		$workSeason--;
+		$Fnm = _getLeagueFile('Rosters', 'REG', $workSeason);
+		if($Fnm != '') {
+			$a = 0;
+			$stop = 0;
+			if(file_exists($Fnm)) {
+				$tableau = file($Fnm);
+				foreach ($tableau as $cle => $val) {
+					$val = encodeToUtf8($val);
+					if(substr_count($val, 'AGE CT SALARY')) {
+						$stop = 1;
+						break 1;
+					}
+					if(substr_count($val, '</PRE>')) {
+						$a = 0;
+					}
+					if($a == 1 && substr_count($val, $csName)) {
+						$reste = trim($val);
+						$reste = trim(substr($reste, strpos($reste, ' ')));
+						$reste = trim(mb_substr($reste, 22, mb_strlen($reste)-22, 'UTF-8'));
+						$reste = trim(substr($reste, strpos($reste, ' ')));
+						$reste = trim(substr($reste, strpos($reste, ' ')));
+						$reste = trim(substr($reste, strpos($reste, ' ')));
+						$statsTemp = preg_split('/ +/', $reste);
+						if(count($statsTemp) == 15) {
+							unset($statsTemp[0]);
+							$statsTemp = array_values($statsTemp);
+						}
+						$rostersHistoryIT[] = $statsTemp[0];
+						$rostersHistorySP[] = $statsTemp[1];
+						$rostersHistoryST[] = $statsTemp[2];
+						$rostersHistoryEN[] = $statsTemp[3];
+						$rostersHistoryDU[] = $statsTemp[4];
+						$rostersHistoryDI[] = $statsTemp[5];
+						$rostersHistorySK[] = $statsTemp[6];
+						$rostersHistoryPA[] = $statsTemp[7];
+						$rostersHistoryCT[] = $statsTemp[8];
+						$rostersHistoryDF[] = $statsTemp[9];
+						$rostersHistorySC[] = $statsTemp[10];
+						$rostersHistoryEX[] = $statsTemp[11];
+						$rostersHistoryLD[] = $statsTemp[12];
+						$rostersHistoryOV[] = $statsTemp[13];
+						$rostersHistorySE[] = $workSeason;
+					}
+					if(substr_count($val, '<PRE>')) {
+						$a = 1;
+					}
+				}
+			}
+			else echo $allFileNotFound.' - '.$Fnm;
+		}
+	}
+}
 ?>
 
 <style>
@@ -1669,6 +1794,57 @@ if($csName != '' && (isset($statsNumber) || isset($statsPLFNumber))) {
 				<td>'.$statsPLFTOTAS[$i].'</td>
 				</tr>';
 			}
+		}
+		echo '</tbody></table></div>';
+	}
+
+	// Attribute history
+	if(isset($rostersHistorySE)) {
+		$c = 1;
+		echo '<h3 class="tableau-top">'.$careerStatsAttributeHistory.'</h3>';
+		echo '<div class="table-responsive"><table class="table table-sm table-striped table-hover text-center">';
+		echo '<thead>';
+		echo '<tr class="tableau-top">
+			<th data-toggle="tooltip" data-placement="top" title="'.$careerStatsSeason.'">S</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersITF.'">'.$rostersIT.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersSPF.'">'.$rostersSP.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersSTF.'">'.$rostersST.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersENF.'">'.$rostersEN.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersDUF.'">'.$rostersDU.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersDIF.'">'.$rostersDI.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersSKF.'">'.$rostersSK.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersPAF.'">'.$rostersPA.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersPCF.'">'.$rostersPC.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersDFF.'">'.$rostersDF.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersOFF.'">'.$rostersOF.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersEXF.'">'.$rostersEX.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersLDF.'">'.$rostersLD.'</th>
+			<th data-toggle="tooltip" data-placement="top" title="'.$rostersOVF.'">'.$rostersOV.'</th>
+			</tr>';
+		echo '</tr>';
+		echo '</thead>';
+		echo '<tbody>';
+		foreach ($rostersHistorySE as $key => $val) {
+			if($c == 1) $c = 2;
+			else $c = 1;
+			echo '
+			<tr>
+			<td style="text-align:center;">'.$rostersHistorySE[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryIT[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistorySP[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryST[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryEN[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryDU[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryDI[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistorySK[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryPA[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryCT[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryDF[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistorySC[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryEX[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryLD[$key].'</td>
+			<td style="text-align:center;">'.$rostersHistoryOV[$key].'</td>
+			</tr>';
 		}
 		echo '</tbody></table></div>';
 	}
