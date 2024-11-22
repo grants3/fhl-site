@@ -656,6 +656,7 @@ if(LEAGUE_LANG == 'FR') {
 	$careerStatsRECORD = 'FICHE';
 	$careerStatsNotPlayed = 'N\'a pas jouée';
 	$careerStatsNoStatsFoundFor = 'Aucune statistique pour';
+	$careerStatsAttributeHistory = 'Historique des attributs';
 	
 	// Recherche Joueurs
 	$searchPlayerTitle = 'Recherche Joueurs';
@@ -1383,6 +1384,7 @@ if(LEAGUE_LANG == 'EN') {
 	$careerStatsRECORD = 'RECORD';
 	$careerStatsNotPlayed = 'Not Played';
 	$careerStatsNoStatsFoundFor = 'No Stats Found for';
+	$careerStatsAttributeHistory = 'Attributes History';
 	
 	// Recherche Joueurs
 	$searchPlayerTitle = 'Player Search';
