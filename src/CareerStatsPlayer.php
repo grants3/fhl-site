@@ -998,7 +998,7 @@ if($csName != '' && $lastTeam != '-') {
 					$score2[$i] = $reste;
 					$matchRnd[$i] = $rnd;
 					
-					if($rnd != '') {
+					if($rnd != 0) {
 // 						$matches = glob($folder.$folderGames.'*PLF-R'.$rnd.'-'.$scheduleNumber[$i].'.html');
 // 						$folderLeagueURL = '';
 // 						for($j=0;$j<count($matches);$j++) {
