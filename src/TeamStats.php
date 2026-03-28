@@ -108,15 +108,15 @@ for($j=1;$j<=$round;$j++) {
 						if(substr_count($val, 'Game Stars') && $a == 2) {
 							break 1;
 						}
-						if(substr_count($val, 'for') && $a == 2) {
+						if(substr_count($val, ' for') && $a == 2) {
 							
 							if(substr_count($val, $tmpGameTeam1)) {
-								$tmpTeam1PPG = trim(substr($val, strlen($tmpGameTeam1)+1, strpos($val, 'for')-1-strlen($tmpGameTeam1)-1));
-								$tmpTeam1PPGO = trim(substr($val, strpos($val, 'for')+4, strpos($val, '<')-strpos($val, 'for')-4));
+								$tmpTeam1PPG = trim(substr($val, strlen($tmpGameTeam1)+1, strpos($val, ' for')-strlen($tmpGameTeam1)-1));
+								$tmpTeam1PPGO = trim(substr($val, strpos($val, ' for')+5, strpos($val, '<')-strpos($val, ' for')-5));
 							}
 							if(substr_count($val, $tmpGameTeam2)) {
-								$tmpTeam2PPG = trim(substr($val, strlen($tmpGameTeam2)+1, strpos($val, 'for')-1-strlen($tmpGameTeam2)-1));
-								$tmpTeam2PPGO = trim(substr($val, strpos($val, 'for')+4, strpos($val, '<')-strpos($val, 'for')-4));
+								$tmpTeam2PPG = trim(substr($val, strlen($tmpGameTeam2)+1, strpos($val, ' for')-strlen($tmpGameTeam2)-1));
+								$tmpTeam2PPGO = trim(substr($val, strpos($val, ' for')+5, strpos($val, '<')-strpos($val, ' for')-5));
 							}
 							
 							$b++;
