@@ -170,14 +170,14 @@ if (PLAYOFF_MODE) {
         $nextGameScheduleHolder = $scheduleHolder;
         $nextRound = $round + 1;
 
-        $fileName = getCurrentPlayoffLeagueFile('-Round' . $nextRound . '-Schedule.html', '-Round' . $nextRound . '-Schedule');
+        $fileName = getCurrentPlayoffLeagueFile('-Round' . $nextRound . '-Schedule');
         
         $nextGamesRound = $nextRound;
     } else if (! $scheduleHolder->isSeasonStarted() && $round > 1) {
         $nextGameScheduleHolder = $scheduleHolder;
         $previousRound = $round - 1;
 
-        $fileName = getCurrentPlayoffLeagueFile('-Round' . $previousRound . '-Schedule.html', '-Round' . $previousRound . '-Schedule');
+        $fileName = getCurrentPlayoffLeagueFile('-Round' . $previousRound . '-Schedule');
         $scheduleHolder = new ScheduleHolder($fileName, '');
 
         $playedGamesRound = $previousRound;
