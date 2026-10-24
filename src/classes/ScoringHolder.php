@@ -15,7 +15,8 @@ class ScoringHolder implements \JsonSerializable{
     private $filteredSkaters;
     private $filteredGoalies;
     
-    public function __construct(string $teamScoringFile, string $searchTeam = null) {
+    //public function __construct(string $teamScoringFile, string $searchTeam = null) {
+    public function __construct(string $teamScoringFile, ?string $searchTeam = null) {
         
         if(!file_exists($teamScoringFile)) {
             throw new \InvalidArgumentException('Team scoring File does not exist at: '.$teamScoringFile);
