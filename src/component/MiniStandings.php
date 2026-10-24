@@ -32,7 +32,8 @@ if(file_exists($Fnm)) {
 	    
 	}
 	
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, '<P>(As of')){
 			$pos = strpos($val, ')');
