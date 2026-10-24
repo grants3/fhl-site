@@ -30,7 +30,8 @@ $e = 0;
 $lastUpdated = '';
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, '(As of')){
 		    $lastUpdated = substr($val, strpos($val, '(')+7, strpos($val, ')')-strpos($val, '(')-7);
