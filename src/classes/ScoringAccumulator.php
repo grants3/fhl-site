@@ -34,7 +34,8 @@ class ScoringAccumulator
         
 //     }
     
-    public function getTopGoalies(string $attribute, int $limit = null, $minGames = 2, string $direction = 'DESC')
+    //public function getTopGoalies(string $attribute, int $limit = null, $minGames = 2, string $direction = 'DESC')
+    public function getTopGoalies(string $attribute, ?int $limit = null, int $minGames = 2, string $direction = 'DESC')
     {
         $goalies = $this->scoringHolder->getFilteredGoalies();
         
@@ -67,7 +68,8 @@ class ScoringAccumulator
         
     }
     
-    public function getTopScorers(string $attribute, int $limit = null, array $filter = null, string $direction = 'DESC')
+    //public function getTopScorers(string $attribute, int $limit = null, array $filter = null, string $direction = 'DESC')
+    public function getTopScorers(string $attribute, ?int $limit = null, ?array $filter = null, string $direction = 'DESC')
     {
         $scorers = $this->scoringHolder->getFilteredSkaters();
 
