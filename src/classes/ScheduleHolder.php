@@ -24,7 +24,8 @@ class ScheduleHolder implements \JsonSerializable{
         $this->tradeDeadline = $tradeDeadline;
     }
 
-    public function __construct(string $file, string $filterTeam = null) {
+    //public function __construct(string $file, string $filterTeam = null) {
+    public function __construct(string $file, ?string $filterTeam = null) {
         if(!file_exists($file)) {
             throw new InvalidArgumentException('File does not exist');
         }
