@@ -31,7 +31,8 @@ if($csName != '') {
 	$a = 0;
 	if(file_exists($Fnm)) {
 		$tableau = file($Fnm);
-		while(list($cle,$val) = myEach($tableau)) {
+		//while(list($cle,$val) = myEach($tableau)) {
+		foreach ($tableau as $cle => $val) {
 			$val = encodeToUtf8($val);
 			if(substr_count($val, '------------------')) {
 				$a = 0;
@@ -103,7 +104,8 @@ if($csName != '') {
 			$a = 0;
 			if(file_exists($Fnm)) {
 				$tableau = file($Fnm);
-				while(list($cle,$val) = myEach($tableau)) {
+				//while(list($cle,$val) = myEach($tableau)) {
+				foreach ($tableau as $cle => $val) {
 					$val = encodeToUtf8($val);
 					if(substr_count($val, '------------------')) {
 						$a = 0;
@@ -174,7 +176,8 @@ if($csName != '') {
 	$workSeason = $NumberSeason + 1;
 	if(file_exists($Fnm)) {
 		$tableau = file($Fnm);
-		while(list($cle,$val) = myEach($tableau)) {
+		//while(list($cle,$val) = myEach($tableau)) {
+		foreach ($tableau as $cle => $val) {
 			$val = encodeToUtf8($val);
 			if(substr_count($val, 'A NAME=')) {
 				$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
@@ -365,7 +368,8 @@ if($csName != '') {
 			$tmpFound = 0;
 			if(file_exists($Fnm)) {
 				$tableau = file($Fnm);
-				while(list($cle,$val) = myEach($tableau)) {
+				//while(list($cle,$val) = myEach($tableau)) {
+				foreach ($tableau as $cle => $val) {
 					$val = encodeToUtf8($val);
 					if(substr_count($val, 'A NAME=')) {
 						$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
@@ -561,7 +565,8 @@ if($csName != '') {
 	$workSeason = $NumberSeason + 1;
 	if(file_exists($Fnm)) {
 		$tableau = file($Fnm);
-		while(list($cle,$val) = myEach($tableau)) {
+		//while(list($cle,$val) = myEach($tableau)) {
+		foreach ($tableau as $cle => $val) {
 			$val = encodeToUtf8($val);
 			if(substr_count($val, 'A NAME=')) {
 				$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
@@ -738,7 +743,8 @@ if($csName != '') {
 			$tmpFound = 0;
 			if(file_exists($Fnm)) {
 				$tableau = file($Fnm);
-				while(list($cle,$val) = myEach($tableau)) {
+				//while(list($cle,$val) = myEach($tableau)) {
+				foreach ($tableau as $cle => $val) {
 					$val = encodeToUtf8($val);
 					if(substr_count($val, 'A NAME=')) {
 						$b = 1;
@@ -966,7 +972,8 @@ if($csName != '' && $lastTeam != '-') {
 		}
 		if (file_exists($Fnm)) {
 			$tableau = file($Fnm);
-			while(list($cle,$val) = myEach($tableau)) {
+			//while(list($cle,$val) = myEach($tableau)) {
+			foreach ($tableau as $cle => $val) {
 				$val = encodeToUtf8($val);
 				if(substr_count($val, 'A HREF=') && substr_count($val, $lastTeam)){
 					$reste = trim(substr($val, strpos($val, '> ')+1));
@@ -1029,7 +1036,8 @@ if($csName != '' && $lastTeam != '-') {
 					if(file_exists($Fnm2)) {
 						//echo $Fnm2.'<br>';
 						$tableau2 = file($Fnm2);
-						while(list($cle2,$val2) = myEach($tableau2)) {
+						//while(list($cle2,$val2) = myEach($tableau2)) {
+						foreach ($tableau2 as $cle2 => $val2) {
 							$val2 = encodeToUtf8($val2);
 							if(substr_count($val2, '</TD><TD><PRE>')) {
 								$a = 4;
