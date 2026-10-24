@@ -46,7 +46,8 @@ for($workSeason=$NumberSeason+1;$workSeason>0;$workSeason--) {
 		$overtime = 0;
 		$f = 0;
 		$tableau = file($Fnm);
-		while(list($cle,$val) = myEach($tableau)) {
+		//while(list($cle,$val) = myEach($tableau)) {
+		foreach ($tableau as $cle => $val) {
 			$val = encodeToUtf8($val);
 			// Détection du simulateur utilisé
 			if(substr_count($val, 'STK') && (substr_count($val, 'OL') || substr_count($val, 'OTL'))) {
