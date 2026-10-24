@@ -53,7 +53,7 @@ if (file_exists($Fnm)) {
 		if(substr_count($val, '<BR>') && !substr_count($val, '(') && !substr_count($val, '<BR><BR>')) {
 			$a++;
 		}
-		if($a == 45) {
+		if($a == 45 && !substr_count($val, '</HTML>')) {
 			$pos = strpos($val, '(');
 			$pos2 = strpos($val, ')');
 			$spj2[$i] = substr($val, 0, $pos);
