@@ -89,7 +89,8 @@ class GameHolder implements \JsonSerializable
 
         if(file_exists($file)) {
             $tableau = file($file);
-            while(list($cle,$val) = myEach($tableau)) {
+            //while(list($cle,$val) = myEach($tableau)) {
+            foreach ($tableau as $cle => $val) {
                 $val = encodeToUtf8($val);
                      
                 if(substr_count($val, ' at ') && $a == 0){
