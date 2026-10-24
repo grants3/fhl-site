@@ -64,7 +64,8 @@ for($j=1;$j<=$round;$j++) {
 		$i = 0;
 		unset($schelduleNumber);
 		$tableau = file($Fnm);
-		while(list($cle,$val) = myEach($tableau)) {
+		//while(list($cle,$val) = myEach($tableau)) {
+		foreach ($tableau as $cle => $val) {
 			if(substr_count($val, ' at ') && !substr_count($val, '<strike>')){
 				break 1;
 			}
@@ -88,7 +89,8 @@ for($j=1;$j<=$round;$j++) {
 				$a = 0;
 				if(file_exists($Fnm)) {
 					$tableau = file($Fnm);
-					while(list($cle,$val) = myEach($tableau)) {
+					//while(list($cle,$val) = myEach($tableau)) {
+					foreach ($tableau as $cle => $val) {
 						$val = encodeToUtf8($val);
 						if(substr_count($val, ' at ') && $a == 0){
 							$pos = strpos($val, ' at ');
@@ -171,7 +173,8 @@ $lastUpdated = '';
 
 if(file_exists($teamStatsFile)) {
     $tableau = file($teamStatsFile);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, '<P>(As of')){
 			$pos = strpos($val, ')');
@@ -245,7 +248,8 @@ if(file_exists($teamStatsFile)) {
 		$val = current($tableaut);
 		
 		$i = 0;
-		while(list ($key, $val) = myEach($tableaut)) {
+		//while(list ($key, $val) = myEach($tableaut)) {
+		foreach ($tableaut as $key => $val) {
 			if($c == 1) $c = 2;
 			else $c = 1;
 			$equipe = $teamList[$key];
