@@ -67,7 +67,8 @@ class GameHolder implements \JsonSerializable
         return preg_replace($from, $to, $content, 1);
     }
     
-    public function __construct(string $file, $matchNumber, $seasonId = null, $round = null) {
+    //public function __construct(string $file, $matchNumber, $seasonId = null, $round = null) {
+    public function __construct(string $file, int $matchNumber, ?int $seasonId = null, ?int $round = null) {
         
         $this->matchNumber = $matchNumber;
         $this->seasonId = $seasonId;
