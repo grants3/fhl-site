@@ -509,13 +509,15 @@ else {
                 $awayScorersFormatted = '';
                 $homeScorersFormatted = '';
 
-                while (list ($key, $val) = myEach($scorersAwayCount)) {
+                //while (list ($key, $val) = myEach($scorersAwayCount)) {
+				foreach ($scorersAwayCount as $key => $val) {
                     $awayScorersFormatted .= $key . '&nbsp;(' . $val . '), ';
                     ;
                     // $awayScorersFormatted .= $key.' ('.$val.'), ';
                 }
 
-                while (list ($key, $val) = myEach($scorersHomeCount)) {
+                //while (list ($key, $val) = myEach($scorersHomeCount)) {
+				foreach ($scorersHomeCount as $key => $val) {
 
                     $homeScorersFormatted .= $key . '&nbsp;(' . $val . '), ';
                     ;
