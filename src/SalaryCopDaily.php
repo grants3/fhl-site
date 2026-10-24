@@ -34,7 +34,8 @@ $leagueCurrentDays = 0;
 $Fnm = TRANSFER_DIR.$folderLeagueURL.'Schedule.html';
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = each($tableau)) {
+	//while(list($cle,$val) = each($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		if(substr_count($val, 'Day')) {
 			$leagueDays++;
 		}
@@ -53,7 +54,8 @@ $Fnm = TRANSFER_DIR.$folderLeagueURL.'Finance.html';
 if(file_exists($Fnm)) {
 	$i = 0;
 	$tableau = file($Fnm);
-	while(list($cle,$val) = each($tableau)) {
+	//while(list($cle,$val) = each($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, '<P>(As of')){
 			$pos = strpos($val, ')');
