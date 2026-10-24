@@ -17,7 +17,8 @@ class TeamInfo
     private $streak='';
     private $arena='';
 
-    public function __construct(string $standingsFile, string $team, string $seasonType=null, $seasonId = null) {
+    //public function __construct(string $standingsFile, string $team, string $seasonType=null, $seasonId = null) {
+    public function __construct(string $standingsFile, string $team, ?string $seasonType = null, ?int $seasonId = null) {
 
         $e = 0;
         
