@@ -25,7 +25,8 @@ $c = 1;
 $d = 0;
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = each($tableau)) {
+	//while(list($cle,$val) = each($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, '<BR><BR>') && $d < 10){
 			if($d == 0) {
