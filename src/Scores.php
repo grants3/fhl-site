@@ -92,7 +92,8 @@ $lastGames = $scheduleHolder->getScheduleByDay($selectedDay);
 			if(file_exists($Fnm)) {
 			    
 				$tableau = file($Fnm);
-				while(list($cle,$val) = myEach($tableau)) {
+				//while(list($cle,$val) = myEach($tableau)) {
+				foreach ($tableau as $cle => $val) {
 					$val = encodeToUtf8($val);
 					if(substr_count($val, ' at ') && $a == 0){
 						$pos = strpos($val, ' at ');
