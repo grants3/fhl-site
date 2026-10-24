@@ -30,7 +30,8 @@ $d = 0;
 $standingFarmFileFound = 1000;
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, '<PRE>')) {
 			$b = 0;
@@ -64,7 +65,8 @@ if(file_exists($Fnm)) {
 $Fnm = getLeagueFile('GMs');
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, 'HREF') && !substr_count($val, '<BR>') && substr_count($val, $currentTeam.' ')) {
 			$gm = substr($val, 16, 26);
@@ -86,7 +88,8 @@ $standingFileFound = 1000;
 $standingFileDivisionFound = 1000;
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, 'STK') && (substr_count($val, 'OL') || substr_count($val, 'OTL'))) {
 			$standingFileOLDetect = 1;
@@ -222,7 +225,8 @@ for($j=0;$j<=$round;$j++) {
 	if(file_exists($Fnm)) {
 		// DÉTECTER LA DERNIÈRE PARTIE ET LA PROCHAINE
 		$tableau = file($Fnm);
-		while(list($cle,$val) = myEach($tableau)) {
+		//while(list($cle,$val) = myEach($tableau)) {
+		foreach ($tableau as $cle => $val) {
 			if(substr_count($val, $currentTeam) && substr_count($val, ' at ') && !substr_count($val, '<strike>')){
 				$reste = trim(str_replace('<br>','', $val));
 				$reste = trim(str_replace('<BR>','', $reste));
@@ -360,7 +364,8 @@ $a = 0;
 $entraineur = '';
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if($a == 1 && substr_count($val, '('.$currentTeam)) {
 			$pos = strpos($val, '(');
@@ -387,7 +392,8 @@ $propayroll = 0;
 $farmpayroll = 0;
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, 'A NAME=') && $b) {
 			$d = 0;
@@ -433,7 +439,8 @@ $d = 1;
 $npropect = 0;
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, 'A NAME=') && $b) {
 			$d = 0;
@@ -467,7 +474,8 @@ $vitalsPoids = 0;
 $vitalsSalaire = 0;
 if (file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, 'A NAME=') && $b) {
 			$d = 0;
@@ -515,7 +523,8 @@ while($d == 1) {
 	$i = 0;
 	if(file_exists($Fnm)) {
 		$tableau = file($Fnm);
-		while(list($cle,$val) = myEach($tableau)) {
+		//while(list($cle,$val) = myEach($tableau)) {
+		foreach ($tableau as $cle => $val) {
 			$val = encodeToUtf8($val);
 			if(substr_count($val, '</PRE><BR>') && $b) {
 				$d = 0;
@@ -658,7 +667,8 @@ $c = 1;
 $i = 0;
 if(file_exists($Fnm)) {
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, '</PRE>')){
 			$a++;
@@ -870,7 +880,8 @@ if(isset($statsGNumber) && count($statsGNumber) >= 2) {
 	$key = key($tableauf);
 	$val = current($tableauf);
 	$i = 0;
-	while(list ($key, $val) = myEach($tableauf)) {
+	//while(list ($key, $val) = myEach($tableauf)) {
+	foreach ($tableauf as $key => $val) {
 		echo '<tr>';
 		echo '<td>'.$statsGNumber[$key].'</td>';
 		echo '<td>'.$statsGRookie[$key].'</td>';
@@ -1153,7 +1164,8 @@ if(CAREER_STATS_DIR != '0') {
 		if(file_exists($Fnm)) {
 
 			$tableau = file($Fnm);
-			while(list($cle,$val) = myEach($tableau)) {
+			//while(list($cle,$val) = myEach($tableau)) {
+			foreach ($tableau as $cle => $val) {
 				$val = encodeToUtf8($val);
 				if(substr_count($val, 'A NAME=')) {
 					//$reste = substr($val, strpos($val, '='), strpos($val, '</')-strpos($val, '='));
@@ -1347,7 +1359,8 @@ echo '</div>';
 			$val = current($tableauf);
 			$c = 1;
 			$stop = 1;
-			while(list ($key, $val) = myEach($tableauf)) {
+			//while(list ($key, $val) = myEach($tableauf)) {
+			foreach ($tableauf as $key => $val) {
 				if($stop == 11) break 1;
 				if($c == 1) $c = 2;
 				else $c = 1;
