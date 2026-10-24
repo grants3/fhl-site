@@ -126,7 +126,8 @@ class TeamInfo
         if (file_exists($financeFileName)) {
             $tableau = file($financeFileName);
 
-            while (list ($cle, $val) = myEach($tableau)) {
+            //while (list ($cle, $val) = myEach($tableau)) {
+            foreach ($tableau as $cle => $val) {
                 $val = encodeToUtf8($val);
                 
                 if(substr_count($val, 'A NAME='.$team) && $d) {
