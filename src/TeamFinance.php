@@ -87,7 +87,8 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
     
 
 	$tableau = file($Fnm);
-	while(list($cle,$val) = myEach($tableau)) {
+	//while(list($cle,$val) = myEach($tableau)) {
+	foreach ($tableau as $cle => $val) {
 		$val = encodeToUtf8($val);
 		if(substr_count($val, 'A NAME=') && $b) {
 			$d = 0;
@@ -345,7 +346,8 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 
 		$key = key($tableaut);
 		$val = current($tableaut);
-		while(list ($key, $val) = myEach($tableaut)) {
+		//while(list ($key, $val) = myEach($tableaut)) {
+		foreach ($tableaut as $key => $val) {
 			echo '<tr>
             <td class="text-left">'.$joueurs[$key].'</td>
             <td>'.$annee[$key].'</td>
@@ -369,7 +371,8 @@ if(file_exists($Fnm) && file_exists($rosterFileName) && file_exists($vitalsFileN
 		    
 			$key = key($tableauf);
 			$val = current($tableauf);
-			while(list ($key, $val) = myEach($joueursf)) {
+			//while(list ($key, $val) = myEach($joueursf)) {
+			foreach ($joueursf as $key => $val) {
 
 				echo '<tr>
                 <td class="text-left">'.$joueursf[$key].'</td>
