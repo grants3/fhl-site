@@ -138,8 +138,8 @@ $teamAbbrHolder = new TeamAbbrHolder($teamScoringFile);
                 	    
                 	}
 
-                	foreach ($tableau as $cle => $val) {
                 	//while(list($cle,$val) = each($tableau)) {
+					foreach ($tableau as $cle => $val) {
                 		$val = encodeToUtf8($val);
                 		if(substr_count($val, '<P>(As of')){
                 			$pos = strpos($val, ')');
