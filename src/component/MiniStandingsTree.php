@@ -73,7 +73,8 @@ $j = $existRnd;
 			unset($score1);
 			unset($score2);
 			unset($day);
-			while(list($cle,$val) = myEach($tableau)) {
+			//while(list($cle,$val) = myEach($tableau)) {
+			foreach ($tableau as $cle => $val) {
 				$val = encodeToUtf8($val);
 				if(substr_count($val, 'Day ')){
 					$l = 0;
