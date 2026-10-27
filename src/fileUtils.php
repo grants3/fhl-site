@@ -52,7 +52,7 @@ function getProfilePhoto($csName){
     return $imgUrl;
 }
 
-function leagueFileExists(string $baseName, string $seasonType, int $seasonId, string $exclude=null) {
+function leagueFileExists(string $baseName, string $seasonType, int $seasonId, ?string $exclude=null) {
     return file_exists(_getLeagueFile($seasonType, $baseName, $seasonId, $exclude));
 }
 
@@ -64,7 +64,7 @@ function leagueFileExists(string $baseName, string $seasonType, int $seasonId, s
  * @param $seasonId
  * @return string
  */
-function getLeagueFileAbsolute($name, $seasonId = null) {
+function getLeagueFileAbsolute($name, ?string $seasonId = null) {
     
     $searchFolder = TRANSFER_DIR;
     
@@ -106,7 +106,7 @@ function getLeaguePrefix($baseDir, bool $playoffs = false, $searchTerm = 'GMs.ht
  * @param $round
  * @return string
  */
-function getGameFile($gameNumber, $seasonId = null, $round = null) {
+function getGameFile($gameNumber, ?string $seasonId = null, ?string $round = null) {
     
     $isPlayoffs = isset($round) && $round; //infer
     //assume playoffs if round set.
@@ -135,15 +135,15 @@ function getGameFile($gameNumber, $seasonId = null, $round = null) {
  * @param string $exclude --file prefix to exclude. (optional). (standings/farm)
  * @return string
  */
-function getCurrentLeagueFile(string $baseName, string $exclude=null) {
+function getCurrentLeagueFile(string $baseName, ?string $exclude=null) {
     return getLeagueFile($baseName, null, $exclude);
 }
 
-function getCurrentRegSeasonFile(string $baseName, string $exclude=null) {
+function getCurrentRegSeasonFile(string $baseName, ?string $exclude=null) {
     return _getLeagueFile($baseName, 'REG', null, $exclude);
 }
 
-function getCurrentPlayoffLeagueFile(string $baseName, string $exclude=null) {
+function getCurrentPlayoffLeagueFile(string $baseName, ?string $exclude=null) {
     return _getLeagueFile($baseName, 'PLF', null, $exclude);
 }
 
@@ -151,7 +151,7 @@ function getCurrentPlayoffLeagueFile(string $baseName, string $exclude=null) {
 /*
  * to be removed. dont use this
  */
-function getLeagueFile(string $baseName, $seasonId = null, string $exclude=null) {
+function getLeagueFile(string $baseName, ?string $seasonId = null, ?string $exclude=null) {
     $seasonType = '';
     
     if(PLAYOFF_MODE){
@@ -161,7 +161,7 @@ function getLeagueFile(string $baseName, $seasonId = null, string $exclude=null)
     return _getLeagueFile($baseName, $seasonType, $seasonId, $exclude);
 }
 
-function _getLeagueFile(string $baseName, $seasonType = null, $seasonId = null, string $exclude=null) {
+function _getLeagueFile(string $baseName, ?string $seasonType = null, ?string $seasonId = null, ?string $exclude=null) {
  
     $isPlayoffs = false;
     if(isset($seasonType)){
@@ -192,7 +192,7 @@ function _getLeagueFile(string $baseName, $seasonType = null, $seasonId = null, 
  * @param string $exclude
  * @return string|mixed
  */
-function _getLeagueFile2(string $baseName, string $seasonType, int $seasonId = null, string $exclude=null) {
+function _getLeagueFile2(string $baseName, string $seasonType, ?string $seasonId = null, ?string $exclude=null) {
     
     if(!isset($exclude)) $exclude = '';
     
@@ -281,7 +281,7 @@ function getPreviousSeasons($careerStatsFolder):array{
     return $seasons;
 }
 
-function getPlayoffRound($seasonId = null) : int{
+function getPlayoffRound(?string $seasonId = null) : int{
     
     $round = 0;
     
