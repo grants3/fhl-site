@@ -113,11 +113,12 @@ class GameHolder implements \JsonSerializable
                     $a++;
                 }
                 if( (isset($equipe1) && (substr_count($val, '<TR><TD>'.$equipe1)) || (isset($equipe1) && substr_count($val, '<TR><TD>'.$equipe2))) && $a >= 1 && $a < 5) {
-                    $mod = prev($tableau);
+                    //$mod = prev($tableau);
 
                     //score by period
                     for($i=0;$i<4;$i++) {
-                        $mod = next($tableau);
+                        //$mod = next($tableau);
+                        $mod = $tableau[$cle+$i+1];
                         $pos_avant = strpos($mod, '>') + 1;
                         $pos_apres = strpos($mod, '</TD>');
                         $long = $pos_apres - $pos_avant;
@@ -127,7 +128,8 @@ class GameHolder implements \JsonSerializable
                         if($a == 3)$this->awayGoals[$i] = substr($mod, $pos_avant, $long);
                         if($a == 4)$this->homeGoals[$i] = substr($mod, $pos_avant, $long);
                     }
-                    $mod = next($tableau);
+                    //$mod = next($tableau);
+                    $mod = $tableau[$cle+$i+1];
                     $pos_avant = strpos($mod, '<B>') + 3;
                     $pos_apres = strpos($mod, '</B>');
                     $long = $pos_apres - $pos_avant;
